@@ -1,0 +1,3301 @@
+{
+  "schema_version": 2,
+  "source": "Complete Japanese Kana practice deck",
+  "total": 227,
+  "items": [
+    {
+      "source_note_id": 1296169988801,
+      "script": "hiragana",
+      "kana": "あ",
+      "romaji": "a",
+      "category": "Gojūon",
+      "audio_file": "1_a.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296169993713,
+      "script": "hiragana",
+      "kana": "い",
+      "romaji": "i",
+      "category": "Gojūon",
+      "audio_file": "2_i.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296169998651,
+      "script": "hiragana",
+      "kana": "う",
+      "romaji": "u",
+      "category": "Gojūon",
+      "audio_file": "3_u.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296170005160,
+      "script": "hiragana",
+      "kana": "え",
+      "romaji": "e",
+      "category": "Gojūon",
+      "audio_file": "4_e.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296170010342,
+      "script": "hiragana",
+      "kana": "お",
+      "romaji": "o",
+      "category": "Gojūon",
+      "audio_file": "5_o.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296170163831,
+      "script": "hiragana",
+      "kana": "か",
+      "romaji": "ka",
+      "category": "Gojūon",
+      "audio_file": "6_ka.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "K"
+      ]
+    },
+    {
+      "source_note_id": 1296170171483,
+      "script": "hiragana",
+      "kana": "き",
+      "romaji": "ki",
+      "category": "Gojūon",
+      "audio_file": "7_ki.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "K"
+      ]
+    },
+    {
+      "source_note_id": 1296170177799,
+      "script": "hiragana",
+      "kana": "く",
+      "romaji": "ku",
+      "category": "Gojūon",
+      "audio_file": "8_ku.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "K"
+      ]
+    },
+    {
+      "source_note_id": 1296170182854,
+      "script": "hiragana",
+      "kana": "け",
+      "romaji": "ke",
+      "category": "Gojūon",
+      "audio_file": "9_ke.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "K"
+      ]
+    },
+    {
+      "source_note_id": 1296170187462,
+      "script": "hiragana",
+      "kana": "こ",
+      "romaji": "ko",
+      "category": "Gojūon",
+      "audio_file": "10_ko.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "K"
+      ]
+    },
+    {
+      "source_note_id": 1296170629876,
+      "script": "hiragana",
+      "kana": "さ",
+      "romaji": "sa",
+      "category": "Gojūon",
+      "audio_file": "11_sa.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296170647928,
+      "script": "hiragana",
+      "kana": "し",
+      "romaji": "shi",
+      "category": "Gojūon",
+      "audio_file": "12_shi.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296170659896,
+      "script": "hiragana",
+      "kana": "す",
+      "romaji": "su",
+      "category": "Gojūon",
+      "audio_file": "13_su.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296170667520,
+      "script": "hiragana",
+      "kana": "せ",
+      "romaji": "se",
+      "category": "Gojūon",
+      "audio_file": "14_se.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296170680856,
+      "script": "hiragana",
+      "kana": "そ",
+      "romaji": "so",
+      "category": "Gojūon",
+      "audio_file": "15_so.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296171622945,
+      "script": "hiragana",
+      "kana": "た",
+      "romaji": "ta",
+      "category": "Gojūon",
+      "audio_file": "16_ta.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296171633048,
+      "script": "hiragana",
+      "kana": "ち",
+      "romaji": "chi",
+      "category": "Gojūon",
+      "audio_file": "17_chi.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296171644323,
+      "script": "hiragana",
+      "kana": "つ",
+      "romaji": "tsu",
+      "category": "Gojūon",
+      "audio_file": "18_tsu.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296171647773,
+      "script": "hiragana",
+      "kana": "て",
+      "romaji": "te",
+      "category": "Gojūon",
+      "audio_file": "19_te.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296171650735,
+      "script": "hiragana",
+      "kana": "と",
+      "romaji": "to",
+      "category": "Gojūon",
+      "audio_file": "20_to.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296171655310,
+      "script": "hiragana",
+      "kana": "な",
+      "romaji": "na",
+      "category": "Gojūon",
+      "audio_file": "21_na.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296171658886,
+      "script": "hiragana",
+      "kana": "に",
+      "romaji": "ni",
+      "category": "Gojūon",
+      "audio_file": "22_ni.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296171661648,
+      "script": "hiragana",
+      "kana": "ぬ",
+      "romaji": "nu",
+      "category": "Gojūon",
+      "audio_file": "23_nu.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296171670048,
+      "script": "hiragana",
+      "kana": "ね",
+      "romaji": "ne",
+      "category": "Gojūon",
+      "audio_file": "24_ne.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296171672185,
+      "script": "hiragana",
+      "kana": "の",
+      "romaji": "no",
+      "category": "Gojūon",
+      "audio_file": "25_no.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296171674910,
+      "script": "hiragana",
+      "kana": "は",
+      "romaji": "ha",
+      "category": "Gojūon",
+      "audio_file": "26_ha.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296171677399,
+      "script": "hiragana",
+      "kana": "ひ",
+      "romaji": "hi",
+      "category": "Gojūon",
+      "audio_file": "27_hi.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296171681436,
+      "script": "hiragana",
+      "kana": "ふ",
+      "romaji": "fu",
+      "category": "Gojūon",
+      "audio_file": "28_hu.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296171685872,
+      "script": "hiragana",
+      "kana": "へ",
+      "romaji": "he",
+      "category": "Gojūon",
+      "audio_file": "29_he.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296171689961,
+      "script": "hiragana",
+      "kana": "ほ",
+      "romaji": "ho",
+      "category": "Gojūon",
+      "audio_file": "30_ho.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Hiragana",
+        "Japanese"
+      ]
+    },
+    {
+      "source_note_id": 1296171692486,
+      "script": "hiragana",
+      "kana": "ま",
+      "romaji": "ma",
+      "category": "Gojūon",
+      "audio_file": "31_ma.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296171696935,
+      "script": "hiragana",
+      "kana": "み",
+      "romaji": "mi",
+      "category": "Gojūon",
+      "audio_file": "32_mi.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296171700323,
+      "script": "hiragana",
+      "kana": "む",
+      "romaji": "mu",
+      "category": "Gojūon",
+      "audio_file": "33_mu.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296171702761,
+      "script": "hiragana",
+      "kana": "め",
+      "romaji": "me",
+      "category": "Gojūon",
+      "audio_file": "34_me.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296171709510,
+      "script": "hiragana",
+      "kana": "も",
+      "romaji": "mo",
+      "category": "Gojūon",
+      "audio_file": "35_mo.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296171711835,
+      "script": "hiragana",
+      "kana": "や",
+      "romaji": "ya",
+      "category": "Gojūon",
+      "audio_file": "36_ya.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "Y"
+      ]
+    },
+    {
+      "source_note_id": 1296171714072,
+      "script": "hiragana",
+      "kana": "ゆ",
+      "romaji": "yu",
+      "category": "Gojūon",
+      "audio_file": "37_yu.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "Y"
+      ]
+    },
+    {
+      "source_note_id": 1296171716511,
+      "script": "hiragana",
+      "kana": "よ",
+      "romaji": "yo",
+      "category": "Gojūon",
+      "audio_file": "38_yo.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "Y"
+      ]
+    },
+    {
+      "source_note_id": 1296171718947,
+      "script": "hiragana",
+      "kana": "ら",
+      "romaji": "ra",
+      "category": "Gojūon",
+      "audio_file": "39_ra.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296171721835,
+      "script": "hiragana",
+      "kana": "り",
+      "romaji": "ri",
+      "category": "Gojūon",
+      "audio_file": "40_ri.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296171724911,
+      "script": "hiragana",
+      "kana": "る",
+      "romaji": "ru",
+      "category": "Gojūon",
+      "audio_file": "41_ru.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296171727910,
+      "script": "hiragana",
+      "kana": "れ",
+      "romaji": "re",
+      "category": "Gojūon",
+      "audio_file": "42_re.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296171730810,
+      "script": "hiragana",
+      "kana": "ろ",
+      "romaji": "ro",
+      "category": "Gojūon",
+      "audio_file": "43_ro.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296171733498,
+      "script": "hiragana",
+      "kana": "わ",
+      "romaji": "wa",
+      "category": "Gojūon",
+      "audio_file": "44_wa.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "W"
+      ]
+    },
+    {
+      "source_note_id": 1296171737661,
+      "script": "hiragana",
+      "kana": "を",
+      "romaji": "wo",
+      "category": "Gojūon",
+      "audio_file": "45_wo.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "W"
+      ]
+    },
+    {
+      "source_note_id": 1296171740337,
+      "script": "hiragana",
+      "kana": "ん",
+      "romaji": "n",
+      "category": "Gojūon",
+      "audio_file": "46_n.mp3",
+      "tags": [
+        "Gojūon",
+        "Hiragana",
+        "Japanese",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296173419495,
+      "script": "hiragana",
+      "kana": "が",
+      "romaji": "ga",
+      "category": "Dakuon",
+      "audio_file": "d1-ga.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173429832,
+      "script": "hiragana",
+      "kana": "ぎ",
+      "romaji": "gi",
+      "category": "Dakuon",
+      "audio_file": "d2-gi.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173436627,
+      "script": "hiragana",
+      "kana": "ぐ",
+      "romaji": "gu",
+      "category": "Dakuon",
+      "audio_file": "d3-gu.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173442150,
+      "script": "hiragana",
+      "kana": "げ",
+      "romaji": "ge",
+      "category": "Dakuon",
+      "audio_file": "d4-ge.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173447000,
+      "script": "hiragana",
+      "kana": "ご",
+      "romaji": "go",
+      "category": "Dakuon",
+      "audio_file": "d5-go.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173453929,
+      "script": "hiragana",
+      "kana": "ざ",
+      "romaji": "za",
+      "category": "Dakuon",
+      "audio_file": "d6-za.mp3",
+      "tags": [
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296173459408,
+      "script": "hiragana",
+      "kana": "じ",
+      "romaji": "ji",
+      "category": "Dakuon",
+      "audio_file": "d7-ji.mp3",
+      "tags": [
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296173467538,
+      "script": "hiragana",
+      "kana": "ず",
+      "romaji": "zu",
+      "category": "Dakuon",
+      "audio_file": "d8-zu.mp3",
+      "tags": [
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296173475108,
+      "script": "hiragana",
+      "kana": "ぜ",
+      "romaji": "ze",
+      "category": "Dakuon",
+      "audio_file": "d9-ze.mp3",
+      "tags": [
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296173480091,
+      "script": "hiragana",
+      "kana": "ぞ",
+      "romaji": "zo",
+      "category": "Dakuon",
+      "audio_file": "d10-zo.mp3",
+      "tags": [
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296173486034,
+      "script": "hiragana",
+      "kana": "だ",
+      "romaji": "da",
+      "category": "Dakuon",
+      "audio_file": "d11-da.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173495218,
+      "script": "hiragana",
+      "kana": "ぢ",
+      "romaji": "dzi",
+      "category": "Dakuon",
+      "audio_file": "d12-dzi.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173502314,
+      "script": "hiragana",
+      "kana": "づ",
+      "romaji": "dzu",
+      "category": "Dakuon",
+      "audio_file": "d13-dzu.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173508308,
+      "script": "hiragana",
+      "kana": "で",
+      "romaji": "de",
+      "category": "Dakuon",
+      "audio_file": "d14-de.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173512575,
+      "script": "hiragana",
+      "kana": "ど",
+      "romaji": "do",
+      "category": "Dakuon",
+      "audio_file": "d15-do.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173518584,
+      "script": "hiragana",
+      "kana": "ば",
+      "romaji": "ba",
+      "category": "Dakuon",
+      "audio_file": "d16-ba.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173527160,
+      "script": "hiragana",
+      "kana": "び",
+      "romaji": "bi",
+      "category": "Dakuon",
+      "audio_file": "d17-bi.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173537196,
+      "script": "hiragana",
+      "kana": "ぶ",
+      "romaji": "bu",
+      "category": "Dakuon",
+      "audio_file": "d18-bu.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173541882,
+      "script": "hiragana",
+      "kana": "べ",
+      "romaji": "be",
+      "category": "Dakuon",
+      "audio_file": "d19-be.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173548932,
+      "script": "hiragana",
+      "kana": "ぼ",
+      "romaji": "bo",
+      "category": "Dakuon",
+      "audio_file": "d20-bo.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Hiragana",
+        "Japanese",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173555751,
+      "script": "hiragana",
+      "kana": "ぱ",
+      "romaji": "pa",
+      "category": "Handakuon",
+      "audio_file": "d21-pa.mp3",
+      "tags": [
+        "Handakuon",
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173561017,
+      "script": "hiragana",
+      "kana": "ぴ",
+      "romaji": "pi",
+      "category": "Handakuon",
+      "audio_file": "d22-pi.mp3",
+      "tags": [
+        "Handakuon",
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173565911,
+      "script": "hiragana",
+      "kana": "ぷ",
+      "romaji": "pu",
+      "category": "Handakuon",
+      "audio_file": "d23-pu.mp3",
+      "tags": [
+        "Handakuon",
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173571967,
+      "script": "hiragana",
+      "kana": "ぺ",
+      "romaji": "pe",
+      "category": "Handakuon",
+      "audio_file": "d24-pe.mp3",
+      "tags": [
+        "Handakuon",
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296173576833,
+      "script": "hiragana",
+      "kana": "ぽ",
+      "romaji": "po",
+      "category": "Handakuon",
+      "audio_file": "d25-po.mp3",
+      "tags": [
+        "Handakuon",
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296174713771,
+      "script": "hiragana",
+      "kana": "きゃ",
+      "romaji": "kya",
+      "category": "Yōon",
+      "audio_file": "c1-kya.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "K",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174720795,
+      "script": "hiragana",
+      "kana": "きゅ",
+      "romaji": "kyu",
+      "category": "Yōon",
+      "audio_file": "c2-kyu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "K",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174726070,
+      "script": "hiragana",
+      "kana": "きょ",
+      "romaji": "kyo",
+      "category": "Yōon",
+      "audio_file": "c3-kyo.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "K",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174734724,
+      "script": "hiragana",
+      "kana": "ぎゃ",
+      "romaji": "gya",
+      "category": "Yōon",
+      "audio_file": "c4-gya.mp3",
+      "tags": [
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174740037,
+      "script": "hiragana",
+      "kana": "ぎゅ",
+      "romaji": "gyu",
+      "category": "Yōon",
+      "audio_file": "c5-gyu.mp3",
+      "tags": [
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174745457,
+      "script": "hiragana",
+      "kana": "ぎょ",
+      "romaji": "gyo",
+      "category": "Yōon",
+      "audio_file": "c6-gyo.mp3",
+      "tags": [
+        "G",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174750717,
+      "script": "hiragana",
+      "kana": "しゃ",
+      "romaji": "sha",
+      "category": "Yōon",
+      "audio_file": "c7-sha.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174755905,
+      "script": "hiragana",
+      "kana": "しゅ",
+      "romaji": "shu",
+      "category": "Yōon",
+      "audio_file": "c8-shu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174760675,
+      "script": "hiragana",
+      "kana": "しょ",
+      "romaji": "sho",
+      "category": "Yōon",
+      "audio_file": "c9-sho.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174767445,
+      "script": "hiragana",
+      "kana": "じゃ",
+      "romaji": "ja",
+      "category": "Yōon",
+      "audio_file": "c10-ja.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174773075,
+      "script": "hiragana",
+      "kana": "じゅ",
+      "romaji": "ju",
+      "category": "Yōon",
+      "audio_file": "c11-ju.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174777817,
+      "script": "hiragana",
+      "kana": "じょ",
+      "romaji": "jo",
+      "category": "Yōon",
+      "audio_file": "c12-jo.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174783783,
+      "script": "hiragana",
+      "kana": "ちゃ",
+      "romaji": "cha",
+      "category": "Yōon",
+      "audio_file": "c13-cha.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "T",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174789653,
+      "script": "hiragana",
+      "kana": "ちゅ",
+      "romaji": "chu",
+      "category": "Yōon",
+      "audio_file": "c14-chu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "T",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174794325,
+      "script": "hiragana",
+      "kana": "ちょ",
+      "romaji": "cho",
+      "category": "Yōon",
+      "audio_file": "c15-cho.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "T",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174799687,
+      "script": "hiragana",
+      "kana": "にゃ",
+      "romaji": "nya",
+      "category": "Yōon",
+      "audio_file": "c16-nya.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "N",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174805496,
+      "script": "hiragana",
+      "kana": "にゅ",
+      "romaji": "nyu",
+      "category": "Yōon",
+      "audio_file": "c17-nyu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "N",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174814921,
+      "script": "hiragana",
+      "kana": "にょ",
+      "romaji": "nyo",
+      "category": "Yōon",
+      "audio_file": "c18-nyo.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "N",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174822631,
+      "script": "hiragana",
+      "kana": "ひゃ",
+      "romaji": "hya",
+      "category": "Yōon",
+      "audio_file": "c19-hya.mp3",
+      "tags": [
+        "H",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174832980,
+      "script": "hiragana",
+      "kana": "ひゅ",
+      "romaji": "hyu",
+      "category": "Yōon",
+      "audio_file": "c20-hyu.mp3",
+      "tags": [
+        "H",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174839214,
+      "script": "hiragana",
+      "kana": "ひょ",
+      "romaji": "hyo",
+      "category": "Yōon",
+      "audio_file": "c21-hyo.mp3",
+      "tags": [
+        "H",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174847987,
+      "script": "hiragana",
+      "kana": "びゃ",
+      "romaji": "bya",
+      "category": "Yōon",
+      "audio_file": "c22-bya.mp3",
+      "tags": [
+        "B",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174864182,
+      "script": "hiragana",
+      "kana": "びゅ",
+      "romaji": "byu",
+      "category": "Yōon",
+      "audio_file": "c23-byu.mp3",
+      "tags": [
+        "B",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174869908,
+      "script": "hiragana",
+      "kana": "びょ",
+      "romaji": "byo",
+      "category": "Yōon",
+      "audio_file": "c24-byo.mp3",
+      "tags": [
+        "B",
+        "Hiragana",
+        "Japanese",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174880175,
+      "script": "hiragana",
+      "kana": "ぴゃ",
+      "romaji": "pya",
+      "category": "Yōon",
+      "audio_file": "c25-pya.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174885501,
+      "script": "hiragana",
+      "kana": "ぴゅ",
+      "romaji": "pyu",
+      "category": "Yōon",
+      "audio_file": "c26-pyu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174890452,
+      "script": "hiragana",
+      "kana": "ぴょ",
+      "romaji": "pyo",
+      "category": "Yōon",
+      "audio_file": "c27-pyo.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "P",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174897628,
+      "script": "hiragana",
+      "kana": "みゃ",
+      "romaji": "mya",
+      "category": "Yōon",
+      "audio_file": "c28-mya.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "M",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174903020,
+      "script": "hiragana",
+      "kana": "みゅ",
+      "romaji": "myu",
+      "category": "Yōon",
+      "audio_file": "c29-myu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "M",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174908258,
+      "script": "hiragana",
+      "kana": "みょ",
+      "romaji": "myo",
+      "category": "Yōon",
+      "audio_file": "c30-myo.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "M",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174913515,
+      "script": "hiragana",
+      "kana": "りゃ",
+      "romaji": "rya",
+      "category": "Yōon",
+      "audio_file": "c31-rya.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "R",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174918816,
+      "script": "hiragana",
+      "kana": "りゅ",
+      "romaji": "ryu",
+      "category": "Yōon",
+      "audio_file": "c32-ryu.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "R",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296174925153,
+      "script": "hiragana",
+      "kana": "りょ",
+      "romaji": "ryo",
+      "category": "Yōon",
+      "audio_file": "c33-ryo.mp3",
+      "tags": [
+        "Hiragana",
+        "Japanese",
+        "R",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296499533072,
+      "script": "katakana",
+      "kana": "ア",
+      "romaji": "a",
+      "category": "Gojūon",
+      "audio_file": "1_a.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499541126,
+      "script": "katakana",
+      "kana": "イ",
+      "romaji": "i",
+      "category": "Gojūon",
+      "audio_file": "2_i.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499549374,
+      "script": "katakana",
+      "kana": "ウ",
+      "romaji": "u",
+      "category": "Gojūon",
+      "audio_file": "3_u.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499555510,
+      "script": "katakana",
+      "kana": "エ",
+      "romaji": "e",
+      "category": "Gojūon",
+      "audio_file": "4_e.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499564030,
+      "script": "katakana",
+      "kana": "オ",
+      "romaji": "o",
+      "category": "Gojūon",
+      "audio_file": "5_o.mp3",
+      "tags": [
+        "A",
+        "Gojūon",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499570346,
+      "script": "katakana",
+      "kana": "カ",
+      "romaji": "ka",
+      "category": "Gojūon",
+      "audio_file": "6_ka.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "K",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499576086,
+      "script": "katakana",
+      "kana": "キ",
+      "romaji": "ki",
+      "category": "Gojūon",
+      "audio_file": "7_ki.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "K",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499585331,
+      "script": "katakana",
+      "kana": "ク",
+      "romaji": "ku",
+      "category": "Gojūon",
+      "audio_file": "8_ku.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "K",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499591124,
+      "script": "katakana",
+      "kana": "コ",
+      "romaji": "ko",
+      "category": "Gojūon",
+      "audio_file": "10_ko.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "K",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499600849,
+      "script": "katakana",
+      "kana": "サ",
+      "romaji": "sa",
+      "category": "Gojūon",
+      "audio_file": "11_sa.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296499606471,
+      "script": "katakana",
+      "kana": "シ",
+      "romaji": "shi",
+      "category": "Gojūon",
+      "audio_file": "12_shi.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296499611911,
+      "script": "katakana",
+      "kana": "ス",
+      "romaji": "su",
+      "category": "Gojūon",
+      "audio_file": "13_su.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296499618293,
+      "script": "katakana",
+      "kana": "セ",
+      "romaji": "se",
+      "category": "Gojūon",
+      "audio_file": "14_se.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296499625161,
+      "script": "katakana",
+      "kana": "ソ",
+      "romaji": "so",
+      "category": "Gojūon",
+      "audio_file": "15_so.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "S"
+      ]
+    },
+    {
+      "source_note_id": 1296499636855,
+      "script": "katakana",
+      "kana": "タ",
+      "romaji": "ta",
+      "category": "Gojūon",
+      "audio_file": "16_ta.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296499644766,
+      "script": "katakana",
+      "kana": "チ",
+      "romaji": "chi",
+      "category": "Gojūon",
+      "audio_file": "17_chi.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296499650705,
+      "script": "katakana",
+      "kana": "ツ",
+      "romaji": "tsu",
+      "category": "Gojūon",
+      "audio_file": "18_tsu.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296499656663,
+      "script": "katakana",
+      "kana": "テ",
+      "romaji": "te",
+      "category": "Gojūon",
+      "audio_file": "19_te.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296499663613,
+      "script": "katakana",
+      "kana": "ト",
+      "romaji": "to",
+      "category": "Gojūon",
+      "audio_file": "20_to.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "T"
+      ]
+    },
+    {
+      "source_note_id": 1296499670781,
+      "script": "katakana",
+      "kana": "ナ",
+      "romaji": "na",
+      "category": "Gojūon",
+      "audio_file": "21_na.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296499677355,
+      "script": "katakana",
+      "kana": "ニ",
+      "romaji": "ni",
+      "category": "Gojūon",
+      "audio_file": "22_ni.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296499688530,
+      "script": "katakana",
+      "kana": "ヌ",
+      "romaji": "nu",
+      "category": "Gojūon",
+      "audio_file": "23_nu.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296499693869,
+      "script": "katakana",
+      "kana": "ネ",
+      "romaji": "ne",
+      "category": "Gojūon",
+      "audio_file": "24_ne.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296499713886,
+      "script": "katakana",
+      "kana": "ノ",
+      "romaji": "no",
+      "category": "Gojūon",
+      "audio_file": "25_no.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296499726354,
+      "script": "katakana",
+      "kana": "ハ",
+      "romaji": "ha",
+      "category": "Gojūon",
+      "audio_file": "26_ha.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499731558,
+      "script": "katakana",
+      "kana": "ヒ",
+      "romaji": "hi",
+      "category": "Gojūon",
+      "audio_file": "27_hi.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499737365,
+      "script": "katakana",
+      "kana": "フ",
+      "romaji": "fu",
+      "category": "Gojūon",
+      "audio_file": "28_hu.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499744013,
+      "script": "katakana",
+      "kana": "ヘ",
+      "romaji": "he",
+      "category": "Gojūon",
+      "audio_file": "29_he.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499749208,
+      "script": "katakana",
+      "kana": "ホ",
+      "romaji": "ho",
+      "category": "Gojūon",
+      "audio_file": "30_ho.mp3",
+      "tags": [
+        "Gojūon",
+        "H",
+        "Japanese",
+        "Katakana"
+      ]
+    },
+    {
+      "source_note_id": 1296499757218,
+      "script": "katakana",
+      "kana": "マ",
+      "romaji": "ma",
+      "category": "Gojūon",
+      "audio_file": "31_ma.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296499763570,
+      "script": "katakana",
+      "kana": "ミ",
+      "romaji": "mi",
+      "category": "Gojūon",
+      "audio_file": "32_mi.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296499770930,
+      "script": "katakana",
+      "kana": "ム",
+      "romaji": "mu",
+      "category": "Gojūon",
+      "audio_file": "33_mu.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296499776659,
+      "script": "katakana",
+      "kana": "メ",
+      "romaji": "me",
+      "category": "Gojūon",
+      "audio_file": "34_me.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296499795132,
+      "script": "katakana",
+      "kana": "モ",
+      "romaji": "mo",
+      "category": "Gojūon",
+      "audio_file": "35_mo.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "M"
+      ]
+    },
+    {
+      "source_note_id": 1296499805192,
+      "script": "katakana",
+      "kana": "ヤ",
+      "romaji": "ya",
+      "category": "Gojūon",
+      "audio_file": "36_ya.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "Y"
+      ]
+    },
+    {
+      "source_note_id": 1296499815564,
+      "script": "katakana",
+      "kana": "ユ",
+      "romaji": "yu",
+      "category": "Gojūon",
+      "audio_file": "37_yu.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "Y"
+      ]
+    },
+    {
+      "source_note_id": 1296499821999,
+      "script": "katakana",
+      "kana": "ヨ",
+      "romaji": "yo",
+      "category": "Gojūon",
+      "audio_file": "38_yo.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "Y"
+      ]
+    },
+    {
+      "source_note_id": 1296499833126,
+      "script": "katakana",
+      "kana": "ラ",
+      "romaji": "ra",
+      "category": "Gojūon",
+      "audio_file": "39_ra.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296499838691,
+      "script": "katakana",
+      "kana": "リ",
+      "romaji": "ri",
+      "category": "Gojūon",
+      "audio_file": "40_ri.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296499844819,
+      "script": "katakana",
+      "kana": "ル",
+      "romaji": "ru",
+      "category": "Gojūon",
+      "audio_file": "41_ru.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296499852015,
+      "script": "katakana",
+      "kana": "レ",
+      "romaji": "re",
+      "category": "Gojūon",
+      "audio_file": "42_re.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296499859391,
+      "script": "katakana",
+      "kana": "ロ",
+      "romaji": "ro",
+      "category": "Gojūon",
+      "audio_file": "43_ro.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "R"
+      ]
+    },
+    {
+      "source_note_id": 1296499868081,
+      "script": "katakana",
+      "kana": "ワ",
+      "romaji": "wa",
+      "category": "Gojūon",
+      "audio_file": "44_wa.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "W"
+      ]
+    },
+    {
+      "source_note_id": 1296499877595,
+      "script": "katakana",
+      "kana": "ヲ",
+      "romaji": "wo",
+      "category": "Gojūon",
+      "audio_file": "45_wo.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "W"
+      ]
+    },
+    {
+      "source_note_id": 1296499896447,
+      "script": "katakana",
+      "kana": "ン",
+      "romaji": "n",
+      "category": "Gojūon",
+      "audio_file": "46_n.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "Katakana",
+        "N"
+      ]
+    },
+    {
+      "source_note_id": 1296499913861,
+      "script": "katakana",
+      "kana": "ガ",
+      "romaji": "ga",
+      "category": "Dakuon",
+      "audio_file": "d1-ga.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296499920030,
+      "script": "katakana",
+      "kana": "ギ",
+      "romaji": "gi",
+      "category": "Dakuon",
+      "audio_file": "d2-gi.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296499928430,
+      "script": "katakana",
+      "kana": "グ",
+      "romaji": "gu",
+      "category": "Dakuon",
+      "audio_file": "d3-gu.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296499933243,
+      "script": "katakana",
+      "kana": "ゲ",
+      "romaji": "ge",
+      "category": "Dakuon",
+      "audio_file": "d4-ge.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296499939214,
+      "script": "katakana",
+      "kana": "ゴ",
+      "romaji": "go",
+      "category": "Dakuon",
+      "audio_file": "d5-go.mp3",
+      "tags": [
+        "Dakuon",
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296499957667,
+      "script": "katakana",
+      "kana": "ザ",
+      "romaji": "za",
+      "category": "Dakuon",
+      "audio_file": "d6-za.mp3",
+      "tags": [
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296499965528,
+      "script": "katakana",
+      "kana": "ジ",
+      "romaji": "ji",
+      "category": "Dakuon",
+      "audio_file": "d7-ji.mp3",
+      "tags": [
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296499973122,
+      "script": "katakana",
+      "kana": "ズ",
+      "romaji": "zu",
+      "category": "Dakuon",
+      "audio_file": "d8-zu.mp3",
+      "tags": [
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296499992092,
+      "script": "katakana",
+      "kana": "ゼ",
+      "romaji": "ze",
+      "category": "Dakuon",
+      "audio_file": "d9-ze.mp3",
+      "tags": [
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296499999858,
+      "script": "katakana",
+      "kana": "ゾ",
+      "romaji": "zo",
+      "category": "Dakuon",
+      "audio_file": "d10-zo.mp3",
+      "tags": [
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Z"
+      ]
+    },
+    {
+      "source_note_id": 1296500033334,
+      "script": "katakana",
+      "kana": "ダ",
+      "romaji": "da",
+      "category": "Dakuon",
+      "audio_file": "d11-da.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500042315,
+      "script": "katakana",
+      "kana": "ヂ",
+      "romaji": "dzi",
+      "category": "Dakuon",
+      "audio_file": "d12-dzi.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500050753,
+      "script": "katakana",
+      "kana": "ヅ",
+      "romaji": "dzu",
+      "category": "Dakuon",
+      "audio_file": "d13-dzu.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500057732,
+      "script": "katakana",
+      "kana": "デ",
+      "romaji": "de",
+      "category": "Dakuon",
+      "audio_file": "d14-de.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500064788,
+      "script": "katakana",
+      "kana": "ド",
+      "romaji": "do",
+      "category": "Dakuon",
+      "audio_file": "d15-do.mp3",
+      "tags": [
+        "D",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500074684,
+      "script": "katakana",
+      "kana": "バ",
+      "romaji": "ba",
+      "category": "Dakuon",
+      "audio_file": "d16-ba.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500081195,
+      "script": "katakana",
+      "kana": "ビ",
+      "romaji": "bi",
+      "category": "Dakuon",
+      "audio_file": "d17-bi.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500089417,
+      "script": "katakana",
+      "kana": "ブ",
+      "romaji": "bu",
+      "category": "Dakuon",
+      "audio_file": "d18-bu.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500095343,
+      "script": "katakana",
+      "kana": "ベ",
+      "romaji": "be",
+      "category": "Dakuon",
+      "audio_file": "d19-be.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500100431,
+      "script": "katakana",
+      "kana": "ボ",
+      "romaji": "bo",
+      "category": "Dakuon",
+      "audio_file": "d20-bo.mp3",
+      "tags": [
+        "B",
+        "Dakuon",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500107859,
+      "script": "katakana",
+      "kana": "パ",
+      "romaji": "pa",
+      "category": "Handakuon",
+      "audio_file": "d21-pa.mp3",
+      "tags": [
+        "Handakuon",
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500113619,
+      "script": "katakana",
+      "kana": "ピ",
+      "romaji": "pi",
+      "category": "Handakuon",
+      "audio_file": "d22-pi.mp3",
+      "tags": [
+        "Handakuon",
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500119840,
+      "script": "katakana",
+      "kana": "プ",
+      "romaji": "pu",
+      "category": "Handakuon",
+      "audio_file": "d23-pu.mp3",
+      "tags": [
+        "Handakuon",
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500126571,
+      "script": "katakana",
+      "kana": "ペ",
+      "romaji": "pe",
+      "category": "Handakuon",
+      "audio_file": "d24-pe.mp3",
+      "tags": [
+        "Handakuon",
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500146577,
+      "script": "katakana",
+      "kana": "ポ",
+      "romaji": "po",
+      "category": "Handakuon",
+      "audio_file": "d25-po.mp3",
+      "tags": [
+        "Handakuon",
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500160982,
+      "script": "katakana",
+      "kana": "キャ",
+      "romaji": "kya",
+      "category": "Yōon",
+      "audio_file": "c1-kya.mp3",
+      "tags": [
+        "Japanese",
+        "K",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500167403,
+      "script": "katakana",
+      "kana": "キュ",
+      "romaji": "kyu",
+      "category": "Yōon",
+      "audio_file": "c2-kyu.mp3",
+      "tags": [
+        "Japanese",
+        "K",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500172543,
+      "script": "katakana",
+      "kana": "キョ",
+      "romaji": "kyo",
+      "category": "Yōon",
+      "audio_file": "c3-kyo.mp3",
+      "tags": [
+        "Japanese",
+        "K",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500178327,
+      "script": "katakana",
+      "kana": "ギャ",
+      "romaji": "gya",
+      "category": "Yōon",
+      "audio_file": "c4-gya.mp3",
+      "tags": [
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500184696,
+      "script": "katakana",
+      "kana": "ギュ",
+      "romaji": "gyu",
+      "category": "Yōon",
+      "audio_file": "c5-gyu.mp3",
+      "tags": [
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500197303,
+      "script": "katakana",
+      "kana": "ギョ",
+      "romaji": "gyo",
+      "category": "Yōon",
+      "audio_file": "c6-gyo.mp3",
+      "tags": [
+        "G",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500205671,
+      "script": "katakana",
+      "kana": "シャ",
+      "romaji": "sha",
+      "category": "Yōon",
+      "audio_file": "c7-sha.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500244673,
+      "script": "katakana",
+      "kana": "シュ",
+      "romaji": "shu",
+      "category": "Yōon",
+      "audio_file": "c8-shu.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500254517,
+      "script": "katakana",
+      "kana": "ショ",
+      "romaji": "sho",
+      "category": "Yōon",
+      "audio_file": "c9-sho.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500261361,
+      "script": "katakana",
+      "kana": "ジャ",
+      "romaji": "ja",
+      "category": "Yōon",
+      "audio_file": "c10-ja.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500270086,
+      "script": "katakana",
+      "kana": "ジュ",
+      "romaji": "ju",
+      "category": "Yōon",
+      "audio_file": "c11-ju.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500275740,
+      "script": "katakana",
+      "kana": "ジョ",
+      "romaji": "jo",
+      "category": "Yōon",
+      "audio_file": "c12-jo.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "S",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500284747,
+      "script": "katakana",
+      "kana": "チャ",
+      "romaji": "cha",
+      "category": "Yōon",
+      "audio_file": "c13-cha.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "T",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500289898,
+      "script": "katakana",
+      "kana": "チュ",
+      "romaji": "chu",
+      "category": "Yōon",
+      "audio_file": "c14-chu.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "T",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500295104,
+      "script": "katakana",
+      "kana": "チョ",
+      "romaji": "cho",
+      "category": "Yōon",
+      "audio_file": "c15-cho.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "T",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500302862,
+      "script": "katakana",
+      "kana": "ニャ",
+      "romaji": "nya",
+      "category": "Yōon",
+      "audio_file": "c16-nya.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "N",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500308388,
+      "script": "katakana",
+      "kana": "ニュ",
+      "romaji": "nyu",
+      "category": "Yōon",
+      "audio_file": "c17-nyu.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "N",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500314342,
+      "script": "katakana",
+      "kana": "ニョ",
+      "romaji": "nyo",
+      "category": "Yōon",
+      "audio_file": "c18-nyo.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "N",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500322401,
+      "script": "katakana",
+      "kana": "ヒャ",
+      "romaji": "hya",
+      "category": "Yōon",
+      "audio_file": "c19-hya.mp3",
+      "tags": [
+        "H",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500330622,
+      "script": "katakana",
+      "kana": "ヒュ",
+      "romaji": "hyu",
+      "category": "Yōon",
+      "audio_file": "c20-hyu.mp3",
+      "tags": [
+        "H",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500337043,
+      "script": "katakana",
+      "kana": "ヒョ",
+      "romaji": "hyo",
+      "category": "Yōon",
+      "audio_file": "c21-hyo_15494354.mp3",
+      "tags": [
+        "H",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500349466,
+      "script": "katakana",
+      "kana": "ビャ",
+      "romaji": "bya",
+      "category": "Yōon",
+      "audio_file": "c22-bya.mp3",
+      "tags": [
+        "B",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500359621,
+      "script": "katakana",
+      "kana": "ビュ",
+      "romaji": "byu",
+      "category": "Yōon",
+      "audio_file": "c23-byu.mp3",
+      "tags": [
+        "B",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500367567,
+      "script": "katakana",
+      "kana": "ビョ",
+      "romaji": "byo",
+      "category": "Yōon",
+      "audio_file": "c24-byo.mp3",
+      "tags": [
+        "B",
+        "Japanese",
+        "Katakana",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500374131,
+      "script": "katakana",
+      "kana": "ピャ",
+      "romaji": "pya",
+      "category": "Yōon",
+      "audio_file": "c25-pya.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500380355,
+      "script": "katakana",
+      "kana": "ピュ",
+      "romaji": "pyu",
+      "category": "Yōon",
+      "audio_file": "c26-pyu.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500387455,
+      "script": "katakana",
+      "kana": "ピョ",
+      "romaji": "pyo",
+      "category": "Yōon",
+      "audio_file": "c27-pyo.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "P",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500396567,
+      "script": "katakana",
+      "kana": "ミャ",
+      "romaji": "mya",
+      "category": "Yōon",
+      "audio_file": "c28-mya.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "M",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500403449,
+      "script": "katakana",
+      "kana": "ミュ",
+      "romaji": "myu",
+      "category": "Yōon",
+      "audio_file": "c29-myu.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "M",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500409403,
+      "script": "katakana",
+      "kana": "ミョ",
+      "romaji": "myo",
+      "category": "Yōon",
+      "audio_file": "c30-myo.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "M",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500415421,
+      "script": "katakana",
+      "kana": "リャ",
+      "romaji": "rya",
+      "category": "Yōon",
+      "audio_file": "c31-rya.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "R",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500424476,
+      "script": "katakana",
+      "kana": "リュ",
+      "romaji": "ryu",
+      "category": "Yōon",
+      "audio_file": "c32-ryu.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "R",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500442164,
+      "script": "katakana",
+      "kana": "リョ",
+      "romaji": "ryo",
+      "category": "Yōon",
+      "audio_file": "c33-ryo.mp3",
+      "tags": [
+        "Japanese",
+        "Katakana",
+        "R",
+        "Voiced",
+        "Yōon"
+      ]
+    },
+    {
+      "source_note_id": 1296500618645,
+      "script": "katakana",
+      "kana": "ウィ",
+      "romaji": "wi",
+      "category": "Additional",
+      "audio_file": "1-wi.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500627393,
+      "script": "katakana",
+      "kana": "ウェ",
+      "romaji": "we",
+      "category": "Additional",
+      "audio_file": "2-we.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500639853,
+      "script": "katakana",
+      "kana": "ウォ",
+      "romaji": "wo",
+      "category": "Additional",
+      "audio_file": "3-wo.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500659867,
+      "script": "katakana",
+      "kana": "ヴァ",
+      "romaji": "va",
+      "category": "Additional",
+      "audio_file": "4-bwa.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500680522,
+      "script": "katakana",
+      "kana": "ヴィ",
+      "romaji": "vi",
+      "category": "Additional",
+      "audio_file": "5-bwi.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500826750,
+      "script": "katakana",
+      "kana": "ヴ",
+      "romaji": "vu",
+      "category": "Additional",
+      "audio_file": "7-bu.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500861720,
+      "script": "katakana",
+      "kana": "ヴェ",
+      "romaji": "ve",
+      "category": "Additional",
+      "audio_file": "8-bwe.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500876905,
+      "script": "katakana",
+      "kana": "ヴォ",
+      "romaji": "vo",
+      "category": "Additional",
+      "audio_file": "9-bwo.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500883777,
+      "script": "katakana",
+      "kana": "シェ",
+      "romaji": "she",
+      "category": "Additional",
+      "audio_file": "10-she.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500891645,
+      "script": "katakana",
+      "kana": "ジェ",
+      "romaji": "je",
+      "category": "Additional",
+      "audio_file": "11-je.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500933745,
+      "script": "katakana",
+      "kana": "ファ",
+      "romaji": "fa",
+      "category": "Additional",
+      "audio_file": "12-fwa.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500944248,
+      "script": "katakana",
+      "kana": "フィ",
+      "romaji": "fi",
+      "category": "Additional",
+      "audio_file": "13-fwi.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500952695,
+      "script": "katakana",
+      "kana": "フェ",
+      "romaji": "fe",
+      "category": "Additional",
+      "audio_file": "14-fwe.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500958617,
+      "script": "katakana",
+      "kana": "フォ",
+      "romaji": "fo",
+      "category": "Additional",
+      "audio_file": "15-fwo.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500969764,
+      "script": "katakana",
+      "kana": "ティ",
+      "romaji": "ti",
+      "category": "Additional",
+      "audio_file": "16-ti.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296500984048,
+      "script": "katakana",
+      "kana": "ディ",
+      "romaji": "di",
+      "category": "Additional",
+      "audio_file": "18-di.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296501010688,
+      "script": "katakana",
+      "kana": "トゥ",
+      "romaji": "to",
+      "category": "Additional",
+      "audio_file": "17-to.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296501132501,
+      "script": "katakana",
+      "kana": "ドゥ",
+      "romaji": "do",
+      "category": "Additional",
+      "audio_file": "19-do.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1296501144855,
+      "script": "katakana",
+      "kana": "チェ",
+      "romaji": "che",
+      "category": "Additional",
+      "audio_file": "20-che.mp3",
+      "tags": [
+        "Additional",
+        "Japanese",
+        "Katakana",
+        "Voiced"
+      ]
+    },
+    {
+      "source_note_id": 1384136882717,
+      "script": "katakana",
+      "kana": "ケ",
+      "romaji": "ke",
+      "category": "Gojūon",
+      "audio_file": "9_ke.mp3",
+      "tags": [
+        "Gojūon",
+        "Japanese",
+        "K",
+        "Katakana"
+      ]
+    }
+  ]
+}
