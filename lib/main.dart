@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import 'screens/home_screen.dart';
+import 'screens/splash_screen.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +25,8 @@ class JLPTStudyApp extends StatelessWidget {
     return MaterialApp(
       title: 'JLPT Study',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFE9A5B6)),
-        scaffoldBackgroundColor: const Color(0xFFFFF9FA),
-        useMaterial3: true,
-      ),
-      home: const HomeScreen(),
+      theme: AppTheme.light,
+      home: const AppSplashScreen(),
     );
   }
 }

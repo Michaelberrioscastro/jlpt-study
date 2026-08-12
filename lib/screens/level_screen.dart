@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/database_service.dart';
+import '../theme/app_colors.dart';
 import 'study_screen.dart';
 
 class LevelScreen extends StatefulWidget {
@@ -13,13 +14,13 @@ class LevelScreen extends StatefulWidget {
 }
 
 class _LevelScreenState extends State<LevelScreen> {
-  Map<String, int>? _overall;
-  Map<String, Map<String, int>>? _byType;
+  Map<String, int>? overall;
+  Map<String, Map<String, int>>? byType;
 
-  bool _loading = true;
-  String? _error;
+  bool loading = true;
+  String? error;
 
-  String _studyType = 'mix';
+  String studyType = 'mix';
 
   @override
   void initState() {
@@ -29,36 +30,36 @@ class _LevelScreenState extends State<LevelScreen> {
 
   Future<void> _load() async {
     setState(() {
-      _loading = true;
-      _error = null;
+      loading = true;
+      error = null;
     });
 
     try {
-      final overall = await DatabaseService.getStudyCounts(widget.level);
-
-      final byType = await DatabaseService.getStudyCountsByType(widget.level);
+      final result = await DatabaseService.getStudyCounts(widget.level);
+      final perType = await DatabaseService.getStudyCountsByType(widget.level);
 
       if (!mounted) return;
 
       setState(() {
-        _overall = overall;
-        _byType = byType;
-        _loading = false;
+        overall = result;
+        byType = perType;
+        loading = false;
       });
     } catch (e) {
       if (!mounted) return;
 
       setState(() {
-        _loading = false;
-        _error = e.toString();
+        loading = false;
+        error = e.toString();
       });
     }
   }
 
   Future<void> _startStudy() async {
-    await Navigator.of(context).push(
+    await Navigator.push(
+      context,
       MaterialPageRoute(
-        builder: (_) => StudyScreen(level: widget.level, studyType: _studyType),
+        builder: (_) => StudyScreen(level: widget.level, studyType: studyType),
       ),
     );
 
@@ -67,206 +68,141 @@ class _LevelScreenState extends State<LevelScreen> {
   }
 
   double _progressFor(String type) {
-    final stats = _byType?[type];
+    final stats = byType?[type];
+    final total = stats?['total'] ?? 0;
+    final learned = stats?['learned'] ?? 0;
 
-    if (stats == null) {
-      return 0;
-    }
-
-    final total = stats['total'] ?? 0;
-    final learned = stats['learned'] ?? 0;
-
-    if (total <= 0) {
-      return 0;
-    }
-
-    return learned / total;
+    return total == 0 ? 0 : learned / total;
   }
 
-  String _labelFor(String type) {
-    switch (type) {
+  String get _studyLabel {
+    switch (studyType) {
       case 'vocab':
         return 'Vocabulario';
       case 'kanji':
         return 'Kanji';
       case 'grammar':
         return 'Gramática';
-      case 'mix':
+      default:
         return 'Mix';
-      default:
-        return type;
-    }
-  }
-
-  IconData _iconFor(String type) {
-    switch (type) {
-      case 'vocab':
-        return Icons.menu_book_outlined;
-      case 'kanji':
-        return Icons.translate_rounded;
-      case 'grammar':
-        return Icons.edit_note_outlined;
-      case 'mix':
-      default:
-        return Icons.auto_awesome_rounded;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final overall = _overall ?? const <String, int>{};
+    final stats = overall ?? const <String, int>{};
 
-    final total = overall['total'] ?? 0;
-    final learned = overall['learned'] ?? 0;
-    final learning = overall['learning'] ?? 0;
-    final due = overall['due'] ?? 0;
-    final newItems = overall['new'] ?? 0;
-
-    final overallProgress = total <= 0 ? 0.0 : learned / total;
+    final total = stats['total'] ?? 0;
+    final learned = stats['learned'] ?? 0;
+    final learning = stats['learning'] ?? 0;
+    final due = stats['due'] ?? 0;
+    final newItems = stats['new'] ?? 0;
+    final progress = total == 0 ? 0.0 : learned / total;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF9FA),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFFF9FA),
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          '${widget.level} · Perfil de estudio',
-          style: const TextStyle(fontWeight: FontWeight.w900),
-        ),
-      ),
+      appBar: AppBar(title: Text(widget.level)),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.fromLTRB(20, 14, 20, 34),
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 36),
           children: [
-            if (_loading)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 70),
+            if (loading)
+              const SizedBox(
+                height: 420,
                 child: Center(child: CircularProgressIndicator()),
               )
-            else if (_error != null)
-              _ErrorCard(error: _error!, onRetry: _load)
+            else if (error != null)
+              _ErrorCard(message: error!, onRetry: _load)
             else ...[
-              _OverallCard(
+              _LevelHero(
                 level: widget.level,
-                progress: overallProgress,
+                progress: progress,
+                learned: learned,
                 total: total,
+                due: due,
+              ),
+
+              const SizedBox(height: 26),
+
+              Text(
+                '¿Qué quieres estudiar?',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Elige una modalidad para esta sesión.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 14),
+
+              _StudyTypeSelector(
+                selected: studyType,
+                onSelected: (value) {
+                  setState(() => studyType = value);
+                },
+              ),
+
+              // The CTA now sits immediately under the selector.
+              const SizedBox(height: 14),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: total == 0 ? null : _startStudy,
+                  icon: const Icon(Icons.play_arrow_rounded),
+                  label: Text('Estudiar $_studyLabel'),
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              Row(
+                children: [
+                  Text(
+                    'Progreso por área',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    '$learning estudiando',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              _ProgressTile(
+                title: 'Vocabulario',
+                symbol: '語',
+                progress: _progressFor('vocab'),
+                stats: byType?['vocab'],
+              ),
+              const SizedBox(height: 10),
+              _ProgressTile(
+                title: 'Kanji',
+                symbol: '字',
+                progress: _progressFor('kanji'),
+                stats: byType?['kanji'],
+              ),
+              const SizedBox(height: 10),
+              _ProgressTile(
+                title: 'Gramática',
+                symbol: '文',
+                progress: _progressFor('grammar'),
+                stats: byType?['grammar'],
+              ),
+
+              const SizedBox(height: 18),
+
+              _SessionInfo(
                 learned: learned,
                 learning: learning,
                 due: due,
                 newItems: newItems,
-              ),
-              const SizedBox(height: 22),
-              const Text(
-                '¿Qué quieres estudiar?',
-                style: TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(height: 12),
-              GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 1.65,
-                children: [
-                  _StudyTypeCard(
-                    label: 'Mix',
-                    subtitle: '4 vocab · 2 kanji · 2 gramática',
-                    icon: Icons.auto_awesome_rounded,
-                    selected: _studyType == 'mix',
-                    onTap: () {
-                      setState(() {
-                        _studyType = 'mix';
-                      });
-                    },
-                  ),
-                  _StudyTypeCard(
-                    label: 'Vocabulario',
-                    subtitle: 'Solo palabras',
-                    icon: Icons.menu_book_outlined,
-                    selected: _studyType == 'vocab',
-                    onTap: () {
-                      setState(() {
-                        _studyType = 'vocab';
-                      });
-                    },
-                  ),
-                  _StudyTypeCard(
-                    label: 'Kanji',
-                    subtitle: 'Solo kanji',
-                    icon: Icons.translate_rounded,
-                    selected: _studyType == 'kanji',
-                    onTap: () {
-                      setState(() {
-                        _studyType = 'kanji';
-                      });
-                    },
-                  ),
-                  _StudyTypeCard(
-                    label: 'Gramática',
-                    subtitle: 'Solo gramática',
-                    icon: Icons.edit_note_outlined,
-                    selected: _studyType == 'grammar',
-                    onTap: () {
-                      setState(() {
-                        _studyType = 'grammar';
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 26),
-              const Text(
-                'Progreso por área',
-                style: TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(height: 12),
-              _ProgressCard(
-                icon: Icons.menu_book_outlined,
-                title: 'Vocabulario',
-                progress: _progressFor('vocab'),
-                stats: _byType?['vocab'],
-              ),
-              const SizedBox(height: 12),
-              _ProgressCard(
-                icon: Icons.translate_rounded,
-                title: 'Kanji',
-                progress: _progressFor('kanji'),
-                stats: _byType?['kanji'],
-              ),
-              const SizedBox(height: 12),
-              _ProgressCard(
-                icon: Icons.edit_note_outlined,
-                title: 'Gramática',
-                progress: _progressFor('grammar'),
-                stats: _byType?['grammar'],
-              ),
-              const SizedBox(height: 20),
-              FilledButton.icon(
-                onPressed: total == 0 ? null : _startStudy,
-                icon: Icon(_iconFor(_studyType)),
-                label: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Text(
-                    'Estudiar ${_labelFor(_studyType)}',
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                'Las sesiones incluyen repasos vencidos, hasta 2 elementos en aprendizaje y hasta 8 nuevos.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.grey.shade600,
-                  fontSize: 13,
-                  height: 1.4,
-                ),
               ),
             ],
           ],
@@ -276,19 +212,313 @@ class _LevelScreenState extends State<LevelScreen> {
   }
 }
 
-class _OverallCard extends StatelessWidget {
+class _LevelHero extends StatelessWidget {
   final String level;
   final double progress;
+  final int learned;
   final int total;
+  final int due;
+
+  const _LevelHero({
+    required this.level,
+    required this.progress,
+    required this.learned,
+    required this.total,
+    required this.due,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(22),
+      decoration: BoxDecoration(
+        color: AppColors.primaryContainer,
+        borderRadius: BorderRadius.circular(28),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 58,
+                height: 58,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: .75),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Text(
+                  level,
+                  style: const TextStyle(
+                    color: AppColors.primaryStrong,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Perfil $level',
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w900),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      '$due repasos pendientes',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '${(progress * 100).toStringAsFixed(1)}%',
+                style: const TextStyle(
+                  color: AppColors.primaryStrong,
+                  fontSize: 19,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          LinearProgressIndicator(
+            value: progress,
+            minHeight: 10,
+            color: AppColors.primaryStrong,
+            backgroundColor: Colors.white.withValues(alpha: .7),
+            borderRadius: BorderRadius.circular(99),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '$learned de $total aprendidos',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StudyTypeSelector extends StatelessWidget {
+  final String selected;
+  final ValueChanged<String> onSelected;
+
+  const _StudyTypeSelector({required this.selected, required this.onSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    const items = [
+      ('mix', 'Mix', Icons.auto_awesome_rounded),
+      ('vocab', 'Vocab', Icons.menu_book_outlined),
+      ('kanji', 'Kanji', Icons.translate_rounded),
+      ('grammar', 'Gramática', Icons.edit_note_outlined),
+    ];
+
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: _TypeButton(
+                value: items[0].$1,
+                label: items[0].$2,
+                icon: items[0].$3,
+                selected: selected == items[0].$1,
+                onTap: () => onSelected(items[0].$1),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: _TypeButton(
+                value: items[1].$1,
+                label: items[1].$2,
+                icon: items[1].$3,
+                selected: selected == items[1].$1,
+                onTap: () => onSelected(items[1].$1),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(
+              child: _TypeButton(
+                value: items[2].$1,
+                label: items[2].$2,
+                icon: items[2].$3,
+                selected: selected == items[2].$1,
+                onTap: () => onSelected(items[2].$1),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: _TypeButton(
+                value: items[3].$1,
+                label: items[3].$2,
+                icon: items[3].$3,
+                selected: selected == items[3].$1,
+                onTap: () => onSelected(items[3].$1),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _TypeButton extends StatelessWidget {
+  final String value;
+  final String label;
+  final IconData icon;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _TypeButton({
+    required this.value,
+    required this.label,
+    required this.icon,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 170),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.primaryStrong : AppColors.surfaceSoft,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 19,
+              color: selected ? Colors.white : AppColors.textSecondary,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: selected ? Colors.white : AppColors.textPrimary,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProgressTile extends StatelessWidget {
+  final String title;
+  final String symbol;
+  final double progress;
+  final Map<String, int>? stats;
+
+  const _ProgressTile({
+    required this.title,
+    required this.symbol,
+    required this.progress,
+    required this.stats,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final learned = stats?['learned'] ?? 0;
+    final total = stats?['total'] ?? 0;
+    final learning = stats?['learning'] ?? 0;
+
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.surfaceSoft,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Text(
+              symbol,
+              style: const TextStyle(
+                color: AppColors.primaryStrong,
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w900),
+                      ),
+                    ),
+                    Text(
+                      '${(progress * 100).toStringAsFixed(1)}%',
+                      style: const TextStyle(
+                        color: AppColors.primaryStrong,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                LinearProgressIndicator(
+                  value: progress,
+                  minHeight: 7,
+                  borderRadius: BorderRadius.circular(99),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  '$learned / $total aprendidos · $learning estudiando',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SessionInfo extends StatelessWidget {
   final int learned;
   final int learning;
   final int due;
   final int newItems;
 
-  const _OverallCard({
-    required this.level,
-    required this.progress,
-    required this.total,
+  const _SessionInfo({
     required this.learned,
     required this.learning,
     required this.due,
@@ -297,289 +527,47 @@ class _OverallCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      color: const Color(0xFFFBE8EE),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-      child: Padding(
-        padding: const EdgeInsets.all(22),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  level,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  '${(progress * 100).toStringAsFixed(1)}%',
-                  style: const TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 6),
-            const Text(
-              'Aprendido del nivel',
-              style: TextStyle(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 14),
-            LinearProgressIndicator(
-              value: progress,
-              minHeight: 11,
-              borderRadius: BorderRadius.circular(99),
-            ),
-            const SizedBox(height: 22),
-            Row(
-              children: [
-                Expanded(
-                  child: _MiniStat(label: 'Aprendidas', value: learned),
-                ),
-                Expanded(
-                  child: _MiniStat(label: 'Estudiando', value: learning),
-                ),
-                Expanded(
-                  child: _MiniStat(label: 'Repasos', value: due),
-                ),
-                Expanded(
-                  child: _MiniStat(label: 'Nuevas', value: newItems),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              '$learned de $total elementos marcados como aprendidos',
-              style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
-            ),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppColors.blueSoft,
+        borderRadius: BorderRadius.circular(18),
       ),
-    );
-  }
-}
-
-class _ProgressCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final double progress;
-  final Map<String, int>? stats;
-
-  const _ProgressCard({
-    required this.icon,
-    required this.title,
-    required this.progress,
-    required this.stats,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final total = stats?['total'] ?? 0;
-    final learned = stats?['learned'] ?? 0;
-    final learning = stats?['learning'] ?? 0;
-
-    return Card(
-      elevation: 0,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 42,
-                  height: 42,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFBE8EE),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(icon),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                Text(
-                  '${(progress * 100).toStringAsFixed(1)}%',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            LinearProgressIndicator(
-              value: progress,
-              minHeight: 9,
-              borderRadius: BorderRadius.circular(99),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Text(
-                  '$learned / $total aprendidos',
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  '$learning estudiando',
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _StudyTypeCard extends StatelessWidget {
-  final String label;
-  final String subtitle;
-  final IconData icon;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _StudyTypeCard({
-    required this.label,
-    required this.subtitle,
-    required this.icon,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-
-    return Card(
-      elevation: 0,
-      color: selected ? const Color(0xFFFBE8EE) : Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: BorderSide(
-          color: selected ? scheme.primary : scheme.outlineVariant,
-          width: selected ? 2 : 1,
-        ),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                size: 28,
-                color: selected ? scheme.primary : scheme.onSurfaceVariant,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.w900),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      subtitle,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontSize: 11,
-                        height: 1.2,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+      child: Row(
+        children: [
+          const Icon(
+            Icons.info_outline_rounded,
+            color: AppColors.blue,
+            size: 19,
           ),
-        ),
+          const SizedBox(width: 9),
+          Expanded(
+            child: Text(
+              'La sesión prioriza repasos, mezcla contenido en aprendizaje y añade hasta 8 elementos nuevos.',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+        ],
       ),
-    );
-  }
-}
-
-class _MiniStat extends StatelessWidget {
-  final String label;
-  final int value;
-
-  const _MiniStat({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          '$value',
-          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey.shade700, fontSize: 11),
-        ),
-      ],
     );
   }
 }
 
 class _ErrorCard extends StatelessWidget {
-  final String error;
+  final String message;
   final VoidCallback onRetry;
 
-  const _ErrorCard({required this.error, required this.onRetry});
+  const _ErrorCard({required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.all(22),
-        child: Column(
-          children: [
-            const Icon(Icons.error_outline_rounded, size: 44),
-            const SizedBox(height: 14),
-            const Text(
-              'No pude cargar este nivel.',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
-            ),
-            const SizedBox(height: 8),
-            Text(error, textAlign: TextAlign.center),
-            const SizedBox(height: 18),
-            OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
-          ],
-        ),
+    return Center(
+      child: Column(
+        children: [
+          Text(message),
+          const SizedBox(height: 12),
+          OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
+        ],
       ),
     );
   }
