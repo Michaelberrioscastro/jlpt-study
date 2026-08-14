@@ -729,9 +729,10 @@ class DatabaseService {
     final isMix = studyType == 'mix';
     final typeClause = isMix ? '' : 'AND li.item_type = ?';
 
-    List<Object?> argsWithType(List<Object?> args) {
-      if (isMix) return args;
-      return [level, studyType, ...args];
+    List<Object?> argsWithType(List<Object?> tail) {
+      // `li.level = ?` is always present. Mix only removes item_type.
+      if (isMix) return [level, ...tail];
+      return [level, studyType, ...tail];
     }
 
     final dueRows = await db.rawQuery('''
@@ -756,6 +757,7 @@ class DatabaseService {
       WHERE li.level = ?
         $typeClause
         AND rs.state IN ('review', 'mature')
+        AND COALESCE(rs.learned, 0) = 0
         AND rs.next_review IS NOT NULL
         AND rs.next_review <= ?
       ORDER BY rs.next_review ASC
@@ -914,6 +916,7 @@ class DatabaseService {
     }
 
     final seen = <String>{};
+    final seenVocabularyFronts = <String>{};
     final result = <StudyItem>[];
 
     void addRows(List<Map<String, Object?>> rows) {
@@ -921,9 +924,16 @@ class DatabaseService {
         final item = StudyItem.fromMap(Map<String, dynamic>.from(row));
         final key = '${item.type}:${item.id}';
 
-        if (seen.add(key)) {
-          result.add(item);
+        if (!seen.add(key)) continue;
+
+        // Keep distinct database entries, but avoid showing the same written
+        // vocabulary expression twice inside one generated session.
+        if (item.type == 'vocab') {
+          final frontKey = item.front.trim();
+          if (!seenVocabularyFronts.add(frontKey)) continue;
         }
+
+        result.add(item);
       }
     }
 

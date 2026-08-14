@@ -31,6 +31,10 @@ class _StudyScreenState extends State<StudyScreen> {
   int _learnedCount = 0;
   int _retryCount = 0;
 
+  // Items rated "Otra vez" remain unresolved until they later receive
+  // Difícil/Bien/Fácil or are marked Aprendida.
+  final Set<String> _pendingAgain = <String>{};
+
   StudyItem? get _current {
     if (_index < 0 || _index >= _items.length) {
       return null;
@@ -38,6 +42,8 @@ class _StudyScreenState extends State<StudyScreen> {
 
     return _items[_index];
   }
+
+  String _itemKey(StudyItem item) => '${item.type}:${item.id}';
 
   @override
   void initState() {
@@ -123,24 +129,31 @@ class _StudyScreenState extends State<StudyScreen> {
     try {
       await SrsService.review(item, rating);
 
+      final itemKey = _itemKey(item);
+
       switch (rating) {
         case ReviewRating.again:
           _againCount += 1;
           _retryCount += 1;
+          _pendingAgain.add(itemKey);
 
-          // "Otra vez" no resuelve la tarjeta:
-          // vuelve a insertarse en la sesión después de hasta 2 tarjetas.
+          // "Otra vez" nunca resuelve la tarjeta. Reaparece tras hasta
+          // dos tarjetas distintas. Si vuelve a recibir "Otra vez", se
+          // programa de nuevo y la sesión no puede terminar con ella pendiente.
           final retryIndex = (_index + 3).clamp(0, _items.length);
           _items.insert(retryIndex, item);
           break;
         case ReviewRating.hard:
           _hardCount += 1;
+          _pendingAgain.remove(itemKey);
           break;
         case ReviewRating.good:
           _goodCount += 1;
+          _pendingAgain.remove(itemKey);
           break;
         case ReviewRating.easy:
           _easyCount += 1;
+          _pendingAgain.remove(itemKey);
           break;
       }
 
@@ -181,6 +194,7 @@ class _StudyScreenState extends State<StudyScreen> {
 
     try {
       await DatabaseService.setLearned(item, learned: true);
+      _pendingAgain.remove(_itemKey(item));
       _learnedCount += 1;
       _index += 1;
 

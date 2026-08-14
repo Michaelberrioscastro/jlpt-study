@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _selectedLevel = 'N5';
   Map<String, int>? _counts;
-  Map<String, int>? _kanaCounts;
   bool _loading = true;
   String? _error;
 
@@ -35,13 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       final result = await DatabaseService.getStudyCounts(_selectedLevel);
-      final kanaResult = await DatabaseService.getKanaOverallCounts();
-
       if (!mounted) return;
 
       setState(() {
         _counts = result;
-        _kanaCounts = kanaResult;
         _loading = false;
       });
     } catch (e) {
@@ -62,9 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openKana() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const KanaScreen()));
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const KanaScreen()),
+    );
 
     if (!mounted) return;
     await _loadCounts();
@@ -88,15 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final newItems = _counts?['new'] ?? 0;
     final progress = total == 0 ? 0.0 : learned / total;
 
-    final kanaTotal = _kanaCounts?['total'] ?? 0;
-    final kanaLearned = _kanaCounts?['learned'] ?? 0;
-    final kanaLearning = _kanaCounts?['learning'] ?? 0;
-    final kanaDue = _kanaCounts?['due'] ?? 0;
-    final kanaNew = _kanaCounts?['new'] ?? 0;
-    final kanaProgress = kanaTotal == 0 ? 0.0 : kanaLearned / kanaTotal;
-
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0),
+      drawer: _StudyDrawer(
+        selectedLevel: _selectedLevel,
+        onKanaTap: _openKana,
+      ),
       body: RefreshIndicator(
         onRefresh: _loadCounts,
         child: ListView(
@@ -105,42 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             _HeroHeader(
               selectedLevel: _selectedLevel,
-              overallDue: due + kanaDue,
+              overallDue: due,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _SectionTitle(
-                    eyebrow: 'FUNDAMENTOS',
-                    title: 'Kana',
-                    trailing: kanaDue > 0
-                        ? _MiniBadge(
-                            icon: Icons.schedule_rounded,
-                            label: '$kanaDue repasos',
-                          )
-                        : null,
-                  ),
-                  const SizedBox(height: 12),
-                  _PrimaryStudyCard(
-                    symbol: 'あア',
-                    title: 'Hiragana & Katakana',
-                    subtitle:
-                        'Construye una base sólida antes de avanzar con el JLPT.',
-                    progress: kanaProgress,
-                    learned: kanaLearned,
-                    total: kanaTotal,
-                    learning: kanaLearning,
-                    due: kanaDue,
-                    newItems: kanaNew,
-                    accent: AppColors.primaryStrong,
-                    accentSoft: AppColors.primaryContainer,
-                    buttonLabel: 'Estudiar Kana',
-                    onTap: kanaTotal == 0 ? null : _openKana,
-                  ),
-
-                  const SizedBox(height: 34),
                   _SectionTitle(
                     eyebrow: 'RUTA JLPT',
                     title: 'Tu nivel',
@@ -267,29 +231,26 @@ class _HeroHeader extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  width: 46,
-                  height: 46,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryStrong,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x248F405A),
-                        blurRadius: 16,
-                        offset: Offset(0, 8),
+                Builder(
+                  builder: (context) {
+                    return Material(
+                      color: AppColors.primaryStrong,
+                      borderRadius: BorderRadius.circular(16),
+                      child: InkWell(
+                        onTap: () => Scaffold.of(context).openDrawer(),
+                        borderRadius: BorderRadius.circular(16),
+                        child: const SizedBox(
+                          width: 46,
+                          height: 46,
+                          child: Icon(
+                            Icons.menu_rounded,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                  child: const Text(
-                    '学',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -329,10 +290,234 @@ class _HeroHeader extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Kana para reforzar la base o $selectedLevel para seguir avanzando.',
+              'Continúa tu ruta $selectedLevel o cambia de nivel cuando quieras.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StudyDrawer extends StatelessWidget {
+  final String selectedLevel;
+  final Future<void> Function() onKanaTap;
+
+  const _StudyDrawer({
+    required this.selectedLevel,
+    required this.onKanaTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: AppColors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.horizontal(
+          right: Radius.circular(28),
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryContainer,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Text(
+                      'あ',
+                      style: TextStyle(
+                        color: AppColors.primaryStrong,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'JLPT Study',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.w900,
+                              ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          'Elige tu ruta de estudio',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 1),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 22, 20, 9),
+              child: Text(
+                'ESTUDIAR',
+                style: TextStyle(
+                  color: AppColors.textMuted,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
+            _DrawerDestination(
+              icon: Icons.school_rounded,
+              title: 'Niveles JLPT',
+              subtitle: 'N5 · N4 · N3 · N2 · N1',
+              selected: true,
+              onTap: () => Navigator.pop(context),
+            ),
+            _DrawerDestination(
+              icon: Icons.translate_rounded,
+              title: 'Kana',
+              subtitle: 'Hiragana · Katakana',
+              onTap: () async {
+                Navigator.pop(context);
+                await Future<void>.delayed(
+                  const Duration(milliseconds: 180),
+                );
+                await onKanaTap();
+              },
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceSoft,
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.auto_graph_rounded,
+                      size: 18,
+                      color: AppColors.primaryStrong,
+                    ),
+                    const SizedBox(width: 9),
+                    Expanded(
+                      child: Text(
+                        'Nivel activo: $selectedLevel',
+                        style: const TextStyle(
+                          color: AppColors.textSecondary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DrawerDestination extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _DrawerDestination({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    this.selected = false,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: Material(
+        color: selected ? AppColors.primaryContainer : Colors.transparent,
+        borderRadius: BorderRadius.circular(18),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(18),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: 13,
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 42,
+                  height: 42,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? Colors.white.withValues(alpha: 0.75)
+                        : AppColors.surfaceSoft,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 21,
+                    color: selected
+                        ? AppColors.primaryStrong
+                        : AppColors.textSecondary,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          color: selected
+                              ? AppColors.primaryStrong
+                              : AppColors.textPrimary,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  selected
+                      ? Icons.check_circle_rounded
+                      : Icons.chevron_right_rounded,
+                  color: selected
+                      ? AppColors.primaryStrong
+                      : AppColors.textMuted,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
