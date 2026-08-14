@@ -53,20 +53,25 @@ class _StudyScreenState extends State<StudyScreen> {
 
   Future<void> _loadSession() async {
     try {
-      final loaded = widget.level == 'KANA'
-          ? await DatabaseService.getTodayKanaItems(
-              script: widget.studyType,
-              dueReviewLimit: 20,
-              learningLimit: 2,
-              newLimit: 8,
-            )
-          : await DatabaseService.getTodayStudyItems(
-              level: widget.level,
-              studyType: widget.studyType,
-              dueReviewLimit: 20,
-              learningLimit: 2,
-              newLimit: 8,
-            );
+      final List<StudyItem> loaded;
+      if (widget.level == 'BEGINNER') {
+        loaded = await DatabaseService.getTodayBeginnerItems(limit: 20);
+      } else if (widget.level == 'KANA') {
+        loaded = await DatabaseService.getTodayKanaItems(
+          script: widget.studyType,
+          dueReviewLimit: 20,
+          learningLimit: 2,
+          newLimit: 8,
+        );
+      } else {
+        loaded = await DatabaseService.getTodayStudyItems(
+          level: widget.level,
+          studyType: widget.studyType,
+          dueReviewLimit: 20,
+          learningLimit: 2,
+          newLimit: 8,
+        );
+      }
 
       if (!mounted) return;
 
@@ -235,6 +240,8 @@ class _StudyScreenState extends State<StudyScreen> {
         return 'Hiragana';
       case 'katakana':
         return 'Katakana';
+      case 'beginner':
+        return 'Repaso';
       case 'mix':
       default:
         return 'Mix';
@@ -249,6 +256,8 @@ class _StudyScreenState extends State<StudyScreen> {
         return '¿Qué expresa esta estructura?';
       case 'kana':
         return '¿Recuerdas cómo se lee este kana?';
+      case 'beginner':
+        return '¿Recuerdas qué significa esta expresión?';
       case 'vocab':
       default:
         return '¿Conoces esta palabra?';
@@ -265,6 +274,8 @@ class _StudyScreenState extends State<StudyScreen> {
         return 'VOCABULARIO';
       case 'kana':
         return 'KANA';
+      case 'beginner':
+        return 'BEGINNER';
       default:
         return type.toUpperCase();
     }
@@ -449,6 +460,7 @@ class _StudyScreenState extends State<StudyScreen> {
                 disabled: _saving,
                 onRating: _rate,
                 onLearned: _markLearned,
+                showLearned: widget.level != 'BEGINNER',
               ),
           ],
         ),
@@ -670,11 +682,13 @@ class _RatingBar extends StatelessWidget {
   final bool disabled;
   final ValueChanged<ReviewRating> onRating;
   final VoidCallback onLearned;
+  final bool showLearned;
 
   const _RatingBar({
     required this.disabled,
     required this.onRating,
     required this.onLearned,
+    this.showLearned = true,
   });
 
   @override
@@ -697,21 +711,23 @@ class _RatingBar extends StatelessWidget {
                   _button('Fácil', ReviewRating.easy),
                 ],
               ),
-              const SizedBox(height: 8),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: disabled ? null : onLearned,
-                  icon: const Icon(Icons.check_circle_rounded),
-                  label: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: Text(
-                      'Aprendida',
-                      style: TextStyle(fontWeight: FontWeight.w900),
+              if (showLearned) ...[
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    onPressed: disabled ? null : onLearned,
+                    icon: const Icon(Icons.check_circle_rounded),
+                    label: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: Text(
+                        'Aprendida',
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ],
           ),
         ),

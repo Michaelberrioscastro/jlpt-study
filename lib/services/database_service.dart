@@ -41,6 +41,7 @@ class DatabaseService {
 
     await _ensureLearnedColumn(_database!);
     await _migrateKana(_database!);
+    await _migrateBeginner(_database!);
 
     return _database!;
   }
@@ -271,6 +272,201 @@ class DatabaseService {
         'applied_at': DateTime.now().toIso8601String(),
       }, conflictAlgorithm: ConflictAlgorithm.ignore);
     });
+  }
+
+  static Future<void> _migrateBeginner(Database db) async {
+    await db.execute("""
+      CREATE TABLE IF NOT EXISTS beginner_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        lesson_id TEXT NOT NULL,
+        unit_id TEXT NOT NULL DEFAULT '',
+        japanese TEXT NOT NULL,
+        romaji TEXT NOT NULL DEFAULT '',
+        meaning TEXT NOT NULL DEFAULT '',
+        UNIQUE(lesson_id, japanese, meaning)
+      )
+    """);
+
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_beginner_items_lesson '
+      'ON beginner_items(lesson_id)',
+    );
+
+    final schemaRows = await db.rawQuery(
+      "SELECT sql FROM sqlite_master "
+      "WHERE type = 'table' AND name = 'review_state'",
+    );
+
+    if (schemaRows.isNotEmpty) {
+      final schema = (schemaRows.first['sql'] ?? '').toString().toLowerCase();
+      final needsBeginner =
+          schema.contains('check') &&
+          schema.contains('item_type') &&
+          !schema.contains("'beginner'");
+
+      if (needsBeginner) {
+        await db.transaction((txn) async {
+          await txn.execute('DROP TABLE IF EXISTS review_state_beginner_tmp');
+
+          await txn.execute("""
+            CREATE TABLE review_state_beginner_tmp (
+              item_type TEXT NOT NULL
+                CHECK(item_type IN ('vocab','kanji','grammar','kana','beginner','custom')),
+              item_id INTEGER NOT NULL,
+              state TEXT NOT NULL DEFAULT 'new'
+                CHECK(state IN ('new','learning','review','mature')),
+              last_review TEXT,
+              next_review TEXT,
+              interval_days REAL NOT NULL DEFAULT 0,
+              ease_factor REAL NOT NULL DEFAULT 2.5,
+              repetitions INTEGER NOT NULL DEFAULT 0,
+              lapses INTEGER NOT NULL DEFAULT 0,
+              steps_remaining INTEGER NOT NULL DEFAULT 0,
+              learned INTEGER NOT NULL DEFAULT 0,
+              PRIMARY KEY(item_type, item_id)
+            )
+          """);
+
+          await txn.execute("""
+            INSERT INTO review_state_beginner_tmp (
+              item_type, item_id, state, last_review, next_review,
+              interval_days, ease_factor, repetitions, lapses,
+              steps_remaining, learned
+            )
+            SELECT
+              item_type, item_id, state, last_review, next_review,
+              interval_days, ease_factor, repetitions, lapses,
+              steps_remaining, COALESCE(learned, 0)
+            FROM review_state
+          """);
+
+          await txn.execute('DROP TABLE review_state');
+          await txn.execute(
+            'ALTER TABLE review_state_beginner_tmp RENAME TO review_state',
+          );
+          await txn.execute(
+            'CREATE INDEX IF NOT EXISTS idx_review_next '
+            'ON review_state(state, next_review)',
+          );
+        });
+      }
+    }
+  }
+
+  static Future<void> activateBeginnerItems({
+    required String lessonId,
+    String unitId = '',
+    required List<Map<String, String>> items,
+  }) async {
+    final db = await database;
+    final now = DateTime.now().toIso8601String();
+
+    await db.transaction((txn) async {
+      for (final item in items) {
+        final japanese = (item['japanese'] ?? '').trim();
+        final meaning = (item['meaning'] ?? '').trim();
+        final romaji = (item['romaji'] ?? '').trim();
+
+        if (japanese.isEmpty || meaning.isEmpty) continue;
+
+        await txn.insert('beginner_items', {
+          'lesson_id': lessonId,
+          'unit_id': unitId,
+          'japanese': japanese,
+          'romaji': romaji,
+          'meaning': meaning,
+        }, conflictAlgorithm: ConflictAlgorithm.ignore);
+
+        final rows = await txn.query(
+          'beginner_items',
+          columns: ['id'],
+          where: 'lesson_id = ? AND japanese = ? AND meaning = ?',
+          whereArgs: [lessonId, japanese, meaning],
+          limit: 1,
+        );
+
+        if (rows.isEmpty) continue;
+        final itemId = (rows.first['id'] as num).toInt();
+
+        await txn.insert('review_state', {
+          'item_type': 'beginner',
+          'item_id': itemId,
+          'state': 'learning',
+          'last_review': null,
+          'next_review': now,
+          'interval_days': 0.0,
+          'ease_factor': 2.5,
+          'repetitions': 0,
+          'lapses': 0,
+          'steps_remaining': 0,
+          'learned': 0,
+        }, conflictAlgorithm: ConflictAlgorithm.ignore);
+      }
+    });
+  }
+
+  static Future<int> getBeginnerDueCount() async {
+    final db = await database;
+    final now = DateTime.now().toIso8601String();
+
+    return Sqflite.firstIntValue(
+          await db.rawQuery(
+            """
+            SELECT COUNT(*)
+            FROM review_state rs
+            JOIN beginner_items bi
+              ON rs.item_type = 'beginner' AND rs.item_id = bi.id
+            WHERE COALESCE(rs.learned, 0) = 0
+              AND (rs.next_review IS NULL OR rs.next_review <= ?)
+            """,
+            [now],
+          ),
+        ) ??
+        0;
+  }
+
+  static Future<List<StudyItem>> getTodayBeginnerItems({int limit = 20}) async {
+    final db = await database;
+    final now = DateTime.now().toIso8601String();
+
+    final rows = await db.rawQuery(
+      """
+      SELECT
+        'beginner' AS item_type,
+        bi.id AS item_id,
+        'BEGINNER' AS level,
+        bi.japanese AS front,
+        bi.romaji AS reading,
+        bi.meaning AS meaning,
+        rs.state,
+        rs.next_review,
+        rs.interval_days,
+        rs.ease_factor,
+        rs.repetitions,
+        rs.lapses,
+        COALESCE(rs.learned, 0) AS learned
+      FROM review_state rs
+      JOIN beginner_items bi
+        ON rs.item_type = 'beginner' AND rs.item_id = bi.id
+      WHERE COALESCE(rs.learned, 0) = 0
+        AND (rs.next_review IS NULL OR rs.next_review <= ?)
+      ORDER BY
+        CASE rs.state
+          WHEN 'learning' THEN 1
+          WHEN 'review' THEN 2
+          WHEN 'mature' THEN 3
+          ELSE 4
+        END,
+        rs.next_review ASC,
+        bi.id ASC
+      LIMIT ?
+      """,
+      [now, limit],
+    );
+
+    return rows
+        .map((row) => StudyItem.fromMap(Map<String, dynamic>.from(row)))
+        .toList();
   }
 
   static Future<Map<String, Map<String, int>>> getKanaStudyCounts() async {
@@ -1094,6 +1290,22 @@ class DatabaseService {
       if (rows.isEmpty) {
         return null;
       }
+
+      return {
+        ...Map<String, dynamic>.from(rows.first),
+        'examples': const <Map<String, dynamic>>[],
+      };
+    }
+
+    if (item.type == 'beginner') {
+      final rows = await db.query(
+        'beginner_items',
+        where: 'id = ?',
+        whereArgs: [item.id],
+        limit: 1,
+      );
+
+      if (rows.isEmpty) return null;
 
       return {
         ...Map<String, dynamic>.from(rows.first),

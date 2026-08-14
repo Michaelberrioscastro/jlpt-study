@@ -29,6 +29,6 @@ flutter:
 
   assets:
     - assets/database/jlpt_study_master.sqlite
-    - assets/data/kana_seed.json
+    - assets/data/
     - assets/audio/kana/
     - assets/branding/

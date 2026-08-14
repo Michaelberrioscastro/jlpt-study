@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../services/database_service.dart';
 import '../theme/app_colors.dart';
+import 'beginner/beginner_path_screen.dart';
 import 'kana_screen.dart';
 import 'level_screen.dart';
 
@@ -58,9 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openKana() async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const KanaScreen()),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const KanaScreen()));
+
+    if (!mounted) return;
+    await _loadCounts();
+  }
+
+  Future<void> _openBeginner() async {
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const BeginnerPathScreen()));
 
     if (!mounted) return;
     await _loadCounts();
@@ -89,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: _StudyDrawer(
         selectedLevel: _selectedLevel,
         onKanaTap: _openKana,
+        onBeginnerTap: _openBeginner,
       ),
       body: RefreshIndicator(
         onRefresh: _loadCounts,
@@ -96,10 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
           physics: const AlwaysScrollableScrollPhysics(),
           padding: EdgeInsets.zero,
           children: [
-            _HeroHeader(
-              selectedLevel: _selectedLevel,
-              overallDue: due,
-            ),
+            _HeroHeader(selectedLevel: _selectedLevel, overallDue: due),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 40),
               child: Column(
@@ -303,10 +311,12 @@ class _HeroHeader extends StatelessWidget {
 class _StudyDrawer extends StatelessWidget {
   final String selectedLevel;
   final Future<void> Function() onKanaTap;
+  final Future<void> Function() onBeginnerTap;
 
   const _StudyDrawer({
     required this.selectedLevel,
     required this.onKanaTap,
+    required this.onBeginnerTap,
   });
 
   @override
@@ -314,9 +324,7 @@ class _StudyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.horizontal(
-          right: Radius.circular(28),
-        ),
+        borderRadius: BorderRadius.horizontal(right: Radius.circular(28)),
       ),
       child: SafeArea(
         child: Column(
@@ -350,9 +358,8 @@ class _StudyDrawer extends StatelessWidget {
                       children: [
                         Text(
                           'JLPT Study',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.w900,
-                              ),
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(fontWeight: FontWeight.w900),
                         ),
                         const SizedBox(height: 2),
                         Text(
@@ -391,10 +398,18 @@ class _StudyDrawer extends StatelessWidget {
               subtitle: 'Hiragana · Katakana',
               onTap: () async {
                 Navigator.pop(context);
-                await Future<void>.delayed(
-                  const Duration(milliseconds: 180),
-                );
+                await Future<void>.delayed(const Duration(milliseconds: 180));
                 await onKanaTap();
+              },
+            ),
+            _DrawerDestination(
+              icon: Icons.local_florist_rounded,
+              title: 'Empezar japonés',
+              subtitle: 'Ruta guiada desde cero',
+              onTap: () async {
+                Navigator.pop(context);
+                await Future<void>.delayed(const Duration(milliseconds: 180));
+                await onBeginnerTap();
               },
             ),
             const Spacer(),
@@ -461,10 +476,7 @@ class _DrawerDestination extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(18),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 13,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
             child: Row(
               children: [
                 Container(
