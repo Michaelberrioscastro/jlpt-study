@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../services/database_service.dart';
 import '../theme/app_colors.dart';
-import 'beginner/beginner_path_screen.dart';
+import 'practice/practice_home_screen.dart';
 import 'kana_screen.dart';
 import 'level_screen.dart';
 
@@ -67,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
     await _loadCounts();
   }
 
-  Future<void> _openBeginner() async {
+  Future<void> _openPractice() async {
     await Navigator.of(
       context,
-    ).push(MaterialPageRoute(builder: (_) => const BeginnerPathScreen()));
+    ).push(MaterialPageRoute(builder: (_) => const PracticeHomeScreen()));
 
     if (!mounted) return;
     await _loadCounts();
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: _StudyDrawer(
         selectedLevel: _selectedLevel,
         onKanaTap: _openKana,
-        onBeginnerTap: _openBeginner,
+        onPracticeTap: _openPractice,
       ),
       body: RefreshIndicator(
         onRefresh: _loadCounts,
@@ -311,12 +311,12 @@ class _HeroHeader extends StatelessWidget {
 class _StudyDrawer extends StatelessWidget {
   final String selectedLevel;
   final Future<void> Function() onKanaTap;
-  final Future<void> Function() onBeginnerTap;
+  final Future<void> Function() onPracticeTap;
 
   const _StudyDrawer({
     required this.selectedLevel,
     required this.onKanaTap,
-    required this.onBeginnerTap,
+    required this.onPracticeTap,
   });
 
   @override
@@ -403,13 +403,13 @@ class _StudyDrawer extends StatelessWidget {
               },
             ),
             _DrawerDestination(
-              icon: Icons.local_florist_rounded,
-              title: 'Empezar japonés',
-              subtitle: 'Ruta guiada desde cero',
+              icon: Icons.fact_check_rounded,
+              title: 'Práctica JLPT',
+              subtitle: 'Tests · simulacros · resultados',
               onTap: () async {
                 Navigator.pop(context);
                 await Future<void>.delayed(const Duration(milliseconds: 180));
-                await onBeginnerTap();
+                await onPracticeTap();
               },
             ),
             const Spacer(),

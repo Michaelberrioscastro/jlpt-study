@@ -30,5 +30,7 @@ flutter:
   assets:
     - assets/database/jlpt_study_master.sqlite
     - assets/data/
+    - assets/data/practice/jlpt_practice_n5_vocab_clean.json
+    - assets/data/practice/
     - assets/audio/kana/
     - assets/branding/

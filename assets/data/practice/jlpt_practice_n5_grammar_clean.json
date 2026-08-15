@@ -1,0 +1,636 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N5",
+  "section": "grammar",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_near_similar_glyph_questions": true,
+    "excluded_image_dependent_questions": true,
+    "excluded_sentence_order_questions_for_v1": true,
+    "note": "v1 uses questions that fit the current multiple-choice UI reliably. Mondai 2 sentence-order questions (17-21) are reserved for a dedicated UI."
+  },
+  "tests": [
+    {
+      "title": "N5 Grammar Practice A",
+      "level": "N5",
+      "section": "grammar",
+      "time_minutes": 20,
+      "source_file": "N5GRAMAR(1).pdf",
+      "id": "n5_grammar_test_a",
+      "original_question_count": 26,
+      "clean_question_count": 21,
+      "questions": [
+        {
+          "id": "n5_grammar_test_a_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "日本（　）ラーメンは おいしいです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "に"
+            },
+            {
+              "id": 2,
+              "text": "の"
+            },
+            {
+              "id": 3,
+              "text": "を"
+            },
+            {
+              "id": 4,
+              "text": "へ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "わたしには きょうだいが 二人 います。弟（　）妹です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "は"
+            },
+            {
+              "id": 2,
+              "text": "も"
+            },
+            {
+              "id": 3,
+              "text": "と"
+            },
+            {
+              "id": 4,
+              "text": "か"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "山下「田中さん（　）きのう どこかに 出かけましたか。」\n田中「いいえ、いえに いました。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "で"
+            },
+            {
+              "id": 2,
+              "text": "は"
+            },
+            {
+              "id": 3,
+              "text": "を"
+            },
+            {
+              "id": 4,
+              "text": "に"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "（タクシーで）\nA「つぎの かどを 右（　）まがって ください。」\nB「わかりました。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "が"
+            },
+            {
+              "id": 2,
+              "text": "や"
+            },
+            {
+              "id": 3,
+              "text": "か"
+            },
+            {
+              "id": 4,
+              "text": "に"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "きのう、わたしは ひとり（　）えいがを 見に 行きました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "が"
+            },
+            {
+              "id": 2,
+              "text": "を"
+            },
+            {
+              "id": 3,
+              "text": "で"
+            },
+            {
+              "id": 4,
+              "text": "は"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "山下「今日 パーティーが ありますから、田中さん（　）来て ください。」\n田中「ありがとうございます。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "に"
+            },
+            {
+              "id": 2,
+              "text": "も"
+            },
+            {
+              "id": 3,
+              "text": "や"
+            },
+            {
+              "id": 4,
+              "text": "で"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "田中「この ぼうしは 山田さん（　）ですか。」\n山田「はい。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "や"
+            },
+            {
+              "id": 2,
+              "text": "は"
+            },
+            {
+              "id": 3,
+              "text": "の"
+            },
+            {
+              "id": 4,
+              "text": "か"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "approximation",
+          "prompt": "駅まで タクシーで 1000円（　）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ぐらい"
+            },
+            {
+              "id": 2,
+              "text": "など"
+            },
+            {
+              "id": 3,
+              "text": "ごろ"
+            },
+            {
+              "id": 4,
+              "text": "も"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "time_expression",
+          "prompt": "A「さようなら。」\nB「さようなら。また（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "おととい"
+            },
+            {
+              "id": 2,
+              "text": "今日"
+            },
+            {
+              "id": 3,
+              "text": "来週"
+            },
+            {
+              "id": 4,
+              "text": "今月"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "comparison",
+          "prompt": "わたしの 母は 50さいです。父は 55さいです。母は 父（　）5さい わかいです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "から"
+            },
+            {
+              "id": 2,
+              "text": "まで"
+            },
+            {
+              "id": 3,
+              "text": "より"
+            },
+            {
+              "id": 4,
+              "text": "のほうが"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q11",
+          "number": 11,
+          "mondai": 1,
+          "subtype": "before_after",
+          "prompt": "子ども「いただきます。」\n母「あ、食べる（　）手を あらいましょう。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "まえに"
+            },
+            {
+              "id": 2,
+              "text": "のまえに"
+            },
+            {
+              "id": 3,
+              "text": "あとに"
+            },
+            {
+              "id": 4,
+              "text": "のあとに"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q12",
+          "number": 12,
+          "mondai": 1,
+          "subtype": "verb_form",
+          "prompt": "A「東京でも 雪が ふりますか。」\nB「ええ、ふりますよ。でも、きょねんは あまり（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "ふりませんでした"
+            },
+            {
+              "id": 2,
+              "text": "ふりません"
+            },
+            {
+              "id": 3,
+              "text": "ふりました"
+            },
+            {
+              "id": 4,
+              "text": "ふります"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q13",
+          "number": 13,
+          "mondai": 1,
+          "subtype": "verb_form",
+          "prompt": "（川で）\nA「見て ください。小さな 魚が たくさん（　）よ。」\nB「ほんとうですね。30ぴき くらい いますね。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "およぎます"
+            },
+            {
+              "id": 2,
+              "text": "およぎません"
+            },
+            {
+              "id": 3,
+              "text": "およぎました"
+            },
+            {
+              "id": 4,
+              "text": "およいで います"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q14",
+          "number": 14,
+          "mondai": 1,
+          "subtype": "giving_receiving",
+          "prompt": "中川「山田さんの その カメラは いいですね。どこで かいましたか。」\n山田「いえ、これは 兄に（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "あげました"
+            },
+            {
+              "id": 2,
+              "text": "もらいました"
+            },
+            {
+              "id": 3,
+              "text": "うりました"
+            },
+            {
+              "id": 4,
+              "text": "かいました"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q15",
+          "number": 15,
+          "mondai": 1,
+          "subtype": "interrogative",
+          "prompt": "たまごりょうりの じょうずな 作りかたを（　）読みました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "何に"
+            },
+            {
+              "id": 2,
+              "text": "何も"
+            },
+            {
+              "id": 3,
+              "text": "何かへ"
+            },
+            {
+              "id": 4,
+              "text": "何かで"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q16",
+          "number": 16,
+          "mondai": 1,
+          "subtype": "request_expression",
+          "prompt": "（電話で）\n本田「はい、本田です。」\n北山「あ、北山花子です。すみません、（　）。」\n本田「はい。ちょっと まって くださいね。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "ひろこさんを おねがいします"
+            },
+            {
+              "id": 2,
+              "text": "ひろこさんを ください"
+            },
+            {
+              "id": 3,
+              "text": "ひろこさんと 話しますか"
+            },
+            {
+              "id": 4,
+              "text": "ひろこさんと 話しませんか"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "わたしは すしが すきです。日本には たくさん すし屋が ありますね。わたしの 国には すし屋が ありませんから、今 とても うれしいです。日本に（　）、いろいろな 店で 食べました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "行くから"
+            },
+            {
+              "id": 2,
+              "text": "行ってから"
+            },
+            {
+              "id": 3,
+              "text": "来るから"
+            },
+            {
+              "id": 4,
+              "text": "来てから"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "学校の 前の 店は、安くて おいしいです。すしが すきな 人は、いっしょに（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "行きましたか"
+            },
+            {
+              "id": 2,
+              "text": "行きませんか"
+            },
+            {
+              "id": 3,
+              "text": "行って いましたか"
+            },
+            {
+              "id": 4,
+              "text": "行って いませんか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q24",
+          "number": 24,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "わたしは えきの ちかくの 本屋が すきです。えきの ちかくの 本屋（　）大きい お店です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "か"
+            },
+            {
+              "id": 2,
+              "text": "と"
+            },
+            {
+              "id": 3,
+              "text": "の"
+            },
+            {
+              "id": 4,
+              "text": "は"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q25",
+          "number": 25,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "外国の 本も 売って います。わたしの 国のも（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "います"
+            },
+            {
+              "id": 2,
+              "text": "読みます"
+            },
+            {
+              "id": 3,
+              "text": "あります"
+            },
+            {
+              "id": 4,
+              "text": "します"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_grammar_test_a_q26",
+          "number": 26,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "そして、わたしが すきな りょうりの 本も 多いです。（　）、本は いつも えきの ちかくの 本屋で 買います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "だから"
+            },
+            {
+              "id": 2,
+              "text": "では"
+            },
+            {
+              "id": 3,
+              "text": "それから"
+            },
+            {
+              "id": 4,
+              "text": "でも"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ]
+}

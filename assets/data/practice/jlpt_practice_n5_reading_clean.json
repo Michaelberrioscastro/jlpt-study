@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "feature": "jlpt_test_practice",
+  "level": "N5",
+  "section": "reading",
+  "curation_policy": {
+    "conservative": true,
+    "included_text_reliably_readable": true,
+    "excluded_image_or_layout_dependent_questions": true,
+    "note": "Primera versión conservadora. Se incluyen solo lecturas y preguntas que pueden representarse fielmente como texto. Las preguntas que dependen de ilustraciones, tablas, horarios o diagramas quedan reservadas para una futura UI visual."
+  },
+  "tests": [
+    {
+      "id": "n5_reading_test_a",
+      "title": "N5 Reading Practice A",
+      "source_file": "N5R.pdf",
+      "passages": [
+        {
+          "id": "n5_reading_a_p01",
+          "mondai": 4,
+          "subtype": "short_passage",
+          "passage": "わたしは 今日、友だちと 買い物に 行きました。3か月前に 見た えいがの DVDが ほしかったからです。買った DVDは、友だちや 姉と いっしょに 見ます。",
+          "questions": [
+            {
+              "id": "n5_reading_a_q27",
+              "number": 27,
+              "prompt": "「わたし」は 今日、何を しましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "友だちと えいがを 見に 行きました。"
+                },
+                {
+                  "id": 2,
+                  "text": "友だちと DVDを 買いに 行きました。"
+                },
+                {
+                  "id": 3,
+                  "text": "姉と えいがを 見に 行きました。"
+                },
+                {
+                  "id": 4,
+                  "text": "姉と DVDを 買いに 行きました。"
+                }
+              ],
+              "correct_option": 2,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n5_reading_a_p02",
+          "mondai": 4,
+          "subtype": "memo",
+          "passage": "森さん\n\nクラスで 使う 本を 中川先生に かりました。5ページを 25枚 コピーして ください。コピーは 南さんに わたして ください。本は、わたしが あした かえしますから、わたしの 机の 上に おいて ください。\n\n山口",
+          "questions": [
+            {
+              "id": "n5_reading_a_q29",
+              "number": 29,
+              "prompt": "森さんは コピーを した あとで、本を どうしますか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "クラスで 使います。"
+                },
+                {
+                  "id": 2,
+                  "text": "南さんに わたします。"
+                },
+                {
+                  "id": 3,
+                  "text": "中川先生に かえします。"
+                },
+                {
+                  "id": 4,
+                  "text": "山口先生の 机の 上に おきます。"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n5_reading_a_p03",
+          "mondai": 5,
+          "subtype": "long_passage",
+          "passage": "きのうの 夜は おそくまで しごとを しました。とても つかれました。しごとの あと、電車で 帰りました。家の 近くの 駅で 電車を おりました。外は 雨でしたが、わたしは かさが ありませんでした。とても こまりました。駅の 人が わたしを 見て、「あの はこの 中の かさを 使って ください。」と 言いました。はこの 中には かさが 3本 ありました。わたしは「えっ、いいんですか。」と 聞きました。駅の 人は「あれは『みんなの かさ』です。お金は いりません。あした、あの はこに かえして ください。」と 言いました。わたしは「わかりました。ありがとうございます。」と 言って、かさを かりて 帰りました。",
+          "questions": [
+            {
+              "id": "n5_reading_a_q30",
+              "number": 30,
+              "prompt": "どうして こまりましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "おそい 時間に 駅に 着いたから"
+                },
+                {
+                  "id": 2,
+                  "text": "しごとが たくさん あったから"
+                },
+                {
+                  "id": 3,
+                  "text": "とても つかれたから"
+                },
+                {
+                  "id": 4,
+                  "text": "かさが なかったから"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n5_reading_a_q31",
+              "number": 31,
+              "prompt": "「わたし」は、あした どうしますか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "かさを はこの 中に 入れます。"
+                },
+                {
+                  "id": 2,
+                  "text": "かさを 駅の 人に わたします。"
+                },
+                {
+                  "id": 3,
+                  "text": "お金を はこの 中に 入れます。"
+                },
+                {
+                  "id": 4,
+                  "text": "お金を 駅の 人に わたします。"
+                }
+              ],
+              "correct_option": 1,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            }
+          ]
+        }
+      ],
+      "excluded_questions": [
+        {
+          "number": 28,
+          "reason": "image_dependent_room_layout"
+        },
+        {
+          "number": 32,
+          "reason": "visual_schedule_advertisement"
+        }
+      ]
+    },
+    {
+      "id": "n5_reading_test_b",
+      "title": "N5 Reading Practice B",
+      "source_file": "N5R (1).pdf",
+      "passages": [
+        {
+          "id": "n5_reading_b_p01",
+          "mondai": 4,
+          "subtype": "short_passage",
+          "passage": "わたしは 毎朝 ご飯と なっとうか、パンと たまごを 食べて、学校へ 行きます。でも、けさは なにも 食べませんでした。バナナを 学校へ 持っていきました。起きた 時間が おそかったからです。",
+          "questions": [
+            {
+              "id": "n5_reading_b_q27",
+              "number": 27,
+              "prompt": "けさ「わたし」は 学校へ 行く 前に、何を 食べましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "ご飯と なっとうを 食べました。"
+                },
+                {
+                  "id": 2,
+                  "text": "パンと たまごを 食べました。"
+                },
+                {
+                  "id": 3,
+                  "text": "なにも 食べませんでした。"
+                },
+                {
+                  "id": 4,
+                  "text": "バナナを 食べました。"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n5_reading_b_p02",
+          "mondai": 4,
+          "subtype": "memo",
+          "passage": "（会社で）\nボゴさんの 机の 上に、この メモと にもつが あります。\n\nボゴさん\n10時ごろ ゆうびんきょくの 人が この にもつを とりに 来ますから、にもつと お金を わたして ください。お金は 中西さんが 持って います。ゆうびんきょくの 人が 来る 前に もらいに 行って ください。\nよろしく おねがいします。\n多田",
+          "questions": [
+            {
+              "id": "n5_reading_b_q29",
+              "number": 29,
+              "prompt": "この メモを 読んで、ボゴさんは はじめに 何を しますか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "中西さんに お金を もらいます。"
+                },
+                {
+                  "id": 2,
+                  "text": "中西さんに にもつと お金を わたします。"
+                },
+                {
+                  "id": 3,
+                  "text": "ゆうびんきょくの 人に にもつを もらいます。"
+                },
+                {
+                  "id": 4,
+                  "text": "ゆうびんきょくの 人に にもつと お金を わたします。"
+                }
+              ],
+              "correct_option": 1,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n5_reading_b_p03",
+          "mondai": 5,
+          "subtype": "long_passage",
+          "passage": "これは チンさんが 書いた さくぶんです。\n\nまちがえました\nチン・シュン\n\nわたしは きのうの 日曜日、友だちと サッカーを しました。朝から ゆうがたまで しましたから、とても つかれました。ゆうべは ばんご飯を 食べた あとで、すぐに ねました。ですから、今日の かんじテストの べんきょうが できませんでした。\n\nけさは 早く 起きました。シャワーを あびて、朝ご飯を 食べました。それから、すぐ かんじの テキストを べんきょうしました。それから 学校へ 行きました。とても いそがしい 朝でした。\n\nしかし、きょうしつで かんじを べんきょうしている 人は いませんでした。まちがえました。テストは 今日ではなくて、あしたでした。",
+          "questions": [
+            {
+              "id": "n5_reading_b_q30",
+              "number": 30,
+              "prompt": "どうして けさは 早く 起きましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "朝から ゆうがたまで サッカーを したかったから"
+                },
+                {
+                  "id": 2,
+                  "text": "かんじテストの べんきょうが したかったから"
+                },
+                {
+                  "id": 3,
+                  "text": "シャワーを あびて、朝ご飯を 食べたかったから"
+                },
+                {
+                  "id": 4,
+                  "text": "学校へ 行って、べんきょうが したかったから"
+                }
+              ],
+              "correct_option": 2,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n5_reading_b_q31",
+              "number": 31,
+              "prompt": "チンさんは 何を まちがえましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "かんじの テキスト"
+                },
+                {
+                  "id": 2,
+                  "text": "かんじの テキストの ページ"
+                },
+                {
+                  "id": 3,
+                  "text": "かんじの テストが ある 日"
+                },
+                {
+                  "id": 4,
+                  "text": "かんじの テストを する きょうしつ"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "inferred_from_passage",
+              "verified_for_app_v1": true
+            }
+          ]
+        }
+      ],
+      "excluded_questions": [
+        {
+          "number": 28,
+          "reason": "notice_text_has_ambiguous_class_labels_in_extraction"
+        },
+        {
+          "number": 32,
+          "reason": "route_diagram_dependent"
+        }
+      ]
+    }
+  ]
+}

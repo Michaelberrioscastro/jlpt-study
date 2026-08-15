@@ -1,0 +1,1598 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N5",
+  "section": "vocabulary",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_near_similar_glyph_questions": true,
+    "excluded_image_dependent_questions": true,
+    "note": "v1 prioritizes questions that can be represented reliably as text in the app."
+  },
+  "tests": [
+    {
+      "title": "N5 Vocabulary Practice A",
+      "level": "N5",
+      "section": "vocabulary",
+      "time_minutes": 25,
+      "source_file": "N5Vocab.pdf",
+      "id": "n5_vocab_test_a",
+      "original_question_count": 35,
+      "clean_question_count": 27,
+      "questions": [
+        {
+          "id": "n5_vocab_test_a_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "あしたは 雨ですか。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ゆき"
+            },
+            {
+              "id": 2,
+              "text": "はれ"
+            },
+            {
+              "id": 3,
+              "text": "くもり"
+            },
+            {
+              "id": 4,
+              "text": "あめ"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "きょうしつで 書いて ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "かいて"
+            },
+            {
+              "id": 2,
+              "text": "きいて"
+            },
+            {
+              "id": 3,
+              "text": "はいて"
+            },
+            {
+              "id": 4,
+              "text": "ひいて"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "しゃしんは はこの 中に あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "そば"
+            },
+            {
+              "id": 2,
+              "text": "そと"
+            },
+            {
+              "id": 3,
+              "text": "なか"
+            },
+            {
+              "id": 4,
+              "text": "よこ"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "この いすは 小さいです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ちいさい"
+            },
+            {
+              "id": 2,
+              "text": "ちさい"
+            },
+            {
+              "id": 3,
+              "text": "しいさい"
+            },
+            {
+              "id": 4,
+              "text": "しさい"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "あしたは 火よう日です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "どようび"
+            },
+            {
+              "id": 2,
+              "text": "すいようび"
+            },
+            {
+              "id": 3,
+              "text": "かようび"
+            },
+            {
+              "id": 4,
+              "text": "にちようび"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "きれいな 空ですね。",
+          "options": [
+            {
+              "id": 1,
+              "text": "いえ"
+            },
+            {
+              "id": 2,
+              "text": "うみ"
+            },
+            {
+              "id": 3,
+              "text": "にわ"
+            },
+            {
+              "id": 4,
+              "text": "そら"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "せいとは 百人 います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ひゃくにん"
+            },
+            {
+              "id": 2,
+              "text": "びゃくにん"
+            },
+            {
+              "id": 3,
+              "text": "ひゃくじん"
+            },
+            {
+              "id": 4,
+              "text": "びゃくじん"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "魚が たくさん いますよ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ねこ"
+            },
+            {
+              "id": 2,
+              "text": "とり"
+            },
+            {
+              "id": 3,
+              "text": "いぬ"
+            },
+            {
+              "id": 4,
+              "text": "さかな"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "パンを 半分 ともだちに あげました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "はんふん"
+            },
+            {
+              "id": 2,
+              "text": "はんぶん"
+            },
+            {
+              "id": 3,
+              "text": "ほんぶん"
+            },
+            {
+              "id": 4,
+              "text": "ほんふん"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "ぎんこうと スーパーの 間に ほそい みちが あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "あいた"
+            },
+            {
+              "id": 2,
+              "text": "となり"
+            },
+            {
+              "id": 3,
+              "text": "あいだ"
+            },
+            {
+              "id": 4,
+              "text": "どなり"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q11",
+          "number": 11,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "たまごを 三つ とって ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "いつつ"
+            },
+            {
+              "id": 2,
+              "text": "みっつ"
+            },
+            {
+              "id": 3,
+              "text": "さんつ"
+            },
+            {
+              "id": 4,
+              "text": "ごつ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q12",
+          "number": 12,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "きょうは 元気が いいですね。",
+          "options": [
+            {
+              "id": 1,
+              "text": "けんき"
+            },
+            {
+              "id": 2,
+              "text": "げんき"
+            },
+            {
+              "id": 3,
+              "text": "でんき"
+            },
+            {
+              "id": 4,
+              "text": "てんき"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "わたしの へやは この アパートの （ ）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ほん"
+            },
+            {
+              "id": 2,
+              "text": "さつ"
+            },
+            {
+              "id": 3,
+              "text": "だい"
+            },
+            {
+              "id": 4,
+              "text": "かい"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "その ナイフで りんごを （ ） ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "おきて"
+            },
+            {
+              "id": 2,
+              "text": "つけて"
+            },
+            {
+              "id": 3,
+              "text": "しめて"
+            },
+            {
+              "id": 4,
+              "text": "きって"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "（ ）を わすれましたから、じかんが わかりません。",
+          "options": [
+            {
+              "id": 1,
+              "text": "じしょ"
+            },
+            {
+              "id": 2,
+              "text": "ちず"
+            },
+            {
+              "id": 3,
+              "text": "とけい"
+            },
+            {
+              "id": 4,
+              "text": "さいふ"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q24",
+          "number": 24,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "わたしの うちは えきに ちかいですから、（ ）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "べんり"
+            },
+            {
+              "id": 2,
+              "text": "じょうぶ"
+            },
+            {
+              "id": 3,
+              "text": "いっぱい"
+            },
+            {
+              "id": 4,
+              "text": "へた"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q25",
+          "number": 25,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "なつやすみは まいにち （ ）で およぎました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "レストラン"
+            },
+            {
+              "id": 2,
+              "text": "プール"
+            },
+            {
+              "id": 3,
+              "text": "エレベーター"
+            },
+            {
+              "id": 4,
+              "text": "ビル"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q26",
+          "number": 26,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "しらない ことばが ありましたから、せんせいに （ ）しました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しつもん"
+            },
+            {
+              "id": 2,
+              "text": "べんきょう"
+            },
+            {
+              "id": 3,
+              "text": "れんしゅう"
+            },
+            {
+              "id": 4,
+              "text": "じゅぎょう"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q27",
+          "number": 27,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "この へやは あついですから、（ ）を あけましょう。",
+          "options": [
+            {
+              "id": 1,
+              "text": "おふろ"
+            },
+            {
+              "id": 2,
+              "text": "まど"
+            },
+            {
+              "id": 3,
+              "text": "エアコン"
+            },
+            {
+              "id": 4,
+              "text": "テーブル"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q28",
+          "number": 28,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "きのうは がっこうで たくさん かんじを （ ）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "うりました"
+            },
+            {
+              "id": 2,
+              "text": "もちました"
+            },
+            {
+              "id": 3,
+              "text": "おぼえました"
+            },
+            {
+              "id": 4,
+              "text": "こまりました"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q29",
+          "number": 29,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "この コーヒーは、さとうを たくさん いれましたから、（ ）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "わかい"
+            },
+            {
+              "id": 2,
+              "text": "くろい"
+            },
+            {
+              "id": 3,
+              "text": "まるい"
+            },
+            {
+              "id": 4,
+              "text": "あまい"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q30",
+          "number": 30,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "つよい かぜが （ ） います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ふいて"
+            },
+            {
+              "id": 2,
+              "text": "いそいで"
+            },
+            {
+              "id": 3,
+              "text": "とんで"
+            },
+            {
+              "id": 4,
+              "text": "はしって"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q31",
+          "number": 31,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "これは りょうしんの しゃしんです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "これは そふと そぼの しゃしんです。"
+            },
+            {
+              "id": 2,
+              "text": "これは ちちと ははの しゃしんです。"
+            },
+            {
+              "id": 3,
+              "text": "これは あにと おとうとの しゃしんです。"
+            },
+            {
+              "id": 4,
+              "text": "これは あねと いもうとの しゃしんです。"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q32",
+          "number": 32,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "この ダンスは やさしいです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "この ダンスは かんたんです。"
+            },
+            {
+              "id": 2,
+              "text": "この ダンスは たいへんです。"
+            },
+            {
+              "id": 3,
+              "text": "この ダンスは たのしいです。"
+            },
+            {
+              "id": 4,
+              "text": "この ダンスは つまらないです。"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q33",
+          "number": 33,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "ふくを せんたくしました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ふくを ぬぎました。"
+            },
+            {
+              "id": 2,
+              "text": "ふくを わたしました。"
+            },
+            {
+              "id": 3,
+              "text": "ふくを あらいました。"
+            },
+            {
+              "id": 4,
+              "text": "ふくを きました。"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q34",
+          "number": 34,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "この へやは くらいですね。",
+          "options": [
+            {
+              "id": 1,
+              "text": "この へやは あかるいですね。"
+            },
+            {
+              "id": 2,
+              "text": "この へやは あかるくないですね。"
+            },
+            {
+              "id": 3,
+              "text": "この へやは しずかじゃ ないですね。"
+            },
+            {
+              "id": 4,
+              "text": "この へやは しずかですね。"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_a_q35",
+          "number": 35,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "リーさんは もりさんに ペンを かしました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "リーさんは もりさんに ペンを もらいました。"
+            },
+            {
+              "id": 2,
+              "text": "もりさんは リーさんに ペンを もらいました。"
+            },
+            {
+              "id": 3,
+              "text": "リーさんは もりさんに ペンを かりました。"
+            },
+            {
+              "id": 4,
+              "text": "もりさんは リーさんに ペンを かりました。"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    },
+    {
+      "title": "N5 Vocabulary Practice B",
+      "level": "N5",
+      "section": "vocabulary",
+      "time_minutes": 25,
+      "source_file": "N5Vocab (2).pdf",
+      "id": "n5_vocab_test_b",
+      "original_question_count": 33,
+      "clean_question_count": 23,
+      "questions": [
+        {
+          "id": "n5_vocab_test_b_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "先週 デパートに かいものに いきました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "せんしゅ"
+            },
+            {
+              "id": 2,
+              "text": "せんしゅう"
+            },
+            {
+              "id": 3,
+              "text": "ぜんしゅ"
+            },
+            {
+              "id": 4,
+              "text": "ぜんしゅう"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "ごはんの 後で さんぽします。",
+          "options": [
+            {
+              "id": 1,
+              "text": "つぎ"
+            },
+            {
+              "id": 2,
+              "text": "うしろ"
+            },
+            {
+              "id": 3,
+              "text": "まえ"
+            },
+            {
+              "id": 4,
+              "text": "あと"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "もう いちど 言って ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "いって"
+            },
+            {
+              "id": 2,
+              "text": "きって"
+            },
+            {
+              "id": 3,
+              "text": "まって"
+            },
+            {
+              "id": 4,
+              "text": "たって"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "ちかくに 山が あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "かわ"
+            },
+            {
+              "id": 2,
+              "text": "やま"
+            },
+            {
+              "id": 3,
+              "text": "いけ"
+            },
+            {
+              "id": 4,
+              "text": "うみ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "この ホテルは へやが 多いです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "すくない"
+            },
+            {
+              "id": 2,
+              "text": "おおい"
+            },
+            {
+              "id": 3,
+              "text": "せまい"
+            },
+            {
+              "id": 4,
+              "text": "ひろい"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "ともだちと いっしょに 学校に いきます。",
+          "options": [
+            {
+              "id": 1,
+              "text": "がこう"
+            },
+            {
+              "id": 2,
+              "text": "がこお"
+            },
+            {
+              "id": 3,
+              "text": "がっこう"
+            },
+            {
+              "id": 4,
+              "text": "がっこお"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "えんぴつが 六本 あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ろくほん"
+            },
+            {
+              "id": 2,
+              "text": "ろくぽん"
+            },
+            {
+              "id": 3,
+              "text": "ろっほん"
+            },
+            {
+              "id": 4,
+              "text": "ろっぽん"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "この 新聞は いくらですか。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しんむん"
+            },
+            {
+              "id": 2,
+              "text": "しんぶん"
+            },
+            {
+              "id": 3,
+              "text": "しむん"
+            },
+            {
+              "id": 4,
+              "text": "しぶん"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "この カメラは 安いです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "たかい"
+            },
+            {
+              "id": 2,
+              "text": "やすい"
+            },
+            {
+              "id": 3,
+              "text": "おもい"
+            },
+            {
+              "id": 4,
+              "text": "かるい"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "かさは 外に あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "いえ"
+            },
+            {
+              "id": 2,
+              "text": "なか"
+            },
+            {
+              "id": 3,
+              "text": "そと"
+            },
+            {
+              "id": 4,
+              "text": "にわ"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q19",
+          "number": 19,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "わたしの へやは この（ ）の 2かいです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "エレベーター"
+            },
+            {
+              "id": 2,
+              "text": "プール"
+            },
+            {
+              "id": 3,
+              "text": "エアコン"
+            },
+            {
+              "id": 4,
+              "text": "アパート"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q20",
+          "number": 20,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "さとうさんは ギターを じょうずに （ ）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "うたいます"
+            },
+            {
+              "id": 2,
+              "text": "ききます"
+            },
+            {
+              "id": 3,
+              "text": "ひきます"
+            },
+            {
+              "id": 4,
+              "text": "あそびます"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "テーブルに おさらと はしを （ ）ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ならべて"
+            },
+            {
+              "id": 2,
+              "text": "とって"
+            },
+            {
+              "id": 3,
+              "text": "たべて"
+            },
+            {
+              "id": 4,
+              "text": "あらって"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "けさ そうじを したから へやは （ ）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "きれい"
+            },
+            {
+              "id": 2,
+              "text": "きたない"
+            },
+            {
+              "id": 3,
+              "text": "あかるい"
+            },
+            {
+              "id": 4,
+              "text": "くらい"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "きょうは 500（ ）およぎました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ど"
+            },
+            {
+              "id": 2,
+              "text": "ばん"
+            },
+            {
+              "id": 3,
+              "text": "メートル"
+            },
+            {
+              "id": 4,
+              "text": "グラム"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q24",
+          "number": 24,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "えきから たいしかんまでの （ ）を かいて ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しゃしん"
+            },
+            {
+              "id": 2,
+              "text": "ちず"
+            },
+            {
+              "id": 3,
+              "text": "てがみ"
+            },
+            {
+              "id": 4,
+              "text": "きっぷ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q25",
+          "number": 25,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "うるさいから テレビを （ ）ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "けして"
+            },
+            {
+              "id": 2,
+              "text": "つけて"
+            },
+            {
+              "id": 3,
+              "text": "しめて"
+            },
+            {
+              "id": 4,
+              "text": "あけて"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q26",
+          "number": 26,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "きょうは （ ）が ふって います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "くもり"
+            },
+            {
+              "id": 2,
+              "text": "はれ"
+            },
+            {
+              "id": 3,
+              "text": "かぜ"
+            },
+            {
+              "id": 4,
+              "text": "ゆき"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q29",
+          "number": 29,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "まいばん くにの かぞくに でんわします。",
+          "options": [
+            {
+              "id": 1,
+              "text": "よるは ときどき くにの かぞくに でんわします。"
+            },
+            {
+              "id": 2,
+              "text": "あさは ときどき くにの かぞくに でんわします。"
+            },
+            {
+              "id": 3,
+              "text": "よるは いつも くにの かぞくに でんわします。"
+            },
+            {
+              "id": 4,
+              "text": "あさは いつも くにの かぞくに でんわします。"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q30",
+          "number": 30,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "この まちには ゆうめいな たてものが あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "この まちには ゆうめいな ビルが あります。"
+            },
+            {
+              "id": 2,
+              "text": "この まちには ゆうめいな おちゃが あります。"
+            },
+            {
+              "id": 3,
+              "text": "この まちには ゆうめいな ケーキが あります。"
+            },
+            {
+              "id": 4,
+              "text": "この まちには ゆうめいな こうえんが あります。"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q31",
+          "number": 31,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "その えいがは おもしろくなかったです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "その えいがは たのしかったです。"
+            },
+            {
+              "id": 2,
+              "text": "その えいがは つまらなかったです。"
+            },
+            {
+              "id": 3,
+              "text": "その えいがは みじかかったです。"
+            },
+            {
+              "id": 4,
+              "text": "その えいがは ながかったです。"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q32",
+          "number": 32,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "たんじょうびは 6がつ15にちです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "6がつ15にちに けっこんしました。"
+            },
+            {
+              "id": 2,
+              "text": "6がつ15にちに テストが はじまりました。"
+            },
+            {
+              "id": 3,
+              "text": "6がつ15にちに うまれました。"
+            },
+            {
+              "id": 4,
+              "text": "6がつ15にちに くにへ かえりました。"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n5_vocab_test_b_q33",
+          "number": 33,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "にねんまえに きょうとへ いきました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "きのう きょうとへ いきました。"
+            },
+            {
+              "id": 2,
+              "text": "おととい きょうとへ いきました。"
+            },
+            {
+              "id": 3,
+              "text": "きょねん きょうとへ いきました。"
+            },
+            {
+              "id": 4,
+              "text": "おととし きょうとへ いきました。"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "inferred_from_question",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ],
+  "excluded_questions": [
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 13,
+      "question_id": "n5_vocab_test_a_q13",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 14,
+      "question_id": "n5_vocab_test_a_q14",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 15,
+      "question_id": "n5_vocab_test_a_q15",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 16,
+      "question_id": "n5_vocab_test_a_q16",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 17,
+      "question_id": "n5_vocab_test_a_q17",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 18,
+      "question_id": "n5_vocab_test_a_q18",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 19,
+      "question_id": "n5_vocab_test_a_q19",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_a",
+      "question_number": 20,
+      "question_id": "n5_vocab_test_a_q20",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 11,
+      "question_id": "n5_vocab_test_b_q11",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 12,
+      "question_id": "n5_vocab_test_b_q12",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 13,
+      "question_id": "n5_vocab_test_b_q13",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 14,
+      "question_id": "n5_vocab_test_b_q14",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 15,
+      "question_id": "n5_vocab_test_b_q15",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 16,
+      "question_id": "n5_vocab_test_b_q16",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 17,
+      "question_id": "n5_vocab_test_b_q17",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 18,
+      "question_id": "n5_vocab_test_b_q18",
+      "reason": "near_similar_glyphs"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 27,
+      "question_id": "n5_vocab_test_b_q27",
+      "reason": "image_dependent"
+    },
+    {
+      "test_id": "n5_vocab_test_b",
+      "question_number": 28,
+      "question_id": "n5_vocab_test_b_q28",
+      "reason": "image_dependent"
+    }
+  ]
+}
