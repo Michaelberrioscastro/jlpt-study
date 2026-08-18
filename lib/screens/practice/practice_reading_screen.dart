@@ -6,13 +6,17 @@ import '../../theme/app_colors.dart';
 import 'reading_test_screen.dart';
 
 class PracticeReadingScreen extends StatefulWidget {
-  const PracticeReadingScreen({super.key});
+  final String level;
+
+  const PracticeReadingScreen({super.key, this.level = 'N5'});
 
   @override
   State<PracticeReadingScreen> createState() => _PracticeReadingScreenState();
 }
 
 class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
+  String get _level => widget.level.toUpperCase();
+
   bool _loading = true;
   double _preparation = 0;
   int _questionCount = 0;
@@ -32,9 +36,11 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
     });
 
     try {
-      final count = await JlptPracticeService.getN5ReadingQuestionCount();
+      final count = await JlptPracticeService.getReadingQuestionCount(
+        level: _level,
+      );
       final summary = await PracticeProgressService.getSummary(
-        level: 'N5',
+        level: _level,
         section: 'reading',
       );
 
@@ -60,6 +66,7 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
     required bool examMode,
   }) async {
     final passages = await JlptPracticeService.buildReadingSession(
+      level: _level,
       questionCount: count,
       shufflePassages: !examMode,
     );
@@ -69,7 +76,8 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => ReadingTestScreen(
-          title: examMode ? 'N5 · Reading completo' : 'N5 · Reading',
+          title: examMode ? '$_level · Reading completo' : '$_level · Reading',
+          level: _level,
           passages: passages,
           mode: mode,
           examMode: examMode,
@@ -85,14 +93,18 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('N5 · Reading')),
+      appBar: AppBar(title: Text('$_level · Reading')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 36),
           children: [
-            _HeaderCard(percentage: _preparation, attempts: _attempts.length),
+            _HeaderCard(
+              level: _level,
+              percentage: _preparation,
+              attempts: _attempts.length,
+            ),
             const SizedBox(height: 22),
             if (_loading)
               const SizedBox(
@@ -154,10 +166,15 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
 }
 
 class _HeaderCard extends StatelessWidget {
+  final String level;
   final double percentage;
   final int attempts;
 
-  const _HeaderCard({required this.percentage, required this.attempts});
+  const _HeaderCard({
+    required this.level,
+    required this.percentage,
+    required this.attempts,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +189,7 @@ class _HeaderCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Icon(
                 Icons.menu_book_rounded,
@@ -181,8 +198,11 @@ class _HeaderCard extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Text(
-                'Reading · 読解',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                '$level · Reading · 読解',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ],
           ),

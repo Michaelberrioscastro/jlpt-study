@@ -6,6 +6,7 @@ import '../../theme/app_colors.dart';
 
 class ReadingTestScreen extends StatefulWidget {
   final String title;
+  final String level;
   final List<JlptReadingPassage> passages;
   final String mode;
   final bool examMode;
@@ -14,6 +15,7 @@ class ReadingTestScreen extends StatefulWidget {
   const ReadingTestScreen({
     super.key,
     required this.title,
+    required this.level,
     required this.passages,
     required this.mode,
     required this.examMode,
@@ -96,7 +98,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
     final percent = total == 0 ? 0 : ((score / total) * 100).round();
 
     await PracticeProgressService.saveAttempt(
-      level: 'N5',
+      level: widget.level.toUpperCase(),
       section: 'reading',
       mode: widget.mode,
       questionCount: total,
@@ -123,7 +125,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'Resultado Reading',
+                  'Resultado ${widget.level.toUpperCase()} · Reading',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 8),

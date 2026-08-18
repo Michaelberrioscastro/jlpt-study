@@ -1,0 +1,544 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N4",
+  "section": "reading",
+  "curation_policy": {
+    "conservative": true,
+    "included_text_reliably_readable": true,
+    "excluded_image_or_layout_dependent_questions": true,
+    "note": "Primera versión conservadora. Se incluyen solo lecturas y preguntas que pueden representarse fielmente como texto. Las preguntas 34-35 de ambos exámenes dependen de tablas/horarios visuales y quedan reservadas para una futura UI visual."
+  },
+  "tests": [
+    {
+      "id": "n4_reading_test_a",
+      "title": "N4 Reading Practice A",
+      "source_file": "N4R.pdf",
+      "passages": [
+        {
+          "id": "n4_reading_a_p01",
+          "mondai": 4,
+          "subtype": "memo",
+          "passage": "アリさん\n\nアリさんから借りた本を置いておきます。ありがとうございました。\nアリさんが借りたいと言っていた本も、一緒に置きます。重いので、今日は2冊しか持ってきませんでした。来週、ほかの3冊を持ってきます。\n\n石川",
+          "questions": [
+            {
+              "id": "n4_reading_a_q26",
+              "number": 26,
+              "prompt": "石川さんは、来週、何をすると言っていますか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "アリさんに本を2冊返します。"
+                },
+                {
+                  "id": 2,
+                  "text": "アリさんに本を3冊返します。"
+                },
+                {
+                  "id": 3,
+                  "text": "アリさんに本を2冊貸します。"
+                },
+                {
+                  "id": 4,
+                  "text": "アリさんに本を3冊貸します。"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_a_p02",
+          "mondai": 4,
+          "subtype": "notice",
+          "passage": "公園で遊ぶときの注意\n\n◆ 公園が開いている時間は、午前6時から午後9時です。これ以外の時間は入れません。\n◆ 自転車やオートバイは、公園の入り口にとめてください。中に入れてはいけません。\n◆ 公園の中で、次のことをしてはいけません。\n・ボールを使って遊ぶこと\n・たばこを吸うこと",
+          "questions": [
+            {
+              "id": "n4_reading_a_q27",
+              "number": 27,
+              "prompt": "このお知らせから、公園についてわかることは何ですか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "午後10時に公園に入ってもいいです。"
+                },
+                {
+                  "id": 2,
+                  "text": "入り口にオートバイをとめてはいけません。"
+                },
+                {
+                  "id": 3,
+                  "text": "サッカーの練習をしてはいけません。"
+                },
+                {
+                  "id": 4,
+                  "text": "たばこを吸ってもいいです。"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_a_p03",
+          "mondai": 4,
+          "subtype": "email",
+          "passage": "トムさん\n\n明日（30日）の約束ですが、会議に出なければならなくなりました。\nそれで、すみませんが、約束を31日の午後3時に変えられませんか。\nトムさんの都合がよければ、オフィスで待っています。\nこのメールを読んだら、返事をください。\n\n山田",
+          "questions": [
+            {
+              "id": "n4_reading_a_q28",
+              "number": 28,
+              "prompt": "トムさんは、山田先生に何を知らせなければなりませんか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "約束を明日に変えられるかどうか"
+                },
+                {
+                  "id": 2,
+                  "text": "約束をあさってに変えられるかどうか"
+                },
+                {
+                  "id": 3,
+                  "text": "トムさんの明日の午後の都合"
+                },
+                {
+                  "id": 4,
+                  "text": "トムさんのあさっての午前の都合"
+                }
+              ],
+              "correct_option": 2,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_a_p04",
+          "mondai": 4,
+          "subtype": "short_passage",
+          "passage": "石田さんは、川下図書館で働いています。本についての相談を受けたり、どこにどの本を置くのがいいか考えたりします。それから、図書館の新聞によい本の紹介文を書いたり、小さな子どもたちに絵本を読んだりします。",
+          "questions": [
+            {
+              "id": "n4_reading_a_q29",
+              "number": 29,
+              "prompt": "石田さんの仕事ではないものはどれですか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "相談に来た人に本について紹介します。"
+                },
+                {
+                  "id": 2,
+                  "text": "本を置く場所はどこがいいか、考えます。"
+                },
+                {
+                  "id": 3,
+                  "text": "新聞にのっている、よい本の紹介文をさがします。"
+                },
+                {
+                  "id": 4,
+                  "text": "小さな子どもたちに、いろいろな絵本を読みます。"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_a_p05",
+          "mondai": 5,
+          "subtype": "long_passage",
+          "passage": "今年の夏、わたしは家族で山の中にあるホテルに泊まりました。\n駅からホテルの近くのバス停まで、バスで2時間以上かかりました。バス停からホテルまでは、細い道を30分近く歩きました。ホテルは小さくて古かったですが、中はとてもきれいでした。ホテルに着くと、息子は「テレビが見たい。」「ゲームがしたい。」と言いました。しかし、このホテルにはどちらもありません。それから、冷蔵庫もエアコンもありません。このホテルは便利ではありませんでしたが、山や湖でいろいろなことができました。\n\n部屋に荷物を置いて窓を開けると、湖から涼しい風が入ってきました。少し休んでから、まだ明るかったので、散歩に出かけました。空気がおいしくて、景色も美しかったです。夜は、星がとてもきれいでした。ホテルにいる間は毎日、みんなで散歩をしたり、湖で泳いだり、虫をとったり、昼寝をしたりしました。\n\nホテルには1週間いました。わたしたちは「楽しかったね。こんな生活もたまにはいいね。」と話しながら、家に帰りました。",
+          "questions": [
+            {
+              "id": "n4_reading_a_q30",
+              "number": 30,
+              "prompt": "どんなホテルに泊まりましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "山の中の大きなホテル"
+                },
+                {
+                  "id": 2,
+                  "text": "古いが、中はきれいなホテル"
+                },
+                {
+                  "id": 3,
+                  "text": "テレビやゲームが楽しめるホテル"
+                },
+                {
+                  "id": 4,
+                  "text": "いろいろなものがあって、便利なホテル"
+                }
+              ],
+              "correct_option": 2,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n4_reading_a_q31",
+              "number": 31,
+              "prompt": "駅からホテルまでどうやって行きましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "駅から30分バスに乗って、バス停から2時間以上歩きました。"
+                },
+                {
+                  "id": 2,
+                  "text": "駅から30分バス停まで歩いて、バスに2時間以上乗りました。"
+                },
+                {
+                  "id": 3,
+                  "text": "駅から2時間近くバスに乗って、バス停から30分以上歩きました。"
+                },
+                {
+                  "id": 4,
+                  "text": "駅から2時間以上バスに乗って、バス停から30分近く歩きました。"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n4_reading_a_q32",
+              "number": 32,
+              "prompt": "ホテルに着いてから、何をしましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "部屋に行かないで、すぐに湖に行きました。"
+                },
+                {
+                  "id": 2,
+                  "text": "部屋に行って、夜までずっと休みました。"
+                },
+                {
+                  "id": 3,
+                  "text": "部屋でテレビを見てから、星を見に外へ出ました。"
+                },
+                {
+                  "id": 4,
+                  "text": "部屋で少し休んでから、散歩に行きました。"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n4_reading_a_q33",
+              "number": 33,
+              "prompt": "「こんな生活」とありますが、どんな生活ですか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "山で遊んだり、昼寝をしたりする生活"
+                },
+                {
+                  "id": 2,
+                  "text": "ゲームをしたり、虫をとったりする生活"
+                },
+                {
+                  "id": 3,
+                  "text": "散歩をしたり、テレビを見たりする生活"
+                },
+                {
+                  "id": 4,
+                  "text": "おいしいものを食べて、何もしない生活"
+                }
+              ],
+              "correct_option": 1,
+              "answer_source": "official_jlpt_answer_key_2012",
+              "verified_for_app_v1": true
+            }
+          ]
+        }
+      ],
+      "excluded_questions": [
+        {
+          "number": 34,
+          "reason": "visual_table_schedule_dependent"
+        },
+        {
+          "number": 35,
+          "reason": "visual_table_schedule_dependent"
+        }
+      ]
+    },
+    {
+      "id": "n4_reading_test_b",
+      "title": "N4 Reading Practice B",
+      "source_file": "N4Reading.pdf",
+      "passages": [
+        {
+          "id": "n4_reading_b_p01",
+          "mondai": 4,
+          "subtype": "notice",
+          "passage": "このお知らせが日本語学校の教室にあります。\n\n忘れ物がありました\n\n忘れた人は、先生たちの部屋へ取りに来てください。\n① 辞書（103教室にありました）\n② 帽子（食堂にありました）\n\n12月5日（月）から7日（水）までは、試験中ですから、先生たちの部屋には入れません。教室でクラスの先生に言ってください。\n\n2016年12月1日（木） 大西日本語学校",
+          "questions": [
+            {
+              "id": "n4_reading_b_q26",
+              "number": 26,
+              "prompt": "試験中の3日間に忘れ物を取りに行きたい人は、どうしなければなりませんか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "試験が終わるまで待ちます。"
+                },
+                {
+                  "id": 2,
+                  "text": "先生たちの部屋へ取りに行きます。"
+                },
+                {
+                  "id": 3,
+                  "text": "忘れ物があった場所へ取りに行きます。"
+                },
+                {
+                  "id": 4,
+                  "text": "教室で、自分のクラスの先生に話します。"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_b_p02",
+          "mondai": 4,
+          "subtype": "short_passage",
+          "passage": "アイスクリームは、夏に食べるととてもおいしいですが、私は寒い冬でも時々食べます。夏は毎日食べるので安いものしか買いませんが、冬は高いものを買います。暖かい部屋でいいアイスクリームを食べるのが、私の楽しみなのです。",
+          "questions": [
+            {
+              "id": "n4_reading_b_q27",
+              "number": 27,
+              "prompt": "私の楽しみは何ですか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "冬に暖かい部屋で毎日アイスクリームを食べること"
+                },
+                {
+                  "id": 2,
+                  "text": "冬に暖かい部屋で高いアイスクリームを食べること"
+                },
+                {
+                  "id": 3,
+                  "text": "夏に毎日アイスクリームを食べること"
+                },
+                {
+                  "id": 4,
+                  "text": "夏に高いアイスクリームを食べること"
+                }
+              ],
+              "correct_option": 2,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_b_p03",
+          "mondai": 4,
+          "subtype": "memo",
+          "passage": "（日本語学校で）\n高田先生の机の上に、このメモがあります。\n\n高田先生\n\nみそ工場の林さんから電話がありました。\n1月に工場見学ができるのは、19日（木）10時、11時と26日（木）14時、15時だそうです。\n見学の日と時間が決まったら、電話がほしいと言っていました。\n行く人の数も教えてもらいたいそうです。\n\n12月1日 10:20 ヒマル",
+          "questions": [
+            {
+              "id": "n4_reading_b_q28",
+              "number": 28,
+              "prompt": "このメモを読んで、高田先生は林さんに何を知らせなければなりませんか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "工場見学に行く人の数だけ"
+                },
+                {
+                  "id": 2,
+                  "text": "工場見学に行く日と時間だけ"
+                },
+                {
+                  "id": 3,
+                  "text": "工場見学に行く日と時間と、行く人の数"
+                },
+                {
+                  "id": 4,
+                  "text": "工場見学に行く日と時間が、いつごろ決まるか"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_b_p04",
+          "mondai": 4,
+          "subtype": "short_passage",
+          "passage": "昨日初めて黒い消しゴムを買いました。レジの人が「白いのは、使うと消しゴムが黒く汚れて嫌だと言う人が多いから、黒いのを作ったそうですよ。」と教えてくれました。私は色がかっこいいから買ったので、理由を聞いて面白いなと思いました。",
+          "questions": [
+            {
+              "id": "n4_reading_b_q29",
+              "number": 29,
+              "prompt": "「私」はどうして黒い消しゴムを買いましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "黒い消しゴムは、使った後で消しゴムが黒く汚れないから"
+                },
+                {
+                  "id": 2,
+                  "text": "黒い消しゴムを買う人が多いと店の人に聞いたから"
+                },
+                {
+                  "id": 3,
+                  "text": "黒い消しゴムのほうが字をきれいに消せるから"
+                },
+                {
+                  "id": 4,
+                  "text": "黒い消しゴムは、色がかっこいいと思ったから"
+                }
+              ],
+              "correct_option": 4,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            }
+          ]
+        },
+        {
+          "id": "n4_reading_b_p05",
+          "mondai": 5,
+          "subtype": "long_passage",
+          "passage": "これはケイティさんが書いた作文です。\n\n東京駅で会った人\nケイティ・ワン\n\n先週、私は友達の家に遊びに行きました。行くときに、東京駅で電車を乗り換えなければならなかったのですが、東京駅は広すぎて、乗り換える電車の場所がわかりませんでした。それで、メモを持って駅の中を行ったり来たりしていました。\n\n「どうしよう。」と思って困っていたとき、山田さんという女の人が声をかけてくれました。山田さんは駅の中にある喫茶店でお茶を飲みながら、私が行ったり来たりしているのを見ていたそうです。「どうしたんですか。」と聞かれたので、「電車の場所がわからないんです。」と答えました。山田さんは私が乗る電車のところまで一緒に行ってくれました。\n\n山田さんは仕事で東京に来ていて、今から京都に帰ると言いました。私は「時間は大丈夫ですか。」と聞きました。山田さんは「京都に行く新幹線はたくさんあるから、次のでも大丈夫です。私も、外国に住んでいたとき、いろいろな人に親切にしてもらいましたから。」と言いました。私は「本当にありがとうございます。」とお礼を言いました。\n\n電車に乗って、一人になった私は、山田さんの言葉を思い出して、心が温かくなりました。そして、私も山田さんみたいに（　）と思いました。",
+          "questions": [
+            {
+              "id": "n4_reading_b_q30",
+              "number": 30,
+              "prompt": "なぜ「どうしよう。」と思いましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "友達が見つからないから"
+                },
+                {
+                  "id": 2,
+                  "text": "間違えて東京駅で電車を降りてしまったから"
+                },
+                {
+                  "id": 3,
+                  "text": "乗りたい電車の場所がわからないから"
+                },
+                {
+                  "id": 4,
+                  "text": "知らない女の人に声をかけられたから"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n4_reading_b_q31",
+              "number": 31,
+              "prompt": "なぜ山田さんは「私」に声をかけましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "「私」が行ったり来たりしているのを見たから"
+                },
+                {
+                  "id": 2,
+                  "text": "「私」と一緒にお茶を飲みたいと思ったから"
+                },
+                {
+                  "id": 3,
+                  "text": "「私」を山田さんの友達と間違えたから"
+                },
+                {
+                  "id": 4,
+                  "text": "「私」が落としたメモを拾ったから"
+                }
+              ],
+              "correct_option": 1,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n4_reading_b_q32",
+              "number": 32,
+              "prompt": "なぜお礼を言いましたか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "山田さんが、京都に行く新幹線がたくさんあると「私」に教えてくれたから"
+                },
+                {
+                  "id": 2,
+                  "text": "山田さんが、帰りが遅くなるかもしれないのに、「私」を案内してくれたから"
+                },
+                {
+                  "id": 3,
+                  "text": "山田さんが、「私」が乗る予定の電車の時間のことを心配してくれたから"
+                },
+                {
+                  "id": 4,
+                  "text": "山田さんが、「私」の国のいろいろな人に親切にしてくれたと聞いたから"
+                }
+              ],
+              "correct_option": 2,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            },
+            {
+              "id": "n4_reading_b_q33",
+              "number": 33,
+              "prompt": "（　）に入れるのに、いちばんいい文はどれですか。",
+              "options": [
+                {
+                  "id": 1,
+                  "text": "仕事を頑張ろう"
+                },
+                {
+                  "id": 2,
+                  "text": "外国に住んでみたい"
+                },
+                {
+                  "id": 3,
+                  "text": "困っている人に親切にしよう"
+                },
+                {
+                  "id": 4,
+                  "text": "東京駅のことをよく知りたい"
+                }
+              ],
+              "correct_option": 3,
+              "answer_source": "official_jlpt_answer_key_2018",
+              "verified_for_app_v1": true
+            }
+          ]
+        }
+      ],
+      "excluded_questions": [
+        {
+          "number": 34,
+          "reason": "visual_table_schedule_dependent"
+        },
+        {
+          "number": 35,
+          "reason": "visual_table_schedule_dependent"
+        }
+      ]
+    }
+  ]
+}

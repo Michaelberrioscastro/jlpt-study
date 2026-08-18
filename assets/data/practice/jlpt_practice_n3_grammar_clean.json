@@ -1,0 +1,1082 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N3",
+  "section": "grammar",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_sentence_ordering_questions": true,
+    "excluded_image_dependent_questions": true,
+    "note": "v1 incluye 問題1 y 問題3. 問題2 (preguntas 14–18, ordenamiento con ★) se excluye porque la interfaz actual no representa fielmente ese formato."
+  },
+  "tests": [
+    {
+      "title": "N3 Grammar Practice A",
+      "level": "N3",
+      "section": "grammar",
+      "time_minutes": 70,
+      "source_file": "N3G.pdf",
+      "id": "n3_grammar_test_a",
+      "original_question_count": 23,
+      "clean_question_count": 18,
+      "questions": [
+        {
+          "id": "n3_grammar_test_a_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "今度の試合に勝てる（　）一生けんめいがんばります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ために"
+            },
+            {
+              "id": 2,
+              "text": "ように"
+            },
+            {
+              "id": 3,
+              "text": "ことに"
+            },
+            {
+              "id": 4,
+              "text": "みたいに"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "今のわたしの安い給料では、何年働いても自分の家は（　）そうもない。",
+          "options": [
+            {
+              "id": 1,
+              "text": "買い"
+            },
+            {
+              "id": 2,
+              "text": "買え"
+            },
+            {
+              "id": 3,
+              "text": "買う"
+            },
+            {
+              "id": 4,
+              "text": "買える"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "A「最近、山田さん元気ないね。」\nB「うん。将来の（　）悩んでるらしいよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "ほうに"
+            },
+            {
+              "id": 2,
+              "text": "場合に"
+            },
+            {
+              "id": 3,
+              "text": "ほかで"
+            },
+            {
+              "id": 4,
+              "text": "ことで"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "A「ねえ、（　）どんな人？」\nB「とても親切でいい人だよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "田中さんが"
+            },
+            {
+              "id": 2,
+              "text": "田中さんで"
+            },
+            {
+              "id": 3,
+              "text": "田中さんって"
+            },
+            {
+              "id": 4,
+              "text": "田中さんでも"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "A「沖縄旅行はどうだった？」\nB「海が青くて、料理もおいしくて、最高だったよ。」\nA「いいなあ。わたしも（　）一度行ってみたいなあ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "いつのまにか"
+            },
+            {
+              "id": 2,
+              "text": "いつ"
+            },
+            {
+              "id": 3,
+              "text": "いつでも"
+            },
+            {
+              "id": 4,
+              "text": "いつか"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（デパートでシャツを選びながら）\n山田「明るい色のシャツが欲しいんだけど……。」\n田中「だったら、これ（　）どう？ 山田さんにすごく似合うと思うよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "なんか"
+            },
+            {
+              "id": 2,
+              "text": "ばかり"
+            },
+            {
+              "id": 3,
+              "text": "へ"
+            },
+            {
+              "id": 4,
+              "text": "に"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（スーパーで）\n母親「今、お菓子を買った子がタケルくん？」\n子ども「ちがうよ。あそこで泣いて、お菓子を（　）子だよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "欲しい"
+            },
+            {
+              "id": 2,
+              "text": "欲しがっている"
+            },
+            {
+              "id": 3,
+              "text": "欲しそうな"
+            },
+            {
+              "id": 4,
+              "text": "欲しがってみる"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "学生「先生、ご相談したいことがあるのですが、授業の後、先生の研究室に（　）よろしいでしょうか。」\n先生「はい、いいですよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "来られても"
+            },
+            {
+              "id": 2,
+              "text": "いらっしゃっても"
+            },
+            {
+              "id": 3,
+              "text": "うかがっても"
+            },
+            {
+              "id": 4,
+              "text": "行かれても"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "A「昨日からずっと頭が痛いんですが、どこかいい病院を知りませんか。」\nB「そうですねえ、ABC病院に行って（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "みさせてください"
+            },
+            {
+              "id": 2,
+              "text": "みてもいいでしょうか"
+            },
+            {
+              "id": 3,
+              "text": "みさせてほしいのですが"
+            },
+            {
+              "id": 4,
+              "text": "みたらどうでしょう"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "このお菓子は小麦粉と卵と砂糖（　）できています。バターや牛乳は使っていません。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ほどが"
+            },
+            {
+              "id": 2,
+              "text": "ほどで"
+            },
+            {
+              "id": 3,
+              "text": "だけが"
+            },
+            {
+              "id": 4,
+              "text": "だけで"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q11",
+          "number": 11,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（会社で）\nA「すみません、山田さんはどこですか。」\nB「山田さんは会議中ですが、会議は11時半（　）終わると思いますよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "までは"
+            },
+            {
+              "id": 2,
+              "text": "までには"
+            },
+            {
+              "id": 3,
+              "text": "までも"
+            },
+            {
+              "id": 4,
+              "text": "までにも"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q12",
+          "number": 12,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "妹「今日は友だちと晩ご飯を食べてくるね。」\n兄「わかった。9時過ぎる（　）、迎えに行くから、電話しろよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "らしいなら"
+            },
+            {
+              "id": 2,
+              "text": "らしいのに"
+            },
+            {
+              "id": 3,
+              "text": "ようなら"
+            },
+            {
+              "id": 4,
+              "text": "ようなのに"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q13",
+          "number": 13,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "弟「お父さん、どこにいるか知らない？」\n兄「さっき部屋にいたけど、忙しそうだったよ。」\n弟「そうか。じゃあ今は（　）。進学のこと、相談したかったんだけど。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "話しかけないほうがよさそうだな"
+            },
+            {
+              "id": 2,
+              "text": "話しかけなくてもよさそうだな"
+            },
+            {
+              "id": 3,
+              "text": "話しかけないほうがいいそうだな"
+            },
+            {
+              "id": 4,
+              "text": "話しかけなくてもいいそうだな"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q19",
+          "number": 19,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "東京に来て、電車を使う人がとても多いのにびっくりしました。最初は、人が多くて大変なのに、なぜみんなが電車を使おうとするのか不思議でした。しかし、東京に来て3か月たって、その理由が（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "わかってくるはずです"
+            },
+            {
+              "id": 2,
+              "text": "わかっていくそうです"
+            },
+            {
+              "id": 3,
+              "text": "わかってきました"
+            },
+            {
+              "id": 4,
+              "text": "わかっていったようです"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q20",
+          "number": 20,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "東京には、10種類以上の電車が走っていて、電車の駅は600以上あります。たくさん駅があるから、どこへでも行くことができます。（　）、電車が遅れることも少ないし、あまり待たなくてもすぐに次の電車が来ます。",
+          "options": [
+            {
+              "id": 1,
+              "text": "したがって"
+            },
+            {
+              "id": 2,
+              "text": "つまり"
+            },
+            {
+              "id": 3,
+              "text": "たとえば"
+            },
+            {
+              "id": 4,
+              "text": "それから"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "実際に、わたしが使っている電車は、ラッシュアワーには3分に1本来ます。（　）なら、みんなが使いたくなる気持ちもわかります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ある電車"
+            },
+            {
+              "id": 2,
+              "text": "そこの電車"
+            },
+            {
+              "id": 3,
+              "text": "こういう電車"
+            },
+            {
+              "id": 4,
+              "text": "どちらかの電車"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "東京では電車が次々来るから、電車の時間を気にして急ぐ必要はないはずです。ところが、駅の中や階段、ホームを、とても急いで歩いている人が多いです。わたしは、これが（　）わかりません。",
+          "options": [
+            {
+              "id": 1,
+              "text": "答えなのか"
+            },
+            {
+              "id": 2,
+              "text": "なぜなのか"
+            },
+            {
+              "id": 3,
+              "text": "理由なのか"
+            },
+            {
+              "id": 4,
+              "text": "だれなのか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_a_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "日本に長く住んでいたら、わたしも同じように（　）。留学生活が終わるころには、答えがわかるのかもしれません。",
+          "options": [
+            {
+              "id": 1,
+              "text": "なるのでしょうか"
+            },
+            {
+              "id": 2,
+              "text": "なったでしょう"
+            },
+            {
+              "id": 3,
+              "text": "なってしまうのです"
+            },
+            {
+              "id": 4,
+              "text": "なってしまいました"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    },
+    {
+      "title": "N3 Grammar Practice B",
+      "level": "N3",
+      "section": "grammar",
+      "time_minutes": 70,
+      "source_file": "N3G (1).pdf",
+      "id": "n3_grammar_test_b",
+      "original_question_count": 23,
+      "clean_question_count": 18,
+      "questions": [
+        {
+          "id": "n3_grammar_test_b_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "彼は小説家（　）有名になったが、普段は小さな病院で働く医者だ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "について"
+            },
+            {
+              "id": 2,
+              "text": "として"
+            },
+            {
+              "id": 3,
+              "text": "にしたがって"
+            },
+            {
+              "id": 4,
+              "text": "と比べて"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "先週、会社の面接で「もし自分を色で表す（　）、何色ですか。」と聞かれ、オレンジ色と答えた。「元気」や「健康」のイメージがあるからだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ことから"
+            },
+            {
+              "id": 2,
+              "text": "という点で"
+            },
+            {
+              "id": 3,
+              "text": "ように"
+            },
+            {
+              "id": 4,
+              "text": "としたら"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "昨日の夜、寝る前に（　）ヨーグルトが食べたくなって、夜中なのにコンビニに買いに行ってしまった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "どうか"
+            },
+            {
+              "id": 2,
+              "text": "せっかく"
+            },
+            {
+              "id": 3,
+              "text": "どうしても"
+            },
+            {
+              "id": 4,
+              "text": "きっと"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "このケーキは材料を混ぜて焼く（　）から、誰でも失敗せずにおいしく作れる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "だけだ"
+            },
+            {
+              "id": 2,
+              "text": "ことだ"
+            },
+            {
+              "id": 3,
+              "text": "せいだ"
+            },
+            {
+              "id": 4,
+              "text": "ときだ"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "私の町では毎年8月最後の日曜日に夏祭りが（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "行います"
+            },
+            {
+              "id": 2,
+              "text": "行わせます"
+            },
+            {
+              "id": 3,
+              "text": "行っています"
+            },
+            {
+              "id": 4,
+              "text": "行われます"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（靴屋で）\n客「すみません。この靴のもう一つ大きいサイズはありますか。」\n店員「あ、はい、確認しますので、少々（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "お待ちしております"
+            },
+            {
+              "id": 2,
+              "text": "お待ちください"
+            },
+            {
+              "id": 3,
+              "text": "お待ちできます"
+            },
+            {
+              "id": 4,
+              "text": "お待ちしましょう"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（電話で）\nX建設の社員「はい、X建設営業部です。」\n中田「あ、私、ABC銀行の中田と（　）が、山石さんをお願いします。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "ございます"
+            },
+            {
+              "id": 2,
+              "text": "いたします"
+            },
+            {
+              "id": 3,
+              "text": "申します"
+            },
+            {
+              "id": 4,
+              "text": "申し上げます"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "息子が通う高校では、お昼にパンや飲み物が買える場所もあるが、基本的には全員がお弁当を（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "持っていったばかりだ"
+            },
+            {
+              "id": 2,
+              "text": "持っていくことになっている"
+            },
+            {
+              "id": 3,
+              "text": "持っていきたい"
+            },
+            {
+              "id": 4,
+              "text": "持っていくつもりだ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "昼寝をするのは気持ちがいいが、夜（　）困るので、いつも15分ぐらいで起きる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "寝なくて"
+            },
+            {
+              "id": 2,
+              "text": "寝られると思って"
+            },
+            {
+              "id": 3,
+              "text": "寝られないと"
+            },
+            {
+              "id": 4,
+              "text": "寝ると思うと"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "A市は、保育園の数が少なく、保育園を（　）利用できない人がいることが問題になっている。",
+          "options": [
+            {
+              "id": 1,
+              "text": "利用したくても"
+            },
+            {
+              "id": 2,
+              "text": "利用しそうになって"
+            },
+            {
+              "id": 3,
+              "text": "利用しているのに"
+            },
+            {
+              "id": 4,
+              "text": "利用できたら"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q11",
+          "number": 11,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "妻「ねえ、ちょっと買い物に行ってくるから、今夜行くレストランの予約をお願いできる？」\n夫「うん、わかった。（　）。19時からで大丈夫？」\n妻「ええ、ありがとう。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "予約してね"
+            },
+            {
+              "id": 2,
+              "text": "予約しておくよ"
+            },
+            {
+              "id": 3,
+              "text": "予約しようよ"
+            },
+            {
+              "id": 4,
+              "text": "予約してあるね"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q12",
+          "number": 12,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（畑で）\n子「ねえ、このトマト、もう食べられる？ 赤くなっているよ。」\n父「うん。そろそろ（　）ね。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "食べやすいそうだ"
+            },
+            {
+              "id": 2,
+              "text": "食べていそうだ"
+            },
+            {
+              "id": 3,
+              "text": "食べたがるそうだ"
+            },
+            {
+              "id": 4,
+              "text": "食べてもよさそうだ"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q13",
+          "number": 13,
+          "mondai": 1,
+          "subtype": "grammar_completion",
+          "prompt": "（改札で）\n南「山下さん、来ませんね。携帯に電話をしても出ないし、どうしますか。」\n中川「これ以上待つと私たちも間に合わないから、先に（　）。」\n南「そうですね。行きますか。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "行ってしまいましょうか"
+            },
+            {
+              "id": 2,
+              "text": "行ってしまうのでしょう"
+            },
+            {
+              "id": 3,
+              "text": "行ってしまいましたか"
+            },
+            {
+              "id": 4,
+              "text": "行ってしまっていました"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q19",
+          "number": 19,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "日本へ来て、多くの人が天気の話をすることに気がつきました。あちこちで、多くの人があいさつに続けて天気の話をしているのを聞きました。（　）、私の国では天気の話をあまりしないので、なぜ天気の話をするのかわかりませんでした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "そのうえ"
+            },
+            {
+              "id": 2,
+              "text": "つまり"
+            },
+            {
+              "id": 3,
+              "text": "けれども"
+            },
+            {
+              "id": 4,
+              "text": "すると"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q20",
+          "number": 20,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "ある冬の寒い朝、日本人の友達に会ったとき、「おはよう。」の後で自然に「寒いね。」と（　）。友達は「本当だね。」と答え、その後、寒い冬に食べるとおいしい食べ物や冬の服の話になりました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "言われていました"
+            },
+            {
+              "id": 2,
+              "text": "言ってもらいました"
+            },
+            {
+              "id": 3,
+              "text": "言わせてみました"
+            },
+            {
+              "id": 4,
+              "text": "言ってしまいました"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "友達は「本当だね。」と答え、その後、寒い冬に食べるとおいしい食べ物や冬の服の話になりました。天気の話が天気に関係した話に（　）、おもしろいと思いました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "広がって"
+            },
+            {
+              "id": 2,
+              "text": "広がるより"
+            },
+            {
+              "id": 3,
+              "text": "広がるように"
+            },
+            {
+              "id": 4,
+              "text": "広がったそうで"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "私の国は一年中暑いですが、日本は四季があって気温の変化が大きいし、天気もよく変わります。そのため、多くの日本人が天気に関心を（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "持ったはずがありません"
+            },
+            {
+              "id": 2,
+              "text": "持ちたがりません"
+            },
+            {
+              "id": 3,
+              "text": "持つのかもしれません"
+            },
+            {
+              "id": 4,
+              "text": "持とうとしません"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_grammar_test_b_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "最近は管理人さんともよく天気の話をするようになって、天気の話は誰とでもしやすいことに気づきました。（　）も天気の話をする人が多い理由の一つだと思います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "どれ"
+            },
+            {
+              "id": 2,
+              "text": "これ"
+            },
+            {
+              "id": 3,
+              "text": "あれら"
+            },
+            {
+              "id": 4,
+              "text": "それら"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1199 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N4",
+  "section": "grammar",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_near_similar_glyph_questions": true,
+    "excluded_image_dependent_questions": true,
+    "excluded_sentence_order_questions_for_v1": true,
+    "note": "v1 uses questions that fit the current multiple-choice UI reliably. Mondai 2 sentence-order questions (16-20) from each source are reserved for a dedicated UI. Answers were verified against the official JLPT 2012 and 2018 N4 answer keys."
+  },
+  "tests": [
+    {
+      "title": "N4 Grammar Practice A",
+      "level": "N4",
+      "section": "grammar",
+      "time_minutes": 20,
+      "source_file": "N4G.pdf",
+      "id": "n4_grammar_test_a",
+      "original_question_count": 25,
+      "clean_question_count": 20,
+      "questions": [
+        {
+          "id": "n4_grammar_test_a_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "わたしの 父は 中国語も 英語（　）話せます。",
+          "options": [
+            {
+              "id": 1,
+              "text": "を"
+            },
+            {
+              "id": 2,
+              "text": "で"
+            },
+            {
+              "id": 3,
+              "text": "も"
+            },
+            {
+              "id": 4,
+              "text": "が"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "これは わたしが 米（　）作った パンです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "に"
+            },
+            {
+              "id": 2,
+              "text": "の"
+            },
+            {
+              "id": 3,
+              "text": "や"
+            },
+            {
+              "id": 4,
+              "text": "で"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "男の子の 顔は 父親より 母親（　）にるという 話を 聞いた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "に"
+            },
+            {
+              "id": 2,
+              "text": "へ"
+            },
+            {
+              "id": 3,
+              "text": "も"
+            },
+            {
+              "id": 4,
+              "text": "を"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "limitation",
+          "prompt": "妹は おしゃべりだ。静かなのは、食事の とき（　）だ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しか"
+            },
+            {
+              "id": 2,
+              "text": "だけ"
+            },
+            {
+              "id": 3,
+              "text": "は"
+            },
+            {
+              "id": 4,
+              "text": "の"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "A「誕生日に 田中さんから 何を もらったんですか。」\nB「田中さん（　）腕時計を もらいました。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "からが"
+            },
+            {
+              "id": 2,
+              "text": "からに"
+            },
+            {
+              "id": 3,
+              "text": "からで"
+            },
+            {
+              "id": 4,
+              "text": "からは"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "time_expression",
+          "prompt": "（会社で）\nA「すみません、山田さんは どこですか。」\nB「山田さんは 会議中ですが、会議は 11時半（　）終わると 思いますよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "までは"
+            },
+            {
+              "id": 2,
+              "text": "までには"
+            },
+            {
+              "id": 3,
+              "text": "までも"
+            },
+            {
+              "id": 4,
+              "text": "までにも"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "interrogative",
+          "prompt": "学生「先生、この 言葉は（　）意味ですか。」\n先生「『やさしい』と いう 意味です。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "どうやって"
+            },
+            {
+              "id": 2,
+              "text": "どのぐらい"
+            },
+            {
+              "id": 3,
+              "text": "どういう"
+            },
+            {
+              "id": 4,
+              "text": "どう"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "adverb",
+          "prompt": "チャン「古川さん、この じゅぎょうの レポート、終わりましたか。」\n古川「はい、一週間 かかりましたが、きのうの 夜、（　）終わりました。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "やっと"
+            },
+            {
+              "id": 2,
+              "text": "ずっと"
+            },
+            {
+              "id": 3,
+              "text": "もっと"
+            },
+            {
+              "id": 4,
+              "text": "きっと"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "conjunction",
+          "prompt": "A「あした いっしょに ドライブに 行きませんか。」\nB「（　）、ごめんなさい、あしたは アルバイトが あるんです。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "行きたいから"
+            },
+            {
+              "id": 2,
+              "text": "行きたいけれど"
+            },
+            {
+              "id": 3,
+              "text": "行きたいし"
+            },
+            {
+              "id": 4,
+              "text": "行きたくて"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "verb_form",
+          "prompt": "子ども「ねえ、ゲームを しても いい？」\n母親「しゅくだいを（　）あとでね。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "していた"
+            },
+            {
+              "id": 2,
+              "text": "している"
+            },
+            {
+              "id": 3,
+              "text": "する"
+            },
+            {
+              "id": 4,
+              "text": "した"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q11",
+          "number": 11,
+          "mondai": 1,
+          "subtype": "adjective_form",
+          "prompt": "この すいかは（　）すぎて、れいぞうこに 入らない。",
+          "options": [
+            {
+              "id": 1,
+              "text": "大き"
+            },
+            {
+              "id": 2,
+              "text": "大きい"
+            },
+            {
+              "id": 3,
+              "text": "大きく"
+            },
+            {
+              "id": 4,
+              "text": "大きくて"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q12",
+          "number": 12,
+          "mondai": 1,
+          "subtype": "fixed_expression",
+          "prompt": "A「誕生日 おめでとうございます。これ、プレゼントです。どうぞ。」\nB「ありがとうございます。大切に（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "します"
+            },
+            {
+              "id": 2,
+              "text": "います"
+            },
+            {
+              "id": 3,
+              "text": "なります"
+            },
+            {
+              "id": 4,
+              "text": "あります"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q13",
+          "number": 13,
+          "mondai": 1,
+          "subtype": "giving_receiving",
+          "prompt": "A「きのうは ひっこしを（　）、どうも ありがとうございました。」\nB「いいえ、どういたしまして。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "手伝って"
+            },
+            {
+              "id": 2,
+              "text": "手伝ったので"
+            },
+            {
+              "id": 3,
+              "text": "手伝って くれて"
+            },
+            {
+              "id": 4,
+              "text": "手伝ったから"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q14",
+          "number": 14,
+          "mondai": 1,
+          "subtype": "giving_receiving",
+          "prompt": "今日、わたしは えんぴつと 消しゴムを 忘れたので、となりの 人に 貸して（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "やりました"
+            },
+            {
+              "id": 2,
+              "text": "あげました"
+            },
+            {
+              "id": 3,
+              "text": "くれました"
+            },
+            {
+              "id": 4,
+              "text": "もらいました"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q15",
+          "number": 15,
+          "mondai": 1,
+          "subtype": "aspect",
+          "prompt": "わたしの 本だなには（　）読んで いない まんがが たくさん あります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "買うあいだ"
+            },
+            {
+              "id": 2,
+              "text": "買ったまま"
+            },
+            {
+              "id": 3,
+              "text": "買いそうで"
+            },
+            {
+              "id": 4,
+              "text": "買って いる"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "わたしの 家には「ポチ」と いう 名前の 犬が います。一か月前に 父が もらって きました。わたしたちは ポチを 家の 中で（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "かうでしょう"
+            },
+            {
+              "id": 2,
+              "text": "かって います"
+            },
+            {
+              "id": 3,
+              "text": "かって いますか"
+            },
+            {
+              "id": 4,
+              "text": "かって いました"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "ポチは とても かわいいのですが、何でも かむので 少し こまって います。先週は 本当に こまりました。ポチが 父の けいたいでんわを（　）からです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "こわした ところだ"
+            },
+            {
+              "id": 2,
+              "text": "こわされて いる"
+            },
+            {
+              "id": 3,
+              "text": "こわして しまった"
+            },
+            {
+              "id": 4,
+              "text": "こわされた"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "わたしは 兄弟が いないので、ずっと さびしかったです。しかし、ポチを かってからは、（　）。わたしたちは いつも いっしょです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "さびしく なります"
+            },
+            {
+              "id": 2,
+              "text": "さびしく なくなりました"
+            },
+            {
+              "id": 3,
+              "text": "さびしく なるかもしれません"
+            },
+            {
+              "id": 4,
+              "text": "さびしく なくなったそうです"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q24",
+          "number": 24,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "ポチは わたしが 家を 出る とき、いつも げんかんまで 出て きます。（　）、元気が ない ときは、そばに 来て くれます。",
+          "options": [
+            {
+              "id": 1,
+              "text": "それに"
+            },
+            {
+              "id": 2,
+              "text": "たとえば"
+            },
+            {
+              "id": 3,
+              "text": "だから"
+            },
+            {
+              "id": 4,
+              "text": "それなら"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_a_q25",
+          "number": 25,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "ポチ（　）わたしたちの 大切な 家族の 一員です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "が"
+            },
+            {
+              "id": 2,
+              "text": "で"
+            },
+            {
+              "id": 3,
+              "text": "と"
+            },
+            {
+              "id": 4,
+              "text": "は"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    },
+    {
+      "title": "N4 Grammar Practice B",
+      "level": "N4",
+      "section": "grammar",
+      "time_minutes": 20,
+      "source_file": "N4grammar.pdf",
+      "id": "n4_grammar_test_b",
+      "original_question_count": 25,
+      "clean_question_count": 20,
+      "questions": [
+        {
+          "id": "n4_grammar_test_b_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "duration",
+          "prompt": "きのうの しゅくだいは 少なかったので、（　）終わりました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "20分"
+            },
+            {
+              "id": 2,
+              "text": "20分しか"
+            },
+            {
+              "id": 3,
+              "text": "20分で"
+            },
+            {
+              "id": 4,
+              "text": "20分を"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "particle",
+          "prompt": "この ロボットは 人（　）会話することが できます。",
+          "options": [
+            {
+              "id": 1,
+              "text": "や"
+            },
+            {
+              "id": 2,
+              "text": "を"
+            },
+            {
+              "id": 3,
+              "text": "へ"
+            },
+            {
+              "id": 4,
+              "text": "と"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "causative",
+          "prompt": "弟は 小さいとき よく けがを して、両親（　）心配させました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "で"
+            },
+            {
+              "id": 2,
+              "text": "を"
+            },
+            {
+              "id": 3,
+              "text": "の"
+            },
+            {
+              "id": 4,
+              "text": "や"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "counter_particle",
+          "prompt": "ホテルの 朝ご飯の パンが とても おいしかったので、八つ（　）食べました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "も"
+            },
+            {
+              "id": 2,
+              "text": "に"
+            },
+            {
+              "id": 3,
+              "text": "が"
+            },
+            {
+              "id": 4,
+              "text": "で"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "passive_agent",
+          "prompt": "この 日本語の じしょは、150年前に 外国人（　）作られました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "から"
+            },
+            {
+              "id": 2,
+              "text": "を"
+            },
+            {
+              "id": 3,
+              "text": "について"
+            },
+            {
+              "id": 4,
+              "text": "によって"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "indefinite_pronoun",
+          "prompt": "A市の 運動場は（　）使えますが、予約が ひつようです。",
+          "options": [
+            {
+              "id": 1,
+              "text": "だれでも"
+            },
+            {
+              "id": 2,
+              "text": "だれを"
+            },
+            {
+              "id": 3,
+              "text": "だれに"
+            },
+            {
+              "id": 4,
+              "text": "だれが"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "interrogative",
+          "prompt": "前田「リーさん、いつも（　）国の かぞくに れんらくしますか。」\nリー「メールを 書くことが 多いです。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "どのぐらい"
+            },
+            {
+              "id": 2,
+              "text": "どの"
+            },
+            {
+              "id": 3,
+              "text": "どうやって"
+            },
+            {
+              "id": 4,
+              "text": "どういう"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "adverb",
+          "prompt": "娘は 先月 高校を 卒業しました。（　）大学の 入学式です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "だんだん"
+            },
+            {
+              "id": 2,
+              "text": "あまり"
+            },
+            {
+              "id": 3,
+              "text": "だいたい"
+            },
+            {
+              "id": 4,
+              "text": "もうすぐ"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q09",
+          "number": 9,
+          "mondai": 1,
+          "subtype": "adverb",
+          "prompt": "今朝は 駅に 行く バスが（　）来なかったので、タクシーで 行きました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "やっと"
+            },
+            {
+              "id": 2,
+              "text": "なかなか"
+            },
+            {
+              "id": 3,
+              "text": "きっと"
+            },
+            {
+              "id": 4,
+              "text": "いつか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q10",
+          "number": 10,
+          "mondai": 1,
+          "subtype": "conditional",
+          "prompt": "山下「南さん、あしたか あさって、カラオケに 行かない？」\n南「あ、いいね。あしたは 都合が 悪いけど、あさって（　）だいじょうぶだよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "なのに"
+            },
+            {
+              "id": 2,
+              "text": "だから"
+            },
+            {
+              "id": 3,
+              "text": "でも"
+            },
+            {
+              "id": 4,
+              "text": "なら"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q11",
+          "number": 11,
+          "mondai": 1,
+          "subtype": "time_expression",
+          "prompt": "私は（　）間、スーパーで アルバイトを して いました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "夏休みに"
+            },
+            {
+              "id": 2,
+              "text": "夏休みで"
+            },
+            {
+              "id": 3,
+              "text": "夏休みの"
+            },
+            {
+              "id": 4,
+              "text": "夏休み"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q12",
+          "number": 12,
+          "mondai": 1,
+          "subtype": "purpose_duration",
+          "prompt": "先週 庭の 木の えだを 切りました。ぜんぶ（　）2時間 かかりました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "切ったり"
+            },
+            {
+              "id": 2,
+              "text": "切るのに"
+            },
+            {
+              "id": 3,
+              "text": "切りに"
+            },
+            {
+              "id": 4,
+              "text": "切るか どうか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q13",
+          "number": 13,
+          "mondai": 1,
+          "subtype": "possibility",
+          "prompt": "木村「山田さん、あしたの 午後、サッカーの 練習に 行きますか。」\n山田「ええ、行きます。でも、午前中に 用事が あるので、（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "遅れないで ください"
+            },
+            {
+              "id": 2,
+              "text": "遅れないほうが いいです"
+            },
+            {
+              "id": 3,
+              "text": "遅れるかもしれません"
+            },
+            {
+              "id": 4,
+              "text": "遅れては いけません"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q14",
+          "number": 14,
+          "mondai": 1,
+          "subtype": "appearance",
+          "prompt": "（食堂で）\n森「空いて いる 席が ありませんね。」\n田中「ええ。あ、でも、あそこの 席が（　）よ。」\n森「本当ですね。空くまで、少し 待ちましょう。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "空きそうです"
+            },
+            {
+              "id": 2,
+              "text": "空きました"
+            },
+            {
+              "id": 3,
+              "text": "空いて います"
+            },
+            {
+              "id": 4,
+              "text": "空いたようです"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q15",
+          "number": 15,
+          "mondai": 1,
+          "subtype": "request_expression",
+          "prompt": "（会議室で）\n林「上田さん、会議の じゅんびは 終わりましたか。てつだいましょうか。」\n上田「ありがとうございます。じゃあ、いすが 一つ 足りないので、となりの 会議室から（　）。」\n林「はい、わかりました。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "持って こなくても いいですか"
+            },
+            {
+              "id": 2,
+              "text": "持って きて もらえますか"
+            },
+            {
+              "id": 3,
+              "text": "持って こないと いけませんか"
+            },
+            {
+              "id": 4,
+              "text": "持って きて いませんか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "私の しゅみは 水泳です。毎週 プールで 泳いで います。（　）、半年前までは 泳ぐことが できませんでした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "それに"
+            },
+            {
+              "id": 2,
+              "text": "だから"
+            },
+            {
+              "id": 3,
+              "text": "しかし"
+            },
+            {
+              "id": 4,
+              "text": "たとえば"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "半年前、夏休みに 日本人の ともだちと 海に 行きました。ともだちは 遠くまで 泳いで いきました。けれども、私（　）泳げませんでした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "は"
+            },
+            {
+              "id": 2,
+              "text": "なら"
+            },
+            {
+              "id": 3,
+              "text": "でも"
+            },
+            {
+              "id": 4,
+              "text": "より"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "次の 週から 町の プールで 泳ぐ 練習を 始めました。水泳の 上手な ともだちに 泳ぎ方を（　）。難しかったですが、毎週 ともだちと 練習しました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "教えて いました"
+            },
+            {
+              "id": 2,
+              "text": "教えて あげました"
+            },
+            {
+              "id": 3,
+              "text": "教えて くれました"
+            },
+            {
+              "id": 4,
+              "text": "教えて もらいました"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q24",
+          "number": 24,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "難しかったですが、毎週 ともだちと 練習しました。それで 少しずつ（　）。今は 一人で 練習して います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "泳いで おきました"
+            },
+            {
+              "id": 2,
+              "text": "泳げるように なりました"
+            },
+            {
+              "id": 3,
+              "text": "泳いで しまいました"
+            },
+            {
+              "id": 4,
+              "text": "泳げることに なりました"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n4_grammar_test_b_q25",
+          "number": 25,
+          "mondai": 3,
+          "subtype": "context_completion",
+          "prompt": "泳ぐのは とても 楽しいです。次に 海に 行くまでに たくさん（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "練習するためです"
+            },
+            {
+              "id": 2,
+              "text": "練習したようです"
+            },
+            {
+              "id": 3,
+              "text": "練習したいです"
+            },
+            {
+              "id": 4,
+              "text": "練習するそうです"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ]
+}

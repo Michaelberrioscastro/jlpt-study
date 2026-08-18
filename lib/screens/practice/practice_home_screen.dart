@@ -15,6 +15,8 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
   bool _loading = true;
   double _n5Preparation = 0;
   int _n5Attempts = 0;
+  double _n4Preparation = 0;
+  int _n4Attempts = 0;
 
   @override
   void initState() {
@@ -23,24 +25,30 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
   }
 
   Future<void> _load() async {
-    final summary = await PracticeProgressService.getSummary(
+    final n5Summary = await PracticeProgressService.getSummary(
       level: 'N5',
+      section: 'vocabulary',
+    );
+    final n4Summary = await PracticeProgressService.getSummary(
+      level: 'N4',
       section: 'vocabulary',
     );
 
     if (!mounted) return;
 
     setState(() {
-      _n5Preparation = summary.preparationPercent;
-      _n5Attempts = summary.recentAttempts.length;
+      _n5Preparation = n5Summary.preparationPercent;
+      _n5Attempts = n5Summary.recentAttempts.length;
+      _n4Preparation = n4Summary.preparationPercent;
+      _n4Attempts = n4Summary.recentAttempts.length;
       _loading = false;
     });
   }
 
-  Future<void> _openN5() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const PracticeLevelScreen()));
+  Future<void> _openLevel(String level) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => PracticeLevelScreen(level: level)),
+    );
 
     if (!mounted) return;
     await _load();
@@ -83,17 +91,21 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
               _LevelCard(
                 level: 'N5',
                 japanese: '日本語能力試験 N5',
-                subtitle: 'Vocabulary disponible',
+                subtitle: 'Vocabulary · Grammar · Reading',
                 percentage: _n5Preparation,
                 attempts: _n5Attempts,
                 enabled: true,
-                onTap: _openN5,
+                onTap: () => _openLevel('N5'),
               ),
               const SizedBox(height: 11),
-              const _LevelCard(
+              _LevelCard(
                 level: 'N4',
                 japanese: '日本語能力試験 N4',
-                subtitle: 'Próximamente',
+                subtitle: 'Vocabulary · Grammar · Reading',
+                percentage: _n4Preparation,
+                attempts: _n4Attempts,
+                enabled: true,
+                onTap: () => _openLevel('N4'),
               ),
               const SizedBox(height: 11),
               const _LevelCard(

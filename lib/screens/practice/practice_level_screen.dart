@@ -8,13 +8,18 @@ import 'practice_reading_screen.dart';
 import 'practice_vocabulary_screen.dart';
 
 class PracticeLevelScreen extends StatefulWidget {
-  const PracticeLevelScreen({super.key});
+  final String level;
+
+  const PracticeLevelScreen({super.key, this.level = 'N5'});
 
   @override
   State<PracticeLevelScreen> createState() => _PracticeLevelScreenState();
 }
 
 class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
+  String get _level => widget.level.toUpperCase();
+  bool get _hasPracticeContent => _level == 'N5' || _level == 'N4';
+
   bool _loading = true;
   double _vocabularyPreparation = 0;
   int _vocabularyAttempts = 0;
@@ -40,22 +45,41 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
     });
 
     try {
+      if (!_hasPracticeContent) {
+        if (!mounted) return;
+        setState(() {
+          _vocabularyQuestions = 0;
+          _vocabularyPreparation = 0;
+          _vocabularyAttempts = 0;
+          _grammarQuestions = 0;
+          _grammarPreparation = 0;
+          _grammarAttempts = 0;
+          _readingQuestions = 0;
+          _readingPreparation = 0;
+          _readingAttempts = 0;
+          _loading = false;
+        });
+        return;
+      }
+
       final vocabularyQuestions =
-          await JlptPracticeService.getN5VocabularyQuestions();
-      final grammarQuestions =
-          await JlptPracticeService.getN5GrammarQuestions();
+          await JlptPracticeService.getVocabularyQuestions(level: _level);
+      final grammarQuestions = await JlptPracticeService.getGrammarQuestions(
+        level: _level,
+      );
       final readingQuestions =
-          await JlptPracticeService.getN5ReadingQuestionCount();
+          await JlptPracticeService.getReadingQuestionCount(level: _level);
+
       final vocabularySummary = await PracticeProgressService.getSummary(
-        level: 'N5',
+        level: _level,
         section: 'vocabulary',
       );
       final grammarSummary = await PracticeProgressService.getSummary(
-        level: 'N5',
+        level: _level,
         section: 'grammar',
       );
       final readingSummary = await PracticeProgressService.getSummary(
-        level: 'N5',
+        level: _level,
         section: 'reading',
       );
 
@@ -82,25 +106,33 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
   }
 
   Future<void> _openVocabulary() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const PracticeVocabularyScreen()));
+    if (!_hasPracticeContent) return;
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PracticeVocabularyScreen(level: _level),
+      ),
+    );
     if (!mounted) return;
     await _load();
   }
 
   Future<void> _openGrammar() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const PracticeGrammarScreen()));
+    if (!_hasPracticeContent) return;
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => PracticeGrammarScreen(level: _level)),
+    );
     if (!mounted) return;
     await _load();
   }
 
   Future<void> _openReading() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const PracticeReadingScreen()));
+    if (!_hasPracticeContent) return;
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => PracticeReadingScreen(level: _level)),
+    );
     if (!mounted) return;
     await _load();
   }
@@ -108,14 +140,14 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('N5 · Preparación')),
+      appBar: AppBar(title: Text('$_level · Preparación')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 36),
           children: [
-            const _HeaderCard(),
+            _HeaderCard(level: _level),
             const SizedBox(height: 18),
             _GeneralPreparationCard(
               hasData:
@@ -144,33 +176,39 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 icon: Icons.translate_rounded,
                 title: 'Vocabulary',
                 japanese: '文字・語彙',
-                subtitle: '$_vocabularyQuestions preguntas disponibles',
+                subtitle: _hasPracticeContent
+                    ? '$_vocabularyQuestions preguntas disponibles'
+                    : 'Próximamente',
                 percentage: _vocabularyPreparation,
                 attempts: _vocabularyAttempts,
-                enabled: true,
-                onTap: _openVocabulary,
+                enabled: _hasPracticeContent,
+                onTap: _hasPracticeContent ? _openVocabulary : null,
               ),
               const SizedBox(height: 11),
               _SectionCard(
                 icon: Icons.extension_rounded,
                 title: 'Grammar',
                 japanese: '文法',
-                subtitle: '$_grammarQuestions preguntas disponibles',
+                subtitle: _hasPracticeContent
+                    ? '$_grammarQuestions preguntas disponibles'
+                    : 'Próximamente',
                 percentage: _grammarPreparation,
                 attempts: _grammarAttempts,
-                enabled: true,
-                onTap: _openGrammar,
+                enabled: _hasPracticeContent,
+                onTap: _hasPracticeContent ? _openGrammar : null,
               ),
               const SizedBox(height: 11),
               _SectionCard(
                 icon: Icons.menu_book_rounded,
                 title: 'Reading',
                 japanese: '読解',
-                subtitle: '$_readingQuestions preguntas disponibles',
+                subtitle: _hasPracticeContent
+                    ? '$_readingQuestions preguntas disponibles'
+                    : 'Próximamente',
                 percentage: _readingPreparation,
                 attempts: _readingAttempts,
-                enabled: true,
-                onTap: _openReading,
+                enabled: _hasPracticeContent,
+                onTap: _hasPracticeContent ? _openReading : null,
               ),
               const SizedBox(height: 11),
               const _SectionCard(
@@ -180,7 +218,7 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 subtitle: 'Próximamente',
               ),
               const SizedBox(height: 22),
-              const _MockExamCard(),
+              _MockExamCard(level: _level),
             ],
           ],
         ),
@@ -190,7 +228,9 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
 }
 
 class _HeaderCard extends StatelessWidget {
-  const _HeaderCard();
+  final String level;
+
+  const _HeaderCard({required this.level});
 
   @override
   Widget build(BuildContext context) {
@@ -210,9 +250,9 @@ class _HeaderCard extends StatelessWidget {
               color: Colors.white.withValues(alpha: .75),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
-              'N5',
-              style: TextStyle(
+            child: Text(
+              level,
+              style: const TextStyle(
                 color: AppColors.primaryStrong,
                 fontSize: 25,
                 fontWeight: FontWeight.w900,
@@ -225,7 +265,7 @@ class _HeaderCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Preparación N5',
+                  'Preparación $level',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w900,
                   ),
@@ -452,7 +492,9 @@ class _SectionCard extends StatelessWidget {
 }
 
 class _MockExamCard extends StatelessWidget {
-  const _MockExamCard();
+  final String level;
+
+  const _MockExamCard({required this.level});
 
   @override
   Widget build(BuildContext context) {
@@ -463,23 +505,27 @@ class _MockExamCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: AppColors.outline),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Icon(Icons.assignment_rounded, color: AppColors.textMuted, size: 28),
+          const Icon(
+            Icons.assignment_rounded,
+            color: AppColors.textMuted,
+            size: 28,
+          ),
           SizedBox(width: 13),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Simulacro N5 completo',
-                  style: TextStyle(
+                  'Simulacro $level completo',
+                  style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 SizedBox(height: 4),
-                Text(
+                const Text(
                   'Vocabulary · Grammar · Reading · Listening\nPróximamente',
                   style: TextStyle(
                     color: AppColors.textMuted,
@@ -490,7 +536,7 @@ class _MockExamCard extends StatelessWidget {
               ],
             ),
           ),
-          Icon(Icons.lock_outline_rounded, color: AppColors.textMuted),
+          const Icon(Icons.lock_outline_rounded, color: AppColors.textMuted),
         ],
       ),
     );

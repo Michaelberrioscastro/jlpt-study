@@ -1,0 +1,1662 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N3",
+  "section": "vocabulary",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_near_similar_glyph_questions": true,
+    "excluded_image_dependent_questions": true,
+    "note": "v1 prioritizes questions that can be represented reliably as text in the app. Mondai 2 orthography questions (9-14 in both source tests) are excluded to preserve the same conservative glyph policy used for N5 and N4."
+  },
+  "tests": [
+    {
+      "title": "N3 Vocabulary Practice A",
+      "level": "N3",
+      "section": "vocabulary",
+      "time_minutes": 30,
+      "source_file": "N3V (1).pdf",
+      "id": "n3_vocab_test_a",
+      "original_question_count": 33,
+      "clean_question_count": 27,
+      "questions": [
+        {
+          "id": "n3_vocab_test_a_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "日本の首都はどこですか。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しゅとう"
+            },
+            {
+              "id": 2,
+              "text": "じゅうと"
+            },
+            {
+              "id": 3,
+              "text": "しゅと"
+            },
+            {
+              "id": 4,
+              "text": "しゅうとう"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "地球は太陽のまわりを回っている。",
+          "options": [
+            {
+              "id": 1,
+              "text": "じきゅう"
+            },
+            {
+              "id": 2,
+              "text": "ちきゅう"
+            },
+            {
+              "id": 3,
+              "text": "じきゅ"
+            },
+            {
+              "id": 4,
+              "text": "ちきゅ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "あの時計は遅れている。",
+          "options": [
+            {
+              "id": 1,
+              "text": "こわれて"
+            },
+            {
+              "id": 2,
+              "text": "おくれて"
+            },
+            {
+              "id": 3,
+              "text": "たおれて"
+            },
+            {
+              "id": 4,
+              "text": "よごれて"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "二人で協力すれば、仕事も早く終わるだろう。",
+          "options": [
+            {
+              "id": 1,
+              "text": "きょりょく"
+            },
+            {
+              "id": 2,
+              "text": "どりょく"
+            },
+            {
+              "id": 3,
+              "text": "きょうりょく"
+            },
+            {
+              "id": 4,
+              "text": "どうりょく"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "大学の奨学金に応募した。",
+          "options": [
+            {
+              "id": 1,
+              "text": "おうぼ"
+            },
+            {
+              "id": 2,
+              "text": "おうも"
+            },
+            {
+              "id": 3,
+              "text": "おうぼう"
+            },
+            {
+              "id": 4,
+              "text": "おうもう"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "子どもの疑問に答えた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "くもん"
+            },
+            {
+              "id": 2,
+              "text": "きもん"
+            },
+            {
+              "id": 3,
+              "text": "ぐもん"
+            },
+            {
+              "id": 4,
+              "text": "ぎもん"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "試験の成績が発表された。",
+          "options": [
+            {
+              "id": 1,
+              "text": "はつひょう"
+            },
+            {
+              "id": 2,
+              "text": "はっぴょう"
+            },
+            {
+              "id": 3,
+              "text": "はつぴょ"
+            },
+            {
+              "id": 4,
+              "text": "はっぴょ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "単語のリストはとなりのページにあります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "げいご"
+            },
+            {
+              "id": 2,
+              "text": "けいご"
+            },
+            {
+              "id": 3,
+              "text": "だんご"
+            },
+            {
+              "id": 4,
+              "text": "たんご"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q15",
+          "number": 15,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "この携帯電話はボタンが押しにくいという（　）を持つ利用者もいる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "関心"
+            },
+            {
+              "id": 2,
+              "text": "不満"
+            },
+            {
+              "id": 3,
+              "text": "目標"
+            },
+            {
+              "id": 4,
+              "text": "我慢"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q16",
+          "number": 16,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "街を（　）していたら、山本さんに会った。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ぐらぐら"
+            },
+            {
+              "id": 2,
+              "text": "がらがら"
+            },
+            {
+              "id": 3,
+              "text": "ばらばら"
+            },
+            {
+              "id": 4,
+              "text": "ぶらぶら"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q17",
+          "number": 17,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "セミナーに参加したい人は、（　）に住所、氏名、希望日を書いてください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "証明書"
+            },
+            {
+              "id": 2,
+              "text": "領収書"
+            },
+            {
+              "id": 3,
+              "text": "申込書"
+            },
+            {
+              "id": 4,
+              "text": "参考書"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q18",
+          "number": 18,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "この計算は（　）なので、コンピューターを使っても時間がかかる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "意外"
+            },
+            {
+              "id": 2,
+              "text": "重大"
+            },
+            {
+              "id": 3,
+              "text": "複雑"
+            },
+            {
+              "id": 4,
+              "text": "正常"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q19",
+          "number": 19,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "このオレンジはアメリカ（　）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "産"
+            },
+            {
+              "id": 2,
+              "text": "製"
+            },
+            {
+              "id": 3,
+              "text": "作"
+            },
+            {
+              "id": 4,
+              "text": "品"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q20",
+          "number": 20,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "優勝した選手に（　）をして記事を書いた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "スピーチ"
+            },
+            {
+              "id": 2,
+              "text": "インタビュー"
+            },
+            {
+              "id": 3,
+              "text": "メッセージ"
+            },
+            {
+              "id": 4,
+              "text": "コミュニケーション"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "全員が自分の意見を（　）したので、会議がなかなか終わらなかった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "命令"
+            },
+            {
+              "id": 2,
+              "text": "返信"
+            },
+            {
+              "id": 3,
+              "text": "主張"
+            },
+            {
+              "id": 4,
+              "text": "注文"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "朝から何も飲んでいないので、のどが（　）です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ぺらぺら"
+            },
+            {
+              "id": 2,
+              "text": "からから"
+            },
+            {
+              "id": 3,
+              "text": "ふらふら"
+            },
+            {
+              "id": 4,
+              "text": "ぺこぺこ"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "将来のために、お金を（　）います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ためて"
+            },
+            {
+              "id": 2,
+              "text": "のせて"
+            },
+            {
+              "id": 3,
+              "text": "かさねて"
+            },
+            {
+              "id": 4,
+              "text": "くわえて"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q24",
+          "number": 24,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "わたしは妻と一緒に通勤しています。",
+          "options": [
+            {
+              "id": 1,
+              "text": "仕事に行って"
+            },
+            {
+              "id": 2,
+              "text": "勉強に行って"
+            },
+            {
+              "id": 3,
+              "text": "買い物に行って"
+            },
+            {
+              "id": 4,
+              "text": "散歩に行って"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q25",
+          "number": 25,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "とてもおそろしい経験をした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "たのしい"
+            },
+            {
+              "id": 2,
+              "text": "うれしい"
+            },
+            {
+              "id": 3,
+              "text": "はずかしい"
+            },
+            {
+              "id": 4,
+              "text": "こわい"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q26",
+          "number": 26,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "先生にわけを話した。",
+          "options": [
+            {
+              "id": 1,
+              "text": "アイディア"
+            },
+            {
+              "id": 2,
+              "text": "ルール"
+            },
+            {
+              "id": 3,
+              "text": "理由"
+            },
+            {
+              "id": 4,
+              "text": "秘密"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q27",
+          "number": 27,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "最近、この川は水がへった気がする。",
+          "options": [
+            {
+              "id": 1,
+              "text": "多くなった"
+            },
+            {
+              "id": 2,
+              "text": "少なくなった"
+            },
+            {
+              "id": 3,
+              "text": "きれいになった"
+            },
+            {
+              "id": 4,
+              "text": "きたなくなった"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q28",
+          "number": 28,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "実験がうまくいかなかったので、やりなおした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "やり方を調べた"
+            },
+            {
+              "id": 2,
+              "text": "やり方を教わった"
+            },
+            {
+              "id": 3,
+              "text": "もう一度やった"
+            },
+            {
+              "id": 4,
+              "text": "やるのを途中でやめた"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q29",
+          "number": 29,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "ころぶ",
+          "options": [
+            {
+              "id": 1,
+              "text": "今日は疲れたので、早めにベッドにころんだ。"
+            },
+            {
+              "id": 2,
+              "text": "仕事が入ったので、旅行の計画がころんでしまった。"
+            },
+            {
+              "id": 3,
+              "text": "台風で庭の木がころんだ。"
+            },
+            {
+              "id": 4,
+              "text": "階段でころんでけがをした。"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q30",
+          "number": 30,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "指示",
+          "options": [
+            {
+              "id": 1,
+              "text": "「この書類、30部コピーしておいて」と秘書に指示した。"
+            },
+            {
+              "id": 2,
+              "text": "「この作文を見ていただけませんか」と先生に指示した。"
+            },
+            {
+              "id": 3,
+              "text": "「あした映画を見に行こうよ」と友達に指示した。"
+            },
+            {
+              "id": 4,
+              "text": "「トイレはどこにありますか」と店員に指示した。"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q31",
+          "number": 31,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "見送る",
+          "options": [
+            {
+              "id": 1,
+              "text": "毎日かならずメールを見送るようにしている。"
+            },
+            {
+              "id": 2,
+              "text": "何ページか見送ってみたが、むずかしくてわからなかった。"
+            },
+            {
+              "id": 3,
+              "text": "電車の窓から景色を見送るのが好きだ。"
+            },
+            {
+              "id": 4,
+              "text": "国に帰る友人を空港まで見送った。"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q32",
+          "number": 32,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "植える",
+          "options": [
+            {
+              "id": 1,
+              "text": "近所の公園にはいろいろな花が植えてある。"
+            },
+            {
+              "id": 2,
+              "text": "ケーキにいちごやクリームをたくさん植えた。"
+            },
+            {
+              "id": 3,
+              "text": "この空港は海に土を植えて作られた。"
+            },
+            {
+              "id": 4,
+              "text": "道に電灯を植えたので明るくなった。"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_a_q33",
+          "number": 33,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "正直",
+          "options": [
+            {
+              "id": 1,
+              "text": "小川さんは正直な人で、決してうそは言いません。"
+            },
+            {
+              "id": 2,
+              "text": "この商品の正直な使い方をこれから説明します。"
+            },
+            {
+              "id": 3,
+              "text": "これは正直な話なのに、だれも信じてくれません。"
+            },
+            {
+              "id": 4,
+              "text": "正直な距離は分かりませんが、10キロぐらいだと思います。"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2012",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    },
+    {
+      "title": "N3 Vocabulary Practice B",
+      "level": "N3",
+      "section": "vocabulary",
+      "time_minutes": 30,
+      "source_file": "N3V.pdf",
+      "id": "n3_vocab_test_b",
+      "original_question_count": 35,
+      "clean_question_count": 29,
+      "questions": [
+        {
+          "id": "n3_vocab_test_b_q01",
+          "number": 1,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "会場には大勢の観客がいた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "けんぎゃく"
+            },
+            {
+              "id": 2,
+              "text": "かんぎゃく"
+            },
+            {
+              "id": 3,
+              "text": "けんきゃく"
+            },
+            {
+              "id": 4,
+              "text": "かんきゃく"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q02",
+          "number": 2,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "田村さんが払ってくれました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "くばって"
+            },
+            {
+              "id": 2,
+              "text": "はらって"
+            },
+            {
+              "id": 3,
+              "text": "かざって"
+            },
+            {
+              "id": 4,
+              "text": "ひろって"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q03",
+          "number": 3,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "ホテルには3時ごろ到着します。",
+          "options": [
+            {
+              "id": 1,
+              "text": "とうちゃく"
+            },
+            {
+              "id": 2,
+              "text": "とうつく"
+            },
+            {
+              "id": 3,
+              "text": "とちゃく"
+            },
+            {
+              "id": 4,
+              "text": "とつく"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q04",
+          "number": 4,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "山下さんが説明を加えました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "つたえました"
+            },
+            {
+              "id": 2,
+              "text": "おえました"
+            },
+            {
+              "id": 3,
+              "text": "くわえました"
+            },
+            {
+              "id": 4,
+              "text": "かえました"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q05",
+          "number": 5,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "今から訓練を行います。",
+          "options": [
+            {
+              "id": 1,
+              "text": "くんれい"
+            },
+            {
+              "id": 2,
+              "text": "くんれん"
+            },
+            {
+              "id": 3,
+              "text": "ぐんれい"
+            },
+            {
+              "id": 4,
+              "text": "ぐんれん"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q06",
+          "number": 6,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "この豆はスープに使うといいですよ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "こな"
+            },
+            {
+              "id": 2,
+              "text": "いも"
+            },
+            {
+              "id": 3,
+              "text": "かい"
+            },
+            {
+              "id": 4,
+              "text": "まめ"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q07",
+          "number": 7,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "社会には共通のルールがあります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "きょうつ"
+            },
+            {
+              "id": 2,
+              "text": "こうつう"
+            },
+            {
+              "id": 3,
+              "text": "きょうつう"
+            },
+            {
+              "id": 4,
+              "text": "こうつ"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q08",
+          "number": 8,
+          "mondai": 1,
+          "subtype": "kanji_reading",
+          "prompt": "来年から税金が上がるそうだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ぜいきん"
+            },
+            {
+              "id": 2,
+              "text": "ぜっきん"
+            },
+            {
+              "id": 3,
+              "text": "せいきん"
+            },
+            {
+              "id": 4,
+              "text": "せっきん"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q15",
+          "number": 15,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "この紙は、ぬれても破れにくいという（　）があります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "実力"
+            },
+            {
+              "id": 2,
+              "text": "特長"
+            },
+            {
+              "id": 3,
+              "text": "専門"
+            },
+            {
+              "id": 4,
+              "text": "主張"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q16",
+          "number": 16,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "佐藤さんには、おとなしい（　）があるが、本当は活動的な人らしい。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ヒント"
+            },
+            {
+              "id": 2,
+              "text": "タイトル"
+            },
+            {
+              "id": 3,
+              "text": "アイディア"
+            },
+            {
+              "id": 4,
+              "text": "イメージ"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q17",
+          "number": 17,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "正月には親戚が集まって、みんなでテーブルを（　）、楽しく食事をした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "囲み"
+            },
+            {
+              "id": 2,
+              "text": "通し"
+            },
+            {
+              "id": 3,
+              "text": "包み"
+            },
+            {
+              "id": 4,
+              "text": "越え"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q18",
+          "number": 18,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "このレストランの料理はおいしくないので、店内はいつも（　）だ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ふらふら"
+            },
+            {
+              "id": 2,
+              "text": "ぐっすり"
+            },
+            {
+              "id": 3,
+              "text": "がらがら"
+            },
+            {
+              "id": 4,
+              "text": "うっかり"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q19",
+          "number": 19,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "高田さんが引っ越すという（　）を聞いたが、本当かどうか気になる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "うわさ"
+            },
+            {
+              "id": 2,
+              "text": "宣伝"
+            },
+            {
+              "id": 3,
+              "text": "うそ"
+            },
+            {
+              "id": 4,
+              "text": "冗談"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q20",
+          "number": 20,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "父から借りた本をなくしてしまったので謝ったら、父はすぐに（　）くれた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "従って"
+            },
+            {
+              "id": 2,
+              "text": "守って"
+            },
+            {
+              "id": 3,
+              "text": "許して"
+            },
+            {
+              "id": 4,
+              "text": "抑えて"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q21",
+          "number": 21,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "パソコンの前でずっと同じ（　）でいたので、体が痛くなった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "様子"
+            },
+            {
+              "id": 2,
+              "text": "姿勢"
+            },
+            {
+              "id": 3,
+              "text": "印象"
+            },
+            {
+              "id": 4,
+              "text": "間隔"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q22",
+          "number": 22,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "申込書に間違いがないか、よく（　）から受付に出した。",
+          "options": [
+            {
+              "id": 1,
+              "text": "くりかえして"
+            },
+            {
+              "id": 2,
+              "text": "気にして"
+            },
+            {
+              "id": 3,
+              "text": "見つめて"
+            },
+            {
+              "id": 4,
+              "text": "たしかめて"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q23",
+          "number": 23,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "わたしのふるさとは（　）が盛んで、米や野菜をたくさん作っています。",
+          "options": [
+            {
+              "id": 1,
+              "text": "自然"
+            },
+            {
+              "id": 2,
+              "text": "資源"
+            },
+            {
+              "id": 3,
+              "text": "作物"
+            },
+            {
+              "id": 4,
+              "text": "農業"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q24",
+          "number": 24,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "水に浮いていた木の葉が、しばらくすると水の中に（　）しまった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しずんで"
+            },
+            {
+              "id": 2,
+              "text": "ころんで"
+            },
+            {
+              "id": 3,
+              "text": "たおれて"
+            },
+            {
+              "id": 4,
+              "text": "おぼれて"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q25",
+          "number": 25,
+          "mondai": 3,
+          "subtype": "context",
+          "prompt": "この話は誰にも言わずに、ずっと（　）にしていた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "裏側"
+            },
+            {
+              "id": 2,
+              "text": "内緒"
+            },
+            {
+              "id": 3,
+              "text": "後方"
+            },
+            {
+              "id": 4,
+              "text": "中身"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q26",
+          "number": 26,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "水の表面がかがやいています。",
+          "options": [
+            {
+              "id": 1,
+              "text": "止まって"
+            },
+            {
+              "id": 2,
+              "text": "揺れて"
+            },
+            {
+              "id": 3,
+              "text": "汚れて"
+            },
+            {
+              "id": 4,
+              "text": "光って"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q27",
+          "number": 27,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "その知らせを聞いたとき、わたしはとてもがっかりした。",
+          "options": [
+            {
+              "id": 1,
+              "text": "残念だと思った"
+            },
+            {
+              "id": 2,
+              "text": "うれしかった"
+            },
+            {
+              "id": 3,
+              "text": "驚いた"
+            },
+            {
+              "id": 4,
+              "text": "安心した"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q28",
+          "number": 28,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "留学生活に不安は当然ありました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "いろいろ"
+            },
+            {
+              "id": 2,
+              "text": "少し"
+            },
+            {
+              "id": 3,
+              "text": "もちろん"
+            },
+            {
+              "id": 4,
+              "text": "いつも"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q29",
+          "number": 29,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "パーティーの料理があまりました。",
+          "options": [
+            {
+              "id": 1,
+              "text": "多すぎて残りました"
+            },
+            {
+              "id": 2,
+              "text": "少し足りませんでした"
+            },
+            {
+              "id": 3,
+              "text": "とてもおいしかったです"
+            },
+            {
+              "id": 4,
+              "text": "そんなにおいしくなかったです"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q30",
+          "number": 30,
+          "mondai": 4,
+          "subtype": "paraphrase",
+          "prompt": "ここは横断禁止です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "座ってはいけません"
+            },
+            {
+              "id": 2,
+              "text": "渡ってはいけません"
+            },
+            {
+              "id": 3,
+              "text": "走ってはいけません"
+            },
+            {
+              "id": 4,
+              "text": "入ってはいけません"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q31",
+          "number": 31,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "急",
+          "options": [
+            {
+              "id": 1,
+              "text": "この料理は電子レンジを使って急にできるので、とても簡単だ。"
+            },
+            {
+              "id": 2,
+              "text": "あと10分で電車が出発してしまうので、急に駅に向かった。"
+            },
+            {
+              "id": 3,
+              "text": "部屋から急に人が飛び出してきたので、ぶつかりそうになった。"
+            },
+            {
+              "id": 4,
+              "text": "新しいゲームを買ったので、家に帰って急にやってみた。"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q32",
+          "number": 32,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "沸騰",
+          "options": [
+            {
+              "id": 1,
+              "text": "今日は朝からどんどん暑くなり、昼には気温が沸騰した。"
+            },
+            {
+              "id": 2,
+              "text": "鍋のお湯が沸騰したら、とうふを入れて火を少し弱くしてください。"
+            },
+            {
+              "id": 3,
+              "text": "昼ごろから具合が悪くなり、夕方熱が沸騰したので病院へ行った。"
+            },
+            {
+              "id": 4,
+              "text": "このストーブは沸騰するのが早いので、すぐに部屋が暖かくなる。"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q33",
+          "number": 33,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "まげる",
+          "options": [
+            {
+              "id": 1,
+              "text": "今朝は寒かったので、マフラーを首にまげて出かけた。"
+            },
+            {
+              "id": 2,
+              "text": "けがは良くなったが、腕を伸ばしたりまげたりすると、まだ少し痛む。"
+            },
+            {
+              "id": 3,
+              "text": "一つのパンを半分にまげて、二人で分けて食べた。"
+            },
+            {
+              "id": 4,
+              "text": "シャツをきちんとまげたら、たんすの引き出しにしまってください。"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q34",
+          "number": 34,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "出張",
+          "options": [
+            {
+              "id": 1,
+              "text": "営業のため、来週一週間、課長とアメリカに出張します。"
+            },
+            {
+              "id": 2,
+              "text": "仕事を辞めたら、家族とゆっくり海外に出張したいと思う。"
+            },
+            {
+              "id": 3,
+              "text": "わたしは毎朝9時に会社に出張し、残業はしないで家に帰る。"
+            },
+            {
+              "id": 4,
+              "text": "あしたは子どもの運動会に出張するので、仕事を休みます。"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n3_vocab_test_b_q35",
+          "number": 35,
+          "mondai": 5,
+          "subtype": "usage",
+          "prompt": "慰める",
+          "options": [
+            {
+              "id": 1,
+              "text": "祖母は古い物でも捨てないで、長い間慰めて使っている。"
+            },
+            {
+              "id": 2,
+              "text": "試合を見ながら、優勝を願って一生懸命選手を慰めた。"
+            },
+            {
+              "id": 3,
+              "text": "仕事で失敗してしまったが、友人が慰めてくれたので元気が出た。"
+            },
+            {
+              "id": 4,
+              "text": "弟が希望の大学に合格したので、家族で外食をして慰めた。"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_answer_key_2018",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ]
+}

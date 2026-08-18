@@ -6,7 +6,9 @@ import '../../theme/app_colors.dart';
 import 'practice_test_screen.dart';
 
 class PracticeVocabularyScreen extends StatefulWidget {
-  const PracticeVocabularyScreen({super.key});
+  final String level;
+
+  const PracticeVocabularyScreen({super.key, this.level = 'N5'});
 
   @override
   State<PracticeVocabularyScreen> createState() =>
@@ -14,6 +16,8 @@ class PracticeVocabularyScreen extends StatefulWidget {
 }
 
 class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
+  String get _level => widget.level.toUpperCase();
+
   int? _questionCount;
   bool _loading = true;
   int _availableQuestions = 0;
@@ -34,9 +38,11 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
     });
 
     try {
-      final questions = await JlptPracticeService.getN5VocabularyQuestions();
+      final questions = await JlptPracticeService.getVocabularyQuestions(
+        level: _level,
+      );
       final summary = await PracticeProgressService.getSummary(
-        level: 'N5',
+        level: _level,
         section: 'vocabulary',
       );
 
@@ -60,14 +66,17 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
   Future<void> _startQuick(int count) async {
     setState(() => _questionCount = count);
 
-    final questions = await JlptPracticeService.buildSession(count: count);
+    final questions = await JlptPracticeService.buildVocabularySession(
+      level: _level,
+      count: count,
+    );
 
     if (!mounted) return;
 
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PracticeTestScreen(
-          title: 'N5 · Vocabulary · $count',
+          title: '$_level · Vocabulary · $count',
           questions: questions,
           examMode: false,
           mode: 'quick_$count',
@@ -84,7 +93,8 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
   Future<void> _startFull() async {
     setState(() => _questionCount = _availableQuestions);
 
-    final questions = await JlptPracticeService.buildSession(
+    final questions = await JlptPracticeService.buildVocabularySession(
+      level: _level,
       count: _availableQuestions,
       shuffle: false,
     );
@@ -94,7 +104,7 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PracticeTestScreen(
-          title: 'N5 · Vocabulary completo',
+          title: '$_level · Vocabulary completo',
           questions: questions,
           examMode: true,
           mode: 'full',
@@ -111,21 +121,22 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('N5 · Vocabulary')),
+      appBar: AppBar(title: Text('$_level · Vocabulary')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 36),
           children: [
-            _HeroCard(availableQuestions: _availableQuestions),
+            _HeroCard(level: _level, availableQuestions: _availableQuestions),
             const SizedBox(height: 14),
             _PreparationCard(
+              level: _level,
               percentage: _preparationPercent,
               attempts: _recentAttempts,
             ),
             const SizedBox(height: 24),
-            const _SectionHeader(eyebrow: 'N5 · 文字・語彙', title: 'Vocabulary'),
+            _SectionHeader(eyebrow: '$_level · 文字・語彙', title: 'Vocabulary'),
             const SizedBox(height: 12),
             if (_loading)
               const SizedBox(
@@ -165,7 +176,7 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
                 icon: Icons.timer_outlined,
                 title: 'Prueba completa',
                 subtitle:
-                    'Todo el banco N5 Vocabulary válido. Sin feedback hasta terminar.',
+                    'Todo el banco $_level Vocabulary válido. Sin feedback hasta terminar.',
                 children: [
                   Expanded(
                     child: FilledButton.icon(
@@ -176,8 +187,6 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              const _ComingSoonCard(),
             ],
           ],
         ),
@@ -187,9 +196,10 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
 }
 
 class _HeroCard extends StatelessWidget {
+  final String level;
   final int availableQuestions;
 
-  const _HeroCard({required this.availableQuestions});
+  const _HeroCard({required this.level, required this.availableQuestions});
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +236,7 @@ class _HeroCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '$availableQuestions preguntas N5 disponibles para comenzar.',
+                  '$availableQuestions preguntas $level disponibles para comenzar.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -239,10 +249,15 @@ class _HeroCard extends StatelessWidget {
 }
 
 class _PreparationCard extends StatelessWidget {
+  final String level;
   final double percentage;
   final List<PracticeAttempt> attempts;
 
-  const _PreparationCard({required this.percentage, required this.attempts});
+  const _PreparationCard({
+    required this.level,
+    required this.percentage,
+    required this.attempts,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -266,10 +281,13 @@ class _PreparationCard extends StatelessWidget {
                 color: AppColors.primaryStrong,
               ),
               const SizedBox(width: 9),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Preparación N5 · Vocabulary',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
+                  'Preparación $level · Vocabulary',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
               Text(
@@ -476,36 +494,6 @@ class _PracticeCard extends StatelessWidget {
           ),
           const SizedBox(height: 17),
           Row(children: children),
-        ],
-      ),
-    );
-  }
-}
-
-class _ComingSoonCard extends StatelessWidget {
-  const _ComingSoonCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.surfaceSoft,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: const Row(
-        children: [
-          Icon(Icons.lock_outline_rounded, color: AppColors.textMuted),
-          SizedBox(width: 11),
-          Expanded(
-            child: Text(
-              'Grammar · Reading · Listening · Simulacro completo\nSe agregarán después de validar Vocabulary.',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
         ],
       ),
     );
