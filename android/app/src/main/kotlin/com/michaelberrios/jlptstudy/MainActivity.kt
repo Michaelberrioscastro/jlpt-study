@@ -1,4 +1,4 @@
-package com.example.jlpt_study
+﻿package com.michaelberrios.jlptstudy
 
 import io.flutter.embedding.android.FlutterActivity
 
