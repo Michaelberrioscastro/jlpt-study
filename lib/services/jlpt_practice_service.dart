@@ -97,7 +97,7 @@ class JlptPracticeService {
   static String _normalizeLevel(String level) {
     final normalized = level.trim().toUpperCase();
     if (!supportedLevels.contains(normalized)) {
-      throw ArgumentError.value(level, 'level', 'Nivel JLPT no válido');
+      throw ArgumentError.value(level, 'level', 'Invalid JLPT level');
     }
     return normalized;
   }

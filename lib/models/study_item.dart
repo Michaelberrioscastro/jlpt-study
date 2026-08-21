@@ -14,6 +14,9 @@ class StudyItem {
   final int repetitions;
   final int lapses;
 
+  // Estado manual para saber si el usuario considera este contenido aprendido.
+  final bool learned;
+
   const StudyItem({
     required this.type,
     required this.id,
@@ -27,6 +30,7 @@ class StudyItem {
     this.easeFactor = 2.5,
     this.repetitions = 0,
     this.lapses = 0,
+    this.learned = false,
   });
 
   bool get isNew => state == 'new';
@@ -36,6 +40,8 @@ class StudyItem {
   bool get isReview => state == 'review';
 
   bool get isMature => state == 'mature';
+
+  bool get isLearned => learned;
 
   factory StudyItem.fromMap(Map<String, dynamic> map) {
     return StudyItem(
@@ -59,6 +65,8 @@ class StudyItem {
       repetitions: (map['repetitions'] as num?)?.toInt() ?? 0,
 
       lapses: (map['lapses'] as num?)?.toInt() ?? 0,
+
+      learned: (map['learned'] as num?)?.toInt() == 1,
     );
   }
 }

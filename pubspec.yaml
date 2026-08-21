@@ -34,3 +34,22 @@ flutter:
     - assets/data/practice/
     - assets/audio/kana/
     - assets/branding/
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/branding/jlpt_study_icon.png"
+  adaptive_icon_background: "#F6F1E8"
+  adaptive_icon_foreground: "assets/branding/jlpt_study_launcher_foreground.png"
+
+flutter_native_splash:
+  color: "#F6F1E8"
+  image: assets/branding/jlpt_study_native_splash.png
+  android: true
+  ios: false
+  web: false
+
+  android_12:
+    color: "#F6F1E8"
+    image: assets/branding/jlpt_study_native_splash.png
+    icon_background_color: "#F6F1E8"

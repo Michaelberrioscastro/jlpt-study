@@ -15,35 +15,62 @@ class DatabaseService {
   static const _databaseName = 'jlpt_study.sqlite';
 
   static Database? _database;
+  static Future<Database>? _databaseInitialization;
 
-  static Future<Database> get database async {
-    if (_database != null) {
-      return _database!;
+  static Future<Database> get database {
+    final readyDatabase = _database;
+    if (readyDatabase != null) {
+      return Future.value(readyDatabase);
     }
 
-    final databasesPath = await getDatabasesPath();
-    final databasePath = join(databasesPath, _databaseName);
-
-    if (!await databaseExists(databasePath)) {
-      final data = await rootBundle.load(_assetPath);
-
-      final bytes = data.buffer.asUint8List(
-        data.offsetInBytes,
-        data.lengthInBytes,
-      );
-
-      await Directory(dirname(databasePath)).create(recursive: true);
-
-      await File(databasePath).writeAsBytes(bytes, flush: true);
+    final initialization = _databaseInitialization;
+    if (initialization != null) {
+      return initialization;
     }
 
-    _database = await openDatabase(databasePath, readOnly: false);
+    final newInitialization = _openAndInitializeDatabase();
+    _databaseInitialization = newInitialization;
+    return newInitialization;
+  }
 
-    await _ensureLearnedColumn(_database!);
-    await _migrateKana(_database!);
-    await _migrateBeginner(_database!);
+  static Future<Database> _openAndInitializeDatabase() async {
+    Database? db;
 
-    return _database!;
+    try {
+      final databasesPath = await getDatabasesPath();
+      final databasePath = join(databasesPath, _databaseName);
+
+      if (!await databaseExists(databasePath)) {
+        final data = await rootBundle.load(_assetPath);
+
+        final bytes = data.buffer.asUint8List(
+          data.offsetInBytes,
+          data.lengthInBytes,
+        );
+
+        await Directory(dirname(databasePath)).create(recursive: true);
+
+        await File(databasePath).writeAsBytes(bytes, flush: true);
+      }
+
+      db = await openDatabase(databasePath, readOnly: false);
+
+      // Do not expose the database until every migration has completed.
+      // Several tabs can request the database during the first app launch.
+      await _ensureLearnedColumn(db);
+      await _migrateKana(db);
+      await _migrateBeginner(db);
+
+      _database = db;
+      return db;
+    } catch (_) {
+      if (db != null && db.isOpen) {
+        await db.close();
+      }
+      rethrow;
+    } finally {
+      _databaseInitialization = null;
+    }
   }
 
   static Future<void> _ensureLearnedColumn(Database db) async {
@@ -179,55 +206,57 @@ class DatabaseService {
         : (viewRows.first['sql'] ?? '').toString();
 
     if (!currentView.toLowerCase().contains("select 'kana'")) {
-      await db.execute('DROP VIEW IF EXISTS learning_items');
+      await db.transaction((txn) async {
+        await txn.execute('DROP VIEW IF EXISTS learning_items');
 
-      await db.execute('''
-        CREATE VIEW learning_items AS
-        SELECT
-          'vocab' AS item_type,
-          id AS item_id,
-          level,
-          expression AS front,
-          reading,
-          meaning
-        FROM vocabulary
+        await txn.execute('''
+          CREATE VIEW learning_items AS
+          SELECT
+            'vocab' AS item_type,
+            id AS item_id,
+            level,
+            expression AS front,
+            reading,
+            meaning
+          FROM vocabulary
 
-        UNION ALL
+          UNION ALL
 
-        SELECT
-          'kanji',
-          id,
-          level,
-          kanji,
-          reading,
-          meaning
-        FROM kanji
+          SELECT
+            'kanji',
+            id,
+            level,
+            kanji,
+            reading,
+            meaning
+          FROM kanji
 
-        UNION ALL
+          UNION ALL
 
-        SELECT
-          'grammar',
-          id,
-          level,
-          pattern,
-          '',
-          meaning
-        FROM grammar
+          SELECT
+            'grammar',
+            id,
+            level,
+            pattern,
+            '',
+            meaning
+          FROM grammar
 
-        UNION ALL
+          UNION ALL
 
-        SELECT
-          'kana',
-          id,
-          'KANA',
-          kana,
-          romaji,
-          CASE script
-            WHEN 'hiragana' THEN 'Hiragana'
-            ELSE 'Katakana'
-          END
-        FROM kana
-      ''');
+          SELECT
+            'kana',
+            id,
+            'KANA',
+            kana,
+            romaji,
+            CASE script
+              WHEN 'hiragana' THEN 'Hiragana'
+              ELSE 'Katakana'
+            END
+          FROM kana
+        ''');
+      });
     }
 
     final migration = await db.query(
@@ -764,6 +793,59 @@ class DatabaseService {
         .toList();
   }
 
+  static Future<List<StudyItem>> getStudyCatalogItems({
+    required String level,
+    required String type,
+  }) async {
+    final normalizedLevel = level.toUpperCase();
+    final normalizedType = type.toLowerCase();
+
+    if (!const {'vocab', 'kanji', 'grammar'}.contains(normalizedType)) {
+      throw ArgumentError.value(
+        type,
+        'type',
+        'Debe ser vocab, kanji o grammar.',
+      );
+    }
+
+    final db = await database;
+
+    final rows = await db.rawQuery(
+      '''
+      SELECT
+        li.item_type,
+        li.item_id,
+        li.level,
+        li.front,
+        li.reading,
+        li.meaning,
+        COALESCE(rs.state, 'new') AS state,
+        rs.next_review,
+        COALESCE(rs.interval_days, 0.0) AS interval_days,
+        COALESCE(rs.ease_factor, 2.5) AS ease_factor,
+        COALESCE(rs.repetitions, 0) AS repetitions,
+        COALESCE(rs.lapses, 0) AS lapses,
+        COALESCE(rs.learned, 0) AS learned
+      FROM learning_items li
+      LEFT JOIN review_state rs
+        ON rs.item_type = li.item_type
+       AND rs.item_id = li.item_id
+      WHERE li.level = ?
+        AND li.item_type = ?
+      ORDER BY li.item_id ASC
+      ''',
+      [normalizedLevel, normalizedType],
+    );
+
+    return rows
+        .map((row) => StudyItem.fromMap(Map<String, dynamic>.from(row)))
+        .toList();
+  }
+
+  static Future<List<StudyItem>> getGrammarItems(String level) {
+    return getStudyCatalogItems(level: level, type: 'grammar');
+  }
+
   static Future<Map<String, int>> getN5Counts() async {
     final db = await database;
 
@@ -1145,7 +1227,6 @@ class DatabaseService {
     required bool learned,
   }) async {
     final db = await database;
-    final now = DateTime.now();
 
     final existing = await db.query(
       'review_state',
@@ -1155,24 +1236,53 @@ class DatabaseService {
     );
 
     if (existing.isEmpty) {
+      if (!learned) return;
+
+      // Manual "learned" is intentionally independent from SRS progress.
+      // A brand-new item gets a neutral review_state row only so the learned
+      // flag can be persisted without pretending that a review happened.
       await db.insert('review_state', {
         'item_type': item.type,
         'item_id': item.id,
-        'state': learned ? 'review' : 'new',
-        'last_review': learned ? now.toIso8601String() : null,
-        'next_review': learned
-            ? now.add(const Duration(days: 30)).toIso8601String()
-            : null,
-        'interval_days': learned ? 30.0 : 0.0,
+        'state': 'new',
+        'last_review': null,
+        'next_review': null,
+        'interval_days': 0.0,
         'ease_factor': 2.5,
-        'repetitions': learned ? 1 : 0,
+        'repetitions': 0,
         'lapses': 0,
         'steps_remaining': 0,
-        'learned': learned ? 1 : 0,
+        'learned': 1,
       }, conflictAlgorithm: ConflictAlgorithm.replace);
       return;
     }
 
+    final row = existing.first;
+    final state = (row['state'] ?? 'new').toString();
+    final repetitions = (row['repetitions'] as num?)?.toInt() ?? 0;
+    final lastReview = row['last_review'];
+    final nextReview = row['next_review'];
+
+    final isManualOnlyState =
+        state == 'new' &&
+        repetitions == 0 &&
+        lastReview == null &&
+        nextReview == null;
+
+    if (!learned && isManualOnlyState) {
+      // If this row only existed because the user manually marked a brand-new
+      // item as learned, remove it when unmarking so it becomes truly "new"
+      // again and can enter the SRS normally later.
+      await db.delete(
+        'review_state',
+        where: 'item_type = ? AND item_id = ?',
+        whereArgs: [item.type, item.id],
+      );
+      return;
+    }
+
+    // Existing SRS history is preserved. Only the independent learned flag
+    // changes, so unmarking lets the item resume from its previous SRS state.
     await db.update(
       'review_state',
       {'learned': learned ? 1 : 0},

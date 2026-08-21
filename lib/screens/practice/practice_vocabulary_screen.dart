@@ -104,7 +104,7 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PracticeTestScreen(
-          title: '$_level · Vocabulary completo',
+          title: '$_level · Full Vocabulary',
           questions: questions,
           examMode: true,
           mode: 'full',
@@ -148,16 +148,15 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
             else ...[
               _PracticeCard(
                 icon: Icons.bolt_rounded,
-                title: 'Práctica rápida',
-                subtitle:
-                    'Preguntas aleatorias con corrección después de cada respuesta.',
+                title: 'Quick practice',
+                subtitle: 'Random questions with feedback after each answer.',
                 children: [
                   Expanded(
                     child: OutlinedButton(
                       onPressed: _questionCount == null
                           ? () => _startQuick(5)
                           : null,
-                      child: const Text('5 preguntas'),
+                      child: const Text('5 questions'),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -166,7 +165,7 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
                       onPressed: _questionCount == null
                           ? () => _startQuick(10)
                           : null,
-                      child: const Text('10 preguntas'),
+                      child: const Text('10 questions'),
                     ),
                   ),
                 ],
@@ -174,15 +173,15 @@ class _PracticeVocabularyScreenState extends State<PracticeVocabularyScreen> {
               const SizedBox(height: 12),
               _PracticeCard(
                 icon: Icons.timer_outlined,
-                title: 'Prueba completa',
+                title: 'Full test',
                 subtitle:
-                    'Todo el banco $_level Vocabulary válido. Sin feedback hasta terminar.',
+                    'The full valid $_level Vocabulary question bank. No feedback until the end.',
                 children: [
                   Expanded(
                     child: FilledButton.icon(
                       onPressed: _questionCount == null ? _startFull : null,
                       icon: const Icon(Icons.play_arrow_rounded),
-                      label: Text('$_availableQuestions preguntas'),
+                      label: Text('$_availableQuestions questions'),
                     ),
                   ),
                 ],
@@ -231,12 +230,12 @@ class _HeroCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Prepárate para el JLPT',
+                  'Prepare for the JLPT',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '$availableQuestions preguntas $level disponibles para comenzar.',
+                  '$availableQuestions $level questions available to start.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -283,7 +282,7 @@ class _PreparationCard extends StatelessWidget {
               const SizedBox(width: 9),
               Expanded(
                 child: Text(
-                  'Preparación $level · Vocabulary',
+                  '$level · Vocabulary Preparation',
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w900,
@@ -309,8 +308,8 @@ class _PreparationCard extends StatelessWidget {
           const SizedBox(height: 9),
           Text(
             attempts.isEmpty
-                ? 'Haz tu primera práctica para comenzar a calcular tu preparación.'
-                : 'Estimación basada en tus últimos 3 intentos, dando más peso a los recientes.',
+                ? 'Complete your first practice session to start calculating your preparation.'
+                : 'Estimate based on your last 3 attempts, with more weight given to recent ones.',
             style: Theme.of(context).textTheme.bodySmall,
           ),
           if (attempts.isNotEmpty) ...[
@@ -318,7 +317,7 @@ class _PreparationCard extends StatelessWidget {
             const Divider(height: 1),
             const SizedBox(height: 13),
             const Text(
-              'Últimos intentos',
+              'Recent attempts',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 8),
@@ -347,13 +346,13 @@ class _AttemptRow extends StatelessWidget {
     String modeLabel;
     switch (attempt.mode) {
       case 'quick_5':
-        modeLabel = '5 preguntas';
+        modeLabel = '5 questions';
         break;
       case 'quick_10':
-        modeLabel = '10 preguntas';
+        modeLabel = '10 questions';
         break;
       case 'full':
-        modeLabel = 'Prueba completa';
+        modeLabel = 'Full test';
         break;
       default:
         modeLabel = attempt.mode;
@@ -525,7 +524,7 @@ class _ErrorCard extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: 12),
-          OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
+          OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
         ],
       ),
     );

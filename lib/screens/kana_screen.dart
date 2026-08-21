@@ -118,7 +118,7 @@ class _KanaScreenState extends State<KanaScreen> {
         backgroundColor: const Color(0xFFFFF9FA),
         surfaceTintColor: Colors.transparent,
         title: const Text(
-          'Kana · Perfil de estudio',
+          'Kana · Study Profile',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
@@ -146,7 +146,7 @@ class _KanaScreenState extends State<KanaScreen> {
               ),
               const SizedBox(height: 22),
               const Text(
-                '¿Qué quieres estudiar?',
+                'What would you like to study?',
                 style: TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 12),
@@ -171,7 +171,7 @@ class _KanaScreenState extends State<KanaScreen> {
                   ),
                   _StudyTypeCard(
                     label: 'Hiragana',
-                    subtitle: 'Solo hiragana',
+                    subtitle: 'Hiragana only',
                     icon: Icons.text_fields_rounded,
                     selected: _studyType == 'hiragana',
                     onTap: () {
@@ -182,7 +182,7 @@ class _KanaScreenState extends State<KanaScreen> {
                   ),
                   _StudyTypeCard(
                     label: 'Katakana',
-                    subtitle: 'Solo katakana',
+                    subtitle: 'Katakana only',
                     icon: Icons.translate_rounded,
                     selected: _studyType == 'katakana',
                     onTap: () {
@@ -195,7 +195,7 @@ class _KanaScreenState extends State<KanaScreen> {
               ),
               const SizedBox(height: 26),
               const Text(
-                'Progreso por silabario',
+                'Progress by script',
                 style: TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 12),
@@ -219,7 +219,7 @@ class _KanaScreenState extends State<KanaScreen> {
                 label: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                    'Estudiar ${_labelFor(_studyType)}',
+                    'Study ${_labelFor(_studyType)}',
                     style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w900,
@@ -229,7 +229,7 @@ class _KanaScreenState extends State<KanaScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                'Las sesiones incluyen repasos vencidos, hasta 2 kana en aprendizaje y hasta 8 nuevos.',
+                'Sessions include due reviews, up to 2 learning kana, and up to 8 new items.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.grey.shade600,
@@ -309,22 +309,22 @@ class _OverallCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _MiniStat(label: 'Aprendidas', value: learned),
+                  child: _MiniStat(label: 'Learned', value: learned),
                 ),
                 Expanded(
-                  child: _MiniStat(label: 'Estudiando', value: learning),
+                  child: _MiniStat(label: 'Learning', value: learning),
                 ),
                 Expanded(
-                  child: _MiniStat(label: 'Repasos', value: due),
+                  child: _MiniStat(label: 'Reviews', value: due),
                 ),
                 Expanded(
-                  child: _MiniStat(label: 'Nuevas', value: newItems),
+                  child: _MiniStat(label: 'New', value: newItems),
                 ),
               ],
             ),
             const SizedBox(height: 12),
             Text(
-              '$learned de $total kana marcados como aprendidos',
+              '$learned of $total kana marked as learned',
               style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
             ),
           ],
@@ -408,7 +408,7 @@ class _ProgressCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '$learned / $total aprendidos',
+                  '$learned / $total learned',
                   style: TextStyle(
                     color: Colors.grey.shade700,
                     fontSize: 12,
@@ -417,7 +417,7 @@ class _ProgressCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  '$learning estudiando',
+                  '$learning learning',
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
                 ),
               ],
@@ -546,13 +546,13 @@ class _ErrorCard extends StatelessWidget {
             const Icon(Icons.error_outline_rounded, size: 44),
             const SizedBox(height: 14),
             const Text(
-              'No pude cargar Kana.',
+              'Couldn\'t load Kana.',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 8),
             Text(error, textAlign: TextAlign.center),
             const SizedBox(height: 18),
-            OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
+            OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
           ],
         ),
       ),

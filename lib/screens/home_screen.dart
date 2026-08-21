@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../services/database_service.dart';
 import '../theme/app_colors.dart';
@@ -14,9 +15,862 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentTab = 0;
+  int _previousTab = 0;
+  String _activeLevel = 'N5';
+
+  final _studyNavigatorKey = GlobalKey<NavigatorState>();
+  final _practiceNavigatorKey = GlobalKey<NavigatorState>();
+  final _kanaNavigatorKey = GlobalKey<NavigatorState>();
+
+  GlobalKey<NavigatorState>? _navigatorKeyFor(int index) {
+    return switch (index) {
+      1 => _studyNavigatorKey,
+      2 => _practiceNavigatorKey,
+      3 => _kanaNavigatorKey,
+      _ => null,
+    };
+  }
+
+  void _selectTab(int index) {
+    if (_currentTab == index) {
+      HapticFeedback.selectionClick();
+
+      final navigator = _navigatorKeyFor(index)?.currentState;
+      if (navigator != null && navigator.canPop()) {
+        navigator.popUntil((route) => route.isFirst);
+      }
+      return;
+    }
+
+    FocusManager.instance.primaryFocus?.unfocus();
+    HapticFeedback.selectionClick();
+
+    setState(() {
+      _previousTab = _currentTab;
+      _currentTab = index;
+    });
+  }
+
+  void _handleBack(bool didPop, Object? result) {
+    if (didPop) return;
+
+    final navigator = _navigatorKeyFor(_currentTab)?.currentState;
+
+    if (navigator != null && navigator.canPop()) {
+      navigator.pop();
+      return;
+    }
+
+    if (_currentTab != 0) {
+      FocusManager.instance.primaryFocus?.unfocus();
+
+      setState(() {
+        _previousTab = _currentTab;
+        _currentTab = 0;
+      });
+    }
+  }
+
+  Widget _buildStudyNavigator() {
+    return Navigator(
+      key: _studyNavigatorKey,
+      onGenerateRoute: (_) {
+        return MaterialPageRoute<void>(
+          builder: (_) => _StudyHub(
+            initialLevel: _activeLevel,
+            onLevelChanged: (level) {
+              if (!mounted || _activeLevel == level) return;
+              setState(() => _activeLevel = level);
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPracticeNavigator() {
+    return Navigator(
+      key: _practiceNavigatorKey,
+      onGenerateRoute: (_) {
+        return MaterialPageRoute<void>(
+          builder: (_) => const PracticeHomeScreen(),
+        );
+      },
+    );
+  }
+
+  Widget _buildKanaNavigator() {
+    return Navigator(
+      key: _kanaNavigatorKey,
+      onGenerateRoute: (_) {
+        return MaterialPageRoute<void>(builder: (_) => const KanaScreen());
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pages = <Widget>[
+      _OverviewHome(
+        activeLevel: _activeLevel,
+        onStudyTap: () => _selectTab(1),
+        onPracticeTap: () => _selectTab(2),
+        onKanaTap: () => _selectTab(3),
+      ),
+      _buildStudyNavigator(),
+      _buildPracticeNavigator(),
+      _buildKanaNavigator(),
+    ];
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: AppColors.primaryStrong,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+      child: PopScope<Object?>(
+        canPop: _currentTab == 0,
+        onPopInvokedWithResult: _handleBack,
+        child: Scaffold(
+          extendBody: false,
+          body: Stack(
+            children: [
+              for (var index = 0; index < pages.length; index++)
+                _AnimatedTabPage(
+                  key: ValueKey('main-tab-$index'),
+                  index: index,
+                  selectedIndex: _currentTab,
+                  previousIndex: _previousTab,
+                  child: pages[index],
+                ),
+            ],
+          ),
+          bottomNavigationBar: _PremiumNavigationBar(
+            selectedIndex: _currentTab,
+            onSelected: _selectTab,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AnimatedTabPage extends StatelessWidget {
+  final int index;
+  final int selectedIndex;
+  final int previousIndex;
+  final Widget child;
+
+  const _AnimatedTabPage({
+    super.key,
+    required this.index,
+    required this.selectedIndex,
+    required this.previousIndex,
+    required this.child,
+  });
+
+  static const _duration = Duration(milliseconds: 230);
+  static const _curve = Cubic(0.16, 1.0, 0.3, 1.0);
+
+  @override
+  Widget build(BuildContext context) {
+    final active = index == selectedIndex;
+
+    final targetOffset = active
+        ? Offset.zero
+        : index < selectedIndex
+        ? const Offset(-0.018, 0)
+        : const Offset(0.018, 0);
+
+    return Positioned.fill(
+      child: IgnorePointer(
+        ignoring: !active,
+        child: ExcludeSemantics(
+          excluding: !active,
+          child: AnimatedOpacity(
+            opacity: active ? 1 : 0,
+            duration: _duration,
+            curve: active ? _curve : Curves.easeOutCubic,
+            child: AnimatedSlide(
+              offset: targetOffset,
+              duration: _duration,
+              curve: _curve,
+              child: AnimatedScale(
+                scale: active ? 1 : 0.994,
+                duration: _duration,
+                curve: _curve,
+                alignment: Alignment.center,
+                child: TickerMode(
+                  enabled: active,
+                  child: RepaintBoundary(child: child),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PremiumNavigationBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onSelected;
+
+  const _PremiumNavigationBar({
+    required this.selectedIndex,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      minimum: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.primaryStrong,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: AppColors.brandGold.withValues(alpha: .28)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryStrong.withValues(alpha: .18),
+              blurRadius: 24,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: NavigationBar(
+            selectedIndex: selectedIndex,
+            onDestinationSelected: onSelected,
+            height: 70,
+            backgroundColor: AppColors.primaryStrong,
+            indicatorColor: AppColors.brandGold.withValues(alpha: .22),
+            elevation: 0,
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.home_outlined),
+                selectedIcon: Icon(Icons.home_rounded),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.school_outlined),
+                selectedIcon: Icon(Icons.school_rounded),
+                label: 'Study',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.fact_check_outlined),
+                selectedIcon: Icon(Icons.fact_check_rounded),
+                label: 'Practice',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.translate_outlined),
+                selectedIcon: Icon(Icons.translate_rounded),
+                label: 'Kana',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OverviewHome extends StatefulWidget {
+  final String activeLevel;
+  final VoidCallback onStudyTap;
+  final VoidCallback onPracticeTap;
+  final VoidCallback onKanaTap;
+
+  const _OverviewHome({
+    required this.activeLevel,
+    required this.onStudyTap,
+    required this.onPracticeTap,
+    required this.onKanaTap,
+  });
+
+  @override
+  State<_OverviewHome> createState() => _OverviewHomeState();
+}
+
+class _OverviewHomeState extends State<_OverviewHome> {
+  Map<String, int>? _counts;
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  @override
+  void didUpdateWidget(covariant _OverviewHome oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.activeLevel != widget.activeLevel) {
+      _load();
+    }
+  }
+
+  Future<void> _load() async {
+    if (mounted) {
+      setState(() => _loading = true);
+    }
+
+    try {
+      final counts = await DatabaseService.getStudyCounts(widget.activeLevel);
+      if (!mounted) return;
+
+      setState(() {
+        _counts = counts;
+        _loading = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _loading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final total = _counts?['total'] ?? 0;
+    final learned = _counts?['learned'] ?? 0;
+    final due = _counts?['due'] ?? 0;
+    final progress = total == 0 ? 0.0 : learned / total;
+
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: _load,
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(bottom: 112),
+          children: [
+            _OverviewHero(level: widget.activeLevel, due: due),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 36),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _SectionTitle(
+                    eyebrow: 'CONTINUE',
+                    title: 'Today\'s study',
+                    trailing: _MiniBadge(
+                      icon: Icons.auto_graph_rounded,
+                      label: widget.activeLevel,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  _ContinueCard(
+                    level: widget.activeLevel,
+                    progress: progress,
+                    learned: learned,
+                    total: total,
+                    due: due,
+                    loading: _loading,
+                    onTap: widget.onStudyTap,
+                  ),
+                  const SizedBox(height: 28),
+                  const _SectionTitle(
+                    eyebrow: 'QUICK ACCESS',
+                    title: 'What would you like to do?',
+                  ),
+                  const SizedBox(height: 12),
+                  _HomeActionCard(
+                    icon: Icons.school_rounded,
+                    title: 'Study with SRS',
+                    subtitle: 'Vocabulary, Kanji, Grammar, and Mix by level.',
+                    accent: AppColors.primary,
+                    accentSoft: AppColors.primarySoft,
+                    onTap: widget.onStudyTap,
+                  ),
+                  const SizedBox(height: 10),
+                  _HomeActionCard(
+                    icon: Icons.fact_check_rounded,
+                    title: 'JLPT Practice',
+                    subtitle:
+                        'Vocabulary, Grammar, and Reading with level-based tests.',
+                    accent: AppColors.sage,
+                    accentSoft: AppColors.sageSoft,
+                    onTap: widget.onPracticeTap,
+                  ),
+                  const SizedBox(height: 10),
+                  _HomeActionCard(
+                    icon: Icons.translate_rounded,
+                    title: 'Kana',
+                    subtitle:
+                        'Review Hiragana and Katakana while keeping your progress.',
+                    accent: AppColors.gold,
+                    accentSoft: AppColors.goldSoft,
+                    onTap: widget.onKanaTap,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _OverviewHero extends StatelessWidget {
+  final String level;
+  final int due;
+
+  const _OverviewHero({required this.level, required this.due});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 22, 20, 28),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColors.primaryContainer, AppColors.surface],
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(32),
+          bottomRight: Radius.circular(32),
+        ),
+      ),
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryStrong,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primaryStrong.withValues(alpha: .18),
+                        blurRadius: 16,
+                        offset: const Offset(0, 7),
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    'あ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 23,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'JLPT Study',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: -.4,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Your Japanese study space',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+                _HeaderPill(
+                  icon: due > 0
+                      ? Icons.notifications_active_outlined
+                      : Icons.check_circle_outline_rounded,
+                  label: due > 0 ? '$due' : '✓',
+                ),
+              ],
+            ),
+            const SizedBox(height: 28),
+            Text(
+              'おかえりなさい',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w900,
+                letterSpacing: -.8,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              due > 0
+                  ? 'You have $due reviews due in $level.'
+                  : 'Your $level path is up to date. Choose how you\'d like to continue.',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ContinueCard extends StatelessWidget {
+  final String level;
+  final double progress;
+  final int learned;
+  final int total;
+  final int due;
+  final bool loading;
+  final VoidCallback onTap;
+
+  const _ContinueCard({
+    required this.level,
+    required this.progress,
+    required this.learned,
+    required this.total,
+    required this.due,
+    required this.loading,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(24),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(24),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: AppColors.outline),
+          ),
+          child: loading
+              ? const _ContinueCardSkeleton()
+              : Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 54,
+                          height: 54,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: AppColors.primarySoft,
+                            borderRadius: BorderRadius.circular(17),
+                          ),
+                          child: Text(
+                            level,
+                            style: const TextStyle(
+                              color: AppColors.primaryStrong,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 13),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Continue $level',
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.w900),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '$learned of $total learned · $due reviews',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_rounded,
+                          color: AppColors.primaryStrong,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0, end: progress),
+                      duration: const Duration(milliseconds: 520),
+                      curve: Curves.easeOutCubic,
+                      builder: (context, value, _) {
+                        return LinearProgressIndicator(
+                          value: value,
+                          minHeight: 8,
+                          borderRadius: BorderRadius.circular(99),
+                          color: AppColors.primaryStrong,
+                          backgroundColor: AppColors.surfaceMuted,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ContinueCardSkeleton extends StatelessWidget {
+  const _ContinueCardSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 100,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              _SkeletonPulse(width: 54, height: 54, borderRadius: 17),
+              SizedBox(width: 13),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _SkeletonPulse(width: 132, height: 15, borderRadius: 8),
+                    SizedBox(height: 9),
+                    _SkeletonPulse(width: 205, height: 11, borderRadius: 7),
+                  ],
+                ),
+              ),
+              SizedBox(width: 18),
+            ],
+          ),
+          Spacer(),
+          _SkeletonPulse(width: double.infinity, height: 8, borderRadius: 99),
+        ],
+      ),
+    );
+  }
+}
+
+class _StudyCardSkeleton extends StatelessWidget {
+  const _StudyCardSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 265,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: const Column(
+        children: [
+          Row(
+            children: [
+              _SkeletonPulse(width: 64, height: 64, borderRadius: 20),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _SkeletonPulse(width: 128, height: 17, borderRadius: 8),
+                    SizedBox(height: 10),
+                    _SkeletonPulse(width: 220, height: 11, borderRadius: 7),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 22),
+          Row(
+            children: [
+              _SkeletonPulse(width: 135, height: 11, borderRadius: 7),
+              Spacer(),
+              _SkeletonPulse(width: 42, height: 11, borderRadius: 7),
+            ],
+          ),
+          SizedBox(height: 9),
+          _SkeletonPulse(width: double.infinity, height: 9, borderRadius: 99),
+          SizedBox(height: 20),
+          _SkeletonPulse(width: double.infinity, height: 58, borderRadius: 18),
+          SizedBox(height: 18),
+          _SkeletonPulse(width: double.infinity, height: 54, borderRadius: 18),
+        ],
+      ),
+    );
+  }
+}
+
+class _SkeletonPulse extends StatefulWidget {
+  final double width;
+  final double height;
+  final double borderRadius;
+
+  const _SkeletonPulse({
+    required this.width,
+    required this.height,
+    required this.borderRadius,
+  });
+
+  @override
+  State<_SkeletonPulse> createState() => _SkeletonPulseState();
+}
+
+class _SkeletonPulseState extends State<_SkeletonPulse>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1050),
+    )..repeat(reverse: true);
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOutCubic,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, _) {
+        final color = Color.lerp(
+          AppColors.surfaceMuted,
+          AppColors.surfaceSoft,
+          _animation.value,
+        );
+
+        return Container(
+          width: widget.width,
+          height: widget.height,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(widget.borderRadius),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _HomeActionCard extends StatefulWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color accent;
+  final Color accentSoft;
+  final VoidCallback onTap;
+
+  const _HomeActionCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.accent,
+    required this.accentSoft,
+    required this.onTap,
+  });
+
+  @override
+  State<_HomeActionCard> createState() => _HomeActionCardState();
+}
+
+class _HomeActionCardState extends State<_HomeActionCard> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedScale(
+      scale: _pressed ? .988 : 1,
+      duration: const Duration(milliseconds: 110),
+      curve: Curves.easeOut,
+      child: Material(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        child: InkWell(
+          onTap: widget.onTap,
+          onHighlightChanged: (value) => setState(() => _pressed = value),
+          borderRadius: BorderRadius.circular(22),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: AppColors.outline),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: widget.accentSoft,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Icon(widget.icon, color: widget.accent),
+                ),
+                const SizedBox(width: 13),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.title,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        widget.subtitle,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.textMuted,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _StudyHub extends StatefulWidget {
+  final String initialLevel;
+  final ValueChanged<String> onLevelChanged;
+
+  const _StudyHub({required this.initialLevel, required this.onLevelChanged});
+
+  @override
+  State<_StudyHub> createState() => _StudyHubState();
+}
+
+class _StudyHubState extends State<_StudyHub> {
   static const List<String> _levels = ['N5', 'N4', 'N3', 'N2', 'N1'];
 
-  String _selectedLevel = 'N5';
+  late String _selectedLevel;
   Map<String, int>? _counts;
   bool _loading = true;
   String? _error;
@@ -24,6 +878,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _selectedLevel = widget.initialLevel;
     _loadCounts();
   }
 
@@ -55,24 +910,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_selectedLevel == level) return;
 
     setState(() => _selectedLevel = level);
-    await _loadCounts();
-  }
-
-  Future<void> _openKana() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const KanaScreen()));
-
-    if (!mounted) return;
-    await _loadCounts();
-  }
-
-  Future<void> _openPractice() async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const PracticeHomeScreen()));
-
-    if (!mounted) return;
+    widget.onLevelChanged(level);
     await _loadCounts();
   }
 
@@ -95,17 +933,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final progress = total == 0 ? 0.0 : learned / total;
 
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 0),
-      drawer: _StudyDrawer(
-        selectedLevel: _selectedLevel,
-        onKanaTap: _openKana,
-        onPracticeTap: _openPractice,
-      ),
       body: RefreshIndicator(
         onRefresh: _loadCounts,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.only(bottom: 112),
           children: [
             _HeroHeader(selectedLevel: _selectedLevel, overallDue: due),
             Padding(
@@ -114,8 +946,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _SectionTitle(
-                    eyebrow: 'RUTA JLPT',
-                    title: 'Tu nivel',
+                    eyebrow: 'JLPT PATH',
+                    title: 'Your level',
                     trailing: _MiniBadge(
                       icon: Icons.auto_graph_rounded,
                       label: _selectedLevel,
@@ -128,14 +960,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     onSelected: _selectLevel,
                   ),
                   const SizedBox(height: 16),
-
                   AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 260),
+                    duration: const Duration(milliseconds: 240),
                     switchInCurve: Curves.easeOutCubic,
                     switchOutCurve: Curves.easeInCubic,
                     transitionBuilder: (child, animation) {
                       final slide = Tween<Offset>(
-                        begin: const Offset(0.03, 0),
+                        begin: const Offset(.025, 0),
                         end: Offset.zero,
                       ).animate(animation);
 
@@ -156,11 +987,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       newItems: newItems,
                     ),
                   ),
-
                   const SizedBox(height: 28),
-                  _FooterTip(
+                  const _FooterTip(
                     text:
-                        'Tu porcentaje solo sube cuando marcas un elemento como Aprendida.',
+                        'Your progress percentage only increases when you mark an item as Learned.',
                   ),
                 ],
               ),
@@ -181,11 +1011,7 @@ class _HomeScreenState extends State<HomeScreen> {
     required int newItems,
   }) {
     if (_loading) {
-      return SizedBox(
-        key: key,
-        height: 265,
-        child: const Center(child: CircularProgressIndicator()),
-      );
+      return _StudyCardSkeleton(key: key);
     }
 
     if (_error != null) {
@@ -195,17 +1021,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return _PrimaryStudyCard(
       key: key,
       symbol: _selectedLevel,
-      title: 'Perfil $_selectedLevel',
-      subtitle: 'Vocabulario · Kanji · Gramática · Mix',
+      title: '$_selectedLevel profile',
+      subtitle: 'Vocabulary · Kanji · Grammar · Mix',
       progress: progress,
       learned: learned,
       total: total,
       learning: learning,
       due: due,
       newItems: newItems,
-      accent: AppColors.sage,
-      accentSoft: AppColors.sageSoft,
-      buttonLabel: 'Entrar a $_selectedLevel',
+      accent: AppColors.primary,
+      accentSoft: AppColors.primarySoft,
+      buttonLabel: 'Enter $_selectedLevel',
       onTap: total == 0 ? null : _openLevel,
     );
   }
@@ -225,7 +1051,7 @@ class _HeroHeader extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFFFFEEF3), Color(0xFFFFF8FA)],
+          colors: [AppColors.primaryContainer, AppColors.surface],
         ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(32),
@@ -239,26 +1065,22 @@ class _HeroHeader extends StatelessWidget {
           children: [
             Row(
               children: [
-                Builder(
-                  builder: (context) {
-                    return Material(
-                      color: AppColors.primaryStrong,
-                      borderRadius: BorderRadius.circular(16),
-                      child: InkWell(
-                        onTap: () => Scaffold.of(context).openDrawer(),
-                        borderRadius: BorderRadius.circular(16),
-                        child: const SizedBox(
-                          width: 46,
-                          height: 46,
-                          child: Icon(
-                            Icons.menu_rounded,
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                Container(
+                  width: 46,
+                  height: 46,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryStrong,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Text(
+                    '学',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -266,15 +1088,15 @@ class _HeroHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'JLPT Study',
+                        'Study',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w900,
-                          letterSpacing: -0.4,
+                          letterSpacing: -.4,
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Japonés, un poco mejor cada día.',
+                        'SRS by JLPT level',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -293,243 +1115,15 @@ class _HeroHeader extends StatelessWidget {
               '今日は何を勉強する？',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w900,
-                letterSpacing: -0.8,
+                letterSpacing: -.8,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              'Continúa tu ruta $selectedLevel o cambia de nivel cuando quieras.',
+              'Continue your $selectedLevel path or switch levels anytime.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _StudyDrawer extends StatelessWidget {
-  final String selectedLevel;
-  final Future<void> Function() onKanaTap;
-  final Future<void> Function() onPracticeTap;
-
-  const _StudyDrawer({
-    required this.selectedLevel,
-    required this.onKanaTap,
-    required this.onPracticeTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: AppColors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.horizontal(right: Radius.circular(28)),
-      ),
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
-              child: Row(
-                children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryContainer,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Text(
-                      'あ',
-                      style: TextStyle(
-                        color: AppColors.primaryStrong,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'JLPT Study',
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(fontWeight: FontWeight.w900),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          'Elige tu ruta de estudio',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(height: 1),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 22, 20, 9),
-              child: Text(
-                'ESTUDIAR',
-                style: TextStyle(
-                  color: AppColors.textMuted,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.2,
-                ),
-              ),
-            ),
-            _DrawerDestination(
-              icon: Icons.school_rounded,
-              title: 'Niveles JLPT',
-              subtitle: 'N5 · N4 · N3 · N2 · N1',
-              selected: true,
-              onTap: () => Navigator.pop(context),
-            ),
-            _DrawerDestination(
-              icon: Icons.translate_rounded,
-              title: 'Kana',
-              subtitle: 'Hiragana · Katakana',
-              onTap: () async {
-                Navigator.pop(context);
-                await Future<void>.delayed(const Duration(milliseconds: 180));
-                await onKanaTap();
-              },
-            ),
-            _DrawerDestination(
-              icon: Icons.fact_check_rounded,
-              title: 'Práctica JLPT',
-              subtitle: 'Tests · simulacros · resultados',
-              onTap: () async {
-                Navigator.pop(context);
-                await Future<void>.delayed(const Duration(milliseconds: 180));
-                await onPracticeTap();
-              },
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: AppColors.surfaceSoft,
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.auto_graph_rounded,
-                      size: 18,
-                      color: AppColors.primaryStrong,
-                    ),
-                    const SizedBox(width: 9),
-                    Expanded(
-                      child: Text(
-                        'Nivel activo: $selectedLevel',
-                        style: const TextStyle(
-                          color: AppColors.textSecondary,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _DrawerDestination extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _DrawerDestination({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.selected = false,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      child: Material(
-        color: selected ? AppColors.primaryContainer : Colors.transparent,
-        borderRadius: BorderRadius.circular(18),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(18),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-            child: Row(
-              children: [
-                Container(
-                  width: 42,
-                  height: 42,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: selected
-                        ? Colors.white.withValues(alpha: 0.75)
-                        : AppColors.surfaceSoft,
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(
-                    icon,
-                    size: 21,
-                    color: selected
-                        ? AppColors.primaryStrong
-                        : AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          color: selected
-                              ? AppColors.primaryStrong
-                              : AppColors.textPrimary,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        subtitle,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                ),
-                Icon(
-                  selected
-                      ? Icons.check_circle_rounded
-                      : Icons.chevron_right_rounded,
-                  color: selected
-                      ? AppColors.primaryStrong
-                      : AppColors.textMuted,
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
@@ -548,7 +1142,7 @@ class _HeaderPill extends StatelessWidget {
       height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.82),
+        color: AppColors.surface.withValues(alpha: 0.90),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: AppColors.outline),
       ),
@@ -690,7 +1284,7 @@ class _LevelRail extends StatelessWidget {
                     boxShadow: selected
                         ? const [
                             BoxShadow(
-                              color: Color(0x208F405A),
+                              color: Color(0x24102536),
                               blurRadius: 12,
                               offset: Offset(0, 5),
                             ),
@@ -888,7 +1482,7 @@ class _AnimatedProgress extends StatelessWidget {
         Row(
           children: [
             Text(
-              '$learned / $total aprendidos',
+              '$learned / $total learned',
               style: Theme.of(
                 context,
               ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
@@ -954,7 +1548,7 @@ class _StatStrip extends StatelessWidget {
           Expanded(
             child: _TinyStat(
               icon: Icons.check_rounded,
-              label: 'Aprendidas',
+              label: 'Learned',
               value: learned,
               accent: accent,
             ),
@@ -962,7 +1556,7 @@ class _StatStrip extends StatelessWidget {
           Expanded(
             child: _TinyStat(
               icon: Icons.school_outlined,
-              label: 'Estudiando',
+              label: 'Learning',
               value: learning,
               accent: accent,
             ),
@@ -970,7 +1564,7 @@ class _StatStrip extends StatelessWidget {
           Expanded(
             child: _TinyStat(
               icon: Icons.schedule_rounded,
-              label: 'Repasos',
+              label: 'Reviews',
               value: due,
               accent: accent,
             ),
@@ -978,7 +1572,7 @@ class _StatStrip extends StatelessWidget {
           Expanded(
             child: _TinyStat(
               icon: Icons.auto_awesome_outlined,
-              label: 'Nuevas',
+              label: 'New',
               value: newItems,
               accent: accent,
             ),
@@ -1088,7 +1682,7 @@ class _ErrorPanel extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'No pude cargar el progreso.',
+            'Couldn\'t load your progress.',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
@@ -1098,7 +1692,7 @@ class _ErrorPanel extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: 16),
-          OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
+          OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
         ],
       ),
     );

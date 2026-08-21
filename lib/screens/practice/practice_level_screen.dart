@@ -18,7 +18,12 @@ class PracticeLevelScreen extends StatefulWidget {
 
 class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
   String get _level => widget.level.toUpperCase();
-  bool get _hasPracticeContent => _level == 'N5' || _level == 'N4';
+  bool get _hasPracticeContent =>
+      _level == 'N5' ||
+      _level == 'N4' ||
+      _level == 'N3' ||
+      _level == 'N2' ||
+      _level == 'N1';
 
   bool _loading = true;
   double _vocabularyPreparation = 0;
@@ -140,7 +145,7 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$_level · Preparación')),
+      appBar: AppBar(title: Text('$_level · Preparation')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -177,8 +182,8 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 title: 'Vocabulary',
                 japanese: '文字・語彙',
                 subtitle: _hasPracticeContent
-                    ? '$_vocabularyQuestions preguntas disponibles'
-                    : 'Próximamente',
+                    ? '$_vocabularyQuestions questions available'
+                    : 'Coming soon',
                 percentage: _vocabularyPreparation,
                 attempts: _vocabularyAttempts,
                 enabled: _hasPracticeContent,
@@ -190,8 +195,8 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 title: 'Grammar',
                 japanese: '文法',
                 subtitle: _hasPracticeContent
-                    ? '$_grammarQuestions preguntas disponibles'
-                    : 'Próximamente',
+                    ? '$_grammarQuestions questions available'
+                    : 'Coming soon',
                 percentage: _grammarPreparation,
                 attempts: _grammarAttempts,
                 enabled: _hasPracticeContent,
@@ -203,8 +208,8 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 title: 'Reading',
                 japanese: '読解',
                 subtitle: _hasPracticeContent
-                    ? '$_readingQuestions preguntas disponibles'
-                    : 'Próximamente',
+                    ? '$_readingQuestions questions available'
+                    : 'Coming soon',
                 percentage: _readingPreparation,
                 attempts: _readingAttempts,
                 enabled: _hasPracticeContent,
@@ -215,7 +220,7 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 icon: Icons.headphones_rounded,
                 title: 'Listening',
                 japanese: '聴解',
-                subtitle: 'Próximamente',
+                subtitle: 'Coming soon',
               ),
               const SizedBox(height: 22),
               _MockExamCard(level: _level),
@@ -265,14 +270,14 @@ class _HeaderCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Preparación $level',
+                  '$level Preparation',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Practica cada sección y descubre dónde necesitas reforzar.',
+                  'Practice each section and identify where you need more work.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -320,7 +325,7 @@ class _GeneralPreparationCard extends StatelessWidget {
               Icon(Icons.insights_rounded, color: AppColors.primaryStrong),
               SizedBox(width: 9),
               Text(
-                'Preparación general',
+                'Overall preparation',
                 style: TextStyle(fontWeight: FontWeight.w900),
               ),
             ],
@@ -330,8 +335,8 @@ class _GeneralPreparationCard extends StatelessWidget {
           const SizedBox(height: 9),
           Text(
             hasData
-                ? 'Aún no calculamos un porcentaje general. ${hasVocabularyData ? 'Vocabulary: ${vocabularyPercent.round()}%. ' : ''}${hasGrammarData ? 'Grammar: ${grammarPercent.round()}%. ' : ''}${hasReadingData ? 'Reading: ${readingPercent.round()}%.' : ''}'
-                : 'Completa secciones para comenzar a estimar tu preparación general.',
+                ? 'We don\'t calculate an overall percentage yet. ${hasVocabularyData ? 'Vocabulary: ${vocabularyPercent.round()}%. ' : ''}${hasGrammarData ? 'Grammar: ${grammarPercent.round()}%. ' : ''}${hasReadingData ? 'Reading: ${readingPercent.round()}%.' : ''}'
+                : 'Complete sections to start estimating your overall preparation.',
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
@@ -349,7 +354,7 @@ class _SectionTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'SECCIONES',
+          'SECTIONS',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
             color: AppColors.primaryStrong,
             fontWeight: FontWeight.w900,
@@ -358,7 +363,7 @@ class _SectionTitle extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '¿Qué quieres practicar?',
+          'What would you like to practice?',
           style: Theme.of(
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
@@ -466,8 +471,8 @@ class _SectionCard extends StatelessWidget {
                       const SizedBox(height: 5),
                       Text(
                         attempts == 0
-                            ? 'Sin datos todavía'
-                            : '${percentage.round()}% de preparación',
+                            ? 'No data yet'
+                            : '${percentage.round()}% preparation',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w800,
                         ),
@@ -518,7 +523,7 @@ class _MockExamCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Simulacro $level completo',
+                  'Full $level mock exam',
                   style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontWeight: FontWeight.w900,
@@ -526,7 +531,7 @@ class _MockExamCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 const Text(
-                  'Vocabulary · Grammar · Reading · Listening\nPróximamente',
+                  'Vocabulary · Grammar · Reading · Listening\nComing soon',
                   style: TextStyle(
                     color: AppColors.textMuted,
                     fontSize: 12,
@@ -568,7 +573,7 @@ class _ErrorCard extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: 12),
-          OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
+          OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
         ],
       ),
     );

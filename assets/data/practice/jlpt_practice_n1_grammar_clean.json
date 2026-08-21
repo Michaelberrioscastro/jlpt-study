@@ -1,0 +1,924 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N1",
+  "section": "grammar",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_sentence_ordering": true,
+    "excluded_mondai": [
+      6
+    ],
+    "note": "Se incluyen 問題5 (Q26–35) y 問題7 (Q41–45). Se excluye 問題6 (Q36–40) porque usa ordenamiento de cuatro fragmentos con ★ y la interfaz actual no representa fielmente ese formato."
+  },
+  "tests": [
+    {
+      "title": "N1 Grammar Practice 2012",
+      "level": "N1",
+      "section": "grammar",
+      "time_minutes": 110,
+      "source_file": "N1G.pdf",
+      "id": "n1_grammar_2012",
+      "original_question_count": 20,
+      "clean_question_count": 15,
+      "excluded_questions": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "questions": [
+        {
+          "id": "n1_grammar_2012_q26",
+          "number": 26,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "人気作家A氏の講演会が無料（　）、多くのファンが詰めかけた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "にして"
+            },
+            {
+              "id": 2,
+              "text": "にあって"
+            },
+            {
+              "id": 3,
+              "text": "として"
+            },
+            {
+              "id": 4,
+              "text": "とあって"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q27",
+          "number": 27,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "都会から田舎に移り住んだ人の話を聞く（　）、「田舎は人を癒す力を持っている」とつくづく感じる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "につけ"
+            },
+            {
+              "id": 2,
+              "text": "なり"
+            },
+            {
+              "id": 3,
+              "text": "とは"
+            },
+            {
+              "id": 4,
+              "text": "にしてみると"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q28",
+          "number": 28,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "この鍋は、いため物に、揚げ物に（　）何にでも使えて便利です。",
+          "options": [
+            {
+              "id": 1,
+              "text": "は"
+            },
+            {
+              "id": 2,
+              "text": "と"
+            },
+            {
+              "id": 3,
+              "text": "や"
+            },
+            {
+              "id": 4,
+              "text": "か"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q29",
+          "number": 29,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "プリンターの調子が悪くなり、製造会社に電話で問い合わせたら、向こうの担当者に、あれこれ質問に答え（　）あげく、対応できないと言われた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "させた"
+            },
+            {
+              "id": 2,
+              "text": "させられる"
+            },
+            {
+              "id": 3,
+              "text": "させる"
+            },
+            {
+              "id": 4,
+              "text": "させられた"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q30",
+          "number": 30,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "その日、私はホームに入ってきた電車に飛び乗った。ところが、電車は反対方向に走り始めた（　）。私は電車の行き先を確かめなかったことを後悔した。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ではない"
+            },
+            {
+              "id": 2,
+              "text": "ではないか"
+            },
+            {
+              "id": 3,
+              "text": "のではない"
+            },
+            {
+              "id": 4,
+              "text": "のではないか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q31",
+          "number": 31,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（インタビューで）\nA「お店で一番気をつけていることは何ですか。」\nB「衛生管理です。お客様に食事を（　）、衛生面の管理には、何よりも注意しております。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "お出しになる以上"
+            },
+            {
+              "id": 2,
+              "text": "お出しになるうえ"
+            },
+            {
+              "id": 3,
+              "text": "お出しする以上"
+            },
+            {
+              "id": 4,
+              "text": "お出しするうえ"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q32",
+          "number": 32,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "留学するまで、私は自分が見ている世界がすべてだと思っていた。実はそれが世界のほんの小さな一部分（　）気付いていなかった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "でないことにしか"
+            },
+            {
+              "id": 2,
+              "text": "でしかないことに"
+            },
+            {
+              "id": 3,
+              "text": "にないことでしか"
+            },
+            {
+              "id": 4,
+              "text": "にしかないことで"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q33",
+          "number": 33,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（パソコンを使いながら）\nA「ねえ、この前教えた計算機能、使ってみた？」\nB「うん。今まであんなに時間をかけてたのが（　）簡単に計算できたよ。」\nA「でしょ。パソコンのことならまかせてよ。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "ばかばかしい思いをするもので"
+            },
+            {
+              "id": 2,
+              "text": "ばかばかしく思えるもので"
+            },
+            {
+              "id": 3,
+              "text": "ばかばかしい思いをするくらい"
+            },
+            {
+              "id": 4,
+              "text": "ばかばかしく思えるくらい"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q34",
+          "number": 34,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（電話で）\n山中「あ、木村先生でいらっしゃいますか。AB出版の山中でございますが、今から原稿をいただきに上がってもよろしいでしょうか。」\n木村「すみません。まだできていないんです。あと3日（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "待っておいてになります"
+            },
+            {
+              "id": 2,
+              "text": "お待ち申し上げております"
+            },
+            {
+              "id": 3,
+              "text": "待たせていただくことにしましょうか"
+            },
+            {
+              "id": 4,
+              "text": "待っていただくわけにはいきませんか"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q35",
+          "number": 35,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（宇宙飛行士 山田太郎さんへのインタビューで）\n山田「実は、初めから宇宙飛行士になる（　）、そうじゃないんです。大学を出たら、医者になろうと思っていましたから。」\n記者「では、何がきっかけで、宇宙飛行士になりたいと思ったんですか。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "つもりだったかっていうと"
+            },
+            {
+              "id": 2,
+              "text": "つもりなのかっていわれたら"
+            },
+            {
+              "id": 3,
+              "text": "つもりじゃなかったのかっていわれたら"
+            },
+            {
+              "id": 4,
+              "text": "つもりがなかったかっていうと"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q41",
+          "number": 41,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "番組の途中にCMが（　）。が、モンダイはその入り方のタイミングだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "入るのにいい"
+            },
+            {
+              "id": 2,
+              "text": "入るのがいいのか"
+            },
+            {
+              "id": 3,
+              "text": "入るのはいい"
+            },
+            {
+              "id": 4,
+              "text": "入るのでいいのか"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q42",
+          "number": 42,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "クイズ番組の中で正解が発表されようとするその瞬間に、サッと画面がCMに入れ替わる。ああいうせこいことは（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "やめようと思う"
+            },
+            {
+              "id": 2,
+              "text": "やめてほしいのだ"
+            },
+            {
+              "id": 3,
+              "text": "やめるのだろうか"
+            },
+            {
+              "id": 4,
+              "text": "やめられるものではない"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q43",
+          "number": 43,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "（　a　）、みんながテレビの前で身を乗り出している瞬間にCMを入れれば、見られる（　b　）。が、わざわざ番組の流れを断ち切り、視聴者の感興をそいでまで強引にCMを見せようとするやり方って、さもしくないだろうか。",
+          "options": [
+            {
+              "id": 1,
+              "text": "a やはり ／ b ところだった"
+            },
+            {
+              "id": 2,
+              "text": "a いったい ／ b のか"
+            },
+            {
+              "id": 3,
+              "text": "a といっても ／ b わけでもない"
+            },
+            {
+              "id": 4,
+              "text": "a たしかに ／ b ことは間違いない"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q44",
+          "number": 44,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "せっかくいいCMを作っても、ああいう出し方をされると、なんと視聴者をバカにした企業だろうと思われてしまう。いやおうなしに（　）ああいうやり方は、極端に言えば暴力みたいなものであって、消費者を大切に思う企業のやることじゃない。",
+          "options": [
+            {
+              "id": 1,
+              "text": "見させてしまう"
+            },
+            {
+              "id": 2,
+              "text": "身を乗り出させる"
+            },
+            {
+              "id": 3,
+              "text": "見られてしまう"
+            },
+            {
+              "id": 4,
+              "text": "身を乗り出される"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2012_q45",
+          "number": 45,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "近ごろハヤリの言葉で言えば、これは企業の「品位」にかかわるモンダイである。（　a　）だけじゃない、（　b　）だいぶ前から、「品がねえぞ」と怒ってるよ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "a ぼく ／ b みんな"
+            },
+            {
+              "id": 2,
+              "text": "a 広告主 ／ b みんな"
+            },
+            {
+              "id": 3,
+              "text": "a 広告主 ／ b ぼくも"
+            },
+            {
+              "id": 4,
+              "text": "a ぼく ／ b 広告主も"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    },
+    {
+      "title": "N1 Grammar Practice 2018",
+      "level": "N1",
+      "section": "grammar",
+      "time_minutes": 110,
+      "source_file": "N1G (1).pdf",
+      "id": "n1_grammar_2018",
+      "original_question_count": 20,
+      "clean_question_count": 15,
+      "excluded_questions": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "questions": [
+        {
+          "id": "n1_grammar_2018_q26",
+          "number": 26,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "朝の満員電車。車内の混雑を（　）、私の目の前に座っている学生風の男は、平然とノートパソコンを広げて、作業に没頭していた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "含めて"
+            },
+            {
+              "id": 2,
+              "text": "もとに"
+            },
+            {
+              "id": 3,
+              "text": "除いて"
+            },
+            {
+              "id": 4,
+              "text": "よそに"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q27",
+          "number": 27,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "私の父は、（　）もしないで漫画を批判するから、本当に嫌になる。",
+          "options": [
+            {
+              "id": 1,
+              "text": "読まない"
+            },
+            {
+              "id": 2,
+              "text": "読み"
+            },
+            {
+              "id": 3,
+              "text": "読もう"
+            },
+            {
+              "id": 4,
+              "text": "読んで"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q28",
+          "number": 28,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（卒業生へのインタビューで）\n聞き手「学生時代にやったことで、今の仕事に役立っていることは何でしょうか。」\n田中「ラグビー部での経験ですね。チームワークの大切さを痛感しました。（　）、それは去年企画チームのリーダーになって初めて気づいたことですが。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "要するに"
+            },
+            {
+              "id": 2,
+              "text": "あるいは"
+            },
+            {
+              "id": 3,
+              "text": "もっとも"
+            },
+            {
+              "id": 4,
+              "text": "ついては"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q29",
+          "number": 29,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "村の郷土史をまとめるにあたり、今年90歳になる元村長の東山さんにお話を伺った。村に初めて汽車が走ったときのことを鮮明に覚えて（　）、その記憶力に驚いた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "おいでになり"
+            },
+            {
+              "id": 2,
+              "text": "差し上げ"
+            },
+            {
+              "id": 3,
+              "text": "まいり"
+            },
+            {
+              "id": 4,
+              "text": "申し上げ"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q30",
+          "number": 30,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（求人サイトの「よくある質問」で）\nQ：インテリアに関する知識がないのですが、働けますか。\nA：研修があるので大丈夫です。知識はある（　）が、それよりも人柄や仕事に取り組む姿勢を重視しています。",
+          "options": [
+            {
+              "id": 1,
+              "text": "にすぎません"
+            },
+            {
+              "id": 2,
+              "text": "ことは否めません"
+            },
+            {
+              "id": 3,
+              "text": "に越したことはありません"
+            },
+            {
+              "id": 4,
+              "text": "といっても過言ではありません"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q31",
+          "number": 31,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "（お知らせで）\n水道管破裂による断水のため、8月12日まで市民プールの営業を休止します。復旧状況（　）、営業再開が遅れる可能性がありますので、ご了承ください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "次第には"
+            },
+            {
+              "id": 2,
+              "text": "次第に"
+            },
+            {
+              "id": 3,
+              "text": "次第では"
+            },
+            {
+              "id": 4,
+              "text": "次第"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q32",
+          "number": 32,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "クレジットカードの番号等、他人に（　）困る情報は、電子メールには書かないほうがいいそうだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "知っていても"
+            },
+            {
+              "id": 2,
+              "text": "知っていなくても"
+            },
+            {
+              "id": 3,
+              "text": "知らなくては"
+            },
+            {
+              "id": 4,
+              "text": "知られては"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q33",
+          "number": 33,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "仕事は、決められた時間内に、いかに成果を上げるかが大切であり、単に時間をかけて（　）と私は思う。",
+          "options": [
+            {
+              "id": 1,
+              "text": "がんばることだといってもおかしくない"
+            },
+            {
+              "id": 2,
+              "text": "がんばればいいというものではない"
+            },
+            {
+              "id": 3,
+              "text": "がんばることでしかない"
+            },
+            {
+              "id": 4,
+              "text": "がんばりようがない"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q34",
+          "number": 34,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "現在、潜水調査船を用いた調査研究が進展中であり、いずれ近いうちに海底のより詳細な地質構造が明らかに（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "なるものと思われる"
+            },
+            {
+              "id": 2,
+              "text": "するという思いがある"
+            },
+            {
+              "id": 3,
+              "text": "なったかに思える"
+            },
+            {
+              "id": 4,
+              "text": "するだろうと思う"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q35",
+          "number": 35,
+          "mondai": 5,
+          "subtype": "grammar_completion",
+          "prompt": "山下「あのう、西村先輩。私、今日でこのサークルを（　）。」\n西村「ええ？ 辞める？ 急にどうして？」",
+          "options": [
+            {
+              "id": 1,
+              "text": "辞めてしまわれたのでしょうか"
+            },
+            {
+              "id": 2,
+              "text": "辞めてしまったのかと思って"
+            },
+            {
+              "id": 3,
+              "text": "辞めさせたらどうでしょうか"
+            },
+            {
+              "id": 4,
+              "text": "辞めさせてもらおうかと思って"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q41",
+          "number": 41,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "マニュアルというものが、この世には存在する。機械を買った場合には、これを読む。書かれてある通りに動かないと困る。ところが、生き物はそうはいかない。あちらに通用したことが、（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "こちらにはいえないこともない"
+            },
+            {
+              "id": 2,
+              "text": "こちらにいえるとは限らない"
+            },
+            {
+              "id": 3,
+              "text": "こちらにもいえるとは思わなかった"
+            },
+            {
+              "id": 4,
+              "text": "こちらにはいえないと思うのか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q42",
+          "number": 42,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "うちで、ねこを飼い始めた当座は、何も分からなかった。さて、（　）時に、当然のことながら「ねこの飼い方」の本も読んだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "そういう"
+            },
+            {
+              "id": 2,
+              "text": "する"
+            },
+            {
+              "id": 3,
+              "text": "あの"
+            },
+            {
+              "id": 4,
+              "text": "やろうという"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q43",
+          "number": 43,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "「ねこの飼い方」の本には、なるほどと思えることが書いてある。中でも納得したのが、（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "トイレのことだ"
+            },
+            {
+              "id": 2,
+              "text": "トイレのことであるに違いない"
+            },
+            {
+              "id": 3,
+              "text": "トイレだからである"
+            },
+            {
+              "id": 4,
+              "text": "トイレだと聞いている"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q44",
+          "number": 44,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "「用足ししている時は、最も無防備な状態です。その最中、人に近づかれることを、ねこはとても嫌います」とあり、そこで、ゆずがそうする時は遠慮していた。（　）。朝、ねこトイレの砂をかきまわし、汚れ物を取り始めると、ゆずがやって来る。",
+          "options": [
+            {
+              "id": 1,
+              "text": "もっともである"
+            },
+            {
+              "id": 2,
+              "text": "当然である"
+            },
+            {
+              "id": 3,
+              "text": "ところがである"
+            },
+            {
+              "id": 4,
+              "text": "例えばである"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n1_grammar_2018_q45",
+          "number": 45,
+          "mondai": 7,
+          "subtype": "context_completion",
+          "prompt": "あの説得力のあるマニュアルは、一体全体、何だったのか。なるほど、生きている物には個性があると、あらためて（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "認識させられたことがある"
+            },
+            {
+              "id": 2,
+              "text": "認識させられたおかげだ"
+            },
+            {
+              "id": 3,
+              "text": "認識させられる話があった"
+            },
+            {
+              "id": 4,
+              "text": "認識させられる出来事だった"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ]
+}

@@ -32,6 +32,11 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
 
   JlptPracticeQuestion get _question => widget.questions[_index];
 
+  String get _level {
+    final match = RegExp(r'\bN[1-5]\b').firstMatch(widget.title.toUpperCase());
+    return match?.group(0) ?? 'N5';
+  }
+
   void _select(int option) {
     if (_checked && !widget.examMode) return;
     setState(() => _selectedOption = option);
@@ -71,7 +76,7 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
     final percent = total == 0 ? 0 : ((_score / total) * 100).round();
 
     await PracticeProgressService.saveAttempt(
-      level: 'N5',
+      level: _level,
       section: widget.section,
       mode: widget.mode,
       questionCount: total,
@@ -98,7 +103,7 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'Resultado',
+                  'Result',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 8),
@@ -110,7 +115,7 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Este intento ya quedó guardado y actualizará tu preparación de ${_sectionLabel(widget.section)}.',
+                  'This attempt has been saved and will update your ${_sectionLabel(widget.section)} preparation.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
@@ -122,7 +127,7 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
                       Navigator.pop(sheetContext);
                       Navigator.pop(context, true);
                     },
-                    child: const Text('Volver a Práctica JLPT'),
+                    child: const Text('Back to JLPT Practice'),
                   ),
                 ),
               ],
@@ -138,7 +143,7 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
     if (widget.questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text(widget.title)),
-        body: const Center(child: Text('No hay preguntas disponibles.')),
+        body: const Center(child: Text('No questions available.')),
       );
     }
 
@@ -168,7 +173,7 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
                       const Spacer(),
                       Text(
                         widget.examMode
-                            ? 'Modo examen'
+                            ? 'Exam mode'
                             : _subtypeLabel(_question.subtype),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w800,
@@ -206,8 +211,8 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
                       const SizedBox(height: 8),
                       Text(
                         _selectedOption == _question.correctOption
-                            ? '✓ Correcto'
-                            : 'Respuesta correcta: ${_question.correctOption}',
+                            ? '✓ Correct'
+                            : 'Correct answer: ${_question.correctOption}',
                         style: TextStyle(
                           color: _selectedOption == _question.correctOption
                               ? AppColors.success
@@ -228,10 +233,10 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
                   onPressed: _selectedOption == null ? null : _continue,
                   child: Text(
                     !widget.examMode && !_checked
-                        ? 'Comprobar'
+                        ? 'Check answer'
                         : _index == widget.questions.length - 1
-                        ? 'Ver resultado'
-                        : 'Siguiente',
+                        ? 'View result'
+                        : 'Next',
                   ),
                 ),
               ),
@@ -317,25 +322,25 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
   String _subtypeLabel(String subtype) {
     switch (subtype) {
       case 'kanji_reading':
-        return 'Lectura';
+        return 'Reading';
       case 'context':
-        return 'Contexto';
+        return 'Context';
       case 'paraphrase':
-        return 'Significado';
+        return 'Meaning';
       case 'particle':
-        return 'Partículas';
+        return 'Particles';
       case 'verb_form':
-        return 'Forma verbal';
+        return 'Verb form';
       case 'comparison':
-        return 'Comparación';
+        return 'Comparison';
       case 'before_after':
-        return 'Expresión temporal';
+        return 'Time expression';
       case 'giving_receiving':
-        return 'Dar / recibir';
+        return 'Giving / receiving';
       case 'context_completion':
-        return 'Gramática en contexto';
+        return 'Grammar in context';
       case 'request_expression':
-        return 'Expresión';
+        return 'Expression';
       default:
         return widget.section == 'grammar' ? 'Grammar' : 'Vocabulary';
     }

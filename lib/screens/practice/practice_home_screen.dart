@@ -17,6 +17,12 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
   int _n5Attempts = 0;
   double _n4Preparation = 0;
   int _n4Attempts = 0;
+  double _n3Preparation = 0;
+  int _n3Attempts = 0;
+  double _n2Preparation = 0;
+  int _n2Attempts = 0;
+  double _n1Preparation = 0;
+  int _n1Attempts = 0;
 
   @override
   void initState() {
@@ -33,6 +39,19 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
       level: 'N4',
       section: 'vocabulary',
     );
+    final n3Summary = await PracticeProgressService.getSummary(
+      level: 'N3',
+      section: 'vocabulary',
+    );
+    final n2Summary = await PracticeProgressService.getSummary(
+      level: 'N2',
+      section: 'vocabulary',
+    );
+
+    final n1Summary = await PracticeProgressService.getSummary(
+      level: 'N1',
+      section: 'vocabulary',
+    );
 
     if (!mounted) return;
 
@@ -41,6 +60,12 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
       _n5Attempts = n5Summary.recentAttempts.length;
       _n4Preparation = n4Summary.preparationPercent;
       _n4Attempts = n4Summary.recentAttempts.length;
+      _n3Preparation = n3Summary.preparationPercent;
+      _n3Attempts = n3Summary.recentAttempts.length;
+      _n2Preparation = n2Summary.preparationPercent;
+      _n2Attempts = n2Summary.recentAttempts.length;
+      _n1Preparation = n1Summary.preparationPercent;
+      _n1Attempts = n1Summary.recentAttempts.length;
       _loading = false;
     });
   }
@@ -57,7 +82,7 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Práctica JLPT')),
+      appBar: AppBar(title: const Text('JLPT Practice')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -67,7 +92,7 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
             const _PracticeHero(),
             const SizedBox(height: 26),
             Text(
-              'ELIGE TU NIVEL',
+              'CHOOSE YOUR LEVEL',
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: AppColors.primaryStrong,
                 fontWeight: FontWeight.w900,
@@ -76,7 +101,7 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
             ),
             const SizedBox(height: 5),
             Text(
-              'Preparación por nivel',
+              'Preparation by level',
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
@@ -108,22 +133,34 @@ class _PracticeHomeScreenState extends State<PracticeHomeScreen> {
                 onTap: () => _openLevel('N4'),
               ),
               const SizedBox(height: 11),
-              const _LevelCard(
+              _LevelCard(
                 level: 'N3',
                 japanese: '日本語能力試験 N3',
-                subtitle: 'Próximamente',
+                subtitle: 'Vocabulary · Grammar · Reading',
+                percentage: _n3Preparation,
+                attempts: _n3Attempts,
+                enabled: true,
+                onTap: () => _openLevel('N3'),
               ),
               const SizedBox(height: 11),
-              const _LevelCard(
+              _LevelCard(
                 level: 'N2',
                 japanese: '日本語能力試験 N2',
-                subtitle: 'Próximamente',
+                subtitle: 'Vocabulary · Grammar · Reading',
+                percentage: _n2Preparation,
+                attempts: _n2Attempts,
+                enabled: true,
+                onTap: () => _openLevel('N2'),
               ),
               const SizedBox(height: 11),
-              const _LevelCard(
+              _LevelCard(
                 level: 'N1',
                 japanese: '日本語能力試験 N1',
-                subtitle: 'Próximamente',
+                subtitle: 'Vocabulary · Grammar · Reading',
+                percentage: _n1Preparation,
+                attempts: _n1Attempts,
+                enabled: true,
+                onTap: () => _openLevel('N1'),
               ),
             ],
           ],
@@ -166,14 +203,14 @@ class _PracticeHero extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Prepárate para el JLPT',
+                  'Prepare for the JLPT',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Practica por nivel y sigue tu preparación a medida que completas tests.',
+                  'Practice by level and track your preparation as you complete tests.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -274,8 +311,8 @@ class _LevelCard extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         attempts == 0
-                            ? 'Sin intentos todavía'
-                            : '${percentage.round()}% · $attempts intentos recientes',
+                            ? 'No attempts yet'
+                            : '${percentage.round()}% · $attempts recent attempts',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w800,
                         ),

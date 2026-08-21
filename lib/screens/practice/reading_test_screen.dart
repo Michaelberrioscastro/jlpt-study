@@ -125,7 +125,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'Resultado ${widget.level.toUpperCase()} · Reading',
+                  '${widget.level.toUpperCase()} · Reading Result',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 8),
@@ -137,7 +137,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Este intento ya quedó guardado y actualizará tu preparación de Reading.',
+                  'This attempt has been saved and will update your Reading preparation.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
@@ -149,7 +149,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                       Navigator.pop(sheetContext);
                       Navigator.pop(context, true);
                     },
-                    child: const Text('Volver a Reading'),
+                    child: const Text('Back to Reading'),
                   ),
                 ),
               ],
@@ -165,7 +165,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
     if (widget.passages.isEmpty || _items.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text(widget.title)),
-        body: const Center(child: Text('No hay lecturas disponibles.')),
+        body: const Center(child: Text('No reading passages available.')),
       );
     }
 
@@ -189,12 +189,12 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                   Row(
                     children: [
                       Text(
-                        '$_answeredCount/${_items.length} respondidas',
+                        '$_answeredCount/${_items.length} answered',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const Spacer(),
                       Text(
-                        widget.examMode ? 'Modo examen' : 'Práctica',
+                        widget.examMode ? 'Exam mode' : 'Practice',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.w800,
                         ),
@@ -251,11 +251,11 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                   onPressed: _passageComplete ? _continue : null,
                   child: Text(
                     !widget.examMode && !_checking
-                        ? 'Comprobar'
+                        ? 'Check answers'
                         : (_passageIndex == widget.passages.length - 1 ||
                               _answeredCount >= _items.length)
-                        ? 'Ver resultado'
-                        : 'Siguiente lectura',
+                        ? 'View result'
+                        : 'Next passage',
                   ),
                 ),
               ),
@@ -289,8 +289,8 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
             const SizedBox(height: 4),
             Text(
               selected == question.correctOption
-                  ? '✓ Correcto'
-                  : 'Respuesta correcta: ${question.correctOption}',
+                  ? '✓ Correct'
+                  : 'Correct answer: ${question.correctOption}',
               style: TextStyle(
                 color: selected == question.correctOption
                     ? AppColors.success

@@ -76,7 +76,7 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => ReadingTestScreen(
-          title: examMode ? '$_level · Reading completo' : '$_level · Reading',
+          title: examMode ? '$_level · Full Reading' : '$_level · Reading',
           level: _level,
           passages: passages,
           mode: mode,
@@ -115,7 +115,7 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
               _ErrorCard(error: _error!, onRetry: _load)
             else ...[
               Text(
-                'PRÁCTICA',
+                'PRACTICE',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppColors.primaryStrong,
                   fontWeight: FontWeight.w900,
@@ -124,7 +124,7 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
               ),
               const SizedBox(height: 5),
               Text(
-                'Elige una sesión',
+                'Choose a session',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
@@ -132,22 +132,22 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
               const SizedBox(height: 13),
               _ActionCard(
                 icon: Icons.bolt_rounded,
-                title: 'Práctica rápida',
-                subtitle: '5 preguntas · pasajes seleccionados al azar',
+                title: 'Quick practice',
+                subtitle: '5 questions · randomly selected passages',
                 onTap: () => _start(count: 5, mode: 'quick_5', examMode: false),
               ),
               const SizedBox(height: 11),
               _ActionCard(
                 icon: Icons.assignment_rounded,
-                title: 'Reading completo',
-                subtitle: '$_questionCount preguntas disponibles',
+                title: 'Full Reading',
+                subtitle: '$_questionCount questions available',
                 onTap: () =>
                     _start(count: _questionCount, mode: 'full', examMode: true),
               ),
               if (_attempts.isNotEmpty) ...[
                 const SizedBox(height: 26),
                 Text(
-                  'ÚLTIMOS INTENTOS',
+                  'RECENT ATTEMPTS',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: AppColors.primaryStrong,
                     fontWeight: FontWeight.w900,
@@ -222,7 +222,7 @@ class _HeaderCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  attempts == 0 ? 'Sin intentos todavía' : 'de preparación',
+                  attempts == 0 ? 'No attempts yet' : 'preparation',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
@@ -236,7 +236,7 @@ class _HeaderCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Lee el pasaje completo y responde sin perder el texto de vista.',
+            'Read the full passage and answer while keeping the text in view.',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
@@ -334,7 +334,7 @@ class _AttemptTile extends StatelessWidget {
           const SizedBox(width: 11),
           Expanded(
             child: Text(
-              '${attempt.correctCount}/${attempt.questionCount} correctas',
+              '${attempt.correctCount}/${attempt.questionCount} correct',
               style: const TextStyle(fontWeight: FontWeight.w800),
             ),
           ),
@@ -372,7 +372,7 @@ class _ErrorCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(error, textAlign: TextAlign.center),
           const SizedBox(height: 12),
-          OutlinedButton(onPressed: onRetry, child: const Text('Reintentar')),
+          OutlinedButton(onPressed: onRetry, child: const Text('Retry')),
         ],
       ),
     );

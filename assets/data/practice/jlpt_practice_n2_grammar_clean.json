@@ -1,0 +1,1024 @@
+{
+  "schema_version": 2,
+  "feature": "jlpt_test_practice",
+  "level": "N2",
+  "section": "grammar",
+  "curation_policy": {
+    "conservative": true,
+    "excluded_sentence_ordering_questions": true,
+    "excluded_image_dependent_questions": true,
+    "note": "v1 incluye 問題7 y 問題9. 問題8 (preguntas 45–49, ordenamiento con ★) se excluye porque la interfaz actual no representa fielmente ese formato."
+  },
+  "tests": [
+    {
+      "title": "N2 Grammar Practice A",
+      "level": "N2",
+      "section": "grammar",
+      "time_minutes": 105,
+      "source_file": "N2G (1).pdf",
+      "id": "n2_grammar_test_a",
+      "original_question_count": 22,
+      "clean_question_count": 17,
+      "questions": [
+        {
+          "id": "n2_grammar_2012_q33",
+          "number": 33,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "A「もう無理だよ、私には5キロなんて走れないよ。」\nB「まだ500メートルだよ。なんでそうやってすぐ、もうだめ（　）言うの。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "を"
+            },
+            {
+              "id": 2,
+              "text": "は"
+            },
+            {
+              "id": 3,
+              "text": "とか"
+            },
+            {
+              "id": 4,
+              "text": "とは"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q34",
+          "number": 34,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "あれこれ悩んだ（　）、ABC大学を志望校に決めた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "さきに"
+            },
+            {
+              "id": 2,
+              "text": "すえに"
+            },
+            {
+              "id": 3,
+              "text": "ところに"
+            },
+            {
+              "id": 4,
+              "text": "とおりに"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q35",
+          "number": 35,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "プリンターの調子が悪くなり、製造会社に電話で問い合わせたら、向こうの担当者に、あれこれ質問に答え（　）あげく、対応できないと言われた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "させた"
+            },
+            {
+              "id": 2,
+              "text": "させられる"
+            },
+            {
+              "id": 3,
+              "text": "させる"
+            },
+            {
+              "id": 4,
+              "text": "させられた"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q36",
+          "number": 36,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "面倒だが、やはりこの仕事は断れない。引き受ける（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "までもあるまい"
+            },
+            {
+              "id": 2,
+              "text": "こともない"
+            },
+            {
+              "id": 3,
+              "text": "はずもない"
+            },
+            {
+              "id": 4,
+              "text": "しかあるまい"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q37",
+          "number": 37,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "山田監督の、「私、山田は、50年ぶりにふるさとに戻って（　）。」というあいさつに、会場からは大きな拍手が起こった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "まいりました"
+            },
+            {
+              "id": 2,
+              "text": "いらっしゃいました"
+            },
+            {
+              "id": 3,
+              "text": "うかがいました"
+            },
+            {
+              "id": 4,
+              "text": "おいでになりました"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q38",
+          "number": 38,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "彼女の絵は、国内より（　）海外での評価が高い。",
+          "options": [
+            {
+              "id": 1,
+              "text": "まさか"
+            },
+            {
+              "id": 2,
+              "text": "たとえ"
+            },
+            {
+              "id": 3,
+              "text": "むしろ"
+            },
+            {
+              "id": 4,
+              "text": "かりに"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q39",
+          "number": 39,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "今年も卒業生を送り出した。次に会うときには、彼らも立派な大人に（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "なるだろう"
+            },
+            {
+              "id": 2,
+              "text": "なっただろう"
+            },
+            {
+              "id": 3,
+              "text": "なっているだろう"
+            },
+            {
+              "id": 4,
+              "text": "なっていただろう"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q40",
+          "number": 40,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "毎日（　）どちらでもいいことばかりを日記に書いているのだが、それがストレス解消になっている。",
+          "options": [
+            {
+              "id": 1,
+              "text": "書くとも書かないとも"
+            },
+            {
+              "id": 2,
+              "text": "書いたか書かなかったか"
+            },
+            {
+              "id": 3,
+              "text": "書いても書かなくても"
+            },
+            {
+              "id": 4,
+              "text": "書くとか書かないとか"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q41",
+          "number": 41,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "顔を洗うときには、せっけんを（　）、さっと洗うのが肌にはよい。",
+          "options": [
+            {
+              "id": 1,
+              "text": "使いすぎずに"
+            },
+            {
+              "id": 2,
+              "text": "使うにすぎず"
+            },
+            {
+              "id": 3,
+              "text": "使うにすぎなく"
+            },
+            {
+              "id": 4,
+              "text": "使いすぎもなくて"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q42",
+          "number": 42,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "留学するまで、私は自分が見ている世界がすべてだと思っていた。実はそれが世界のほんの小さな一部分（　）気付いていなかった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "でないことにしか"
+            },
+            {
+              "id": 2,
+              "text": "でしかないことに"
+            },
+            {
+              "id": 3,
+              "text": "にないことでしか"
+            },
+            {
+              "id": 4,
+              "text": "にしかないことで"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q43",
+          "number": 43,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "（会社で）\nA「あれ？ あそこにいるの、山田さんかな。」\nB「山田さんは出張中だよ。今ここに（　）。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "いないわけじゃないよ"
+            },
+            {
+              "id": 2,
+              "text": "いるわけないじゃない"
+            },
+            {
+              "id": 3,
+              "text": "いたわけじゃないよ"
+            },
+            {
+              "id": 4,
+              "text": "いなかったわけじゃない"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q44",
+          "number": 44,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "A「このタレント、最近よくテレビで見るね。」\nB「ほんと。この人を見ない日はない（　）よね。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "と言ってもいいぐらいだ"
+            },
+            {
+              "id": 2,
+              "text": "と言ったらいいだけだ"
+            },
+            {
+              "id": 3,
+              "text": "と言ってもいいからだ"
+            },
+            {
+              "id": 4,
+              "text": "と言ったらいいことだ"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q50",
+          "number": 50,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "ところで、彼ら鉄道ファンたちは（　）趣味を楽しんでいるのだろうか。",
+          "options": [
+            {
+              "id": 1,
+              "text": "それほど"
+            },
+            {
+              "id": 2,
+              "text": "どのように"
+            },
+            {
+              "id": 3,
+              "text": "それでも"
+            },
+            {
+              "id": 4,
+              "text": "どちらの"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q51",
+          "number": 51,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "「乗り鉄」（　）、写真を撮るのが好きな「撮り鉄」、車両や鉄道がある風景を描く「描き鉄」、鉄道の模型が好きな「模型鉄」などだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "にかわって"
+            },
+            {
+              "id": 2,
+              "text": "によって"
+            },
+            {
+              "id": 3,
+              "text": "のうえ"
+            },
+            {
+              "id": 4,
+              "text": "のほか"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q52",
+          "number": 52,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "ある40代の「乗り鉄」の女性は鉄道の魅力を（　）語る。",
+          "options": [
+            {
+              "id": 1,
+              "text": "こう"
+            },
+            {
+              "id": 2,
+              "text": "そう"
+            },
+            {
+              "id": 3,
+              "text": "同様に"
+            },
+            {
+              "id": 4,
+              "text": "以上のように"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q53",
+          "number": 53,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "（　）の特徴は、他の「鉄」とは異なり、ホームではなく、電車が見えるところにある公園やレストランなど、子どもと一緒にゆっくり過ごせる場所で電車を見るという点である。",
+          "options": [
+            {
+              "id": 1,
+              "text": "鉄道ファン"
+            },
+            {
+              "id": 2,
+              "text": "女性ファン"
+            },
+            {
+              "id": 3,
+              "text": "彼女たち"
+            },
+            {
+              "id": 4,
+              "text": "大人たち"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2012_q54",
+          "number": 54,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "鉄道ファンにはいろいろなタイプがあり、楽しみ方も（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "さまざまだ"
+            },
+            {
+              "id": 2,
+              "text": "さまざまだと言われた"
+            },
+            {
+              "id": 3,
+              "text": "さまざまである点だ"
+            },
+            {
+              "id": 4,
+              "text": "さまざまだと思われている"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2012_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    },
+    {
+      "title": "N2 Grammar Practice B",
+      "level": "N2",
+      "section": "grammar",
+      "time_minutes": 105,
+      "source_file": "N2G.pdf",
+      "id": "n2_grammar_test_b",
+      "original_question_count": 22,
+      "clean_question_count": 17,
+      "questions": [
+        {
+          "id": "n2_grammar_2018_q33",
+          "number": 33,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "卒業論文がなかなか書けなくて、一時は（　）かけたが、何とか今日無事に提出することができた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "あきらめ"
+            },
+            {
+              "id": 2,
+              "text": "あきらめて"
+            },
+            {
+              "id": 3,
+              "text": "あきらめる"
+            },
+            {
+              "id": 4,
+              "text": "あきらめた"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q34",
+          "number": 34,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "子どものころ、母（　）作ったハンバーグが大好きで、よく作ってもらった。",
+          "options": [
+            {
+              "id": 1,
+              "text": "の"
+            },
+            {
+              "id": 2,
+              "text": "との"
+            },
+            {
+              "id": 3,
+              "text": "によって"
+            },
+            {
+              "id": 4,
+              "text": "にとって"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q35",
+          "number": 35,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "多様な情報があふれる現代社会（　）、大切なのは、膨大な情報の中から、自分に必要な情報を選ぶ力である。",
+          "options": [
+            {
+              "id": 1,
+              "text": "に加えて"
+            },
+            {
+              "id": 2,
+              "text": "において"
+            },
+            {
+              "id": 3,
+              "text": "を基にして"
+            },
+            {
+              "id": 4,
+              "text": "を込めて"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q36",
+          "number": 36,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "作文が得意な友達に「どうやったらうまくなれるの？」と聞いたら、「たくさん書けば（　）うまくなるよ。」と言われた。",
+          "options": [
+            {
+              "id": 1,
+              "text": "必ずしも"
+            },
+            {
+              "id": 2,
+              "text": "たとえ"
+            },
+            {
+              "id": 3,
+              "text": "そのうち"
+            },
+            {
+              "id": 4,
+              "text": "さっき"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q37",
+          "number": 37,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "看護師の仕事は夜勤もあって大変だが、自分でこの仕事を選んだ（　）、がんばって続けたいと思う。",
+          "options": [
+            {
+              "id": 1,
+              "text": "以上"
+            },
+            {
+              "id": 2,
+              "text": "とたん"
+            },
+            {
+              "id": 3,
+              "text": "あげくに"
+            },
+            {
+              "id": 4,
+              "text": "かのようで"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q38",
+          "number": 38,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "（内線電話で）\n山田「はい、山田です。」\n木村「受付の木村ですが、X社の中川様が（　）。」\n山田「わかりました。すぐ行きます。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "伺いました"
+            },
+            {
+              "id": 2,
+              "text": "お目にかかりました"
+            },
+            {
+              "id": 3,
+              "text": "ございました"
+            },
+            {
+              "id": 4,
+              "text": "お越しになりました"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q39",
+          "number": 39,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "人は一生のうちどのくらい寝ているのでしょうか。仮に一日8時間寝て、80歳まで生きる（　）。すると、睡眠時間は約233,600時間で、約27年寝ている計算になります。",
+          "options": [
+            {
+              "id": 1,
+              "text": "となりました"
+            },
+            {
+              "id": 2,
+              "text": "とします"
+            },
+            {
+              "id": 3,
+              "text": "とされていました"
+            },
+            {
+              "id": 4,
+              "text": "と見られます"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q40",
+          "number": 40,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "夢を語る（　）誰でもできるが、実現させるのは簡単なことではない。",
+          "options": [
+            {
+              "id": 1,
+              "text": "だけでは"
+            },
+            {
+              "id": 2,
+              "text": "だけなら"
+            },
+            {
+              "id": 3,
+              "text": "ためしか"
+            },
+            {
+              "id": 4,
+              "text": "ためには"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q41",
+          "number": 41,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "（説明書で）\nエアコンを掃除するときは、安全上、必ずコンセントを（　）してください。",
+          "options": [
+            {
+              "id": 1,
+              "text": "抜いたことを"
+            },
+            {
+              "id": 2,
+              "text": "抜いたことが"
+            },
+            {
+              "id": 3,
+              "text": "抜いてからに"
+            },
+            {
+              "id": 4,
+              "text": "抜いてからは"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q42",
+          "number": 42,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "私はスピーチが苦手なのに、今度友達の結婚パーティーでスピーチを（　）、困っている。",
+          "options": [
+            {
+              "id": 1,
+              "text": "しにくくて"
+            },
+            {
+              "id": 2,
+              "text": "してほしくて"
+            },
+            {
+              "id": 3,
+              "text": "させてみたくて"
+            },
+            {
+              "id": 4,
+              "text": "することになってしまって"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q43",
+          "number": 43,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "せっかく、夕日がきれいなことで有名なA海岸に来たのに、急に雨が降り出した。どうも夕日は（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "見えてもしかたない"
+            },
+            {
+              "id": 2,
+              "text": "見られないことだった"
+            },
+            {
+              "id": 3,
+              "text": "見られそうにない"
+            },
+            {
+              "id": 4,
+              "text": "見えないことがあった"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q44",
+          "number": 44,
+          "mondai": 7,
+          "subtype": "grammar_completion",
+          "prompt": "山川「中村くん、毎日ジョギング（　）？」\n中村「うん、そうなんだよ。」\n山川「実は、ぼくもなんだよ。走るっていいよね。」",
+          "options": [
+            {
+              "id": 1,
+              "text": "しない"
+            },
+            {
+              "id": 2,
+              "text": "しててもいい"
+            },
+            {
+              "id": 3,
+              "text": "しちゃえば"
+            },
+            {
+              "id": 4,
+              "text": "してるんだって"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q50",
+          "number": 50,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "世界のあちこちで使われているこのトイレマークが実は日本で生まれたものだということを（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "ご存じなわけだ"
+            },
+            {
+              "id": 2,
+              "text": "ご存じだろうか"
+            },
+            {
+              "id": 3,
+              "text": "ご存じのようだ"
+            },
+            {
+              "id": 4,
+              "text": "ご存じだからだろう"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q51",
+          "number": 51,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "当時、日本国内の案内板は「お手洗い」などと日本語で書かれているものがほとんどだった。（　）、それでは世界90数か国から来日する選手たちに理解してもらえない。",
+          "options": [
+            {
+              "id": 1,
+              "text": "それに"
+            },
+            {
+              "id": 2,
+              "text": "しかし"
+            },
+            {
+              "id": 3,
+              "text": "または"
+            },
+            {
+              "id": 4,
+              "text": "それどころか"
+            }
+          ],
+          "correct_option": 2,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q52",
+          "number": 52,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "そこで、案内板作成者たちは、あらゆる国の選手が理解できるよう、絵で表すことを考えた。（　）、トイレマークなのだ。",
+          "options": [
+            {
+              "id": 1,
+              "text": "作成者が理解したのは"
+            },
+            {
+              "id": 2,
+              "text": "日本で考えられたのが"
+            },
+            {
+              "id": 3,
+              "text": "ここに生み出したのは"
+            },
+            {
+              "id": 4,
+              "text": "こうして生まれたのが"
+            }
+          ],
+          "correct_option": 4,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q53",
+          "number": 53,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "競技を表すマークは、この東京オリンピックで初めて全面的に導入され、高い評価を受けた。そして、その後のオリンピックでもデザインを変えながら毎回（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "使用されている"
+            },
+            {
+              "id": 2,
+              "text": "使用した点だ"
+            },
+            {
+              "id": 3,
+              "text": "使用していける"
+            },
+            {
+              "id": 4,
+              "text": "使用したいものだ"
+            }
+          ],
+          "correct_option": 1,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        },
+        {
+          "id": "n2_grammar_2018_q54",
+          "number": 54,
+          "mondai": 9,
+          "subtype": "context_completion",
+          "prompt": "それは、あらゆる人にわかりやすくという思いが世界に届いた（　）。",
+          "options": [
+            {
+              "id": 1,
+              "text": "結果として表れるかもしれない"
+            },
+            {
+              "id": 2,
+              "text": "結果のはずだった"
+            },
+            {
+              "id": 3,
+              "text": "結果に違いない"
+            },
+            {
+              "id": 4,
+              "text": "結果でなければならなかった"
+            }
+          ],
+          "correct_option": 3,
+          "answer_source": "official_jlpt_2018_answer_key",
+          "explanation": "",
+          "verified_for_app_v1": true
+        }
+      ]
+    }
+  ]
+}

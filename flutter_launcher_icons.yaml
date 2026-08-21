@@ -1,5 +1,7 @@
-flutter_launcher_icons:
+﻿flutter_launcher_icons:
   android: true
   ios: false
-  image_path: "assets/branding/app_icon.png"
+  image_path: "assets/branding/jlpt_study_icon.png"
+  adaptive_icon_background: "#F6F1E8"
+  adaptive_icon_foreground: "assets/branding/jlpt_study_launcher_foreground.png"
   min_sdk_android: 21
