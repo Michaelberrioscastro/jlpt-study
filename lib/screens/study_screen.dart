@@ -56,9 +56,7 @@ class _StudyScreenState extends State<StudyScreen> {
   Future<void> _loadSession() async {
     try {
       final List<StudyItem> loaded;
-      if (widget.level == 'BEGINNER') {
-        loaded = await DatabaseService.getTodayBeginnerItems(limit: 20);
-      } else if (widget.level == 'KANA') {
+      if (widget.level == 'KANA') {
         loaded = await DatabaseService.getTodayKanaItems(
           script: widget.studyType,
           dueReviewLimit: 20,
@@ -269,8 +267,6 @@ class _StudyScreenState extends State<StudyScreen> {
         return 'Hiragana';
       case 'katakana':
         return 'Katakana';
-      case 'beginner':
-        return 'Review';
       case 'mix':
       default:
         return 'Mixed';
@@ -285,8 +281,6 @@ class _StudyScreenState extends State<StudyScreen> {
         return 'What does this grammar pattern express?';
       case 'kana':
         return 'Do you remember how to read this kana?';
-      case 'beginner':
-        return 'Do you remember what this expression means?';
       case 'vocab':
       default:
         return 'Do you know this word?';
@@ -303,17 +297,13 @@ class _StudyScreenState extends State<StudyScreen> {
         return 'VOCABULARY';
       case 'kana':
         return 'KANA';
-      case 'beginner':
-        return 'BEGINNER';
       default:
         return type.toUpperCase();
     }
   }
 
   bool get _canManageGrammar =>
-      widget.studyType == 'grammar' &&
-      widget.level != 'BEGINNER' &&
-      widget.level != 'KANA';
+      widget.studyType == 'grammar' && widget.level != 'KANA';
 
   Future<void> _openGrammarManager() async {
     if (!_canManageGrammar) return;
@@ -600,7 +590,6 @@ class _StudyScreenState extends State<StudyScreen> {
                       disabled: _saving,
                       onRating: _rate,
                       onLearned: _markLearned,
-                      showLearned: widget.level != 'BEGINNER',
                     )
                   : const SizedBox(key: ValueKey('rating-bar-hidden')),
             ),

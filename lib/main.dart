@@ -23,7 +23,7 @@ class JLPTStudyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'JLPT Study',
+      title: 'JLPT Tracker',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: const AppSplashScreen(),

@@ -1,5 +1,5 @@
 name: jlpt_study
-description: "A JLPT and Kana spaced-repetition study app."
+description: "A JLPT knowledge tracker with SRS review, Kana tracking, and JLPT-style practice."
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -29,8 +29,7 @@ flutter:
 
   assets:
     - assets/database/jlpt_study_master.sqlite
-    - assets/data/
-    - assets/data/practice/jlpt_practice_n5_vocab_clean.json
+    - assets/data/kana_seed.json
     - assets/data/practice/
     - assets/audio/kana/
     - assets/branding/
