@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../services/database_service.dart';
 import '../theme/app_colors.dart';
+import 'learning_home_screen.dart';
 import 'practice/practice_home_screen.dart';
 import 'kana_screen.dart';
 import 'level_screen.dart';
@@ -72,6 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> _openLearning() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    HapticFeedback.selectionClick();
+
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(builder: (_) => const LearningHomeScreen()),
+    );
+  }
+
   Widget _buildStudyNavigator() {
     return Navigator(
       key: _studyNavigatorKey,
@@ -114,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final pages = <Widget>[
       _OverviewHome(
         activeLevel: _activeLevel,
+        onLearnTap: _openLearning,
         onStudyTap: () => _selectTab(1),
         onPracticeTap: () => _selectTab(2),
         onKanaTap: () => _selectTab(3),
@@ -282,12 +293,14 @@ class _PremiumNavigationBar extends StatelessWidget {
 
 class _OverviewHome extends StatefulWidget {
   final String activeLevel;
+  final VoidCallback onLearnTap;
   final VoidCallback onStudyTap;
   final VoidCallback onPracticeTap;
   final VoidCallback onKanaTap;
 
   const _OverviewHome({
     required this.activeLevel,
+    required this.onLearnTap,
     required this.onStudyTap,
     required this.onPracticeTap,
     required this.onKanaTap,
@@ -378,6 +391,16 @@ class _OverviewHomeState extends State<_OverviewHome> {
                     title: 'What would you like to do?',
                   ),
                   const SizedBox(height: 12),
+                  _HomeActionCard(
+                    icon: Icons.psychology_alt_rounded,
+                    title: 'Learn N4 Vocabulary',
+                    subtitle:
+                        'Learn meaning, reading, context, and active recall in guided daily lessons.',
+                    accent: AppColors.vermilion,
+                    accentSoft: AppColors.vermilionSoft,
+                    onTap: widget.onLearnTap,
+                  ),
+                  const SizedBox(height: 10),
                   _HomeActionCard(
                     icon: Icons.school_rounded,
                     title: 'Study with SRS',
