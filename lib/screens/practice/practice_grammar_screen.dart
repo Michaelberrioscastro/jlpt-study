@@ -120,7 +120,7 @@ class _PracticeGrammarScreenState extends State<PracticeGrammarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$_level · Grammar')),
+      appBar: AppBar(title: Text('$_level Grammar Practice')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -135,27 +135,30 @@ class _PracticeGrammarScreenState extends State<PracticeGrammarScreen> {
               attempts: _recentAttempts,
             ),
             const SizedBox(height: 24),
-            _SectionHeader(eyebrow: '$_level · 文法', title: 'Grammar'),
+            _SectionHeader(
+              eyebrow: '$_level · 文法',
+              title: 'Choose a practice mode',
+            ),
             const SizedBox(height: 12),
             if (_loading)
-              const SizedBox(
-                height: 180,
-                child: Center(child: CircularProgressIndicator()),
-              )
+              _PracticeLoadingCard(level: _level)
             else if (_error != null)
               _ErrorCard(error: _error!, onRetry: _load)
             else ...[
               _PracticeCard(
                 icon: Icons.bolt_rounded,
                 title: 'Quick practice',
-                subtitle: 'Random questions with feedback after each answer.',
+                subtitle:
+                    'Short random sessions with feedback after each answer.',
                 children: [
                   Expanded(
                     child: OutlinedButton(
                       onPressed: _questionCount == null
                           ? () => _startQuick(5)
                           : null,
-                      child: const Text('5 questions'),
+                      child: Text(
+                        _questionCount == 5 ? 'Preparing…' : '5 questions',
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -164,7 +167,9 @@ class _PracticeGrammarScreenState extends State<PracticeGrammarScreen> {
                       onPressed: _questionCount == null
                           ? () => _startQuick(10)
                           : null,
-                      child: const Text('10 questions'),
+                      child: Text(
+                        _questionCount == 10 ? 'Preparing…' : '10 questions',
+                      ),
                     ),
                   ),
                 ],
@@ -172,15 +177,20 @@ class _PracticeGrammarScreenState extends State<PracticeGrammarScreen> {
               const SizedBox(height: 12),
               _PracticeCard(
                 icon: Icons.timer_outlined,
-                title: 'Full test',
+                title: 'Full grammar test',
                 subtitle:
-                    'The full valid $_level Grammar question bank. No feedback until the end.',
+                    'Use the full available $_level grammar question bank with results at the end.',
                 children: [
                   Expanded(
                     child: FilledButton.icon(
                       onPressed: _questionCount == null ? _startFull : null,
                       icon: const Icon(Icons.play_arrow_rounded),
-                      label: Text('$_availableQuestions questions'),
+                      label: Text(
+                        _questionCount == _availableQuestions &&
+                                _questionCount != null
+                            ? 'Preparing…'
+                            : '$_availableQuestions questions',
+                      ),
                     ),
                   ),
                 ],
@@ -188,6 +198,68 @@ class _PracticeGrammarScreenState extends State<PracticeGrammarScreen> {
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _PracticeLoadingCard extends StatelessWidget {
+  final String level;
+
+  const _PracticeLoadingCard({required this.level});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primarySoft,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Text(
+              '文',
+              style: TextStyle(
+                color: AppColors.primaryStrong,
+                fontSize: 21,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          const SizedBox(width: 13),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Loading $level grammar practice',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(99)),
+                  child: LinearProgressIndicator(
+                    minHeight: 5,
+                    color: AppColors.primaryStrong,
+                    backgroundColor: AppColors.primarySoft,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -217,10 +289,13 @@ class _HeroCard extends StatelessWidget {
               color: Colors.white.withValues(alpha: .75),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Icon(
-              Icons.fact_check_rounded,
-              color: AppColors.primaryStrong,
-              size: 31,
+            child: const Text(
+              '文',
+              style: TextStyle(
+                color: AppColors.primaryStrong,
+                fontSize: 27,
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
           const SizedBox(width: 16),
@@ -229,12 +304,22 @@ class _HeroCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Prepare for the JLPT',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  'Grammar practice',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 3),
                 Text(
-                  '$availableQuestions $level Grammar questions available to start.',
+                  '文法 · $level',
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: AppColors.primaryStrong,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 7),
+                Text(
+                  '$availableQuestions JLPT-style grammar questions available for $level.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -274,14 +359,24 @@ class _PreparationCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.auto_graph_rounded,
-                color: AppColors.primaryStrong,
+              Container(
+                width: 38,
+                height: 38,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColors.primarySoft,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.insights_rounded,
+                  color: AppColors.primaryStrong,
+                  size: 20,
+                ),
               ),
-              const SizedBox(width: 9),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  '$level · Grammar Preparation',
+                  '$level · Grammar practice',
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w900,
@@ -307,8 +402,8 @@ class _PreparationCard extends StatelessWidget {
           const SizedBox(height: 9),
           Text(
             attempts.isEmpty
-                ? 'Complete your first practice session to start calculating your preparation.'
-                : 'Estimate based on your last 3 attempts, with more weight given to recent ones.',
+                ? 'Complete your first session to start tracking your grammar practice score.'
+                : 'Practice score based on your recent attempts, with more weight given to newer results.',
             style: Theme.of(context).textTheme.bodySmall,
           ),
           if (attempts.isNotEmpty) ...[
@@ -316,7 +411,7 @@ class _PreparationCard extends StatelessWidget {
             const Divider(height: 1),
             const SizedBox(height: 13),
             const Text(
-              'Recent attempts',
+              'Recent practice',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 8),
@@ -351,7 +446,7 @@ class _AttemptRow extends StatelessWidget {
         modeLabel = '10 questions';
         break;
       case 'full':
-        modeLabel = 'Full test';
+        modeLabel = 'Full grammar test';
         break;
       default:
         modeLabel = attempt.mode;

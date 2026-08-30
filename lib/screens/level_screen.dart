@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../models/study_item.dart';
 import '../services/database_service.dart';
 import '../theme/app_colors.dart';
+import 'practice/practice_level_screen.dart';
 import 'study_screen.dart';
 
 class LevelScreen extends StatefulWidget {
@@ -71,6 +72,19 @@ class _LevelScreenState extends State<LevelScreen> {
     await _load();
   }
 
+  Future<void> _openPractice() async {
+    HapticFeedback.selectionClick();
+
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => PracticeLevelScreen(level: widget.level),
+      ),
+    );
+
+    if (!mounted) return;
+    await _load();
+  }
+
   Future<void> _openStudyCatalog({
     required String type,
     required String title,
@@ -116,7 +130,7 @@ class _LevelScreenState extends State<LevelScreen> {
       case 'grammar':
         return 'Grammar';
       default:
-        return 'Mix';
+        return 'Mixed';
     }
   }
 
@@ -132,7 +146,7 @@ class _LevelScreenState extends State<LevelScreen> {
     final progress = total == 0 ? 0.0 : learned / total;
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.level)),
+      appBar: AppBar(title: Text('${widget.level} Tracker')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -152,57 +166,29 @@ class _LevelScreenState extends State<LevelScreen> {
                 due: due,
               ),
 
-              const SizedBox(height: 26),
+              const SizedBox(height: 24),
+
+              _TrackerStatusCard(
+                learned: learned,
+                learning: learning,
+                due: due,
+                notLearned: newItems,
+              ),
+
+              const SizedBox(height: 28),
 
               Text(
-                'What would you like to study?',
+                'Track by area',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
               ),
               const SizedBox(height: 6),
               Text(
-                'Choose a study mode for this session.',
+                'Open a category to browse its items and mark what you already know.',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 14),
-
-              _StudyTypeSelector(
-                selected: studyType,
-                onSelected: (value) {
-                  setState(() => studyType = value);
-                },
-              ),
-
-              // The CTA now sits immediately under the selector.
-              const SizedBox(height: 14),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: total == 0 ? null : _startStudy,
-                  icon: const Icon(Icons.play_arrow_rounded),
-                  label: Text('Study $_studyLabel'),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              Row(
-                children: [
-                  Text(
-                    'Progress by area',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '$learning learning',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
 
               _ProgressTile(
                 title: 'Vocabulary',
@@ -240,7 +226,39 @@ class _LevelScreenState extends State<LevelScreen> {
                 ),
               ),
 
-              const SizedBox(height: 18),
+              const SizedBox(height: 30),
+
+              Text(
+                'Review your knowledge',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Choose what to include in this SRS review session.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 14),
+
+              _StudyTypeSelector(
+                selected: studyType,
+                onSelected: (value) {
+                  setState(() => studyType = value);
+                },
+              ),
+
+              const SizedBox(height: 14),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: total == 0 ? null : _startStudy,
+                  icon: const Icon(Icons.refresh_rounded),
+                  label: Text('Start $_studyLabel review'),
+                ),
+              ),
+
+              const SizedBox(height: 16),
 
               _SessionInfo(
                 learned: learned,
@@ -248,9 +266,172 @@ class _LevelScreenState extends State<LevelScreen> {
                 due: due,
                 newItems: newItems,
               ),
+
+              const SizedBox(height: 30),
+
+              Text(
+                'Practice your knowledge',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Test your ${widget.level} knowledge with JLPT-style Vocabulary, Grammar, and Reading questions.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 14),
+
+              _PracticeKnowledgeCard(level: widget.level, onTap: _openPractice),
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _TrackerStatusCard extends StatelessWidget {
+  final int learned;
+  final int learning;
+  final int due;
+  final int notLearned;
+
+  const _TrackerStatusCard({
+    required this.learned,
+    required this.learning,
+    required this.due,
+    required this.notLearned,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Knowledge status',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'A quick snapshot of how your ${learned + learning + notLearned} tracked items are classified.',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _TrackerStatusMetric(
+                  label: 'Learned',
+                  value: learned,
+                  icon: Icons.check_circle_rounded,
+                  accent: AppColors.sage,
+                  background: AppColors.sageSoft,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _TrackerStatusMetric(
+                  label: 'Learning',
+                  value: learning,
+                  icon: Icons.autorenew_rounded,
+                  accent: AppColors.primary,
+                  background: AppColors.primarySoft,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: _TrackerStatusMetric(
+                  label: 'Due',
+                  value: due,
+                  icon: Icons.schedule_rounded,
+                  accent: AppColors.gold,
+                  background: AppColors.goldSoft,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _TrackerStatusMetric(
+                  label: 'Not learned',
+                  value: notLearned,
+                  icon: Icons.radio_button_unchecked_rounded,
+                  accent: AppColors.textSecondary,
+                  background: AppColors.surfaceSoft,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TrackerStatusMetric extends StatelessWidget {
+  final String label;
+  final int value;
+  final IconData icon;
+  final Color accent;
+  final Color background;
+
+  const _TrackerStatusMetric({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.accent,
+    required this.background,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: accent),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$value',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -307,13 +488,13 @@ class _LevelHero extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '$level profile',
+                      '$level knowledge tracker',
                       style: Theme.of(context).textTheme.headlineSmall
                           ?.copyWith(fontWeight: FontWeight.w900),
                     ),
                     const SizedBox(height: 3),
                     Text(
-                      '$due reviews due',
+                      '$due reviews ready',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
@@ -353,7 +534,7 @@ class _LevelHero extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '$learned of $total learned',
+            '$learned of $total marked learned',
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
@@ -371,8 +552,8 @@ class _StudyTypeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const items = [
-      ('mix', 'Mix', Icons.auto_awesome_rounded),
-      ('vocab', 'Vocab', Icons.menu_book_outlined),
+      ('mix', 'Mixed', Icons.auto_awesome_rounded),
+      ('vocab', 'Vocabulary', Icons.menu_book_outlined),
       ('kanji', 'Kanji', Icons.translate_rounded),
       ('grammar', 'Grammar', Icons.edit_note_outlined),
     ];
@@ -664,7 +845,7 @@ class _ProgressTileState extends State<_ProgressTile> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        '$learned / $total learned · $learning learning',
+                        '$learned / $total learned · $learning in SRS',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -677,6 +858,111 @@ class _ProgressTileState extends State<_ProgressTile> {
                   child: const Icon(
                     Icons.chevron_right_rounded,
                     color: AppColors.primaryStrong,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PracticeKnowledgeCard extends StatefulWidget {
+  final String level;
+  final VoidCallback onTap;
+
+  const _PracticeKnowledgeCard({required this.level, required this.onTap});
+
+  @override
+  State<_PracticeKnowledgeCard> createState() => _PracticeKnowledgeCardState();
+}
+
+class _PracticeKnowledgeCardState extends State<_PracticeKnowledgeCard> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedScale(
+      scale: _pressed ? .988 : 1,
+      duration: const Duration(milliseconds: 105),
+      curve: Curves.easeOutCubic,
+      child: Material(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        child: InkWell(
+          onTap: widget.onTap,
+          onHighlightChanged: (value) {
+            if (_pressed == value) return;
+            setState(() => _pressed = value);
+          },
+          borderRadius: BorderRadius.circular(22),
+          child: Container(
+            padding: const EdgeInsets.all(17),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: AppColors.outline),
+              boxShadow: _pressed
+                  ? null
+                  : [
+                      BoxShadow(
+                        color: AppColors.textPrimary.withValues(alpha: .025),
+                        blurRadius: 14,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 54,
+                  height: 54,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColors.sageSoft,
+                    borderRadius: BorderRadius.circular(17),
+                  ),
+                  child: const Icon(
+                    Icons.fact_check_rounded,
+                    color: AppColors.sage,
+                    size: 26,
+                  ),
+                ),
+                const SizedBox(width: 13),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${widget.level} JLPT Practice',
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Vocabulary · Grammar · Reading',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Open practice for ${widget.level}',
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(
+                              color: AppColors.sage,
+                              fontWeight: FontWeight.w900,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                AnimatedSlide(
+                  offset: _pressed ? const Offset(.08, 0) : Offset.zero,
+                  duration: const Duration(milliseconds: 105),
+                  child: const Icon(
+                    Icons.chevron_right_rounded,
+                    color: AppColors.sage,
                   ),
                 ),
               ],
@@ -870,7 +1156,7 @@ class _StudyCatalogSheetState extends State<_StudyCatalogSheet> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '${_learnedCount} of ${_items.length} marked as learned',
+                            '${_learnedCount} of ${_items.length} marked learned',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -929,7 +1215,7 @@ class _StudyCatalogSheetState extends State<_StudyCatalogSheet> {
                     ),
                     const SizedBox(width: 8),
                     ChoiceChip(
-                      label: Text('Pending ($pendingCount)'),
+                      label: Text('Not learned ($pendingCount)'),
                       selected: _filter == 'pending',
                       onSelected: (_) {
                         HapticFeedback.selectionClick();
@@ -961,8 +1247,8 @@ class _StudyCatalogSheetState extends State<_StudyCatalogSheet> {
                     const SizedBox(width: 7),
                     Expanded(
                       child: Text(
-                        'Items marked as learned will not appear in SRS. '
-                        'Existing SRS history is preserved.',
+                        'Mark items as Learned when you already know them. '
+                        'Learned items stay out of SRS, while review history is preserved.',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.textMuted,
                         ),
@@ -1127,7 +1413,7 @@ class _CatalogItemCard extends StatelessWidget {
                       switchOutCurve: Curves.easeIn,
                       child: _SmallStatusChip(
                         key: ValueKey('learned-${item.id}-${item.learned}'),
-                        label: item.learned ? 'Learned' : 'Pending',
+                        label: item.learned ? 'Learned' : 'Not learned',
                         icon: item.learned
                             ? Icons.check_circle_rounded
                             : Icons.radio_button_unchecked_rounded,
@@ -1157,7 +1443,7 @@ class _CatalogItemCard extends StatelessWidget {
                       key: ValueKey('toggle-${item.id}-${item.learned}'),
                       onPressed: onToggle,
                       tooltip: item.learned
-                          ? 'Mark as pending'
+                          ? 'Mark as not learned'
                           : 'Mark as learned',
                       icon: Icon(
                         item.learned
@@ -1488,7 +1774,8 @@ class _SessionInfo extends StatelessWidget {
           const SizedBox(width: 9),
           Expanded(
             child: Text(
-              'The session prioritizes reviews, mixes in learning items, and adds up to 8 new items.',
+              'Review sessions prioritize due items, then reinforce items already in SRS. '
+              'Up to 8 not-yet-tracked items may be introduced when needed.',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),

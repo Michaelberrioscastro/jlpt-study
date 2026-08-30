@@ -45,6 +45,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
       }
       remaining -= questions.length;
     }
+
     return items;
   }
 
@@ -53,6 +54,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
         .where((item) => item.passage.id == _passage.id)
         .map((item) => item.question.id)
         .toSet();
+
     return _passage.questions.where((q) => ids.contains(q.id)).toList();
   }
 
@@ -94,6 +96,7 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
           (item) => _answers[item.question.id] == item.question.correctOption,
         )
         .length;
+
     final total = items.length;
     final percent = total == 0 ? 0 : ((score / total) * 100).round();
 
@@ -111,45 +114,106 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
       context: context,
       isDismissible: false,
       enableDrag: false,
+      backgroundColor: Colors.transparent,
       builder: (sheetContext) {
         return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 26, 24, 28),
+          top: false,
+          child: Container(
+            margin: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(22, 24, 22, 22),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(color: AppColors.outline),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.textPrimary.withValues(alpha: .08),
+                  blurRadius: 28,
+                  offset: const Offset(0, 12),
+                ),
+              ],
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.menu_book_rounded,
-                  size: 46,
-                  color: AppColors.primaryStrong,
+                Container(
+                  width: 64,
+                  height: 64,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColors.primarySoft,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    '読',
+                    style: TextStyle(
+                      color: AppColors.primaryStrong,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  '${widget.level.toUpperCase()} · Reading Result',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  'Reading practice complete',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 5),
                 Text(
-                  '$score / $total · $percent%',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+                  '${widget.level.toUpperCase()} · Reading',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 20),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 16,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryContainer,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _ResultMetric(
+                          label: 'Correct',
+                          value: '$score / $total',
+                        ),
+                      ),
+                      Container(width: 1, height: 40, color: AppColors.outline),
+                      Expanded(
+                        child: _ResultMetric(
+                          label: 'Practice score',
+                          value: '$percent%',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 14),
                 Text(
-                  'This attempt has been saved and will update your Reading preparation.',
+                  'This attempt has been saved and will update your Reading practice score.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 22),
                 SizedBox(
                   width: double.infinity,
-                  child: FilledButton(
+                  child: FilledButton.icon(
                     onPressed: () {
                       Navigator.pop(sheetContext);
                       Navigator.pop(context, true);
                     },
-                    child: const Text('Back to Reading'),
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    label: const Text('Back to Reading Practice'),
                   ),
                 ),
               ],
@@ -164,45 +228,64 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
   Widget build(BuildContext context) {
     if (widget.passages.isEmpty || _items.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.title)),
-        body: const Center(child: Text('No reading passages available.')),
+        backgroundColor: AppColors.background,
+        appBar: AppBar(
+          backgroundColor: AppColors.background,
+          surfaceTintColor: Colors.transparent,
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Container(
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: AppColors.outline),
+              ),
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.menu_book_outlined,
+                    color: AppColors.textMuted,
+                    size: 34,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'No reading passages available.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       );
     }
 
     final progress = _answeredCount / _items.length;
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        surfaceTintColor: Colors.transparent,
+        title: Text(widget.title),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-              child: Column(
-                children: [
-                  LinearProgressIndicator(
-                    value: progress,
-                    minHeight: 8,
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                  const SizedBox(height: 7),
-                  Row(
-                    children: [
-                      Text(
-                        '$_answeredCount/${_items.length} answered',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      const Spacer(),
-                      Text(
-                        widget.examMode ? 'Exam mode' : 'Practice',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            _ReadingProgressHeader(
+              level: widget.level.toUpperCase(),
+              currentPassage: _passageIndex + 1,
+              totalPassages: widget.passages.length,
+              answered: _answeredCount,
+              totalQuestions: _items.length,
+              progress: progress,
+              examMode: widget.examMode,
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -220,36 +303,45 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceSoft,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: AppColors.outline),
-                      ),
-                      child: SelectableText(
-                        _passage.passage,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          height: 1.8,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    _PassageCard(text: _passage.passage),
+                    const SizedBox(height: 24),
+                    Text(
+                      _visibleQuestions.length == 1
+                          ? 'Question'
+                          : '${_visibleQuestions.length} questions',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
-                    const SizedBox(height: 22),
+                    const SizedBox(height: 14),
                     ..._visibleQuestions.map(_buildQuestion),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                border: Border(
+                  top: BorderSide(
+                    color: AppColors.outline.withValues(alpha: .7),
+                  ),
+                ),
+              ),
               child: SizedBox(
                 width: double.infinity,
-                child: FilledButton(
+                child: FilledButton.icon(
                   onPressed: _passageComplete ? _continue : null,
-                  child: Text(
+                  icon: Icon(
+                    !widget.examMode && !_checking
+                        ? Icons.check_rounded
+                        : (_passageIndex == widget.passages.length - 1 ||
+                              _answeredCount >= _items.length)
+                        ? Icons.fact_check_rounded
+                        : Icons.arrow_forward_rounded,
+                  ),
+                  label: Text(
                     !widget.examMode && !_checking
                         ? 'Check answers'
                         : (_passageIndex == widget.passages.length - 1 ||
@@ -268,35 +360,36 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
 
   Widget _buildQuestion(JlptReadingQuestion question) {
     final selected = _answers[question.id];
+    final correct = selected == question.correctOption;
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 24),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 18),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: AppColors.outline),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '${question.number}. ${question.prompt}',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              height: 1.6,
+              height: 1.55,
               fontWeight: FontWeight.w900,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
           ...question.options.map(
             (option) => _buildOption(question, option, selected),
           ),
           if (_checking && !widget.examMode) ...[
             const SizedBox(height: 4),
-            Text(
-              selected == question.correctOption
-                  ? '✓ Correct'
-                  : 'Correct answer: ${question.correctOption}',
-              style: TextStyle(
-                color: selected == question.correctOption
-                    ? AppColors.success
-                    : AppColors.error,
-                fontWeight: FontWeight.w900,
-              ),
+            _AnswerFeedbackCard(
+              correct: correct,
+              correctOption: question.correctOption,
+              correctText: _correctOptionText(question),
             ),
           ],
         ],
@@ -314,16 +407,24 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
 
     Color background = AppColors.surface;
     Color border = AppColors.outline;
+    Color numberBackground = AppColors.surfaceSoft;
+    Color numberForeground = AppColors.textSecondary;
 
     if (!widget.examMode && _checking && correct) {
       background = AppColors.sageSoft;
       border = AppColors.success;
+      numberBackground = AppColors.success;
+      numberForeground = Colors.white;
     } else if (!widget.examMode && _checking && selected && !correct) {
       background = const Color(0xFFFFE8E9);
       border = AppColors.error;
+      numberBackground = AppColors.error;
+      numberForeground = Colors.white;
     } else if (selected) {
       background = AppColors.primarySoft;
       border = AppColors.primary;
+      numberBackground = AppColors.primaryStrong;
+      numberForeground = Colors.white;
     }
 
     return Padding(
@@ -334,29 +435,35 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
         child: InkWell(
           onTap: () => _select(question, option.id),
           borderRadius: BorderRadius.circular(17),
-          child: Container(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 160),
+            curve: Curves.easeOutCubic,
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
             decoration: BoxDecoration(
-              border: Border.all(color: border),
+              border: Border.all(
+                color: border,
+                width: selected || (!widget.examMode && _checking && correct)
+                    ? 1.5
+                    : 1,
+              ),
               borderRadius: BorderRadius.circular(17),
             ),
             child: Row(
               children: [
-                Container(
-                  width: 30,
-                  height: 30,
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 160),
+                  width: 32,
+                  height: 32,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: selected
-                        ? AppColors.primaryStrong
-                        : AppColors.surfaceSoft,
+                    color: numberBackground,
                     shape: BoxShape.circle,
                   ),
                   child: Text(
                     '${option.id}',
                     style: TextStyle(
-                      color: selected ? Colors.white : AppColors.textSecondary,
+                      color: numberForeground,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
@@ -366,17 +473,254 @@ class _ReadingTestScreenState extends State<ReadingTestScreen> {
                   child: Text(
                     option.text,
                     style: const TextStyle(
+                      color: AppColors.textPrimary,
                       fontSize: 16,
                       height: 1.5,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
+                if (selected && !_checking) ...[
+                  const SizedBox(width: 8),
+                  const Icon(
+                    Icons.check_circle_outline_rounded,
+                    color: AppColors.primaryStrong,
+                    size: 20,
+                  ),
+                ],
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  String _correctOptionText(JlptReadingQuestion question) {
+    for (final option in question.options) {
+      if (option.id == question.correctOption) {
+        return option.text;
+      }
+    }
+    return '';
+  }
+}
+
+class _ReadingProgressHeader extends StatelessWidget {
+  final String level;
+  final int currentPassage;
+  final int totalPassages;
+  final int answered;
+  final int totalQuestions;
+  final double progress;
+  final bool examMode;
+
+  const _ReadingProgressHeader({
+    required this.level,
+    required this.currentPassage,
+    required this.totalPassages,
+    required this.answered,
+    required this.totalQuestions,
+    required this.progress,
+    required this.examMode,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 6, 20, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColors.primarySoft,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  '読',
+                  style: TextStyle(
+                    color: AppColors.primaryStrong,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$level · Reading',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      examMode
+                          ? 'Exam mode · Passage $currentPassage of $totalPassages'
+                          : 'Practice · Passage $currentPassage of $totalPassages',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '$answered / $totalQuestions',
+                style: const TextStyle(
+                  color: AppColors.primaryStrong,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 11),
+          LinearProgressIndicator(
+            value: progress,
+            minHeight: 7,
+            color: AppColors.primaryStrong,
+            backgroundColor: AppColors.surfaceMuted,
+            borderRadius: BorderRadius.circular(99),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PassageCard extends StatelessWidget {
+  final String text;
+
+  const _PassageCard({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceSoft,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: SelectableText(
+        text,
+        style: const TextStyle(
+          color: AppColors.textPrimary,
+          fontSize: 17,
+          height: 1.8,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+}
+
+class _AnswerFeedbackCard extends StatelessWidget {
+  final bool correct;
+  final int correctOption;
+  final String correctText;
+
+  const _AnswerFeedbackCard({
+    required this.correct,
+    required this.correctOption,
+    required this.correctText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = correct ? AppColors.success : AppColors.error;
+    final background = correct ? AppColors.sageSoft : const Color(0xFFFFE8E9);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(13),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: accent.withValues(alpha: .45)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            correct ? Icons.check_circle_rounded : Icons.cancel_rounded,
+            color: accent,
+            size: 20,
+          ),
+          const SizedBox(width: 9),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  correct ? 'Correct' : 'Not quite',
+                  style: TextStyle(color: accent, fontWeight: FontWeight.w900),
+                ),
+                if (!correct) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    correctText.isEmpty
+                        ? 'Correct answer: $correctOption'
+                        : 'Correct answer: $correctOption · $correctText',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ResultMetric extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _ResultMetric({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppColors.primaryStrong,
+            fontSize: 22,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        const SizedBox(height: 3),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: AppColors.textSecondary,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
     );
   }
 }

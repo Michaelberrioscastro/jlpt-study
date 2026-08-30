@@ -93,7 +93,7 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$_level · Reading')),
+      appBar: AppBar(title: Text('$_level Reading Practice')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -107,15 +107,12 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
             ),
             const SizedBox(height: 22),
             if (_loading)
-              const SizedBox(
-                height: 180,
-                child: Center(child: CircularProgressIndicator()),
-              )
+              _PracticeLoadingCard(level: _level)
             else if (_error != null)
               _ErrorCard(error: _error!, onRetry: _load)
             else ...[
               Text(
-                'PRACTICE',
+                'PRACTICE YOUR KNOWLEDGE',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppColors.primaryStrong,
                   fontWeight: FontWeight.w900,
@@ -124,7 +121,7 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
               ),
               const SizedBox(height: 5),
               Text(
-                'Choose a session',
+                'Choose a practice mode',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
@@ -133,21 +130,22 @@ class _PracticeReadingScreenState extends State<PracticeReadingScreen> {
               _ActionCard(
                 icon: Icons.bolt_rounded,
                 title: 'Quick practice',
-                subtitle: '5 questions · randomly selected passages',
+                subtitle: 'Short session · randomly selected passages',
                 onTap: () => _start(count: 5, mode: 'quick_5', examMode: false),
               ),
               const SizedBox(height: 11),
               _ActionCard(
                 icon: Icons.assignment_rounded,
-                title: 'Full Reading',
-                subtitle: '$_questionCount questions available',
+                title: 'Full reading test',
+                subtitle:
+                    '$_questionCount questions available · results at the end',
                 onTap: () =>
                     _start(count: _questionCount, mode: 'full', examMode: true),
               ),
               if (_attempts.isNotEmpty) ...[
                 const SizedBox(height: 26),
                 Text(
-                  'RECENT ATTEMPTS',
+                  'RECENT PRACTICE',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: AppColors.primaryStrong,
                     fontWeight: FontWeight.w900,
@@ -191,53 +189,147 @@ class _HeaderCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.menu_book_rounded,
-                color: AppColors.primaryStrong,
-                size: 30,
+              Container(
+                width: 64,
+                height: 64,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColors.surface.withValues(alpha: .78),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Text(
+                  '読',
+                  style: TextStyle(
+                    color: AppColors.primaryStrong,
+                    fontSize: 27,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
-              SizedBox(width: 10),
-              Text(
-                '$level · Reading · 読解',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Reading practice',
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w900),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      '読解 · $level',
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: AppColors.primaryStrong,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Read the full passage and answer while keeping the text in view.',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${percentage.round()}%',
+                attempts == 0 ? '—' : '${percentage.round()}%',
                 style: const TextStyle(
                   color: AppColors.primaryStrong,
-                  fontSize: 34,
+                  fontSize: 28,
                   fontWeight: FontWeight.w900,
                 ),
               ),
               const SizedBox(width: 9),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: Text(
-                  attempts == 0 ? 'No attempts yet' : 'preparation',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+              Text(
+                attempts == 0 ? 'No attempts yet' : 'practice score',
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
               ),
             ],
           ),
           const SizedBox(height: 10),
           LinearProgressIndicator(
-            value: progress,
+            value: attempts == 0 ? 0 : progress,
             minHeight: 8,
+            color: AppColors.primaryStrong,
+            backgroundColor: AppColors.surface.withValues(alpha: .72),
             borderRadius: BorderRadius.circular(99),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
           Text(
-            'Read the full passage and answer while keeping the text in view.',
-            style: Theme.of(context).textTheme.bodyMedium,
+            attempts == 0
+                ? 'Complete your first reading session to start tracking your score.'
+                : 'Practice score based on your recent reading attempts.',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PracticeLoadingCard extends StatelessWidget {
+  final String level;
+
+  const _PracticeLoadingCard({required this.level});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primarySoft,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Text(
+              '読',
+              style: TextStyle(
+                color: AppColors.primaryStrong,
+                fontSize: 21,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          const SizedBox(width: 13),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Loading $level reading practice',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(99)),
+                  child: LinearProgressIndicator(
+                    minHeight: 5,
+                    color: AppColors.primaryStrong,
+                    backgroundColor: AppColors.primarySoft,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -330,7 +422,20 @@ class _AttemptTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.history_rounded, color: AppColors.textMuted),
+          Container(
+            width: 36,
+            height: 36,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primarySoft,
+              borderRadius: BorderRadius.circular(11),
+            ),
+            child: const Icon(
+              Icons.history_rounded,
+              color: AppColors.primaryStrong,
+              size: 18,
+            ),
+          ),
           const SizedBox(width: 11),
           Expanded(
             child: Text(

@@ -145,7 +145,7 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$_level · Preparation')),
+      appBar: AppBar(title: Text('$_level Practice')),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -170,10 +170,7 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
             const _SectionTitle(),
             const SizedBox(height: 12),
             if (_loading)
-              const SizedBox(
-                height: 180,
-                child: Center(child: CircularProgressIndicator()),
-              )
+              _PracticeLoadingCard(level: _level)
             else if (_error != null)
               _ErrorCard(error: _error!, onRetry: _load)
             else ...[
@@ -270,14 +267,14 @@ class _HeaderCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$level Preparation',
+                  'Practice your $level knowledge',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Practice each section and identify where you need more work.',
+                  'Use JLPT-style questions to check what you can actually recognize and apply.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -320,24 +317,119 @@ class _GeneralPreparationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.insights_rounded, color: AppColors.primaryStrong),
-              SizedBox(width: 9),
-              Text(
-                'Overall preparation',
-                style: TextStyle(fontWeight: FontWeight.w900),
+              Container(
+                width: 38,
+                height: 38,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColors.primarySoft,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.insights_rounded,
+                  color: AppColors.primaryStrong,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Practice snapshot',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      hasData
+                          ? 'Your latest practice performance by section.'
+                          : 'Complete a practice section to start building this view.',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          const LinearProgressIndicator(value: 0, minHeight: 9),
-          const SizedBox(height: 9),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _PracticeMetric(
+                  label: 'Vocabulary',
+                  value: hasVocabularyData
+                      ? '${vocabularyPercent.round()}%'
+                      : '—',
+                  active: hasVocabularyData,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _PracticeMetric(
+                  label: 'Grammar',
+                  value: hasGrammarData ? '${grammarPercent.round()}%' : '—',
+                  active: hasGrammarData,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _PracticeMetric(
+                  label: 'Reading',
+                  value: hasReadingData ? '${readingPercent.round()}%' : '—',
+                  active: hasReadingData,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PracticeMetric extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool active;
+
+  const _PracticeMetric({
+    required this.label,
+    required this.value,
+    required this.active,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      decoration: BoxDecoration(
+        color: active ? AppColors.primarySoft : AppColors.surfaceSoft,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
           Text(
-            hasData
-                ? 'We don\'t calculate an overall percentage yet. ${hasVocabularyData ? 'Vocabulary: ${vocabularyPercent.round()}%. ' : ''}${hasGrammarData ? 'Grammar: ${grammarPercent.round()}%. ' : ''}${hasReadingData ? 'Reading: ${readingPercent.round()}%.' : ''}'
-                : 'Complete sections to start estimating your overall preparation.',
-            style: Theme.of(context).textTheme.bodySmall,
+            value,
+            style: TextStyle(
+              color: active ? AppColors.primaryStrong : AppColors.textMuted,
+              fontSize: 18,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: AppColors.textSecondary,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),
@@ -354,7 +446,7 @@ class _SectionTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'SECTIONS',
+          'PRACTICE YOUR KNOWLEDGE',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
             color: AppColors.primaryStrong,
             fontWeight: FontWeight.w900,
@@ -363,12 +455,73 @@ class _SectionTitle extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'What would you like to practice?',
+          'Choose a section',
           style: Theme.of(
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
         ),
       ],
+    );
+  }
+}
+
+class _PracticeLoadingCard extends StatelessWidget {
+  final String level;
+
+  const _PracticeLoadingCard({required this.level});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: AppColors.outline),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primarySoft,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Text(
+              level,
+              style: const TextStyle(
+                color: AppColors.primaryStrong,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          const SizedBox(width: 13),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Loading $level practice',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(99)),
+                  child: LinearProgressIndicator(
+                    minHeight: 5,
+                    color: AppColors.primaryStrong,
+                    backgroundColor: AppColors.primarySoft,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -469,13 +622,27 @@ class _SectionCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(99),
                       ),
                       const SizedBox(height: 5),
-                      Text(
-                        attempts == 0
-                            ? 'No data yet'
-                            : '${percentage.round()}% preparation',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              attempts == 0
+                                  ? 'No attempts yet'
+                                  : '${percentage.round()}% practice score · $attempts recent attempt${attempts == 1 ? '' : 's'}',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(fontWeight: FontWeight.w800),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Practice',
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(
+                                  color: AppColors.primaryStrong,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                          ),
+                        ],
                       ),
                     ],
                   ],
@@ -523,7 +690,7 @@ class _MockExamCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Full $level mock exam',
+                  '$level Mock Exam',
                   style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontWeight: FontWeight.w900,
@@ -531,7 +698,7 @@ class _MockExamCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 const Text(
-                  'Vocabulary · Grammar · Reading · Listening\nComing soon',
+                  'Full exam simulation · Coming soon',
                   style: TextStyle(
                     color: AppColors.textMuted,
                     fontSize: 12,

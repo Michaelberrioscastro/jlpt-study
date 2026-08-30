@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import '../services/database_service.dart';
 import '../theme/app_colors.dart';
-import 'practice/practice_home_screen.dart';
 import 'kana_screen.dart';
 import 'level_screen.dart';
 
@@ -20,14 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   String _activeLevel = 'N5';
 
   final _studyNavigatorKey = GlobalKey<NavigatorState>();
-  final _practiceNavigatorKey = GlobalKey<NavigatorState>();
   final _kanaNavigatorKey = GlobalKey<NavigatorState>();
 
   GlobalKey<NavigatorState>? _navigatorKeyFor(int index) {
     return switch (index) {
       1 => _studyNavigatorKey,
-      2 => _practiceNavigatorKey,
-      3 => _kanaNavigatorKey,
+      2 => _kanaNavigatorKey,
       _ => null,
     };
   }
@@ -89,17 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildPracticeNavigator() {
-    return Navigator(
-      key: _practiceNavigatorKey,
-      onGenerateRoute: (_) {
-        return MaterialPageRoute<void>(
-          builder: (_) => const PracticeHomeScreen(),
-        );
-      },
-    );
-  }
-
   Widget _buildKanaNavigator() {
     return Navigator(
       key: _kanaNavigatorKey,
@@ -115,11 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
       _OverviewHome(
         activeLevel: _activeLevel,
         onStudyTap: () => _selectTab(1),
-        onPracticeTap: () => _selectTab(2),
-        onKanaTap: () => _selectTab(3),
+        onKanaTap: () => _selectTab(2),
       ),
       _buildStudyNavigator(),
-      _buildPracticeNavigator(),
       _buildKanaNavigator(),
     ];
 
@@ -258,14 +242,9 @@ class _PremiumNavigationBar extends StatelessWidget {
                 label: 'Home',
               ),
               NavigationDestination(
-                icon: Icon(Icons.school_outlined),
-                selectedIcon: Icon(Icons.school_rounded),
-                label: 'Study',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.fact_check_outlined),
-                selectedIcon: Icon(Icons.fact_check_rounded),
-                label: 'Practice',
+                icon: Icon(Icons.checklist_outlined),
+                selectedIcon: Icon(Icons.checklist_rounded),
+                label: 'Tracker',
               ),
               NavigationDestination(
                 icon: Icon(Icons.translate_outlined),
@@ -283,13 +262,11 @@ class _PremiumNavigationBar extends StatelessWidget {
 class _OverviewHome extends StatefulWidget {
   final String activeLevel;
   final VoidCallback onStudyTap;
-  final VoidCallback onPracticeTap;
   final VoidCallback onKanaTap;
 
   const _OverviewHome({
     required this.activeLevel,
     required this.onStudyTap,
-    required this.onPracticeTap,
     required this.onKanaTap,
   });
 
@@ -355,8 +332,8 @@ class _OverviewHomeState extends State<_OverviewHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _SectionTitle(
-                    eyebrow: 'CONTINUE',
-                    title: 'Today\'s study',
+                    eyebrow: 'YOUR PROGRESS',
+                    title: 'Current JLPT status',
                     trailing: _MiniBadge(
                       icon: Icons.auto_graph_rounded,
                       label: widget.activeLevel,
@@ -375,33 +352,22 @@ class _OverviewHomeState extends State<_OverviewHome> {
                   const SizedBox(height: 28),
                   const _SectionTitle(
                     eyebrow: 'QUICK ACCESS',
-                    title: 'What would you like to do?',
+                    title: 'Choose where to continue',
                   ),
                   const SizedBox(height: 12),
                   _HomeActionCard(
-                    icon: Icons.school_rounded,
-                    title: 'Study with SRS',
-                    subtitle: 'Vocabulary, Kanji, Grammar, and Mix by level.',
+                    icon: Icons.track_changes_rounded,
+                    title: 'JLPT Tracker',
+                    subtitle: 'Track · Review · Practice by JLPT level.',
                     accent: AppColors.primary,
                     accentSoft: AppColors.primarySoft,
                     onTap: widget.onStudyTap,
                   ),
                   const SizedBox(height: 10),
                   _HomeActionCard(
-                    icon: Icons.fact_check_rounded,
-                    title: 'JLPT Practice',
-                    subtitle:
-                        'Vocabulary, Grammar, and Reading with level-based tests.',
-                    accent: AppColors.sage,
-                    accentSoft: AppColors.sageSoft,
-                    onTap: widget.onPracticeTap,
-                  ),
-                  const SizedBox(height: 10),
-                  _HomeActionCard(
                     icon: Icons.translate_rounded,
-                    title: 'Kana',
-                    subtitle:
-                        'Review Hiragana and Katakana while keeping your progress.',
+                    title: 'Kana Tracker',
+                    subtitle: 'Hiragana · Katakana · Progress · Review.',
                     accent: AppColors.gold,
                     accentSoft: AppColors.goldSoft,
                     onTap: widget.onKanaTap,
@@ -474,7 +440,7 @@ class _OverviewHero extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'JLPT Study',
+                        'JLPT Tracker',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w900,
                           letterSpacing: -.4,
@@ -482,7 +448,7 @@ class _OverviewHero extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Your Japanese study space',
+                        'Know what you know. Test what you know.',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -498,7 +464,7 @@ class _OverviewHero extends StatelessWidget {
             ),
             const SizedBox(height: 28),
             Text(
-              'おかえりなさい',
+              '学習を記録しよう',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w900,
                 letterSpacing: -.8,
@@ -507,8 +473,8 @@ class _OverviewHero extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               due > 0
-                  ? 'You have $due reviews due in $level.'
-                  : 'Your $level path is up to date. Choose how you\'d like to continue.',
+                  ? 'You have $due items ready to review in $level.'
+                  : 'Your $level tracker is up to date. Choose what you want to check next.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -580,13 +546,13 @@ class _ContinueCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Continue $level',
+                                'Open $level tracker',
                                 style: Theme.of(context).textTheme.titleMedium
                                     ?.copyWith(fontWeight: FontWeight.w900),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                '$learned of $total learned · $due reviews',
+                                '$learned of $total marked learned · $due reviews due',
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
@@ -655,51 +621,77 @@ class _ContinueCardSkeleton extends StatelessWidget {
   }
 }
 
-class _StudyCardSkeleton extends StatelessWidget {
-  const _StudyCardSkeleton({super.key});
+class _LevelSwitchLoadingCard extends StatelessWidget {
+  final String level;
+
+  const _LevelSwitchLoadingCard({super.key, required this.level});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 265,
+      width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(28),
         border: Border.all(color: AppColors.outline),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.textPrimary.withValues(alpha: .035),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
-      child: const Column(
+      child: Row(
         children: [
-          Row(
-            children: [
-              _SkeletonPulse(width: 64, height: 64, borderRadius: 20),
-              SizedBox(width: 15),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _SkeletonPulse(width: 128, height: 17, borderRadius: 8),
-                    SizedBox(height: 10),
-                    _SkeletonPulse(width: 220, height: 11, borderRadius: 7),
-                  ],
-                ),
+          Container(
+            width: 58,
+            height: 58,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primarySoft,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Text(
+              level,
+              style: const TextStyle(
+                color: AppColors.primaryStrong,
+                fontSize: 22,
+                fontWeight: FontWeight.w900,
               ),
-            ],
+            ),
           ),
-          SizedBox(height: 22),
-          Row(
-            children: [
-              _SkeletonPulse(width: 135, height: 11, borderRadius: 7),
-              Spacer(),
-              _SkeletonPulse(width: 42, height: 11, borderRadius: 7),
-            ],
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Loading $level tracker',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Updating your progress…',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(99)),
+                  child: LinearProgressIndicator(
+                    minHeight: 5,
+                    color: AppColors.primaryStrong,
+                    backgroundColor: AppColors.primarySoft,
+                  ),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 9),
-          _SkeletonPulse(width: double.infinity, height: 9, borderRadius: 99),
-          SizedBox(height: 20),
-          _SkeletonPulse(width: double.infinity, height: 58, borderRadius: 18),
-          SizedBox(height: 18),
-          _SkeletonPulse(width: double.infinity, height: 54, borderRadius: 18),
         ],
       ),
     );
@@ -946,8 +938,8 @@ class _StudyHubState extends State<_StudyHub> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _SectionTitle(
-                    eyebrow: 'JLPT PATH',
-                    title: 'Your level',
+                    eyebrow: 'TRACKER',
+                    title: 'Choose your JLPT level',
                     trailing: _MiniBadge(
                       icon: Icons.auto_graph_rounded,
                       label: _selectedLevel,
@@ -990,7 +982,7 @@ class _StudyHubState extends State<_StudyHub> {
                   const SizedBox(height: 28),
                   const _FooterTip(
                     text:
-                        'Your progress percentage only increases when you mark an item as Learned.',
+                        'Open a level to track, review, and practice that JLPT level in one place.',
                   ),
                 ],
               ),
@@ -1011,7 +1003,7 @@ class _StudyHubState extends State<_StudyHub> {
     required int newItems,
   }) {
     if (_loading) {
-      return _StudyCardSkeleton(key: key);
+      return _LevelSwitchLoadingCard(key: key, level: _selectedLevel);
     }
 
     if (_error != null) {
@@ -1021,8 +1013,8 @@ class _StudyHubState extends State<_StudyHub> {
     return _PrimaryStudyCard(
       key: key,
       symbol: _selectedLevel,
-      title: '$_selectedLevel profile',
-      subtitle: 'Vocabulary · Kanji · Grammar · Mix',
+      title: '$_selectedLevel knowledge tracker',
+      subtitle: 'Track · Review · Practice',
       progress: progress,
       learned: learned,
       total: total,
@@ -1031,7 +1023,7 @@ class _StudyHubState extends State<_StudyHub> {
       newItems: newItems,
       accent: AppColors.primary,
       accentSoft: AppColors.primarySoft,
-      buttonLabel: 'Enter $_selectedLevel',
+      buttonLabel: 'Open $_selectedLevel tracker',
       onTap: total == 0 ? null : _openLevel,
     );
   }
@@ -1074,7 +1066,7 @@ class _HeroHeader extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Text(
-                    '学',
+                    '記',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -1088,7 +1080,7 @@ class _HeroHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Study',
+                        'Tracker',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w900,
                           letterSpacing: -.4,
@@ -1096,7 +1088,7 @@ class _HeroHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'SRS by JLPT level',
+                        'Track · Review · Practice by JLPT level',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -1112,7 +1104,7 @@ class _HeroHeader extends StatelessWidget {
             ),
             const SizedBox(height: 28),
             Text(
-              '今日は何を勉強する？',
+              '知識を確認しよう',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.w900,
                 letterSpacing: -.8,
@@ -1120,7 +1112,7 @@ class _HeroHeader extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Continue your $selectedLevel path or switch levels anytime.',
+              'Choose a level and keep all of your tracking, reviews, and practice together.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -1448,7 +1440,7 @@ class _PrimaryStudyCardState extends State<_PrimaryStudyCard> {
                         backgroundColor: widget.accent,
                         foregroundColor: Colors.white,
                       ),
-                      icon: const Icon(Icons.play_arrow_rounded, size: 20),
+                      icon: const Icon(Icons.arrow_forward_rounded, size: 20),
                       label: Text(widget.buttonLabel),
                     ),
                   ),

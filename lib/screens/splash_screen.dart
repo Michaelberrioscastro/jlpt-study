@@ -152,7 +152,7 @@ class _AppSplashScreenState extends State<AppSplashScreen>
                                     horizontal: 26,
                                   ),
                                   child: Image.asset(
-                                    'assets/branding/jlpt_study_brand.png',
+                                    'assets/branding/splash_animated.gif',
                                     fit: BoxFit.contain,
                                     filterQuality: FilterQuality.high,
                                     gaplessPlayback: true,

@@ -273,7 +273,7 @@ class _StudyScreenState extends State<StudyScreen> {
         return 'Review';
       case 'mix':
       default:
-        return 'Mix';
+        return 'Mixed';
     }
   }
 
@@ -342,7 +342,7 @@ class _StudyScreenState extends State<StudyScreen> {
         label: const Padding(
           padding: EdgeInsets.symmetric(vertical: 12),
           child: Text(
-            'Browse and mark grammar',
+            'Open grammar tracker',
             style: TextStyle(fontWeight: FontWeight.w800),
           ),
         ),
@@ -361,7 +361,7 @@ class _StudyScreenState extends State<StudyScreen> {
 
     if (_error != null) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.level)),
+        appBar: AppBar(title: Text('${widget.level} Review')),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(28),
@@ -391,7 +391,7 @@ class _StudyScreenState extends State<StudyScreen> {
                   ),
                   const SizedBox(height: 16),
                   const Text(
-                    'Something went wrong during this session.',
+                    'Something went wrong during this review.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: AppColors.textPrimary,
@@ -428,7 +428,7 @@ class _StudyScreenState extends State<StudyScreen> {
 
     if (_items.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.level)),
+        appBar: AppBar(title: Text('${widget.level} Review')),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(32),
@@ -450,7 +450,7 @@ class _StudyScreenState extends State<StudyScreen> {
                 ),
                 const SizedBox(height: 18),
                 const Text(
-                  'Nothing due right now',
+                  'Nothing to review right now',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.textPrimary,
@@ -460,7 +460,7 @@ class _StudyScreenState extends State<StudyScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'You are all caught up for now.',
+                  'Your review queue is clear for now.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
@@ -488,7 +488,7 @@ class _StudyScreenState extends State<StudyScreen> {
         backgroundColor: AppColors.background,
         surfaceTintColor: Colors.transparent,
         title: Text(
-          '${widget.level} · $_studyTypeLabel',
+          '${widget.level} · $_studyTypeLabel Review',
           style: const TextStyle(fontWeight: FontWeight.w900),
         ),
         actions: [
@@ -542,6 +542,18 @@ class _StudyScreenState extends State<StudyScreen> {
                       _buildGrammarManagerButton(),
                       const SizedBox(height: 14),
                     ],
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'REVIEW · $_studyTypeLabel',
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppColors.textMuted,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: .8,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 240),
                       switchInCurve: Curves.easeOutCubic,
@@ -608,7 +620,7 @@ class _StudyScreenState extends State<StudyScreen> {
         backgroundColor: AppColors.background,
         surfaceTintColor: Colors.transparent,
         title: const Text(
-          'Session complete',
+          'Review complete',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
@@ -648,7 +660,7 @@ class _StudyScreenState extends State<StudyScreen> {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  '${widget.level} · $_studyTypeLabel complete',
+                  '${widget.level} · $_studyTypeLabel review complete',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: AppColors.textPrimary,
@@ -658,7 +670,7 @@ class _StudyScreenState extends State<StudyScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '$total cards completed this session',
+                  '$total cards reviewed this session',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
@@ -722,7 +734,7 @@ class _StudyScreenState extends State<StudyScreen> {
                     icon: const Icon(Icons.arrow_back_rounded),
                     label: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 4),
-                      child: Text('Back'),
+                      child: Text('Back to tracker'),
                     ),
                   ),
                 ),
@@ -781,7 +793,7 @@ class _StudyFlashcard extends StatelessWidget {
               borderRadius: BorderRadius.circular(99),
             ),
             child: Text(
-              typeLabel,
+              '$typeLabel · REVIEW',
               style: const TextStyle(
                 color: AppColors.primaryStrong,
                 fontSize: 11,
@@ -905,7 +917,7 @@ class _StudySessionSkeleton extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         title: Text(
-          '$level · $studyType',
+          '$level · $studyType Review',
           style: const TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
@@ -1336,7 +1348,7 @@ class _GrammarManagerSheetState extends State<_GrammarManagerSheet> {
                       },
                     ),
                     ChoiceChip(
-                      label: Text('Pending $pendingCount'),
+                      label: Text('Not learned $pendingCount'),
                       selected: _filter == 'pending',
                       onSelected: (_) {
                         HapticFeedback.selectionClick();
@@ -1368,7 +1380,7 @@ class _GrammarManagerSheetState extends State<_GrammarManagerSheet> {
                   const SizedBox(width: 7),
                   Expanded(
                     child: Text(
-                      'Marking an item as learned does not change its SRS history.',
+                      'Mark an item as Learned when you already know it. Its existing SRS history is preserved.',
                       style: TextStyle(
                         color: AppColors.textMuted,
                         fontSize: 12,
@@ -1498,7 +1510,7 @@ class _GrammarManagerSheetState extends State<_GrammarManagerSheet> {
                               const SizedBox(width: 8),
                               IconButton(
                                 tooltip: item.learned
-                                    ? 'Mark as pending'
+                                    ? 'Mark as not learned'
                                     : 'Mark as learned',
                                 onPressed: saving
                                     ? null
@@ -1549,7 +1561,7 @@ class _GrammarStatusChip extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           Text(
-            learned ? 'Learned' : 'Pending',
+            learned ? 'Learned' : 'Not learned',
             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
           ),
         ],
@@ -1769,6 +1781,16 @@ class _RatingBar extends StatelessWidget {
                         )
                       : const SizedBox(key: ValueKey('saving-row-hidden')),
                 ),
+                if (!disabled) ...[
+                  Text(
+                    'How well did you remember it?',
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 9),
+                ],
                 Row(
                   children: [
                     _RatingButton(
