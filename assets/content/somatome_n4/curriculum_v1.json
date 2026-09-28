@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "course": {
+    "id": "somatome_n4",
+    "title_ja": "日本語総まとめ N4 文法・読解・聴解",
+    "title_es": "Somatome N4 — Gramática, Reading y Listening",
+    "level": "N4",
+    "weeks": 6,
+    "sessions": 42
+  },
+  "sessions": []
+}
