@@ -795,14 +795,6 @@ class HomePage extends StatelessWidget {
               else
                 _bookCard(books[2]),
               const SizedBox(height: 28),
-
-                    Expanded(child: _bookCard(books[2])),
-                    const Expanded(child: SizedBox()),
-                  ],
-                )
-              else
-                _bookCard(books[2]),
-              const SizedBox(height: 28),
               Row(
                 children: [
                   const Expanded(
