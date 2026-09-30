@@ -6,6 +6,7 @@ import '../study/study_catalog.dart';
 import '../study/book_catalog.dart';
 import 'progress_service.dart';
 import '../study/expanded_content.dart';
+import '../study/learning_engine.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -471,6 +472,204 @@ class _BookSwitcher extends StatelessWidget {
   }
 }
 
+class _SmartStudyCard extends StatelessWidget {
+  final ProgressService progress;
+  final VoidCallback onStart;
+
+  const _SmartStudyCard({
+    required this.progress,
+    required this.onStart,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final plan = progress.smartPlan;
+    final intelligence = progress.learningSnapshot;
+    final hasData = intelligence.hasIntelligenceData;
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [AppColors.violetSoft, AppColors.surface],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.violet.withOpacity(.28)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.violet.withOpacity(.08),
+            blurRadius: 24,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: AppColors.violet.withOpacity(.14),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(
+                  Icons.auto_awesome_rounded,
+                  color: AppColors.violet,
+                  size: 21,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Text(
+                  'ESTUDIO INTELIGENTE',
+                  style: TextStyle(
+                    color: AppColors.violet,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.6,
+                  ),
+                ),
+              ),
+              Text(
+                '≈ ${plan.estimatedMinutes} min',
+                style: const TextStyle(
+                  color: AppColors.muted,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 13),
+          Text(
+            plan.title,
+            style: const TextStyle(
+              color: AppColors.ink,
+              fontSize: 19,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            plan.reason,
+            style: const TextStyle(
+              color: AppColors.muted,
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              _SmartMetric(
+                label: 'Conceptos',
+                value: intelligence.trackedConcepts.toString(),
+              ),
+              const SizedBox(width: 8),
+              _SmartMetric(
+                label: 'Pendientes',
+                value: intelligence.dueConcepts.toString(),
+              ),
+              const SizedBox(width: 8),
+              _SmartMetric(
+                label: 'En riesgo',
+                value: intelligence.atRiskConcepts.toString(),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: plan.hasPlan ? onStart : null,
+              icon: const Icon(Icons.bolt_rounded, size: 18),
+              label: Text(plan.actionLabel),
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.violet,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 13),
+              ),
+            ),
+          ),
+          if (!hasData) ...[
+            const SizedBox(height: 8),
+            const Text(
+              'La app empezará a personalizar esta tarjeta a medida que respondas preguntas.',
+              style: TextStyle(
+                color: AppColors.muted,
+                fontSize: 9,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SmartMetric extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _SmartMetric({
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) => Expanded(
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 9),
+      decoration: BoxDecoration(
+        color: AppColors.surface.withOpacity(.72),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: AppColors.ink,
+              fontSize: 15,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.muted,
+              fontSize: 8,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void onStartSmart(BuildContext context, SessionInfo session) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => LessonFlowPage(
+        session: session,
+        progress: ProgressService.instance,
+      ),
+    ),
+  );
+}
+
 class HomePage extends StatelessWidget {
   final ProgressService progress;
   final VoidCallback onStart;
@@ -741,6 +940,14 @@ class HomePage extends StatelessWidget {
                   percent: percent,
                   onStart: onStart,
                 ),
+              const SizedBox(height: 14),
+              _SmartStudyCard(
+                progress: progress,
+                onStart: () {
+                  final sessions = progress.smartPlan.sessions;
+                  if (sessions.isNotEmpty) onStartSmart(context, sessions.first);
+                },
+              ),
               const SizedBox(height: 30),
               Row(
                 children: [
@@ -2029,7 +2236,13 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
     final ok=value==q.answer;
     setState(() { selected=value; checked=true; });
     if(ok) correct++; else wrong++;
-    await widget.progress.recordAnswer(sessionId:widget.session.id,questionId:q.id,prompt:q.question,correct:ok);
+    await widget.progress.recordAnswer(
+      sessionId: widget.session.id,
+      questionId: q.id,
+      prompt: q.question,
+      correct: ok,
+      conceptIds: LearningEngine.conceptsForFocus(widget.session.focus),
+    );
     setState((){});
   }
 
