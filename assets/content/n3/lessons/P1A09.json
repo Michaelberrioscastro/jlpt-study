@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1A09",
+    "week": 4,
+    "day": 4,
+    "type": "consolidation",
+    "pages": [
+      92,
+      94
+    ],
+    "title_ja": "I · 後に決まった表現が来る副詞",
+    "title_es": "Adverbios y colocaciones",
+    "focus": "Adverbios que requieren expresiones determinadas después",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 92–94. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "CONSOLIDA",
+      "title": "I · 後に決まった表現が来る副詞",
+      "body": "Consolida el foco indicado en las páginas 92–94.",
+      "pattern": "Adverbios que requieren expresiones determinadas después",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera función, contexto y matiz.",
+      "tip": "Compara usos cercanos y observa las restricciones."
+    },
+    {
+      "id": "P1A09-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "Adverbios que requieren expresiones determinadas después",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es Adverbios que requieren expresiones determinadas después."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal y crea una oración propia.",
+    "reward": 25
+  }
+}
