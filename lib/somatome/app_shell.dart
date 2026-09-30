@@ -644,7 +644,7 @@ class HomePage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                for (var week = 1; week <= 6; week++)
+                for (var week = 1; week <= (progress.studyLevel == 'N3' ? 8 : 6); week++)
                   _HomeWeekRow(
                     week: week,
                     progress: progress,
@@ -799,7 +799,7 @@ class _HomeWeekRow extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: LinearProgressIndicator(
-                    value: done / 7,
+                    value: sessions.isEmpty ? 0 : done / sessions.length,
                     minHeight: 6,
                     backgroundColor: const Color(0xFFECE7E2),
                   ),
@@ -1173,7 +1173,7 @@ class _Path extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = <Widget>[];
 
-    for (var i = 1; i <= 6; i++) {
+    for (var i = 1; i <= (progress.studyLevel == 'N3' ? 8 : 6); i++) {
       children.add(
         Column(
           children: [
