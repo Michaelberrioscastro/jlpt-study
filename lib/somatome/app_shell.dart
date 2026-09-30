@@ -613,62 +613,76 @@ class HomePage extends StatelessWidget {
           final compact = constraints.maxWidth < 650;
 
           return ListView(
-            padding: EdgeInsets.fromLTRB(compact ? 20 : 42, compact ? 20 : 28, compact ? 20 : 42, 50),
+            padding: EdgeInsets.fromLTRB(
+              compact ? 20 : 42,
+              compact ? 22 : 32,
+              compact ? 20 : 42,
+              50,
+            ),
             children: [
-              Container(
-                constraints: const BoxConstraints(minHeight: 270),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF17213C), Color(0xFF0C1326)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+              Row(
+                children: [
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'INICIO',
+                          style: TextStyle(
+                            color: AppColors.coral,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 2.2,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          'Tu estudio de japonés',
+                          style: TextStyle(
+                            color: AppColors.ink,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(34),
-                  border: Border.all(color: AppColors.violet.withOpacity(.34)),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(.28), blurRadius: 38, offset: const Offset(0, 18))],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(34),
-                  child: Stack(
-                    children: [
-                      const Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _HomeScenePainter()))),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(compact ? 24 : 34, 28, compact ? 24 : 34, 25),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(color: AppColors.border),
+                    ),
+                    child: Row(
+                      children: [
+                        const Text('🔥', style: TextStyle(fontSize: 17)),
+                        const SizedBox(width: 7),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 6,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('JLPT STUDY', style: TextStyle(color: AppColors.coral, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 3)),
-                                  const SizedBox(height: 14),
-                                  Text('Tu japonés,', style: TextStyle(color: Colors.white, fontFamily: 'Georgia', fontSize: compact ? 34 : 45, height: .95, fontWeight: FontWeight.w700)),
-                                  Text('un paso a la vez.', style: TextStyle(color: AppColors.violet, fontFamily: 'Georgia', fontSize: compact ? 34 : 45, height: 1.0, fontWeight: FontWeight.w700)),
-                                  const SizedBox(height: 11),
-                                  const Text('Pequeños hábitos, grandes logros.', style: TextStyle(color: AppColors.muted, fontSize: 12, fontWeight: FontWeight.w700)),
-                                  const SizedBox(height: 18),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(.055),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(color: Colors.white.withOpacity(.08)),
-                                    ),
-                                    child: const Text('「継続は力なり。」  La constancia da resultados.', style: TextStyle(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w700)),
-                                  ),
-                                ],
+                            Text(
+                              '${stats.streak}',
+                              style: const TextStyle(
+                                color: AppColors.ink,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
                               ),
                             ),
-                            if (wide) const Expanded(flex: 5, child: SizedBox(height: 235)),
+                            const Text(
+                              'días de racha',
+                              style: TextStyle(
+                                color: AppColors.muted,
+                                fontSize: 8,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      Positioned(right: 18, top: 15, child: _StreakBadge(streak: stats.streak)),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
               const SizedBox(height: 20),
               if (wide)
