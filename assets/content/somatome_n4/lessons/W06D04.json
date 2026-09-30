@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W06D04",
+    "week": 6,
+    "day": 4,
+    "type": "listening",
+    "pages": [
+      104,
+      105
+    ],
+    "title_ja": "どうしてですか — ポイント理解 —",
+    "title_es": "¿Por qué? — Comprensión de puntos clave —",
+    "focus": "どうしてですか / ポイント理解",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización de las páginas 104–105. Las actividades de la app son originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "ESCUCHA",
+      "title": "どうしてですか — ポイント理解 —",
+      "body": "Práctica de どうしてですか / ポイント理解. El objetivo es anticipar la tarea, reconocer información clave y responder con rapidez.",
+      "pattern": "Escuchar → identificar información → responder",
+      "example_ja": "どうしてですか。",
+      "example_es": "¿Por qué? — Comprensión de puntos clave —",
+      "tip": "Primero identifica la situación general; después confirma el dato decisivo."
+    },
+    {
+      "id": "W06D04-q1",
+      "type": "choice",
+      "title": "Preparación",
+      "question": "¿Qué ayuda antes de escuchar?",
+      "options": [
+        "Leer rápidamente las opciones y anticipar qué buscar",
+        "Memorizar todas las palabras",
+        "Traducir todo palabra por palabra"
+      ],
+      "answer": 0,
+      "explanation": "Anticipar la información hace la escucha más eficiente."
+    },
+    {
+      "id": "W06D04-q2",
+      "type": "choice",
+      "title": "Respuesta",
+      "question": "Si reconoces una palabra de una opción, ¿qué haces?",
+      "options": [
+        "Compruebas si responde exactamente a la pregunta",
+        "La eliges automáticamente",
+        "Ignoras el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Reconocer una palabra no basta: comprueba su relación con la tarea."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Resume la estrategia de esta sesión y escribe qué información buscarías primero.",
+    "reward": 20
+  }
+}
