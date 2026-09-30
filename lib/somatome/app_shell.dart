@@ -2455,12 +2455,122 @@ class ReviewPage extends StatelessWidget {
   @override Widget build(BuildContext context){final s=progress.stats;return SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,78,20,30),children:[
     Text('Repaso inteligente',style:Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:5),const Text('Convierte tus errores en puntos fuertes.'),const SizedBox(height:18),
     Card(color:AppColors.primarySoft,child:Padding(padding:const EdgeInsets.all(19),child:Row(children:[const Icon(Icons.auto_awesome_rounded,size:34,color:AppColors.primary),const SizedBox(width:13),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(s.openMistakes.toString()+' errores pendientes',style:const TextStyle(fontSize:19,fontWeight:FontWeight.w900)),Text(s.corrected.toString()+' errores ya corregidos',style:const TextStyle(color:AppColors.muted))]))] ))),
-    const SizedBox(height:14),_StatsRow(stats:s),const SizedBox(height:18),
+    const SizedBox(height:14),_StatsRow(stats:s),const SizedBox(height:14),
+    _LearningPriorityCard(progress: progress),
+    const SizedBox(height:18),
     if(s.openMistakes>0) for(final m in progress.mistakePrompts.take(8)) Card(margin:const EdgeInsets.only(bottom:8),child:ListTile(leading:const Icon(Icons.replay_rounded),title:Text(m,maxLines:2,overflow:TextOverflow.ellipsis),subtitle:const Text('Pendiente de reforzar')))
     else Card(child:Padding(padding:const EdgeInsets.all(22),child:Column(children:const[Icon(Icons.celebration_rounded,size:48,color:AppColors.primary),SizedBox(height:10),Text('No tienes errores pendientes',style:TextStyle(fontWeight:FontWeight.w900,fontSize:18)),SizedBox(height:5),Text('Sigue avanzando y vuelve aquí para reforzar lo difícil.',textAlign:TextAlign.center)]))),
     const SizedBox(height:18),Text('Próxima sesión',style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:8),
     _SessionTile(session:progress.nextUnlockedSession(),progress:progress,onOpen:onOpen),
   ]));}
+}
+
+class _LearningPriorityCard extends StatelessWidget {
+  final ProgressService progress;
+
+  const _LearningPriorityCard({required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    final snapshot = progress.learningSnapshot;
+    final items = snapshot.due.isNotEmpty
+        ? snapshot.due.take(4).toList()
+        : snapshot.weakest.take(4).toList();
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.auto_awesome_rounded,
+                  color: AppColors.violet,
+                  size: 19,
+                ),
+                const SizedBox(width: 8),
+                const Expanded(
+                  child: Text(
+                    'Prioridades detectadas',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                Text(
+                  snapshot.dueConcepts > 0
+                      ? 'REPASO'
+                      : 'DIAGNÓSTICO',
+                  style: const TextStyle(
+                    color: AppColors.muted,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.3,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Text(
+              snapshot.dueConcepts > 0
+                  ? 'Estos conceptos ya entraron en la ventana de repaso.'
+                  : 'A medida que acumules respuestas, aquí aparecerán tus áreas prioritarias.',
+              style: const TextStyle(
+                color: AppColors.muted,
+                fontSize: 9,
+                fontWeight: FontWeight.w700,
+                height: 1.35,
+              ),
+            ),
+            if (items.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              for (final item in items)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 7),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: item.isDue
+                              ? AppColors.coral
+                              : AppColors.yellow,
+                        ),
+                      ),
+                      const SizedBox(width: 9),
+                      Expanded(
+                        child: Text(
+                          item.id,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        item.mastery.round().toString() + '%',
+                        style: const TextStyle(
+                          color: AppColors.muted,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class ProgressPage extends StatelessWidget {
