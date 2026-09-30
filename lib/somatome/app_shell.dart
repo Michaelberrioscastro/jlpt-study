@@ -916,12 +916,21 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
 
   @override void initState(){super.initState();future=_load();}
   Future<LessonPacket> _load() async {
-    if(widget.session.id=='W01D01' || widget.session.id=='P1L01'){
-      final raw=await rootBundle.loadString(widget.session.id=='P1L01' ? 'assets/content/n3/lessons/P1L01.json' : 'assets/content/somatome_n4/lessons/W01D01.json');
-      packet=LessonPacket.fromJson(jsonDecode(raw) as Map<String,dynamic>,widget.session);
-    }else{
-      packet=StudyCatalog.buildPacket(widget.session);
+    final isN3 = widget.session.id.startsWith('P') || widget.session.id.startsWith('R');
+    final asset = isN3
+        ? 'assets/content/n3/lessons/' + widget.session.id + '.json'
+        : 'assets/content/somatome_n4/lessons/' + widget.session.id + '.json';
+
+    try {
+      final raw = await rootBundle.loadString(asset);
+      packet = LessonPacket.fromJson(
+        jsonDecode(raw) as Map<String, dynamic>,
+        widget.session,
+      );
+    } catch (_) {
+      packet = StudyCatalog.buildPacket(widget.session);
     }
+
     return packet!;
   }
 
