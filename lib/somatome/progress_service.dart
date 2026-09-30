@@ -20,7 +20,7 @@ class ProgressService extends ChangeNotifier {
   bool _loaded=false;
   String _level='N4';
 
-  String get level => _level;
+  String get studyLevel => _level;
 
   Future<void> load() async {
     if (_loaded) return;
