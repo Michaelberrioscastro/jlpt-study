@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W03D02",
+    "week": 3,
+    "day": 2,
+    "type": "grammar",
+    "pages": [
+      52,
+      53
+    ],
+    "title_ja": "このまどから富士山が見えます。",
+    "title_es": "Desde esta ventana se puede ver el monte Fuji.",
+    "focus": "見える / 聞こえる / できる / 可能",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 52–53. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "このまどから富士山が見えます。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 52–53 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "見える / 聞こえる / できる / 可能",
+      "example_ja": "ここから東京駅がよく見えます。",
+      "example_es": "Desde esta ventana se puede ver el monte Fuji.",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W03D02-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "見える / 聞こえる / できる / 可能",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es 見える / 聞こえる / できる / 可能."
+    },
+    {
+      "id": "W03D02-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
