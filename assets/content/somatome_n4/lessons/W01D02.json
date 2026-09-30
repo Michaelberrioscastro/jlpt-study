@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W01D02",
+    "week": 1,
+    "day": 2,
+    "type": "grammar",
+    "pages": [20, 21],
+    "title_ja": "漢字は少ししか書けません。",
+    "title_es": "Solo puedo escribir unos pocos kanji.",
+    "focus": "しか～ない · でも · で · も · とか",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las funciones gramaticales presentadas en las páginas 20–21. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "しか～ない: solo y nada más",
+      "body": "しか aparece con una forma negativa para expresar que la cantidad o el conjunto es limitado. La idea central es 'solo...'.",
+      "pattern": "N + しか + forma negativa",
+      "example_ja": "私はひらがなしか書けません。",
+      "example_es": "Solo puedo escribir hiragana.",
+      "tip": "Cuando veas しか, comprueba que la oración termina en una forma negativa."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "Elige la estructura",
+      "question": "¿Cuál expresa 'Solo tengo un libro'?",
+      "options": [
+        "本が一冊しかありません。",
+        "本が一冊でもありません。",
+        "本が一冊とかありません。",
+        "本が一冊でありません。"
+      ],
+      "answer": 0,
+      "explanation": "一冊しかありません expresa que la cantidad disponible se limita a un libro."
+    },
+    {
+      "id": "s3",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "でも, で y も",
+      "body": "La lección reúne varios usos de estas partículas. でも puede introducir un ejemplo o una propuesta; で puede indicar medio, lugar de una actividad o causa según el contexto; も puede enfatizar cantidad o extensión.",
+      "pattern": "Nでも · Nで · Nも",
+      "example_ja": "お茶でも飲みませんか。",
+      "example_es": "¿Tomamos un té o algo así?",
+      "tip": "No traduzcas estas partículas automáticamente: identifica primero la función que cumplen en la oración."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Reconoce でも",
+      "question": "Quieres proponer informalmente tomar algo: '¿Tomamos un café o algo?'",
+      "options": [
+        "コーヒーでも飲みませんか。",
+        "コーヒーしか飲みませんか。",
+        "コーヒーも飲みませんか。",
+        "コーヒーで飲みませんか。"
+      ],
+      "answer": 0,
+      "explanation": "Nでも puede presentar una opción representativa en una propuesta."
+    },
+    {
+      "id": "s5",
+      "type": "teach",
+      "label": "PRACTICA",
+      "title": "También: cantidad con も y ejemplos con とか",
+      "body": "も puede destacar una cantidad grande o, en una oración negativa, una cantidad escasa o inexistente. とか sirve para mencionar ejemplos, normalmente en una enumeración no exhaustiva.",
+      "pattern": "cantidad + も · NとかNとか",
+      "example_ja": "ラーメンとかそばとかを食べます。",
+      "example_es": "Como cosas como ramen, soba y similares.",
+      "tip": "La idea de とか es 'por ejemplo, entre otras cosas', no una lista cerrada."
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Reto final",
+      "question": "¿Cuál expresa que llegaron diez personas, enfatizando la cantidad?",
+      "options": [
+        "10人も来ました。",
+        "10人しか来ました。",
+        "10人でも来ました。",
+        "10人で来ません。"
+      ],
+      "answer": 0,
+      "explanation": "10人も puede enfatizar que la cantidad fue grande o inesperadamente alta."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Escribe una frase con しか～ない y otra con Nでも. Después explica en español qué función cumple la partícula.",
+    "reward": 20
+  }
+}
