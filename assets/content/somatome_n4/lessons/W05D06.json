@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W05D06",
+    "week": 5,
+    "day": 6,
+    "type": "reading",
+    "pages": [
+      92,
+      93
+    ],
+    "title_ja": "広告やお知らせを読みましょう",
+    "title_es": "Leamos anuncios y avisos.",
+    "focus": "広告・お知らせ",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización de las páginas 92–93. Las actividades de la app son originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "LEE",
+      "title": "広告やお知らせを読みましょう",
+      "body": "Práctica de 広告・お知らせ. Trabaja localización de información, contexto y selección de respuestas.",
+      "pattern": "Palabras clave → localizar → comprobar",
+      "example_ja": "重要なことばを見つけましょう。",
+      "example_es": "Busquemos las palabras importantes.",
+      "tip": "No traduzcas todo: identifica primero quién, qué, cuándo y dónde."
+    },
+    {
+      "id": "W05D06-q1",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene localizar primero?",
+      "options": [
+        "Nombres, fechas, lugares y acciones clave",
+        "Cada palabra del texto",
+        "Solo la primera frase"
+      ],
+      "answer": 0,
+      "explanation": "Las palabras clave permiten localizar rápidamente la información."
+    },
+    {
+      "id": "W05D06-q2",
+      "type": "choice",
+      "title": "Comprensión",
+      "question": "Si la pregunta pide algo que NO es correcto, ¿qué debes hacer?",
+      "options": [
+        "Comprobar cada opción contra el texto",
+        "Elegir la primera opción",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Las preguntas negativas requieren verificar cada opción con el texto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Resume la estrategia de esta sesión y escribe qué información buscarías primero.",
+    "reward": 20
+  }
+}
