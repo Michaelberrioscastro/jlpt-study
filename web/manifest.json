@@ -1,11 +1,11 @@
 {
-    "name": "jlpt_study",
-    "short_name": "jlpt_study",
+    "name": "JLPT N3 Study",
+    "short_name": "JLPT N3 Study",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Japanese JLPT N3 grammar study app.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
