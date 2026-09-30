@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W04D07",
+    "week": 4,
+    "day": 7,
+    "type": "grammar",
+    "pages": [
+      78,
+      79
+    ],
+    "title_ja": "まとめ問題",
+    "title_es": "Repaso — Semana 4",
+    "focus": "Review",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 78–79. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "REPASA",
+      "title": "まとめ問題",
+      "body": "Sesión de repaso de los contenidos trabajados en esta semana.",
+      "pattern": "Review",
+      "example_ja": "文脈を考えて、いちばん自然な形を選びましょう。",
+      "example_es": "Repaso — Semana 4",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W04D07-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "Review",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es Review."
+    },
+    {
+      "id": "W04D07-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
