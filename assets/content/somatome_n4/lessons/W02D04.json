@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W02D04",
+    "week": 2,
+    "day": 4,
+    "type": "grammar",
+    "pages": [40, 41],
+    "title_ja": "日記を書くようにしましょう。",
+    "title_es": "Procuremos escribir un diario.",
+    "focus": "ために · ように · ようになる · ようにする · ように言う",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las expresiones presentadas en las páginas 40–41. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {"id":"s1","type":"teach","label":"APRENDE","title":"Propósito y causa: ために","body":"ために puede expresar propósito y, según el contexto, causa o motivo. Para expresar un objetivo se usa con una acción que se quiere realizar para conseguir algo.","pattern":"Vる + ために · Nのために","example_ja":"社長は会議に出席するために、東京へ行きました。","example_es":"El director fue a Tokio para asistir a una reunión.","tip":"El significado exacto depende de la relación entre las dos partes de la oración."},
+    {"id":"s2","type":"choice","title":"Expresar propósito","question":"¿Cuál expresa 'Fui a Japón para estudiar japonés'?","options":["日本語を勉強するために、日本へ行きました。","日本語を勉強するように、日本へ行きました。","日本語を勉強するようになって、日本へ行きました。","日本語を勉強するようにして、日本へ行きました。"],"answer":0,"explanation":"Vるために expresa el propósito de realizar la acción principal."},
+    {"id":"s3","type":"teach","label":"CLAVE","title":"Objetivo con ように","body":"ように puede expresar un objetivo relacionado con una capacidad, posibilidad o estado deseado. También aparece en instrucciones preventivas como 忘れないように.","pattern":"Vる／Vない + ように","example_ja":"みんなに聞こえるように、大きい声で話してください。","example_es":"Habla en voz alta para que todos puedan oírte.","tip":"Compara el propósito con ために y los objetivos de capacidad/estado con ように."},
+    {"id":"s4","type":"choice","title":"Objetivo con capacidad","question":"¿Cuál significa 'Quiero llegar a poder hablar bien japonés'?","options":["日本語が上手に話すためになりたいです。","日本語が上手に話せるようになりたいです。","日本語が上手に話すようにしたいです。","日本語が上手に話したためになりたいです。"],"answer":1,"explanation":"話せるようになる expresa un cambio hacia la capacidad de hablar."},
+    {"id":"s5","type":"teach","label":"PRACTICA","title":"Cambio y hábito: ようになる／ようにする","body":"Vようになる expresa un cambio: algo pasa a ocurrir o se adquiere una capacidad. Vようにする expresa un esfuerzo o hábito deliberado para conseguir que algo ocurra.","pattern":"Vようになる · Vようにする","example_ja":"日本語のニュースを毎日見るようにしています。","example_es":"Procuro ver noticias en japonés todos los días.","tip":"ようになる = cambio que se produce; ようにする = esfuerzo consciente o hábito."},
+    {"id":"s6","type":"choice","title":"Cambio o esfuerzo","question":"¿Cuál expresa un hábito deliberado?","options":["毎日日本語を話すようになりました。","毎日日本語を話すようにしています。","毎日日本語を話すためになりました。","毎日日本語を話すように言われました。"],"answer":1,"explanation":"ようにしています expresa que la persona procura mantener ese hábito."},
+    {"id":"s7","type":"choice","title":"Transmitir una instrucción","question":"¿Cuál significa 'Me dijeron que volviera temprano'?","options":["早く帰るように言われました。","早く帰るために言われました。","早く帰るようになりました。","早く帰るようにしています。"],"answer":0,"explanation":"Vように言う／言われる se usa para transmitir una instrucción o indicación."}
+  ],
+  "reflection":{"title":"Mini misión","prompt_es":"Escribe una frase con ために y otra con ようにする. Después explica qué expresa cada una.","reward":20}
+}
