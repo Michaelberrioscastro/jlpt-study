@@ -1,5 +1,5 @@
 name: jlpt_study
-description: "Premium JLPT study app with Somatome N4 and Shin Kanzen Master N3 courses."
+description: "Premium JLPT study app with multiple N4 and N3 JLPT preparation books."
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -26,3 +26,4 @@ flutter:
     - assets/content/
     - assets/content/n3/lessons/
     - assets/content/somatome_n4/lessons/
+    - assets/content/shinkanzen_n4_dokkai/lessons/
