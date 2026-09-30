@@ -5,6 +5,7 @@ import 'app_theme.dart';
 import '../study/study_catalog.dart';
 import '../study/book_catalog.dart';
 import 'progress_service.dart';
+import '../study/expanded_content.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -1001,6 +1002,13 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
     } catch (_) {
       packet = StudyCatalog.buildPacket(widget.session);
     }
+
+    packet = ExpandedContentService.enrich(
+      packet!,
+      level: progress.studyLevel,
+      bookId: StudyCatalog.activeBookId,
+    );
+    packet = ExpandedContentService.randomize(packet!);
 
     return packet!;
   }
