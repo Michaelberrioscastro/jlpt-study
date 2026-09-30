@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W03D05",
+    "week": 3,
+    "day": 5,
+    "type": "grammar",
+    "pages": [
+      58,
+      59
+    ],
+    "title_ja": "手伝ってくださいませんか。",
+    "title_es": "¿Podría ayudarme?",
+    "focus": "てくださいませんか / てもらいたい / てほしい / たらどうですか / んですが",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 58–59. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "手伝ってくださいませんか。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 58–59 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "てくださいませんか / てもらいたい / てほしい / たらどうですか / んですが",
+      "example_ja": "もう一度言っていただけませんか。",
+      "example_es": "¿Podría ayudarme?",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W03D05-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "てくださいませんか / てもらいたい / てほしい / たらどうですか / んですが",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es てくださいませんか / てもらいたい / てほしい / たらどうですか / んですが."
+    },
+    {
+      "id": "W03D05-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
