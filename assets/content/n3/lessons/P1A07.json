@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1A07",
+    "week": 4,
+    "day": 2,
+    "type": "consolidation",
+    "pages": [
+      84,
+      86
+    ],
+    "title_ja": "G · 「する・なる」の整理",
+    "title_es": "Usos de する y なる",
+    "focus": "～する・～なる・～ようにしている・～ようになっている",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 84–86. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "CONSOLIDA",
+      "title": "G · 「する・なる」の整理",
+      "body": "Consolida el foco indicado en las páginas 84–86.",
+      "pattern": "～する・～なる・～ようにしている・～ようになっている",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera función, contexto y matiz.",
+      "tip": "Compara usos cercanos y observa las restricciones."
+    },
+    {
+      "id": "P1A07-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "～する・～なる・～ようにしている・～ようになっている",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es ～する・～なる・～ようにしている・～ようになっている."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal y crea una oración propia.",
+    "reward": 25
+  }
+}
