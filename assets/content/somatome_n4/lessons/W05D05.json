@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W05D05",
+    "week": 5,
+    "day": 5,
+    "type": "reading",
+    "pages": [
+      90,
+      91
+    ],
+    "title_ja": "長めの文章を読みましょう②",
+    "title_es": "Leamos un texto más largo ②.",
+    "focus": "文章②",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las páginas 90–91. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "LEE",
+      "title": "長めの文章を読みましょう②",
+      "body": "Práctica de 文章②. Trabaja localización de información, contexto y selección de respuestas.",
+      "pattern": "Palabras clave → localizar → comprobar",
+      "example_ja": "文章の大事なところを見つけましょう。",
+      "example_es": "Encuentra la información importante del texto.",
+      "tip": "Busca primero la idea general y después el detalle que pide la pregunta."
+    },
+    {
+      "id": "W05D05-q1",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene localizar primero?",
+      "options": [
+        "Nombres, fechas, lugares y acciones clave",
+        "Cada palabra del texto",
+        "Solo la última frase"
+      ],
+      "answer": 0,
+      "explanation": "Las palabras clave permiten localizar rápidamente la información."
+    },
+    {
+      "id": "W05D05-q2",
+      "type": "choice",
+      "title": "Comprensión",
+      "question": "Si una pregunta pide algo que NO es correcto, ¿qué haces?",
+      "options": [
+        "Compruebas cada opción contra el texto",
+        "Eliges la primera opción",
+        "Ignoras el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Hay que verificar cada opción con la información del texto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Resume la estrategia de esta sesión y escribe un ejemplo propio.",
+    "reward": 20
+  }
+}
