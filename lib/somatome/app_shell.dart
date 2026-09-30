@@ -515,7 +515,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('JLPT ${level}@@', style: const TextStyle(color: AppColors.ink, fontSize: 18, fontWeight: FontWeight.w900)),
+                      Text('JLPT ${level}', style: const TextStyle(color: AppColors.ink, fontSize: 18, fontWeight: FontWeight.w900)),
                       const SizedBox(height: 3),
                       Text(
                         snapshot.book.shortTitle,
@@ -534,7 +534,7 @@ class HomePage extends StatelessWidget {
                     border: Border.all(color: active ? AppColors.violet : AppColors.border, width: 4),
                   ),
                   child: Center(
-                    child: Text('${percent}@@%', style: const TextStyle(color: AppColors.ink, fontSize: 11, fontWeight: FontWeight.w900)),
+                    child: Text('${percent}%', style: const TextStyle(color: AppColors.ink, fontSize: 11, fontWeight: FontWeight.w900)),
                   ),
                 ),
               ],
@@ -554,11 +554,11 @@ class HomePage extends StatelessWidget {
               children: [
                 const Icon(Icons.check_circle_rounded, color: AppColors.mint, size: 15),
                 const SizedBox(width: 6),
-                Text('${snapshot.completed}@@/${snapshot.total}@@ sesiones', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
+                Text('${snapshot.completed}/${snapshot.total} sesiones', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
                 const Spacer(),
                 const Icon(Icons.bolt_rounded, color: AppColors.yellow, size: 16),
                 const SizedBox(width: 4),
-                Text('${snapshot.xp}@@ XP', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
+                Text('${snapshot.xp} XP', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
               ],
             ),
           ],
@@ -714,21 +714,21 @@ class HomePage extends StatelessWidget {
                 Row(children: [
                   Expanded(child: _goalCard('Estudiar hoy', stats.totalAnswers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet)),
                   const SizedBox(width: 10),
-                  Expanded(child: _goalCard('Mantener la racha', '${stats.streak}@@/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
+                  Expanded(child: _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
                   const SizedBox(width: 10),
-                  Expanded(child: _goalCard('Precisión', '${stats.accuracy.round()}@@%', Icons.gps_fixed_rounded, AppColors.mint)),
+                  Expanded(child: _goalCard('Precisión', '${stats.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint)),
                   const SizedBox(width: 10),
-                  Expanded(child: _goalCard('Ganar XP', '${stats.xp}@@/100 XP', Icons.bolt_rounded, AppColors.yellow)),
+                  Expanded(child: _goalCard('Ganar XP', '${stats.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow)),
                 ])
               else
                 Column(children: [
                   _goalCard('Estudiar hoy', stats.totalAnswers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet),
                   const SizedBox(height: 9),
-                  _goalCard('Mantener la racha', '${stats.streak}@@/7 días', Icons.local_fire_department_rounded, AppColors.coral),
+                  _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral),
                   const SizedBox(height: 9),
-                  _goalCard('Precisión', '${stats.accuracy.round()}@@%', Icons.gps_fixed_rounded, AppColors.mint),
+                  _goalCard('Precisión', '${stats.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint),
                   const SizedBox(height: 9),
-                  _goalCard('Ganar XP', '${stats.xp}@@/100 XP', Icons.bolt_rounded, AppColors.yellow),
+                  _goalCard('Ganar XP', '${stats.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow),
                 ]),
               const SizedBox(height: 26),
               Container(
@@ -813,7 +813,7 @@ class _ContinueCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-              Text('${progress.completedCount}@@/${StudyCatalog.totalSessions}@@ sesiones · ${percent}@@%', style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700)),
+              Text('${progress.completedCount}/${StudyCatalog.totalSessions} sesiones · ${percent}%', style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700)),
             ],
           ),
         ),
