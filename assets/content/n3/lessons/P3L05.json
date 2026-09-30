@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P3L05",
+    "week": 6,
+    "day": 5,
+    "type": "text",
+    "pages": [
+      128,
+      129
+    ],
+    "title_ja": "課5 · 話者が見る位置を動かさない－3",
+    "title_es": "Pasiva, causativa y causativa-pasiva",
+    "focus": "受身・使役・使役受身",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 128–129. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "課5 · 話者が見る位置を動かさない－3",
+      "body": "Trabaja el foco textual indicado en las páginas 128–129.",
+      "pattern": "受身・使役・使役受身",
+      "example_ja": "文章全体の関係を考えて読みましょう。",
+      "example_es": "Lee teniendo en cuenta las relaciones de todo el texto.",
+      "tip": "No analices cada oración de forma aislada: observa cómo se conecta con las demás."
+    },
+    {
+      "id": "P3L05-q1",
+      "type": "choice",
+      "title": "Cohesión",
+      "question": "¿Qué conviene observar en un texto?",
+      "options": [
+        "Relaciones entre oraciones y referencias",
+        "Solo palabras aisladas",
+        "Solo la traducción"
+      ],
+      "answer": 0,
+      "explanation": "La Parte 3 trabaja cómo las formas se relacionan dentro del texto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica qué recurso ayuda a mantener la cohesión en este bloque.",
+    "reward": 25
+  }
+}
