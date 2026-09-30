@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_theme.dart';
-import 'lesson_catalog.dart';
+import '../study/study_catalog.dart';
 import 'progress_service.dart';
 
 class AppShell extends StatefulWidget {
@@ -50,6 +50,8 @@ class _AppShellState extends State<AppShell> {
                   _DesktopRail(
                     selected: tab,
                     onChanged: (v) => setState(() => tab = v),
+                    level: progress.studyLevel,
+                    onLevelChanged: (v) => progress.setLevel(v),
                   ),
                   Expanded(
                     child: Container(
@@ -69,7 +71,12 @@ class _AppShellState extends State<AppShell> {
 
           return Scaffold(
             backgroundColor: AppColors.background,
-            body: content,
+            body: Column(
+              children: [
+                _MobileLevelBar(level: progress.studyLevel, onChanged: (v) => progress.setLevel(v)),
+                Expanded(child: content),
+              ],
+            ),
             bottomNavigationBar: SafeArea(
               top: false,
               child: Container(
@@ -104,11 +111,50 @@ class _AppShellState extends State<AppShell> {
   );
 }
 
+class _LevelSwitcher extends StatelessWidget {
+  final String level;
+  final ValueChanged<String> onChanged;
+  const _LevelSwitcher({required this.level, required this.onChanged});
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(4),
+    decoration: BoxDecoration(color: AppColors.background,borderRadius: BorderRadius.circular(15),border: Border.all(color: AppColors.border)),
+    child: Row(children:[
+      Expanded(child:_LevelChoice(label:'N4',selected:level=='N4',onTap:()=>onChanged('N4'))),
+      Expanded(child:_LevelChoice(label:'N3',selected:level=='N3',onTap:()=>onChanged('N3'))),
+    ]),
+  );
+}
+class _LevelChoice extends StatelessWidget {
+  final String label; final bool selected; final VoidCallback onTap;
+  const _LevelChoice({required this.label,required this.selected,required this.onTap});
+  @override
+  Widget build(BuildContext context)=>InkWell(
+    onTap:selected?null:onTap,borderRadius:BorderRadius.circular(11),
+    child:AnimatedContainer(duration:const Duration(milliseconds:180),padding:const EdgeInsets.symmetric(vertical:9),
+      decoration:BoxDecoration(color:selected?AppColors.navy:Colors.transparent,borderRadius:BorderRadius.circular(11)),
+      child:Text(label,textAlign:TextAlign.center,style:TextStyle(color:selected?Colors.white:AppColors.muted,fontWeight:FontWeight.w900,fontSize:12))),
+  );
+}
+class _MobileLevelBar extends StatelessWidget {
+  final String level; final ValueChanged<String> onChanged;
+  const _MobileLevelBar({required this.level,required this.onChanged});
+  @override
+  Widget build(BuildContext context)=>SafeArea(bottom:false,child:Padding(
+    padding:const EdgeInsets.fromLTRB(16,10,16,6),
+    child:Row(children:[
+      Expanded(child:Text(level=='N4'?'Somatome N4':'Shin Kanzen Master N3',style:const TextStyle(fontWeight:FontWeight.w900,fontSize:15))),
+      SizedBox(width:142,child:_LevelSwitcher(level:level,onChanged:onChanged)),
+    ]),
+  ));
+}
 class _DesktopRail extends StatelessWidget {
   final int selected;
   final ValueChanged<int> onChanged;
+  final String level;
+  final ValueChanged<String> onLevelChanged;
 
-  const _DesktopRail({required this.selected, required this.onChanged});
+  const _DesktopRail({required this.selected, required this.onChanged, required this.level, required this.onLevelChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -182,6 +228,8 @@ class _DesktopRail extends StatelessWidget {
               ],
             ),
           ),
+          _LevelSwitcher(level: level, onChanged: onLevelChanged),
+          const SizedBox(height: 18),
           for (var i = 0; i < items.length; i++)
             Padding(
               padding: const EdgeInsets.only(bottom: 7),
@@ -783,7 +831,7 @@ class _Hero extends StatelessWidget {
     child: Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       Row(children:[Expanded(child:Text('SIGUIENTE SESIÓN',style:Theme.of(context).textTheme.labelMedium?.copyWith(color:AppColors.primary,fontWeight:FontWeight.w900,letterSpacing:1.2))),_Pill(icon:Icons.lock_open_rounded,text:'Desbloqueada')]),
       const SizedBox(height:12),
-      Text('Semana '+session.week.toString()+' · Día '+session.day.toString(),style:const TextStyle(fontWeight:FontWeight.w900)),
+      Text((progress.studyLevel=='N3'?'Bloque ':'Semana ')+session.week.toString()+' · Día '+session.day.toString(),style:const TextStyle(fontWeight:FontWeight.w900)),
       const SizedBox(height:5),
       Text(session.titleJa,style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),
       const SizedBox(height:4),
@@ -828,7 +876,7 @@ class _WeekCard extends StatelessWidget {
     return Card(margin:const EdgeInsets.only(bottom:12),child:Padding(padding:const EdgeInsets.all(15),child:Column(children:[
       Row(children:[
         CircleAvatar(backgroundColor:unlocked?AppColors.primarySoft:const Color(0xFFEDEAE7),child:Text(week.toString(),style:TextStyle(fontWeight:FontWeight.w900,color:unlocked?AppColors.primary:AppColors.muted))),
-        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Semana '+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
+        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text((progress.studyLevel=='N3'?'Bloque ':'Semana ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
         Text((done/sessions.length*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900)),
       ]),
       const SizedBox(height:10),ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/sessions.length,minHeight:7)),
