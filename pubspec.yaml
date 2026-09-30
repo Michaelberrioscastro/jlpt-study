@@ -1,5 +1,5 @@
-name: jlpt_n4_study
-description: "A simple Japanese study app built around books and structured courses."
+name: jlpt_n3_study
+description: "A simple Japanese study app built around Shin Kanzen Master N3 grammar and structured study."
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -22,4 +22,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/content/
-    - assets/content/somatome_n4/lessons/
+    - assets/content/n3/lessons/
