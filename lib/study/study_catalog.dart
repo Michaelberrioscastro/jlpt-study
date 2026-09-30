@@ -1,3 +1,5 @@
+export '../somatome/lesson_catalog.dart';
+
 import '../somatome/lesson_catalog.dart';
 import '../n3/n3_catalog.dart';
 
