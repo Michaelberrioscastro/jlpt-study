@@ -1,34 +1,40 @@
 {
-  "title": "課1 · ～とき",
-  "source_pages": [
-    16,
-    17
-  ],
+  "schema_version": 2,
+  "session": {
+    "id": "P1L01",
+    "week": 1,
+    "day": 1,
+    "type": "grammar",
+    "pages": [16, 17],
+    "title_ja": "課1 · ～とき",
+    "title_es": "Cuando / mientras: expresiones de tiempo",
+    "focus": "～うちに · ～間／～間に · ～てからでないと／～てからでなければ · ～ところ",
+    "source": "新完全マスター文法 日本語能力試験N3",
+    "content_note": "La sesión sigue la organización de 第1部・1課. Las actividades interactivas incluidas aquí son material didáctico original basado en las estructuras identificadas; los ejercicios exactos del libro se incorporarán durante la auditoría de contenido."
+  },
   "steps": [
     {
+      "id": "s1",
       "type": "teach",
       "label": "APRENDE",
       "title": "～とき",
       "body": "La primera lección de Part 1 trabaja expresiones relacionadas con el tiempo y el momento de una acción.",
       "pattern": "～うちに · ～間／～間に · ～てからでないと／～てからでなければ · ～ところだ",
       "example_ja": "日本にいるうちに、一度富士山に登ってみたい。",
-      "example_es": "Mientras esté en Japón, quiero intentar subir al monte Fuji una vez.",
-      "tip": "Compara si una acción ocurre mientras otra continúa, durante un intervalo, después de cumplir un requisito o en un estado/momento concreto."
+      "example_es": "Mientras esté en Japón, quiero intentar subir el monte Fuji una vez.",
+      "tip": "Compara si una acción ocurre mientras se mantiene una determinada situación, durante un intervalo, después de cumplir un requisito o en un estado/momento concreto."
     },
     {
-      "type": "question",
+      "id": "s2",
+      "type": "choice",
       "title": "Reconoce ～うちに",
       "question": "日本にいる（　）一度富士山に登ってみたい。",
-      "options": [
-        "うちに",
-        "間に",
-        "ところ",
-        "てからでないと"
-      ],
+      "options": ["うちに", "間に", "ところ", "てからでないと"],
       "answer": 0,
       "explanation": "La frase usa ～うちに para expresar que algo se realiza mientras se mantiene una determinada situación."
     },
     {
+      "id": "s3",
       "type": "teach",
       "label": "CLAVE",
       "title": "～間／～間に",
@@ -39,15 +45,11 @@
       "tip": "Observa si la segunda acción se desarrolla durante todo el intervalo o sucede en algún momento dentro de él."
     },
     {
-      "type": "question",
+      "id": "s4",
+      "type": "choice",
       "title": "Requisito previo",
       "question": "運転免許を取って（　）車を運転してはいけない。",
-      "options": [
-        "からでないと",
-        "いるうちに",
-        "ところ",
-        "間に"
-      ],
+      "options": ["からでないと", "いるうちに", "ところ", "間に"],
       "answer": 0,
       "explanation": "～てからでないと expresa que una acción no puede realizarse hasta cumplir el requisito previo."
     }
