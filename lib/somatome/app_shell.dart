@@ -1190,8 +1190,8 @@ class _SessionTile extends StatelessWidget {
     required this.session,
     required this.progress,
     required this.onOpen,
-    required this.isFirst,
-    required this.isLast,
+    this.isFirst = false,
+    this.isLast = false,
   });
 
   @override
@@ -1408,7 +1408,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
 
     packet = ExpandedContentService.enrich(
       packet!,
-      level: progress.studyLevel,
+      level: widget.progress.studyLevel,
       bookId: StudyCatalog.activeBookId,
     );
     packet = ExpandedContentService.randomize(packet!);
