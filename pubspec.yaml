@@ -1,5 +1,5 @@
-name: jlpt_n4_study
-description: "A simple Japanese study app built around books and structured courses."
+name: jlpt_study
+description: "Premium JLPT study app with Somatome N4 and Shin Kanzen Master N3 courses."
 publish_to: 'none'
 
 version: 1.0.0+1
