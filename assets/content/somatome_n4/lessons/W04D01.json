@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W04D01",
+    "week": 4,
+    "day": 1,
+    "type": "grammar",
+    "pages": [
+      66,
+      67
+    ],
+    "title_ja": "夏休みになったら、国に帰ります。",
+    "title_es": "Cuando lleguen las vacaciones de verano, volveré a mi país.",
+    "focus": "たら / ば / なら / と",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 66–67. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "夏休みになったら、国に帰ります。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 66–67 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "たら / ば / なら / と",
+      "example_ja": "夏休みになったら、国に帰ります。",
+      "example_es": "Cuando lleguen las vacaciones de verano, volveré a mi país.",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W04D01-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "たら / ば / なら / と",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es たら / ば / なら / と."
+    },
+    {
+      "id": "W04D01-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
