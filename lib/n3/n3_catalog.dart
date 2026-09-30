@@ -9,7 +9,7 @@ class SessionInfo {
 }
 
 abstract final class LessonCatalog {
-  static const totalSessions = 49;
+  static const totalSessions = 50;
   static final sessions = <SessionInfo>[
     ..._module(1, 'P1L', 'grammar', [
       ['課1 · ～とき', 'Cuando / mientras: ～うちに・～間／～間に・～てからでないと・～ところ', 'Tiempo y estado de una acción', 16, 17],
