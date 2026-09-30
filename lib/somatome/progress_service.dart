@@ -146,6 +146,12 @@ class ProgressService extends ChangeNotifier {
     if (selected.level != _level) return;
     if (value == _bookId && _loaded) return;
 
+    // Persist the requested book before reloading. load() restores the selected
+    // book from SharedPreferences, so saving first prevents it from snapping
+    // back to the previously selected N4 book.
+    final p = _prefs ??= await SharedPreferences.getInstance();
+    await p.setString('selected_book_' + _level, value);
+
     _bookId = value;
     _resetMemory();
     await load();
