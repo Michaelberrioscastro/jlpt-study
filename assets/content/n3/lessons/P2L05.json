@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P2L05",
+    "week": 5,
+    "day": 5,
+    "type": "review",
+    "pages": [
+      112,
+      112
+    ],
+    "title_ja": "第2部・まとめ問題",
+    "title_es": "Repaso de la Parte 2",
+    "focus": "Repaso Part 2",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 112–112. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "REPASA",
+      "title": "第2部・まとめ問題",
+      "body": "Trabaja Repaso Part 2 según la organización de las páginas 112–112.",
+      "pattern": "Repaso Part 2",
+      "example_ja": "文の意味と構造を考えて、適切な形を選びましょう。",
+      "example_es": "Considera el significado y la estructura de la oración.",
+      "tip": "En esta parte importa la relación entre los componentes de la oración."
+    },
+    {
+      "id": "P2L05-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el objetivo de esta sesión?",
+      "options": [
+        "Repaso Part 2",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es Repaso Part 2."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica cómo se organiza la oración en este bloque y crea un ejemplo.",
+    "reward": 25
+  }
+}
