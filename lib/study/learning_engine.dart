@@ -14,6 +14,9 @@ class ConceptMastery {
   double intervalDays;
   DateTime? lastSeen;
   DateTime? dueAt;
+  int totalResponseMs;
+  int responseCount;
+  int lastResponseMs;
   final List<bool> recent;
 
   ConceptMastery({
@@ -26,10 +29,14 @@ class ConceptMastery {
     this.intervalDays = 0,
     this.lastSeen,
     this.dueAt,
+    this.totalResponseMs = 0,
+    this.responseCount = 0,
+    this.lastResponseMs = 0,
     List<bool>? recent,
   }) : recent = recent ?? <bool>[];
 
   double get accuracy => attempts == 0 ? 0 : correct / attempts;
+  double get averageResponseMs => responseCount == 0 ? 0 : totalResponseMs / responseCount;
 
   double get mastery {
     if (attempts == 0) return 0;
@@ -59,6 +66,7 @@ class ConceptMastery {
     if (isDue) score += 35;
     if (isAtRisk) score += 20;
     if (recent.isNotEmpty && !recent.last) score += 25;
+    if (r.lastResponseMs >= 12000) score += 8;
     return score;
   }
 
@@ -72,6 +80,9 @@ class ConceptMastery {
         'intervalDays': intervalDays,
         'lastSeen': lastSeen?.millisecondsSinceEpoch,
         'dueAt': dueAt?.millisecondsSinceEpoch,
+        'totalResponseMs': totalResponseMs,
+        'responseCount': responseCount,
+        'lastResponseMs': lastResponseMs,
         'recent': recent,
       };
 
@@ -86,6 +97,9 @@ class ConceptMastery {
       intervalDays: (map['intervalDays'] as num?)?.toDouble() ?? 0,
       lastSeen: _date(map['lastSeen']),
       dueAt: _date(map['dueAt']),
+      totalResponseMs: (map['totalResponseMs'] as num?)?.toInt() ?? 0,
+      responseCount: (map['responseCount'] as num?)?.toInt() ?? 0,
+      lastResponseMs: (map['lastResponseMs'] as num?)?.toInt() ?? 0,
       recent: (map['recent'] as List<dynamic>?)
               ?.map((x) => x == true)
               .toList() ??
@@ -175,6 +189,7 @@ class LearningEngine {
     required String sessionId,
     required String questionId,
     required bool correct,
+    int responseMs = 0,
   }) async {
     final ids = conceptIds.isEmpty
         ? <String>[normalizeConcept(sessionId)]
@@ -186,7 +201,7 @@ class LearningEngine {
 
     for (final id in ids) {
       final record = _concepts.putIfAbsent(id, () => ConceptMastery(id: id));
-      _update(record, correct);
+      _update(record, correct, responseMs);
     }
 
     await _save(prefs, level);
@@ -335,8 +350,13 @@ class LearningEngine {
     return text.length > 70 ? text.substring(0, 70) : text;
   }
 
-  void _update(ConceptMastery r, bool correct) {
+  void _update(ConceptMastery r, bool correct, int responseMs) {
     final now = DateTime.now();
+    if (responseMs > 0) {
+      r.totalResponseMs += responseMs;
+      r.responseCount++;
+      r.lastResponseMs = responseMs;
+    }
     r.attempts++;
 
     if (correct) {
