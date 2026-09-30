@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W01D04",
+    "week": 1,
+    "day": 4,
+    "type": "grammar",
+    "pages": [24, 25],
+    "title_ja": "今、勉強しているところです。",
+    "title_es": "Ahora mismo estoy estudiando.",
+    "focus": "ところ · 間／間に · とき · 中",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las funciones gramaticales presentadas en las páginas 24–25. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "ところ: el momento de una acción",
+      "body": "ところ permite situar una acción: justo antes de comenzar, mientras está ocurriendo o justo después de haber terminado.",
+      "pattern": "Vるところ · Vているところ · Vたところ",
+      "example_ja": "今から出かけるところです。",
+      "example_es": "Estoy a punto de salir ahora.",
+      "tip": "Observa la forma verbal: Vる señala una acción a punto de empezar, Vている una acción en curso y Vた una acción recién terminada."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "¿En qué momento?",
+      "question": "Quieres decir 'Ahora mismo estoy cenando'.",
+      "options": [
+        "今、晩ご飯を食べているところです。",
+        "今、晩ご飯を食べるところです。",
+        "今、晩ご飯を食べたところです。",
+        "今、晩ご飯を食べないところです。"
+      ],
+      "answer": 0,
+      "explanation": "Vているところ sitúa la acción en pleno desarrollo."
+    },
+    {
+      "id": "s3",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "間 y 間に",
+      "body": "間 puede presentar una acción que se desarrolla durante un intervalo. 間に puede señalar que otra acción ocurre en algún momento dentro de ese intervalo.",
+      "pattern": "Nの間 · Vている間に",
+      "example_ja": "夏休みの間に旅行したいです。",
+      "example_es": "Quiero viajar durante las vacaciones de verano.",
+      "tip": "La diferencia se entiende mejor preguntando si la segunda acción ocupa todo el intervalo o ocurre en algún punto dentro de él."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Dentro de un intervalo",
+      "question": "¿Qué opción expresa que harás una acción en algún momento durante las vacaciones?",
+      "options": [
+        "夏休みの間に旅行します。",
+        "夏休みのところ旅行します。",
+        "夏休みのまで旅行します。",
+        "夏休みのばかり旅行します。"
+      ],
+      "answer": 0,
+      "explanation": "間に puede marcar que una acción ocurre dentro del intervalo de las vacaciones."
+    },
+    {
+      "id": "s5",
+      "type": "teach",
+      "label": "AMPLÍA",
+      "title": "とき y 中",
+      "body": "とき permite indicar cuándo ocurre algo. 中 puede expresar que una acción ocurre durante un período determinado; con expresiones como 今中 o 会議中 hay que reconocer la lectura y el contexto.",
+      "pattern": "Vる／Vた とき · N中",
+      "example_ja": "寝るとき、パジャマを着ます。",
+      "example_es": "Cuando me voy a dormir, me pongo el pijama.",
+      "tip": "En 中, el contexto determina si hablamos de un período general o de una actividad que está en curso."
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Reto final",
+      "question": "¿Qué opción expresa 'Cuando me acuesto, me pongo el pijama'?",
+      "options": [
+        "寝るとき、パジャマを着ます。",
+        "寝るところ、パジャマを着ます。",
+        "寝た間、パジャマを着ます。",
+        "寝るまでに、パジャマを着ます。"
+      ],
+      "answer": 0,
+      "explanation": "とき se utiliza para situar la acción respecto del momento de dormir."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Crea una frase con Vているところ y otra con ～とき. Explica qué momento de la acción comunica cada una.",
+    "reward": 20
+  }
+}
