@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "SKN4P2U08",
+    "week": 2,
+    "day": 8,
+    "type": "information",
+    "pages": [
+      36,
+      39
+    ],
+    "title_ja": "情報検索1（案内）",
+    "title_es": "Búsqueda de información 1 · Guía",
+    "focus": "Buscar rápidamente información relevante en una guía",
+    "source": "新完全マスター 読解 N4",
+    "content_note": "Mapa curricular basado en las páginas indicadas del libro. Las actividades interactivas de esta app son originales y no constituyen una transcripción de los ejercicios publicados."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "ENTRENAMIENTO",
+      "title": "情報検索1（案内）",
+      "body": "Búsqueda de información 1 · Guía.\n\nEsta sesión está mapeada a las páginas de referencia del libro. La explicación y la práctica interactiva de esta app son originales y no transcriben los ejercicios del libro.",
+      "pattern": "Buscar rápidamente información relevante en una guía",
+      "example_ja": "新完全マスター 読解 N4 · pp. 36–39",
+      "example_es": "Primero identifica qué pide la pregunta y después localiza la información que la responde.",
+      "tip": "En búsqueda de información, lee con un objetivo concreto y localiza solo los datos necesarios."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 1",
+      "question": "En una guía o aviso, ¿qué debes identificar antes de buscar un dato?",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 2",
+      "question": "Si buscas un horario, ¿qué parte del texto merece atención prioritaria?",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 3",
+      "question": "¿Por qué no es necesario leer todas las líneas con el mismo detalle?",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    }
+  ],
+  "reflection": {
+    "prompt": "¿Qué estrategia de lectura quieres recordar en la próxima sesión?",
+    "options": [
+      "Buscar primero la información que pide la pregunta",
+      "Leer sin objetivo hasta el final",
+      "Traducir palabra por palabra"
+    ]
+  }
+}
