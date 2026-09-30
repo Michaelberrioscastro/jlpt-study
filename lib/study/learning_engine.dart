@@ -269,6 +269,16 @@ class LearningEngine {
 
   ConceptMastery? concept(String id) => _concepts[normalizeConcept(id)];
 
+  static List<String> conceptsForFocus(String focus) {
+    final parts = focus
+        .split(RegExp(r'\\s*[·/／,、]+\\s*'))
+        .map(normalizeConcept)
+        .where((x) => x.isNotEmpty && x != 'Review')
+        .toSet()
+        .toList();
+    return parts.isEmpty ? <String>[normalizeConcept(focus)] : parts;
+  }
+
   static String normalizeConcept(String value) {
     var text = value
         .replaceAll('〜', '～')
