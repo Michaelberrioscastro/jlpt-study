@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jlpt_study/study/learning_engine.dart';
+import 'package:jlpt_study/somatome/lesson_catalog.dart';
 
 void main() {
   group('LearningEngine', () {
