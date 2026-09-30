@@ -27,42 +27,220 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
     animation: progress,
-    builder: (_, __) => Scaffold(
-      body: IndexedStack(index: tab, children: [
-        HomePage(progress: progress, onStart: () => openSession(progress.nextUnlockedSession())),
-        CoursePage(progress: progress, onOpen: openSession),
-        ReviewPage(progress: progress, onOpen: openSession),
-        ProgressPage(progress: progress),
-      ]),
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(14, 0, 14, 12),
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: AppColors.border),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primary.withOpacity(.12),
-                blurRadius: 24,
-                offset: const Offset(0, 8),
+    builder: (_, __) {
+      final content = IndexedStack(
+        index: tab,
+        children: [
+          HomePage(progress: progress, onStart: () => openSession(progress.nextUnlockedSession())),
+          CoursePage(progress: progress, onOpen: openSession),
+          ReviewPage(progress: progress, onOpen: openSession),
+          ProgressPage(progress: progress),
+        ],
+      );
+
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          final desktop = constraints.maxWidth >= 900;
+
+          if (desktop) {
+            return Scaffold(
+              backgroundColor: AppColors.background,
+              body: Row(
+                children: [
+                  _DesktopRail(
+                    selected: tab,
+                    onChanged: (v) => setState(() => tab = v),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: AppColors.background,
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1180),
+                          child: content,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: Row(
-            children: [
-              _NavItem(index: 0, selected: tab == 0, icon: Icons.home_rounded, label: 'Inicio', onTap: () => setState(() => tab = 0)),
-              _NavItem(index: 1, selected: tab == 1, icon: Icons.route_rounded, label: 'Curso', onTap: () => setState(() => tab = 1)),
-              _NavItem(index: 2, selected: tab == 2, icon: Icons.refresh_rounded, label: 'Repaso', onTap: () => setState(() => tab = 2)),
-              _NavItem(index: 3, selected: tab == 3, icon: Icons.insights_rounded, label: 'Progreso', onTap: () => setState(() => tab = 3)),
-            ],
-          ),
-        ),
-      ),
-    ),
+            );
+          }
+
+          return Scaffold(
+            backgroundColor: AppColors.background,
+            body: content,
+            bottomNavigationBar: SafeArea(
+              top: false,
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(color: AppColors.border),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withOpacity(.12),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    _NavItem(index: 0, selected: tab == 0, icon: Icons.home_rounded, label: 'Inicio', onTap: () => setState(() => tab = 0)),
+                    _NavItem(index: 1, selected: tab == 1, icon: Icons.route_rounded, label: 'Curso', onTap: () => setState(() => tab = 1)),
+                    _NavItem(index: 2, selected: tab == 2, icon: Icons.refresh_rounded, label: 'Repaso', onTap: () => setState(() => tab = 2)),
+                    _NavItem(index: 3, selected: tab == 3, icon: Icons.insights_rounded, label: 'Progreso', onTap: () => setState(() => tab = 3)),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
   );
+}
+
+class _DesktopRail extends StatelessWidget {
+  final int selected;
+  final ValueChanged<int> onChanged;
+
+  const _DesktopRail({required this.selected, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    const items = [
+      (Icons.home_rounded, 'Inicio'),
+      (Icons.route_rounded, 'Curso'),
+      (Icons.refresh_rounded, 'Repaso'),
+      (Icons.insights_rounded, 'Progreso'),
+    ];
+
+    return Container(
+      width: 235,
+      margin: const EdgeInsets.fromLTRB(18, 18, 0, 18),
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: AppColors.border),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(.07),
+            blurRadius: 30,
+            offset: const Offset(4, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 4, 10, 26),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF735BC1), Color(0xFF4E3A91)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'N4',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 11),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'JLPT Study',
+                      style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'Somatome N4',
+                      style: TextStyle(color: AppColors.muted, fontSize: 11),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          for (var i = 0; i < items.length; i++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 7),
+              child: InkWell(
+                onTap: () => onChanged(i),
+                borderRadius: BorderRadius.circular(18),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+                  decoration: BoxDecoration(
+                    color: selected == i ? AppColors.primarySoft : Colors.transparent,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        items[i].$1,
+                        size: 21,
+                        color: selected == i ? AppColors.primary : AppColors.muted,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        items[i].$2,
+                        style: TextStyle(
+                          color: selected == i ? AppColors.primaryDeep : AppColors.text,
+                          fontWeight: selected == i ? FontWeight.w900 : FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFFF0EBFC), Color(0xFFFFF0F1)],
+              ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.auto_awesome_rounded, color: AppColors.primary, size: 22),
+                SizedBox(width: 9),
+                Expanded(
+                  child: Text(
+                    'Aprende un poco cada día.',
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, height: 1.35),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _NavItem extends StatelessWidget {
