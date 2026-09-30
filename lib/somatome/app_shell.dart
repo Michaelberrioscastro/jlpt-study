@@ -272,53 +272,61 @@ class _SideMenu extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('JLPT Study', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
-                      SizedBox(height: 2),
-                      Text('Tu espacio de estudio', style: TextStyle(fontSize: 11, color: AppColors.muted, fontWeight: FontWeight.w700)),
-                    ],
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('JLPT Study', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+                        SizedBox(height: 2),
+                        Text('Tu espacio de estudio', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 11, color: AppColors.muted, fontWeight: FontWeight.w700)),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 26),
-              const Text('NIVEL', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
-              const SizedBox(height: 8),
-              _LevelSwitcher(level: level, onChanged: onLevelChanged),
               const SizedBox(height: 16),
-              const Text('LIBRO', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
-              const SizedBox(height: 8),
-              _BookSwitcher(book: book, onChanged: onBookChanged),
-              const SizedBox(height: 22),
-              const Divider(color: AppColors.border),
-              const SizedBox(height: 12),
-              _SideNavItem(index: 0, selected: selected == 0, icon: Icons.home_rounded, label: 'Inicio', onTap: onTabChanged),
-              _SideNavItem(index: 1, selected: selected == 1, icon: Icons.route_rounded, label: 'Curso', onTap: onTabChanged),
-              _SideNavItem(index: 2, selected: selected == 2, icon: Icons.refresh_rounded, label: 'Repaso', onTap: onTabChanged),
-              _SideNavItem(index: 3, selected: selected == 3, icon: Icons.insights_rounded, label: 'Progreso', onTap: onTabChanged),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [AppColors.navy, AppColors.navySoft],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(22),
-                ),
-                child: Row(
-                  children: [
-                    const Text('🌸', style: TextStyle(fontSize: 24)),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        '${book.shortTitle}\n${book.subtitle}',
-                        style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, height: 1.35),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      const Text('NIVEL', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
+                      const SizedBox(height: 8),
+                      _LevelSwitcher(level: level, onChanged: onLevelChanged),
+                      const SizedBox(height: 16),
+                      const Text('LIBRO', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
+                      const SizedBox(height: 8),
+                      _BookSwitcher(book: book, onChanged: onBookChanged),
+                      const SizedBox(height: 22),
+                      const Divider(color: AppColors.border),
+                      const SizedBox(height: 12),
+                      _SideNavItem(index: 0, selected: selected == 0, icon: Icons.home_rounded, label: 'Inicio', onTap: onTabChanged),
+                      _SideNavItem(index: 1, selected: selected == 1, icon: Icons.route_rounded, label: 'Curso', onTap: onTabChanged),
+                      _SideNavItem(index: 2, selected: selected == 2, icon: Icons.refresh_rounded, label: 'Repaso', onTap: onTabChanged),
+                      _SideNavItem(index: 3, selected: selected == 3, icon: Icons.insights_rounded, label: 'Progreso', onTap: onTabChanged),
+                      const SizedBox(height: 18),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(colors: [AppColors.navy, AppColors.navySoft], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+                        child: Row(
+                          children: [
+                            const Text('🌸', style: TextStyle(fontSize: 24)),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                '${book.shortTitle}\n${book.subtitle}',
+                                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, height: 1.35),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
