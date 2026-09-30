@@ -43,6 +43,7 @@ void main() {
         sessionId: 'W01D01',
         questionId: 'q1',
         correct: false,
+        responseMs: 15000,
       );
 
       final record = engine.concept('～うちに');
@@ -50,6 +51,7 @@ void main() {
       expect(record!.attempts, 1);
       expect(record.correct, 0);
       expect(record.dueAt, isNotNull);
+      expect(record.lastResponseMs, 15000);
     });
 
     test('builds a personalized plan after learning data exists', () async {
