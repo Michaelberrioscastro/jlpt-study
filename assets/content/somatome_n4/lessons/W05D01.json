@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W05D01",
+    "week": 5,
+    "day": 1,
+    "type": "reading",
+    "pages": [
+      82,
+      83
+    ],
+    "title_ja": "メールやメモを読みましょう",
+    "title_es": "Leamos correos y notas.",
+    "focus": "メール・メモ",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 82–83. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "LEE",
+      "title": "メールやメモを読みましょう",
+      "body": "Práctica de メール・メモ. Las páginas 82–83 trabajan la comprensión de este tipo de texto.",
+      "pattern": "Palabras clave → localizar información → comprobar contexto",
+      "example_ja": "重要なことばを見つけましょう。",
+      "example_es": "Busquemos las palabras importantes.",
+      "tip": "Primero identifica quién, qué, cuándo, dónde y qué se pregunta."
+    },
+    {
+      "id": "W05D01-q1",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene localizar primero?",
+      "options": [
+        "Nombres, fechas, lugares y acciones clave",
+        "Cada palabra antes de entender la pregunta",
+        "Solo la primera frase"
+      ],
+      "answer": 0,
+      "explanation": "Las palabras clave ayudan a localizar rápidamente la información."
+    },
+    {
+      "id": "W05D01-q2",
+      "type": "choice",
+      "title": "Comprensión",
+      "question": "Si la pregunta pide algo que NO es correcto, ¿qué debes hacer?",
+      "options": [
+        "Comprobar cada opción contra el texto",
+        "Elegir la primera opción",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Las preguntas negativas requieren verificar las opciones con la información del texto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
