@@ -1,0 +1,147 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W02D01",
+    "week": 2,
+    "day": 1,
+    "type": "grammar",
+    "pages": [34, 35],
+    "title_ja": "宿題をしなければいけません。",
+    "title_es": "Tengo que hacer la tarea.",
+    "focus": "なければならない · なければいけない · なくてはいけない · ないといけない · なきゃ／なくちゃ · なくてもいい · てはいけない · たら／ばいい",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las expresiones presentadas en las páginas 34–35. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "Obligación: なければならない／なければいけない",
+      "body": "Estas expresiones indican que algo debe hacerse. La forma se construye a partir de la forma negativa del verbo. En la conversación aparecen también formas abreviadas.",
+      "pattern": "Vなければならない／Vなければいけない",
+      "example_ja": "明日は早く起きなければなりません。",
+      "example_es": "Mañana tengo que levantarme temprano.",
+      "tip": "También aparecen なくてはいけない y ないといけない con el mismo sentido general de obligación."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "Expresar obligación",
+      "question": "¿Cuál completa mejor: 明日は試験です。勉強（　）。",
+      "options": [
+        "しなければなりません",
+        "しなくてもいいです",
+        "してはいけません",
+        "したらいいです"
+      ],
+      "answer": 0,
+      "explanation": "しなければなりません expresa que estudiar es necesario u obligatorio."
+    },
+    {
+      "id": "s3",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "Formas coloquiales de obligación",
+      "body": "En conversación informal pueden aparecer なきゃ y なくちゃ. Son formas abreviadas que expresan obligación y son frecuentes en el habla cotidiana.",
+      "pattern": "Vなきゃ · Vなくちゃ",
+      "example_ja": "試験だから、勉強しなくちゃ。",
+      "example_es": "Como hay examen, tengo que estudiar.",
+      "tip": "Reconoce estas formas al escuchar conversaciones, pero distingue su registro informal."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Conversación informal",
+      "question": "¿Cuál suena natural en una conversación informal para 'Tengo que lavar la ropa'?",
+      "options": [
+        "洗濯しなきゃ。",
+        "洗濯しなくてもいい。",
+        "洗濯してはいけない。",
+        "洗濯したらいい。"
+      ],
+      "answer": 0,
+      "explanation": "しなきゃ es una forma coloquial de expresar obligación."
+    },
+    {
+      "id": "s5",
+      "type": "teach",
+      "label": "PRACTICA",
+      "title": "No es necesario: なくてもいい",
+      "body": "Vなくてもいい expresa que una acción no es necesaria. No significa que la acción esté prohibida: significa que está permitido no hacerla.",
+      "pattern": "Vなくてもいい",
+      "example_ja": "その本は、すぐに返さなくてもいいです。",
+      "example_es": "No hace falta devolver ese libro inmediatamente.",
+      "tip": "Compara なくてもいい (no es necesario) con てはいけない (está prohibido)."
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Permiso para no hacer algo",
+      "question": "¿Cuál significa 'No hace falta venir mañana'?",
+      "options": [
+        "明日来なくてもいいです。",
+        "明日来てはいけません。",
+        "明日来なければなりません。",
+        "明日来たらいいです。"
+      ],
+      "answer": 0,
+      "explanation": "来なくてもいい expresa que no es necesario venir."
+    },
+    {
+      "id": "s7",
+      "type": "teach",
+      "label": "DIFERENCIA",
+      "title": "Prohibición: てはいけない",
+      "body": "Vてはいけない indica que una acción no está permitida. Es diferente de なくてもいい, que solo dice que no es necesario hacerla.",
+      "pattern": "Vてはいけない",
+      "example_ja": "テストのとき、ペンを使ってはいけません。",
+      "example_es": "Durante el examen no se puede usar bolígrafo.",
+      "tip": "Piensa: なくてもいい = no hace falta; てはいけない = no se puede."
+    },
+    {
+      "id": "s8",
+      "type": "choice",
+      "title": "Obligación, permiso o prohibición",
+      "question": "En una biblioteca, ¿qué expresa 'ここで写真を撮ってはいけません'?",
+      "options": [
+        "Aquí no es necesario sacar fotos.",
+        "Aquí está permitido sacar fotos.",
+        "Aquí está prohibido sacar fotos.",
+        "Aquí deberías sacar fotos."
+      ],
+      "answer": 2,
+      "explanation": "てはいけません indica prohibición."
+    },
+    {
+      "id": "s9",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "たら／ばいい: consejo",
+      "body": "たらいい y ばいい pueden utilizarse para expresar qué sería conveniente hacer o qué opción podría ser buena. El significado depende del contexto.",
+      "pattern": "Vたらいい · Vばいい",
+      "example_ja": "頭が痛いとき、この薬を飲むといいです。",
+      "example_es": "Cuando te duele la cabeza, es bueno tomar este medicamento.",
+      "tip": "En consejos también pueden aparecer preguntas como どうしたらいいですか, '¿qué debería hacer?'."
+    },
+    {
+      "id": "s10",
+      "type": "choice",
+      "title": "Dar un consejo",
+      "question": "¿Cuál expresa mejor 'Deberías descansar'?",
+      "options": [
+        "休んだらいいですよ。",
+        "休まなくてもいいですよ。",
+        "休んではいけません。",
+        "休まなければいけません。"
+      ],
+      "answer": 0,
+      "explanation": "休んだらいいです presenta una recomendación o consejo."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Escribe tres frases: una obligación con なければならない, una situación donde no sea necesario hacer algo con なくてもいい y una prohibición con てはいけない.",
+    "reward": 20
+  }
+}
