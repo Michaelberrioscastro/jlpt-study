@@ -41,6 +41,8 @@ class ProgressService extends ChangeNotifier {
   }
   SessionInfo nextUnlockedSession()=>LessonCatalog.sessions.firstWhere((s)=>!isCompleted(s.id),orElse:()=>LessonCatalog.sessions.last);
   bool moduleUnlocked(int week)=>LessonCatalog.sessions.where((s)=>s.week==week).any((s)=>isUnlocked(s.id));
+  bool weekUnlocked(int week)=>moduleUnlocked(week);
+  bool weekCompleted(int week)=>moduleCompleted(week);
   bool moduleCompleted(int week){
     final items=LessonCatalog.sessions.where((s)=>s.week==week).toList();
     return items.isNotEmpty && items.every((s)=>isCompleted(s.id));
