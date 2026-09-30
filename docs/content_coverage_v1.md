@@ -58,3 +58,12 @@ The unified app now has dedicated content assets for every N4 and N3 study unit.
 - visually test desktop and mobile layouts;
 - run Flutter analysis/build when a Flutter SDK is available.
 
+
+
+## 新完全マスター 読解 N4
+
+- 21/21 unidades curriculares incorporadas.
+- Libro separado de Somatome N4 mediante `shinkanzen_n4_dokkai`.
+- 8 unidades de 第1部, 9 de 第2部, 3 de 第3部 y 1 simulacro.
+- Assets Schema v2 dedicados en `assets/content/shinkanzen_n4_dokkai/lessons/`.
+- Las actividades interactivas son originales y están mapeadas a las páginas del libro; no son una transcripción literal de los ejercicios publicados.
