@@ -22,3 +22,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/content/
+    - assets/content/n3/lessons/
