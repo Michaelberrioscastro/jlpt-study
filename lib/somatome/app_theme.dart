@@ -81,7 +81,6 @@ abstract final class AppTheme {
           borderRadius: BorderRadius.circular(24),
           side: const BorderSide(color: AppColors.border),
         ),
-        ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
