@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P3L08",
+    "week": 7,
+    "day": 3,
+    "type": "text",
+    "pages": [
+      136,
+      137
+    ],
+    "title_ja": "課8 · は・が",
+    "title_es": "Diferenciación de は y が",
+    "focus": "は / が",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 136–137. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "課8 · は・が",
+      "body": "Trabaja el foco textual indicado en las páginas 136–137.",
+      "pattern": "は / が",
+      "example_ja": "文章全体の関係を考えて読みましょう。",
+      "example_es": "Lee teniendo en cuenta las relaciones de todo el texto.",
+      "tip": "No analices cada oración de forma aislada: observa cómo se conecta con las demás."
+    },
+    {
+      "id": "P3L08-q1",
+      "type": "choice",
+      "title": "Cohesión",
+      "question": "¿Qué conviene observar en un texto?",
+      "options": [
+        "Relaciones entre oraciones y referencias",
+        "Solo palabras aisladas",
+        "Solo la traducción"
+      ],
+      "answer": 0,
+      "explanation": "La Parte 3 trabaja cómo las formas se relacionan dentro del texto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica qué recurso ayuda a mantener la cohesión en este bloque.",
+    "reward": 25
+  }
+}
