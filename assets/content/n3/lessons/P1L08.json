@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1L08",
+    "week": 2,
+    "day": 2,
+    "type": "grammar",
+    "pages": [
+      38,
+      39
+    ],
+    "title_ja": "課8 · 絶対～ない・必ず～とは言えない",
+    "title_es": "Negación, límite y matización",
+    "focus": "～はずがない／～わけがない・～とは限らない・～わけではない・～ないことはない・～ことは～が",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 38–39. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "課8 · 絶対～ない・必ず～とは言えない",
+      "body": "Trabaja el foco indicado en las páginas 38–39.",
+      "pattern": "～はずがない／～わけがない・～とは限らない・～わけではない・～ないことはない・～ことは～が",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera el contexto y elige la expresión adecuada.",
+      "tip": "Compara función, contexto y matiz."
+    },
+    {
+      "id": "P1L08-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "～はずがない／～わけがない・～とは限らない・～わけではない・～ないことはない・～ことは～が",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es ～はずがない／～わけがない・～とは限らない・～わけではない・～ないことはない・～ことは～が."
+    },
+    {
+      "id": "P1L08-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comparar entre formas parecidas?",
+      "options": [
+        "Función, contexto y matiz",
+        "Solo la traducción",
+        "Solo la longitud"
+      ],
+      "answer": 0,
+      "explanation": "En N3 la discriminación depende del uso y el contexto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal y crea una oración propia.",
+    "reward": 25
+  }
+}
