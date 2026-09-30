@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1L09",
+    "week": 2,
+    "day": 3,
+    "type": "grammar",
+    "pages": [
+      44,
+      45
+    ],
+    "title_ja": "課9 · ～と望む",
+    "title_es": "Deseo, petición y expectativa",
+    "focus": "～てもらいたい・～ていただきたい・～てほしい・～（さ）せてもらいたい・～といい／～ばいい／～たらいい",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según la organización y páginas 44–45 del libro. Las actividades son originales de la app; no se transcriben literalmente los ejercicios del libro."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "課9 · ～と望む",
+      "body": "Esta sesión trabaja el foco indicado en las páginas 44–45. Identifica la función, la relación con el contexto y las diferencias entre formas cercanas.",
+      "pattern": "～てもらいたい・～ていただきたい・～てほしい・～（さ）せてもらいたい・～といい／～ばいい／～たらいい",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera el contexto y elige la expresión adecuada.",
+      "tip": "No memorices solo la traducción: observa qué función cumple la estructura."
+    },
+    {
+      "id": "P1L09-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "～てもらいたい・～ていただきたい・～てほしい・～（さ）せてもらいたい・～といい／～ばいい／～たらいい",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es ～てもらいたい・～ていただきたい・～てほしい・～（さ）せてもらいたい・～といい／～ばいい／～たらいい."
+    },
+    {
+      "id": "P1L09-q2",
+      "type": "choice",
+      "title": "Estrategia N3",
+      "question": "¿Qué conviene comparar cuando dos formas parecen similares?",
+      "options": [
+        "Función, contexto y matiz",
+        "Solo la traducción",
+        "Solo la longitud"
+      ],
+      "answer": 0,
+      "explanation": "En N3 muchas formas cercanas se distinguen por función, contexto y matiz."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal del foco y crea una oración propia.",
+    "reward": 25
+  }
+}
