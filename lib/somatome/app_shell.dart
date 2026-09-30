@@ -36,9 +36,32 @@ class _AppShellState extends State<AppShell> {
     if (drawerOpen) setState(() => drawerOpen = false);
   }
 
-  void selectLevel(String level) {
-    progress.setLevel(level);
+  Future<void> selectLevel(String level) async {
+    await progress.setLevel(level);
+    if (!mounted) return;
     setState(() => drawerOpen = false);
+  }
+
+  Future<void> selectBook(String bookId) async {
+    await progress.setBook(bookId);
+    if (!mounted) return;
+    setState(() => drawerOpen = false);
+  }
+
+  Future<void> openBook(String bookId) async {
+    await progress.setBook(bookId);
+    if (!mounted) return;
+    setState(() {
+      tab = 0;
+      drawerOpen = false;
+    });
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BookDashboardPage(progress: progress),
+      ),
+    );
+    if (mounted) setState(() {});
   }
 
   @override
@@ -51,7 +74,8 @@ class _AppShellState extends State<AppShell> {
           HomePage(
             progress: progress,
             onStart: () => openSession(progress.nextUnlockedSession()),
-            onLevelSelected: selectLevel,
+            onBookSelected: selectBook,
+            onOpenBook: openBook,
           ),
           CoursePage(progress: progress, onOpen: openSession),
           ReviewPage(progress: progress, onOpen: openSession),
@@ -93,8 +117,7 @@ class _AppShellState extends State<AppShell> {
                 },
                 onLevelChanged: selectLevel,
                 onBookChanged: (v) {
-                  progress.setBook(v);
-                  setState(() {});
+                  selectBook(v);
                 },
               ),
             ),
@@ -451,28 +474,43 @@ class _BookSwitcher extends StatelessWidget {
 class HomePage extends StatelessWidget {
   final ProgressService progress;
   final VoidCallback onStart;
-  final ValueChanged<String> onLevelSelected;
+  final ValueChanged<String> onBookSelected;
+  final ValueChanged<String> onOpenBook;
 
   const HomePage({
     super.key,
     required this.progress,
     required this.onStart,
-    required this.onLevelSelected,
+    required this.onBookSelected,
+    required this.onOpenBook,
   });
 
-  Widget _bookCard(LevelProgressSnapshot snapshot, String level) {
-    final active = progress.studyLevel == level;
+  Color _accent(StudyBook book) {
+    switch (book.id) {
+      case 'shinkanzen_n4_dokkai':
+        return AppColors.mint;
+      case 'shinkanzen_n3_grammar':
+        return AppColors.coral;
+      default:
+        return AppColors.violet;
+    }
+  }
+
+  Widget _bookCard(StudyBook book) {
+    final snapshot = progress.progressForBook(book);
+    final selected = progress.book.id == book.id;
     final percent = (snapshot.progress * 100).round();
+    final accent = _accent(book);
 
     return InkWell(
-      onTap: () => onLevelSelected(level),
+      onTap: () => onBookSelected(book.id),
       borderRadius: BorderRadius.circular(25),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 240),
+        duration: const Duration(milliseconds: 220),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: active
+            colors: selected
                 ? [AppColors.navySoft, AppColors.surface]
                 : [AppColors.surface2, AppColors.surface],
             begin: Alignment.topLeft,
@@ -480,14 +518,14 @@ class HomePage extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
-            color: active ? AppColors.violet.withOpacity(.62) : AppColors.border,
-            width: active ? 1.3 : 1,
+            color: selected ? accent.withOpacity(.68) : AppColors.border,
+            width: selected ? 1.4 : 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.18),
-              blurRadius: 25,
-              offset: const Offset(0, 13),
+              color: Colors.black.withOpacity(.16),
+              blurRadius: 24,
+              offset: const Offset(0, 12),
             ),
           ],
         ),
@@ -497,18 +535,23 @@ class HomePage extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: level == 'N4'
-                          ? [AppColors.violet, const Color(0xFF6D5BE8)]
-                          : [AppColors.coral, const Color(0xFFB94F78)],
+                      colors: [accent, accent.withOpacity(.62)],
                     ),
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   child: Center(
-                    child: Text(level, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 14)),
+                    child: Text(
+                      book.level,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -516,13 +559,26 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('JLPT ${level}', style: const TextStyle(color: AppColors.ink, fontSize: 18, fontWeight: FontWeight.w900)),
-                      const SizedBox(height: 3),
                       Text(
-                        snapshot.book.shortTitle,
+                        book.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          color: AppColors.ink,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        book.subtitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppColors.muted,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ],
                   ),
@@ -532,10 +588,20 @@ class HomePage extends StatelessWidget {
                   height: 48,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: active ? AppColors.violet : AppColors.border, width: 4),
+                    border: Border.all(
+                      color: selected ? accent : AppColors.border,
+                      width: 4,
+                    ),
                   ),
                   child: Center(
-                    child: Text('${percent}%', style: const TextStyle(color: AppColors.ink, fontSize: 11, fontWeight: FontWeight.w900)),
+                    child: Text(
+                      '${percent}%',
+                      style: const TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -547,20 +613,48 @@ class HomePage extends StatelessWidget {
                 minHeight: 7,
                 value: snapshot.progress.clamp(0.0, 1.0).toDouble(),
                 backgroundColor: AppColors.border,
-                valueColor: AlwaysStoppedAnimation<Color>(level == 'N4' ? AppColors.violet : AppColors.coral),
+                valueColor: AlwaysStoppedAnimation<Color>(accent),
               ),
             ),
-            const SizedBox(height: 13),
+            const SizedBox(height: 12),
             Row(
               children: [
                 const Icon(Icons.check_circle_rounded, color: AppColors.mint, size: 15),
                 const SizedBox(width: 6),
-                Text('${snapshot.completed}/${snapshot.total} sesiones', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
+                Text(
+                  '${snapshot.completed}/${snapshot.total} sesiones',
+                  style: const TextStyle(
+                    color: AppColors.muted,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
                 const Spacer(),
                 const Icon(Icons.bolt_rounded, color: AppColors.yellow, size: 16),
                 const SizedBox(width: 4),
-                Text('${snapshot.xp} XP', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
+                Text(
+                  '${snapshot.xp} XP',
+                  style: const TextStyle(
+                    color: AppColors.muted,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
               ],
+            ),
+            const SizedBox(height: 13),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () => onOpenBook(book.id),
+                icon: const Icon(Icons.arrow_forward_rounded, size: 17),
+                label: const Text('Abrir libro'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: accent,
+                  side: BorderSide(color: accent.withOpacity(.38)),
+                  padding: const EdgeInsets.symmetric(vertical: 11),
+                ),
+              ),
             ),
           ],
         ),
@@ -581,7 +675,10 @@ class HomePage extends StatelessWidget {
           Container(
             width: 38,
             height: 38,
-            decoration: BoxDecoration(color: color.withOpacity(.13), borderRadius: BorderRadius.circular(13)),
+            decoration: BoxDecoration(
+              color: color.withOpacity(.13),
+              borderRadius: BorderRadius.circular(13),
+            ),
             child: Icon(icon, color: color, size: 19),
           ),
           const SizedBox(width: 11),
@@ -602,10 +699,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final n4 = progress.progressForBook(progress.selectedBookForLevel('N4'));
-    final n3 = progress.progressForBook(progress.selectedBookForLevel('N3'));
+    final selected = progress.book;
+    final selectedSnapshot = progress.progressForBook(selected);
     final stats = progress.stats;
-    final percent = (progress.sessionProgress * 100).round();
+    final percent = (selectedSnapshot.progress * 100).round();
+    final books = BookCatalog.books;
 
     return SafeArea(
       child: LayoutBuilder(
@@ -625,73 +723,581 @@ class HomePage extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(flex: 7, child: _ContinueCard(progress: progress, percent: percent, onStart: onStart)),
+                    Expanded(
+                      flex: 7,
+                      child: _ContinueCard(
+                        progress: progress,
+                        percent: percent,
+                        onStart: onStart,
+                      ),
+                    ),
                     const SizedBox(width: 16),
                     const Expanded(flex: 4, child: _NextSessionCard()),
                   ],
                 )
               else
-                _ContinueCard(progress: progress, percent: percent, onStart: onStart),
+                _ContinueCard(
+                  progress: progress,
+                  percent: percent,
+                  onStart: onStart,
+                ),
               const SizedBox(height: 30),
               Row(
                 children: [
-                  const Expanded(child: Text('Tus niveles', style: TextStyle(color: AppColors.ink, fontSize: 24, fontWeight: FontWeight.w900))),
-                  const Text('ELIGE PARA ESTUDIAR', style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.4)),
+                  const Expanded(
+                    child: Text(
+                      'Tus libros',
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    'ELIGE PARA ESTUDIAR',
+                    style: TextStyle(
+                      color: AppColors.muted,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.4,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 13),
               if (wide)
-                Row(children: [
-                  Expanded(child: _bookCard(n4, 'N4')),
-                  const SizedBox(width: 14),
-                  Expanded(child: _bookCard(n3, 'N3')),
-                ])
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _bookCard(books[0])),
+                    const SizedBox(width: 14),
+                    Expanded(child: _bookCard(books[1])),
+                  ],
+                )
               else
-                Column(children: [
-                  _bookCard(n4, 'N4'),
-                  const SizedBox(height: 12),
-                  _bookCard(n3, 'N3'),
-                ]),
+                Column(
+                  children: [
+                    _bookCard(books[0]),
+                    const SizedBox(height: 12),
+                    _bookCard(books[1]),
+                  ],
+                ),
+              const SizedBox(height: 12),
+              if (wide)
+                Row(
+                class BookDashboardPage extends StatelessWidget {
+  final ProgressService progress;
+
+  const BookDashboardPage({super.key, required this.progress});
+
+  Color _accent(StudyBook book) {
+    switch (book.id) {
+      case 'shinkanzen_n4_dokkai':
+        return AppColors.mint;
+      case 'shinkanzen_n3_grammar':
+        return AppColors.coral;
+      default:
+        return AppColors.violet;
+    }
+  }
+
+  String _typeLabel(StudyBook book) {
+    switch (book.id) {
+      case 'shinkanzen_n4_dokkai':
+        return 'N4 · COMPRENSIÓN LECTORA';
+      case 'shinkanzen_n3_grammar':
+        return 'N3 · GRAMÁTICA';
+      default:
+        return 'N4 · CURSO COMPLETO';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: progress,
+      builder: (context, _) {
+        final book = progress.book;
+        final snapshot = progress.progressForBook(book);
+        final accent = _accent(book);
+        final percent = (snapshot.progress * 100).round();
+        final sessions = StudyCatalog.sessions;
+        final next = sessions.isEmpty
+            ? null
+            : sessions.firstWhere(
+                (session) => !progress.isCompleted(session.id),
+                orElse: () => sessions.last,
+              );
+
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          appBar: AppBar(
+            title: Text(
+              book.shortTitle,
+              style: const TextStyle(fontWeight: FontWeight.w900),
+            ),
+          ),
+          body: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final wide = constraints.maxWidth >= 900;
+                return ListView(
+                  padding: EdgeInsets.fromLTRB(wide ? 42 : 20, 24, wide ? 42 : 20, 44),
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [accent.withOpacity(.18), AppColors.surface],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(28),
+                        border: Border.all(color: accent.withOpacity(.34)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _typeLabel(book),
+                            style: TextStyle(
+                              color: accent,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 1.6,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            book.title,
+                            style: const TextStyle(
+                              color: AppColors.ink,
+                              fontSize: 26,
+                              fontWeight: FontWeight.w900,
+                              height: 1.1,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            book.subtitle,
+                            style: const TextStyle(
+                              color: AppColors.muted,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 18),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: LinearProgressIndicator(
+                              minHeight: 8,
+                              value: snapshot.progress.clamp(0.0, 1.0).toDouble(),
+                              backgroundColor: AppColors.border,
+                              valueColor: AlwaysStoppedAnimation<Color>(accent),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            '${percent}% · ${snapshot.completed}/${snapshot.total} sesiones',
+                            style: const TextStyle(
+                              color: AppColors.muted,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    if (wide)
+                      Row(
+                        children: [
+                          Expanded(child: _DashboardStatCard(icon: Icons.check_circle_rounded, value: '${snapshot.completed}', label: 'Completadas', color: accent)),
+                          const SizedBox(width: 10),
+                          Expanded(child: _DashboardStatCard(icon: Icons.percent_rounded, value: '${snapshot.accuracy.round()}%', label: 'Precisión', color: AppColors.mint)),
+                          const SizedBox(width: 10),
+                          Expanded(child: _DashboardStatCard(icon: Icons.bolt_rounded, value: '${snapshot.xp}', label: 'XP', color: AppColors.yellow)),
+                        ],
+                      )
+                    else
+                      Column(
+                        children: [
+                          _DashboardStatCard(icon: Icons.check_circle_rounded, value: '${snapshot.completed}', label: 'Completadas', color: accent),
+                          const SizedBox(height: 9),
+                          _DashboardStatCard(icon: Icons.percent_rounded, value: '${snapshot.accuracy.round()}%', label: 'Precisión', color: AppColors.mint),
+                          const SizedBox(height: 9),
+                          _DashboardStatCard(icon: Icons.bolt_rounded, value: '${snapshot.xp}', label: 'XP', color: AppColors.yellow),
+                        ],
+                      ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        onPressed: next == null
+                            ? null
+                            : () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => LessonFlowPage(
+                                      session: next,
+                                      progress: progress,
+                                    ),
+                                  ),
+                                ),
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        label: Text(snapshot.completed == 0 ? 'Comenzar libro' : 'Continuar aprendiendo'),
+                        style: FilledButton.styleFrom(
+                          backgroundColor: accent,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 28),
+                    const Text(
+                      'Contenido',
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    const Text(
+                      'Avanza en orden. Las sesiones siguientes se desbloquean al completar la anterior.',
+                      style: TextStyle(
+                        color: AppColors.muted,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    for (var i = 0; i < sessions.length; i++)
+                      _BookSessionCard(
+                        session: sessions[i],
+                        progress: progress,
+                        accent: accent,
+                        index: i,
+                        onOpen: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => LessonFlowPage(
+                              session: sessions[i],
+                              progress: progress,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _DashboardStatCard extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+  final Color color;
+
+  const _DashboardStatCard({
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: AppColors.border),
+    ),
+    child: Row(
+      children: [
+        Container(
+          width: 38,
+          height: 38,
+          decoration: BoxDecoration(
+            color: color.withOpacity(.13),
+            borderRadius: BorderRadius.circular(13),
+          ),
+          child: Icon(icon, color: color, size: 19),
+        ),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(value, style: const TextStyle(color: AppColors.ink, fontSize: 17, fontWeight: FontWeight.w900)),
+            Text(label, style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700)),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+class _BookSessionCard extends StatelessWidget {
+  final SessionInfo session;
+  final ProgressService progress;
+  final Color accent;
+  final int index;
+  final VoidCallback onOpen;
+
+  const _BookSessionCard({
+    required this.session,
+    required this.progress,
+    required this.accent,
+    required this.index,
+    required this.onOpen,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final completed = progress.isCompleted(session.id);
+    final unlocked = progress.isUnlocked(session.id);
+    final locked = !completed && !unlocked;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 9),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: unlocked ? onOpen : null,
+          borderRadius: BorderRadius.circular(19),
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: completed
+                  ? AppColors.mintSoft.withOpacity(.35)
+                  : unlocked
+                      ? accent.withOpacity(.10)
+                      : AppColors.surface2.withOpacity(.55),
+              borderRadius: BorderRadius.circular(19),
+              border: Border.all(
+                color: completed
+                    ? AppColors.mint.withOpacity(.28)
+                    : unlocked
+                        ? accent.withOpacity(.28)
+                        : AppColors.border.withOpacity(.55),
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: completed
+                        ? AppColors.mint
+                        : unlocked
+                            ? accent
+                            : AppColors.surface,
+                    border: Border.all(
+                      color: locked ? AppColors.border : accent.withOpacity(.45),
+                    ),
+                  ),
+                  child: Icon(
+                    completed
+                        ? Icons.check_rounded
+                        : unlocked
+                            ? Icons.play_arrow_rounded
+                            : Icons.lock_rounded,
+                    color: completed || unlocked ? Colors.white : AppColors.muted,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Sesión ${index + 1} · ${session.titleJa}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: locked ? AppColors.muted : AppColors.ink,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        session.titleEs,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: locked
+                              ? AppColors.muted.withOpacity(.72)
+                              : AppColors.muted,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Icon(
+                  completed
+                      ? Icons.verified_rounded
+                      : unlocked
+                          ? Icons.arrow_forward_rounded
+                          : Icons.lock_outline_rounded,
+                  color: completed
+                      ? AppColors.mint
+                      : unlocked
+                          ? accent
+                          : AppColors.muted.withOpacity(.6),
+                  size: 18,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _bookCard(books[2])),
+                    const Expanded(child: SizedBox()),
+                  ],
+                )
+              else
+                _bookCard(books[2]),
               const SizedBox(height: 28),
               Row(
                 children: [
-                  const Expanded(child: Text('Mis metas', style: TextStyle(color: AppColors.ink, fontSize: 21, fontWeight: FontWeight.w900))),
-                  const Text('PROGRESO', style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+                  const Expanded(
+                    child: Text(
+                      'Libro seleccionado',
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    selected.level,
+                    style: const TextStyle(
+                      color: AppColors.muted,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 13),
+              Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            selected.title,
+                            style: const TextStyle(
+                              color: AppColors.ink,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            selected.description,
+                            style: const TextStyle(
+                              color: AppColors.muted,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              height: 1.35,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      '${percent}%',
+                      style: const TextStyle(
+                        color: AppColors.violet,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 28),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Mis metas',
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    'PROGRESO',
+                    style: TextStyle(
+                      color: AppColors.muted,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 13),
               if (wide)
-                Row(children: [
-                  Expanded(child: _goalCard('Estudiar hoy', stats.totalAnswers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet)),
-                  const SizedBox(width: 10),
-                  Expanded(child: _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
-                  const SizedBox(width: 10),
-                  Expanded(child: _goalCard('Precisión', '${stats.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint)),
-                  const SizedBox(width: 10),
-                  Expanded(child: _goalCard('Ganar XP', '${stats.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow)),
-                ])
-              else
-                Column(children: [
-                  _goalCard('Estudiar hoy', stats.totalAnswers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet),
-                  const SizedBox(height: 9),
-                  _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral),
-                  const SizedBox(height: 9),
-                  _goalCard('Precisión', '${stats.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint),
-                  const SizedBox(height: 9),
-                  _goalCard('Ganar XP', '${stats.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow),
-                ]),
-              const SizedBox(height: 26),
-              Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(22), border: Border.all(color: AppColors.border)),
-                child: const Row(
+                Row(
                   children: [
-                    Text('🌸', style: TextStyle(fontSize: 25)),
-                    SizedBox(width: 12),
-                    Expanded(child: Text('Tu progreso se guarda por nivel y por libro. Cambia de ruta cuando quieras sin perder lo que ya has estudiado.', style: TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700, height: 1.4))),
+                    Expanded(child: _goalCard('Estudiar hoy', selectedSnapshot.answers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet)),
+                    const SizedBox(width: 10),
+                    Expanded(child: _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
+                    const SizedBox(width: 10),
+                    Expanded(child: _goalCard('Precisión', '${selectedSnapshot.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint)),
+                    const SizedBox(width: 10),
+                    Expanded(child: _goalCard('Ganar XP', '${selectedSnapshot.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow)),
+                  ],
+                )
+              else
+                Column(
+                  children: [
+                    _goalCard('Estudiar hoy', selectedSnapshot.answers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet),
+                    const SizedBox(height: 9),
+                    _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral),
+                    const SizedBox(height: 9),
+                    _goalCard('Precisión', '${selectedSnapshot.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint),
+                    const SizedBox(height: 9),
+                    _goalCard('Ganar XP', '${selectedSnapshot.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow),
                   ],
                 ),
-              ),
             ],
           );
         },
