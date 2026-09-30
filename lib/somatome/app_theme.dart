@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract final class AppColors {
   static const background = Color(0xFFF4F1EA);
@@ -50,12 +51,12 @@ abstract final class AppTheme {
       fontFamily: 'Roboto',
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
-          TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+          TargetPlatform.android: ZoomPageTransitionsBuilder(),
           TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.windows: FadeForwardsPageTransitionsBuilder(),
-          TargetPlatform.linux: FadeForwardsPageTransitionsBuilder(),
-          TargetPlatform.fuchsia: FadeForwardsPageTransitionsBuilder(),
+          TargetPlatform.windows: ZoomPageTransitionsBuilder(),
+          TargetPlatform.linux: ZoomPageTransitionsBuilder(),
+          TargetPlatform.fuchsia: ZoomPageTransitionsBuilder(),
         },
       ),
       appBarTheme: const AppBarTheme(
