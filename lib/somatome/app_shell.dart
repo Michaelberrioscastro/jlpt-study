@@ -864,7 +864,7 @@ class _WeekCard extends StatelessWidget {
             : (week<=4?'Gramática':week==5?'Reading':'Listening');
     return Card(margin:const EdgeInsets.only(bottom:12),child:Padding(padding:const EdgeInsets.all(15),child:Column(children:[
       Row(children:[
-        CircleAvatar(backgroundColor:unlocked?AppColors.primarySoft:const Color(0xFFEDEAE7),child:Text(week.toString(),style:TextStyle(fontWeight:FontWeight.w900,color:unlocked?AppColors.primary:AppColors.muted))),
+        CircleAvatar(backgroundColor:unlocked?AppColors.primarySoft:AppColors.surface2,child:Text(week.toString(),style:TextStyle(fontWeight:FontWeight.w900,color:unlocked?AppColors.primary:AppColors.muted))),
         const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text((StudyCatalog.blockLabel + ' ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
         Text((done/sessions.length*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900)),
       ]),
@@ -1000,7 +1000,7 @@ class _TeachCard extends StatelessWidget {
     Container(
       padding:const EdgeInsets.all(22),
       decoration:BoxDecoration(
-        gradient:const LinearGradient(begin:Alignment.topLeft,end:Alignment.bottomRight,colors:[AppColors.violetSoft,Color(0xFFFFF7F1)]),
+        gradient:const LinearGradient(begin:Alignment.topLeft,end:Alignment.bottomRight,colors:[AppColors.violetSoft,AppColors.surface2]),
         borderRadius:BorderRadius.circular(26),
         border:Border.all(color:AppColors.violet.withOpacity(.10)),
         boxShadow:[BoxShadow(color:AppColors.violet.withOpacity(.08),blurRadius:24,offset:const Offset(0,10))],
