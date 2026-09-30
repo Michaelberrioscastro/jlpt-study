@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1A06",
+    "week": 4,
+    "day": 1,
+    "type": "consolidation",
+    "pages": [
+      80,
+      82
+    ],
+    "title_ja": "F · 「ばかり」のいろいろな使い方",
+    "title_es": "Usos de ばかり",
+    "focus": "～ばかり・～てばかりいる・～ばかりでなく・～ばかりだ・～たばかりだ",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 80–82. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "CONSOLIDA",
+      "title": "F · 「ばかり」のいろいろな使い方",
+      "body": "Consolida el foco indicado en las páginas 80–82.",
+      "pattern": "～ばかり・～てばかりいる・～ばかりでなく・～ばかりだ・～たばかりだ",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera función, contexto y matiz.",
+      "tip": "Compara usos cercanos y observa las restricciones."
+    },
+    {
+      "id": "P1A06-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "～ばかり・～てばかりいる・～ばかりでなく・～ばかりだ・～たばかりだ",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es ～ばかり・～てばかりいる・～ばかりでなく・～ばかりだ・～たばかりだ."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal y crea una oración propia.",
+    "reward": 25
+  }
+}
