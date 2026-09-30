@@ -18,8 +18,7 @@ abstract final class N3Catalog {
       ['課10 · ～したほうがいい・～なさい', '命令・禁止・～こと・～べきだ／～べきではない・～たらどうか', 'Consejo, obligación y prohibición', 46, 47],
       ['課11 · ～（よう）と思う', '～ことにする／～ことにしている・～ようにする／～ようにしている・～（よ）うとする・～つもりだ', 'Intención, decisión y propósito', 50, 51],
       ['課12 · 敬語', '尊敬語・謙譲語1・謙譲語2・丁寧語', 'Keigo: respeto, humildad y cortesía', 52, 53],
-    ]),
-    ..._module(3, 'P1A', 'consolidation', [
+    ], offset: 6),    ..._module(3, 'P1A', 'consolidation', [
       ['A · いろいろな働きをする助詞', 'Partículas con distintas funciones; contraste de も・しか y ぐらい／くらい・まで', 'Partículas', 58, 60],
       ['B · 助詞のような働きをする言葉', '～について・～に対して／～に対する・～によって・～にとって・～として', 'Palabras con función semejante a partículas', 62, 64],
       ['C · 「こと・の」の使い方', 'Diferencias y usos de こと y の', 'こと / の', 66, 68],
@@ -71,9 +70,9 @@ abstract final class N3Catalog {
     ]),
   ];
 
-  static List<SessionInfo> _module(int week, String prefix, String type, List<List<dynamic>> rows) => List.generate(rows.length, (i) {
+  static List<SessionInfo> _module(int week, String prefix, String type, List<List<dynamic>> rows, {int offset = 0}) => List.generate(rows.length, (i) {
     final r = rows[i];
-    return SessionInfo(id: prefix + (i + 1).toString().padLeft(2, '0'), week: week, day: i + 1, type: type,
+    return SessionInfo(id: prefix + (i + 1 + offset).toString().padLeft(2, '0'), week: week, day: i + 1, type: type,
       titleJa: r[0] as String, titleEs: r[1] as String, focus: r[2] as String,
       pages: [r[3] as int, r[4] as int], review: type == 'consolidation');
   });
