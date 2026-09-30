@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1L05",
+    "week": 1,
+    "day": 5,
+    "type": "grammar",
+    "pages": [
+      30,
+      31
+    ],
+    "title_ja": "課5 · ～だから",
+    "title_es": "Causa, razón y consecuencia",
+    "focus": "～ためだ／～ために・～によって／～による・～から／～ことから・～おかげ・～せい・～のだから",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según la organización y páginas 30–31 del libro. Las actividades son originales de la app; no se transcriben literalmente los ejercicios del libro."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "課5 · ～だから",
+      "body": "Esta sesión trabaja el foco indicado en las páginas 30–31. Identifica la función, la relación con el contexto y las diferencias entre formas cercanas.",
+      "pattern": "～ためだ／～ために・～によって／～による・～から／～ことから・～おかげ・～せい・～のだから",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera el contexto y elige la expresión adecuada.",
+      "tip": "No memorices solo la traducción: observa qué función cumple la estructura."
+    },
+    {
+      "id": "P1L05-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "～ためだ／～ために・～によって／～による・～から／～ことから・～おかげ・～せい・～のだから",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es ～ためだ／～ために・～によって／～による・～から／～ことから・～おかげ・～せい・～のだから."
+    },
+    {
+      "id": "P1L05-q2",
+      "type": "choice",
+      "title": "Estrategia N3",
+      "question": "¿Qué conviene comparar cuando dos formas parecen similares?",
+      "options": [
+        "Función, contexto y matiz",
+        "Solo la traducción",
+        "Solo la longitud"
+      ],
+      "answer": 0,
+      "explanation": "En N3 muchas formas cercanas se distinguen por función, contexto y matiz."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal del foco y crea una oración propia.",
+    "reward": 25
+  }
+}
