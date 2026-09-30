@@ -868,8 +868,8 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
 
   @override void initState(){super.initState();future=_load();}
   Future<LessonPacket> _load() async {
-    if(false){
-      final raw=await rootBundle.loadString('assets/content/n3_placeholder/W01D01.json');
+    if(widget.session.id=='P1L01'){
+      final raw=await rootBundle.loadString('assets/content/n3/lessons/P1L01.json');
       packet=LessonPacket.fromJson(jsonDecode(raw) as Map<String,dynamic>,widget.session);
     }else{
       packet=LessonCatalog.buildPacket(widget.session);
