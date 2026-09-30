@@ -19,6 +19,27 @@ class StudyStats {
   double get accuracy => totalAnswers == 0 ? 0 : correct / totalAnswers * 100;
 }
 
+class LevelProgressSnapshot {
+  final StudyBook book;
+  final int completed;
+  final int total;
+  final int xp;
+  final int answers;
+  final int correct;
+
+  const LevelProgressSnapshot({
+    required this.book,
+    required this.completed,
+    required this.total,
+    required this.xp,
+    required this.answers,
+    required this.correct,
+  });
+
+  double get progress => total == 0 ? 0 : completed / total;
+  double get accuracy => answers == 0 ? 0 : correct / answers * 100;
+}
+
 class ProgressService extends ChangeNotifier {
   ProgressService._();
   static final instance = ProgressService._();
@@ -34,6 +55,39 @@ class ProgressService extends ChangeNotifier {
   String get studyLevel => _level;
   String get bookId => _bookId;
   StudyBook get book => BookCatalog.forId(_bookId);
+
+  StudyBook selectedBookForLevel(String level) {
+    final saved = _prefs?.getString('selected_book_' + level);
+    if (saved != null) {
+      final candidate = BookCatalog.forId(saved);
+      if (candidate.level == level) return candidate;
+    }
+    return BookCatalog.defaultForLevel(level);
+  }
+
+  LevelProgressSnapshot progressForBook(StudyBook book) {
+    final p = _prefs;
+    final prefix = book.level + '_' + book.id;
+    final completed = p?.getStringList('completed_sessions_' + prefix)?.length ?? 0;
+    final answers = p?.getInt('total_answers_' + prefix) ?? 0;
+    final correct = p?.getInt('correct_' + prefix) ?? 0;
+    final xp = p?.getInt('xp_' + prefix) ?? 0;
+
+    final total = book.id == BookCatalog.somatomeN4.id
+        ? 42
+        : book.id == BookCatalog.shinKanzenN4Reading.id
+            ? 21
+            : 50;
+
+    return LevelProgressSnapshot(
+      book: book,
+      completed: completed,
+      total: total,
+      xp: xp,
+      answers: answers,
+      correct: correct,
+    );
+  }
 
   String _storagePrefix() => _level + '_' + _bookId;
 
