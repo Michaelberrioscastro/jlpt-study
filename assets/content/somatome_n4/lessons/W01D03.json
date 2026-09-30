@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W01D03",
+    "week": 1,
+    "day": 3,
+    "type": "grammar",
+    "pages": [22, 23],
+    "title_ja": "9時までに来てください。",
+    "title_es": "Ven antes de las 9.",
+    "focus": "まで · までに · たり～たり · し · ばかり",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las funciones gramaticales presentadas en las páginas 22–23. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "まで y までに",
+      "body": "まで marca un límite temporal hasta el cual continúa una situación o acción. までに marca el plazo dentro del cual debe completarse una acción.",
+      "pattern": "V / N + まで · V + までに",
+      "example_ja": "レポートは金曜日までに出してください。",
+      "example_es": "Entrega el informe antes del viernes.",
+      "tip": "Pregunta si algo continúa hasta el límite (まで) o si debe quedar terminado antes de ese límite (までに)."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "Distingue el plazo",
+      "question": "¿Qué opción significa 'Por favor, entrega la tarea antes del lunes'?",
+      "options": [
+        "月曜日までに宿題を出してください。",
+        "月曜日まで宿題を出しています。",
+        "月曜日たり宿題を出してください。",
+        "月曜日ばかり宿題を出してください。"
+      ],
+      "answer": 0,
+      "explanation": "までに señala el momento límite antes del cual la tarea debe estar entregada."
+    },
+    {
+      "id": "s3",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "たり～たりする",
+      "body": "たり～たり sirve para presentar ejemplos de acciones dentro de un conjunto. No implica que sean las únicas acciones posibles.",
+      "pattern": "Vた + り、Vた + り + する",
+      "example_ja": "休みの日は本を読んだり、映画を見たりします。",
+      "example_es": "En mis días libres leo libros, veo películas y hago cosas así.",
+      "tip": "Piensa en 'hacer cosas como A y B' en lugar de una enumeración completa."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Enumera ejemplos",
+      "question": "¿Cuál usa たり～たり correctamente para describir actividades del fin de semana?",
+      "options": [
+        "週末は映画を見たり、本を読んだりします。",
+        "週末は映画を見るたり、本を読むたりします。",
+        "週末は映画を見てり、本を読んだりします。",
+        "週末は映画しか見たり、本も読んだりします。"
+      ],
+      "answer": 0,
+      "explanation": "La forma correcta es la forma pasada + り, seguida normalmente por する."
+    },
+    {
+      "id": "s5",
+      "type": "teach",
+      "label": "AMPLÍA",
+      "title": "し y ばかり",
+      "body": "し permite presentar varias razones o características. ばかり expresa que algo se concentra en una cosa o actividad, dando la idea de 'solo eso' o 'mucho de eso'.",
+      "pattern": "～し、～し · Nばかり / Vてばかりいる",
+      "example_ja": "弟はゲームばかりしています。",
+      "example_es": "Mi hermano se pasa el tiempo jugando.",
+      "tip": "ばかり llama la atención sobre una concentración excesiva o exclusiva; し permite acumular razones."
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Reto final",
+      "question": "Quieres decir 'El restaurante es rico y barato'. ¿Qué opción corresponde?",
+      "options": [
+        "このレストランはおいしいし、安いです。",
+        "このレストランはおいしいまで、安いです。",
+        "このレストランはおいしいばかり、安いです。",
+        "このレストランはおいしいに、安いです。"
+      ],
+      "answer": 0,
+      "explanation": "し permite enlazar varias características o razones: rico y barato."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Escribe tres actividades que haces en tus días libres usando たり～たり y añade una razón usando し.",
+    "reward": 20
+  }
+}
