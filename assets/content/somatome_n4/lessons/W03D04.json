@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W03D04",
+    "week": 3,
+    "day": 4,
+    "type": "grammar",
+    "pages": [
+      56,
+      57
+    ],
+    "title_ja": "この漢字の読み方はむずかしいです。",
+    "title_es": "La forma de leer este kanji es difícil.",
+    "focus": "読み方 / それに / それで / ところが / だから",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 56–57. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "この漢字の読み方はむずかしいです。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 56–57 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "読み方 / それに / それで / ところが / だから",
+      "example_ja": "漢字を覚えるのは大変です。",
+      "example_es": "La forma de leer este kanji es difícil.",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W03D04-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "読み方 / それに / それで / ところが / だから",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es 読み方 / それに / それで / ところが / だから."
+    },
+    {
+      "id": "W03D04-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
