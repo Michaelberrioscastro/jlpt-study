@@ -66,7 +66,7 @@ class ConceptMastery {
     if (isDue) score += 35;
     if (isAtRisk) score += 20;
     if (recent.isNotEmpty && !recent.last) score += 25;
-    if (r.lastResponseMs >= 12000) score += 8;
+    if (lastResponseMs >= 12000) score += 8;
     return score;
   }
 
