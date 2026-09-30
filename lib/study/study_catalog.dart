@@ -25,6 +25,25 @@ abstract final class StudyCatalog {
 
   static int get totalSessions => sessions.length;
 
+  static int get totalBlocks {
+    switch (activeBookId) {
+      case 'shinkanzen_n4_dokkai':
+        return 4;
+      case 'shinkanzen_n3_grammar':
+        return 8;
+      case 'somatome_n4':
+      default:
+        return 6;
+    }
+  }
+
+  static String get blockLabel =>
+      activeBookId == 'shinkanzen_n4_dokkai'
+          ? 'Parte'
+          : activeBookId == 'shinkanzen_n3_grammar'
+              ? 'Bloque'
+              : 'Semana';
+
   static LessonPacket buildPacket(SessionInfo session) {
     switch (activeBookId) {
       case 'shinkanzen_n4_dokkai':
