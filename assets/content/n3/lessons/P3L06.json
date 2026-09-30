@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P3L06",
+    "week": 7,
+    "day": 1,
+    "type": "text",
+    "pages": [
+      130,
+      131
+    ],
+    "title_ja": "課6 · 話者が見る位置を動かさない－4",
+    "title_es": "Dar y recibir acciones",
+    "focus": "～てあげる・～てもらう・～てくれる",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 130–131. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "課6 · 話者が見る位置を動かさない－4",
+      "body": "Trabaja el foco textual indicado en las páginas 130–131.",
+      "pattern": "～てあげる・～てもらう・～てくれる",
+      "example_ja": "文章全体の関係を考えて読みましょう。",
+      "example_es": "Lee teniendo en cuenta las relaciones de todo el texto.",
+      "tip": "No analices cada oración de forma aislada: observa cómo se conecta con las demás."
+    },
+    {
+      "id": "P3L06-q1",
+      "type": "choice",
+      "title": "Cohesión",
+      "question": "¿Qué conviene observar en un texto?",
+      "options": [
+        "Relaciones entre oraciones y referencias",
+        "Solo palabras aisladas",
+        "Solo la traducción"
+      ],
+      "answer": 0,
+      "explanation": "La Parte 3 trabaja cómo las formas se relacionan dentro del texto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica qué recurso ayuda a mantener la cohesión en este bloque.",
+    "reward": 25
+  }
+}
