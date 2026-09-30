@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "SKN4P1U05",
+    "week": 1,
+    "day": 5,
+    "type": "reading_skill",
+    "pages": [
+      8,
+      8
+    ],
+    "title_ja": "前後関係からわかる意味",
+    "title_es": "Significado a partir del contexto",
+    "focus": "Inferir significado mediante las oraciones anterior y posterior",
+    "source": "新完全マスター 読解 N4",
+    "content_note": "Mapa curricular basado en las páginas indicadas del libro. Las actividades interactivas de esta app son originales y no constituyen una transcripción de los ejercicios publicados."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "ENTRENAMIENTO",
+      "title": "前後関係からわかる意味",
+      "body": "Significado a partir del contexto.\n\nEsta sesión está mapeada a las páginas de referencia del libro. La explicación y la práctica interactiva de esta app son originales y no transcriben los ejercicios del libro.",
+      "pattern": "Inferir significado mediante las oraciones anterior y posterior",
+      "example_ja": "新完全マスター 読解 N4 · pp. 8–8",
+      "example_es": "Primero identifica qué pide la pregunta y después localiza la información que la responde.",
+      "tip": "No intentes traducir todo de inmediato: busca estructura, referentes, conectores y palabras clave."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 1",
+      "question": "¿Qué debes buscar primero?",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 2",
+      "question": "La relación entre las partes de la oración",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 3",
+      "question": "Solo la palabra más larga",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    },
+    {
+      "type": "choice",
+      "title": "Práctica 4",
+      "question": "La traducción literal del título",
+      "options": [
+        "La información relevante para responder la pregunta",
+        "Una palabra aislada sin relación con la pregunta",
+        "Una interpretación que el texto no permite",
+        "Un dato que no aparece en el texto"
+      ],
+      "answer": 0,
+      "explanation": "La lectura eficaz relaciona la pregunta con la información pertinente del texto y evita inferencias que no están respaldadas."
+    }
+  ],
+  "reflection": {
+    "prompt": "¿Qué estrategia de lectura quieres recordar en la próxima sesión?",
+    "options": [
+      "Buscar primero la información que pide la pregunta",
+      "Leer sin objetivo hasta el final",
+      "Traducir palabra por palabra"
+    ]
+  }
+}
