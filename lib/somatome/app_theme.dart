@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract final class AppColors {
-  static const background = Color(0xFFF4F1EA);
-  static const surface = Color(0xFFFFFCF7);
-  static const ink = Color(0xFF1D2030);
-  static const muted = Color(0xFF777786);
-  static const border = Color(0xFFE7E1D7);
+  static const background = Color(0xFF090E1D);
+  static const surface = Color(0xFF121A2E);
+  static const surface2 = Color(0xFF18233B);
+  static const ink = Color(0xFFF7F8FC);
+  static const muted = Color(0xFFA9B2C7);
+  static const border = Color(0xFF2A3654);
 
-  static const navy = Color(0xFF20243A);
-  static const navySoft = Color(0xFF303650);
-  static const coral = Color(0xFFFF6B5F);
-  static const coralSoft = Color(0xFFFFE4DF);
-  static const mint = Color(0xFF43B9A5);
-  static const mintSoft = Color(0xFFDDF4EF);
-  static const violet = Color(0xFF8575E8);
-  static const violetSoft = Color(0xFFEAE7FF);
+  static const navy = Color(0xFF090E1D);
+  static const navySoft = Color(0xFF1B2745);
+  static const coral = Color(0xFFFF6B68);
+  static const coralSoft = Color(0xFF3B222B);
+  static const mint = Color(0xFF56CDB4);
+  static const mintSoft = Color(0xFF173B3A);
+  static const violet = Color(0xFF9585FF);
+  static const violetSoft = Color(0xFF292447);
   static const yellow = Color(0xFFFFC857);
-  static const yellowSoft = Color(0xFFFFF1CC);
-  static const redSoft = Color(0xFFFFE1E0);
-  static const green = Color(0xFF35A27D);
+  static const yellowSoft = Color(0xFF3B311C);
+  static const redSoft = Color(0xFF3D2229);
+  static const green = Color(0xFF46B98E);
+  static const sakura = Color(0xFFF08CA4);
 
   // Compatibility aliases for the current app shell.
   static const primary = violet;
@@ -35,7 +37,7 @@ abstract final class AppTheme {
   static ThemeData get light {
     final scheme = ColorScheme.fromSeed(
       seedColor: AppColors.violet,
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
     );
 
     return ThemeData(
@@ -43,8 +45,12 @@ abstract final class AppTheme {
       colorScheme: scheme.copyWith(
         primary: AppColors.violet,
         onPrimary: Colors.white,
+        secondary: AppColors.coral,
+        onSecondary: Colors.white,
         surface: AppColors.surface,
         onSurface: AppColors.ink,
+        surfaceTint: Colors.transparent,
+        outline: AppColors.border,
       ),
       scaffoldBackgroundColor: AppColors.background,
       splashFactory: InkSparkle.splashFactory,
@@ -105,9 +111,10 @@ abstract final class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surface,
         indicatorColor: AppColors.violetSoft,
+        labelTextStyle: const WidgetStatePropertyAll(TextStyle(color: AppColors.ink, fontWeight: FontWeight.w800)),
         elevation: 0,
         labelTextStyle: const WidgetStatePropertyAll(
-          TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+          TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.ink),
         ),
       ),
       dialogTheme: DialogThemeData(
@@ -120,6 +127,7 @@ abstract final class AppTheme {
         backgroundColor: AppColors.surface,
         selectedColor: AppColors.violetSoft,
         side: const BorderSide(color: AppColors.border),
+        labelStyle: const TextStyle(color: AppColors.ink, fontWeight: FontWeight.w800),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         labelStyle: const TextStyle(fontWeight: FontWeight.w800),
       ),
@@ -132,7 +140,7 @@ abstract final class AppTheme {
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.violet,
-        linearTrackColor: Color(0xFFE3DED5),
+        linearTrackColor: AppColors.border,
       ),
     );
   }
