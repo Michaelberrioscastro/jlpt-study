@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "R03",
+    "week": 8,
+    "day": 3,
+    "type": "review",
+    "pages": [
+      56,
+      57
+    ],
+    "title_ja": "まとめ問題（1課～12課）",
+    "title_es": "Repaso acumulativo de Part 1, lecciones 1–12",
+    "focus": "Repaso acumulativo",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 56–57. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "REPASA",
+      "title": "まとめ問題（1課～12課）",
+      "body": "Trabaja Repaso acumulativo según la organización de las páginas 56–57.",
+      "pattern": "Repaso acumulativo",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera el contexto y elige la expresión adecuada.",
+      "tip": "Compara función, contexto y matiz."
+    },
+    {
+      "id": "R03-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "Repaso acumulativo",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es Repaso acumulativo."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica el punto principal y crea una oración propia.",
+    "reward": 25
+  }
+}
