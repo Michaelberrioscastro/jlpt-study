@@ -242,20 +242,109 @@ class _TeachCard extends StatelessWidget {
 }
 
 class _QuestionCard extends StatelessWidget {
-  final QuestionStep step; final int? selected; final bool checked; final Future<void> Function(int,QuestionStep) onAnswer; final VoidCallback onNext;
-  const _QuestionCard({super.key,required this.step,required this.selected,required this.checked,required this.onAnswer,required this.onNext});
-  @override Widget build(BuildContext context){
-    final ok=checked&&selected==step.answer;
-    return ListView(padding:const EdgeInsets.fromLTRB(22,26,22,30),children:[
-      _Label(text:'TU TURNO'),const SizedBox(height:12),
-      Text(step.title,style:Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:18),
-      Text(step.question,style:const TextStyle(fontSize:18,fontWeight:FontWeight.w700,height:1.4)),const SizedBox(height:18),
-      for(var i=0;i<step.options.length;i++) Padding(padding:const EdgeInsets.only(bottom:10),child:OutlinedButton(
-        style:OutlinedButton.styleFrom(alignment:Alignment.centerLeft,padding:const EdgeInsets.symmetric(horizontal:16,vertical:16),side:BorderSide(color:checked&&i==step.answer?const Color(0xFF4B8A5A):checked&&i==selected?const Color(0xFFC85A5A):AppColors.border,width:checked&&(i==step.answer||i==selected)?2:1)),
-        onPressed:checked?null:(){ onAnswer(i,step); },child:Text(step.options[i],style:const TextStyle(fontSize:16)))),
-      if(checked)...[
-        const SizedBox(height:4),Card(color:ok?AppColors.sageSoft:AppColors.roseSoft,child:Padding(padding:const EdgeInsets.all(15),child:Row(crossAxisAlignment:CrossAxisAlignment.start,children:[Icon(ok?Icons.check_circle_rounded:Icons.info_outline_rounded,color:ok?const Color(0xFF4B8A5A):const Color(0xFFC85A5A)),const SizedBox(width:10),Expanded(child:Text(step.explanation))]))),
-        const SizedBox(height:15),SizedBox(width:double.infinity,child:FilledButton(onPressed:onNext,child:const Text('SIGUIENTE'))),
+  final QuestionStep step;
+  final int? selected;
+  final bool checked;
+  final Future<void> Function(int, QuestionStep) onAnswer;
+  final VoidCallback onNext;
+
+  const _QuestionCard({
+    super.key,
+    required this.step,
+    required this.selected,
+    required this.checked,
+    required this.onAnswer,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ok = checked && selected == step.answer;
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(22, 26, 22, 30),
+      children: [
+        _Label(text: 'TU TURNO'),
+        const SizedBox(height: 12),
+        Text(
+          step.title,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(fontWeight: FontWeight.w900),
+        ),
+        const SizedBox(height: 18),
+        Text(
+          step.question,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            height: 1.4,
+          ),
+        ),
+        const SizedBox(height: 18),
+
+        for (var i = 0; i < step.options.length; i++)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                side: BorderSide(
+                  color: checked && i == step.answer
+                      ? const Color(0xFF4B8A5A)
+                      : checked && i == selected
+                          ? const Color(0xFFC85A5A)
+                          : AppColors.border,
+                  width: checked && (i == step.answer || i == selected)
+                      ? 2
+                      : 1,
+                ),
+              ),
+              onPressed: checked ? null : () => onAnswer(i, step),
+              child: Text(
+                step.options[i],
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+
+        if (checked) ...[
+          const SizedBox(height: 4),
+          Card(
+            color: ok ? AppColors.sageSoft : AppColors.roseSoft,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    ok
+                        ? Icons.check_circle_rounded
+                        : Icons.info_outline_rounded,
+                    color: ok
+                        ? const Color(0xFF4B8A5A)
+                        : const Color(0xFFC85A5A),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(child: Text(step.explanation)),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: onNext,
+              child: const Text('SIGUIENTE'),
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -328,11 +417,63 @@ class _WeekRow extends StatelessWidget {
 }
 
 class _Path extends StatelessWidget {
-  final ProgressService progress; const _Path({required this.progress});
-  @override Widget build(BuildContext context)=>Card(child:Padding(padding:const EdgeInsets.all(16),child:Row(children:[for(var i=1;i<=6;i++)...[
-    Column(children:[CircleAvatar(radius:17,backgroundColor:progress.weekCompleted(i)?AppColors.sageSoft:progress.weekUnlocked(i)?AppColors.primarySoft:const Color(0xFFEDEAE7),child:Icon(progress.weekCompleted(i)?Icons.check_rounded:progress.weekUnlocked(i)?Icons.play_arrow_rounded:Icons.lock_rounded,size:17,color:progress.weekCompleted(i)?const Color(0xFF4B8A5A):progress.weekUnlocked(i)?AppColors.primary:AppColors.muted)),const SizedBox(height:4),Text('S'+i.toString(),style:const TextStyle(fontSize:10,fontWeight:FontWeight.w800))]),
-    if(i<6) const Expanded(child:Divider()),
-  ]])));
+  final ProgressService progress;
+
+  const _Path({required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    final children = <Widget>[];
+
+    for (var i = 1; i <= 6; i++) {
+      children.add(
+        Column(
+          children: [
+            CircleAvatar(
+              radius: 17,
+              backgroundColor: progress.weekCompleted(i)
+                  ? AppColors.sageSoft
+                  : progress.weekUnlocked(i)
+                      ? AppColors.primarySoft
+                      : const Color(0xFFEDEAE7),
+              child: Icon(
+                progress.weekCompleted(i)
+                    ? Icons.check_rounded
+                    : progress.weekUnlocked(i)
+                        ? Icons.play_arrow_rounded
+                        : Icons.lock_rounded,
+                size: 17,
+                color: progress.weekCompleted(i)
+                    ? const Color(0xFF4B8A5A)
+                    : progress.weekUnlocked(i)
+                        ? AppColors.primary
+                        : AppColors.muted,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'S' + i.toString(),
+              style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      );
+
+      if (i < 6) {
+        children.add(const Expanded(child: Divider()));
+      }
+    }
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(children: children),
+      ),
+    );
+  }
 }
 
 class _Pill extends StatelessWidget {
