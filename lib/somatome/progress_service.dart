@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../study/book_catalog.dart';
 import '../study/study_catalog.dart';
+import '../study/learning_engine.dart';
 
 class StudyStats {
   final int totalAnswers, correct, wrong, corrected, xp, streak, openMistakes, level;
@@ -45,6 +46,7 @@ class ProgressService extends ChangeNotifier {
   static final instance = ProgressService._();
 
   SharedPreferences? _prefs;
+  final LearningEngine _learning = LearningEngine();
   final Set<String> _completed = {};
   final Map<String, Map<String, dynamic>> _mistakes = {};
   int _total = 0, _correct = 0, _wrong = 0, _corrected = 0, _xp = 0, _streak = 1;
@@ -136,6 +138,8 @@ class ProgressService extends ChangeNotifier {
 
     StudyCatalog.activeLevel = _level;
     StudyCatalog.activeBookId = _bookId;
+
+    await _learning.load(_prefs!, _level);
 
     final prefix = _storagePrefix();
     final completedKey = 'completed_sessions_' + prefix;
@@ -252,6 +256,15 @@ class ProgressService extends ChangeNotifier {
     _loaded = false;
   }
 
+  LearningSnapshot get learningSnapshot => _learning.snapshot();
+
+  SmartSessionPlan get smartPlan => _learning.recommend(
+        sessions: StudyCatalog.sessions,
+        completedIds: _completed,
+      );
+
+  ConceptMastery? conceptMastery(String id) => _learning.concept(id);
+
   StudyStats get stats => StudyStats(
         totalAnswers: _total,
         correct: _correct,
@@ -301,6 +314,7 @@ class ProgressService extends ChangeNotifier {
     required String questionId,
     required String prompt,
     required bool correct,
+    List<String> conceptIds = const <String>[],
   }) async {
     _total++;
     final existing = _mistakes[questionId];
@@ -319,6 +333,16 @@ class ProgressService extends ChangeNotifier {
         'open': true,
       };
     }
+
+    final p = _prefs ??= await SharedPreferences.getInstance();
+    await _learning.record(
+      prefs: p,
+      level: _level,
+      conceptIds: conceptIds,
+      sessionId: sessionId,
+      questionId: questionId,
+      correct: correct,
+    );
 
     await _save();
     notifyListeners();
