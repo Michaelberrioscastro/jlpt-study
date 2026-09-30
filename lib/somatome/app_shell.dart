@@ -531,7 +531,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 18),
             Text(
-              'JLPT $${level}',
+              'JLPT ${level}',
               style: TextStyle(
                 color: active ? Colors.white : AppColors.ink,
                 fontSize: 22,
