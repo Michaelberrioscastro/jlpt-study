@@ -253,7 +253,7 @@ class _SideMenu extends StatelessWidget {
     child: SizedBox(
       width: 316,
       child: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(22, 22, 18, 18),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,11 +285,9 @@ class _SideMenu extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                       const SizedBox(height: 10),
                       const Text('NIVEL', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
                       const SizedBox(height: 8),
@@ -325,9 +323,7 @@ class _SideMenu extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                ],
               ),
             ],
           ),
