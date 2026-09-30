@@ -2200,6 +2200,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
   LessonPacket? packet;
   int step=0,correct=0,wrong=0;
   int? selected; bool checked=false;
+  DateTime questionStartedAt = DateTime.now();
 
   @override void initState(){super.initState();future=_load();}
   Future<LessonPacket> _load() async {
@@ -2234,6 +2235,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
   Future<void> answer(int value,QuestionStep q) async {
     if(checked)return;
     final ok=value==q.answer;
+    final responseMs = DateTime.now().difference(questionStartedAt).inMilliseconds;
     setState(() { selected=value; checked=true; });
     if(ok) correct++; else wrong++;
     await widget.progress.recordAnswer(
@@ -2242,17 +2244,18 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
       prompt: q.question,
       correct: ok,
       conceptIds: LearningEngine.conceptsForFocus(widget.session.focus),
+      responseMs: responseMs,
     );
     setState((){});
   }
 
   Future<void> next() async {
-    if(step<packet!.steps.length-1){setState(() { step++; selected=null; checked=false; });return;}
+    if(step<packet!.steps.length-1){setState(() { step++; selected=null; checked=false; questionStartedAt=DateTime.now(); });return;}
     final total=correct+wrong;
     final passed=total>0 && correct/total>=.80;
     if(passed) await widget.progress.completeSession(widget.session.id,correct,wrong);
     if(!mounted)return;
-    showDialog(context:context,barrierDismissible:false,builder:(_)=>_ResultDialog(passed:passed,correct:correct,wrong:wrong,onClose:(){Navigator.pop(context);if(passed){Navigator.pop(context);}else{setState((){step=0;correct=0;wrong=0;selected=null;checked=false;});}}));
+    showDialog(context:context,barrierDismissible:false,builder:(_)=>_ResultDialog(passed:passed,correct:correct,wrong:wrong,onClose:(){Navigator.pop(context);if(passed){Navigator.pop(context);}else{setState((){step=0;correct=0;wrong=0;selected=null;checked=false;questionStartedAt=DateTime.now();});}}));
   }
 
   @override Widget build(BuildContext context)=>FutureBuilder<LessonPacket>(future:future,builder:(_,snap){
@@ -2269,7 +2272,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
             Text((step+1).toString()+'/'+packet!.steps.length.toString(),style:const TextStyle(fontSize:11,fontWeight:FontWeight.w900,color:AppColors.muted)),
           ]),
         ),
-        Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(() { step++; })):_QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
+        Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(() { step++; questionStartedAt=DateTime.now(); })):_QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
       ]),
     );
   });
