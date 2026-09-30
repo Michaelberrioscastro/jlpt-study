@@ -115,8 +115,7 @@ class ProgressService extends ChangeNotifier {
       total: total,
       xp: xp,
       answers: answers,
-      correct: correct,
-      responseMs: responseMs,
+      correct: correct
     );
   }
 
@@ -344,6 +343,7 @@ class ProgressService extends ChangeNotifier {
       sessionId: sessionId,
       questionId: questionId,
       correct: correct,
+      responseMs: responseMs,
     );
 
     await _save();
