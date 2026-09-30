@@ -296,233 +296,398 @@ class HomePage extends StatelessWidget {
   final ProgressService progress;
   final VoidCallback onStart;
 
-  const HomePage({super.key, required this.progress, required this.onStart});
+  const HomePage({
+    super.key,
+    required this.progress,
+    required this.onStart,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final s = progress.stats;
+    final stats = progress.stats;
     final next = progress.nextUnlockedSession();
+    final percent = (progress.sessionProgress * 100).round();
 
     return SafeArea(
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 18, 20, 30),
+        padding: const EdgeInsets.fromLTRB(26, 18, 26, 34),
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'JLPT N4',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppColors.primary,
+                      style: TextStyle(
+                        color: AppColors.violet,
+                        fontSize: 10,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 2,
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    const Text(
+                    SizedBox(height: 7),
+                    Text(
                       'おかえりなさい',
-                      style: TextStyle(color: AppColors.muted, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 27,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: -1,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      '¿Listo para tu siguiente paso?',
+                      style: TextStyle(
+                        color: AppColors.muted,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: AppColors.border),
+                  color: AppColors.coralSoft,
+                  borderRadius: BorderRadius.circular(17),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.local_fire_department_rounded, size: 18, color: AppColors.primary),
-                    const SizedBox(width: 5),
-                    Text(s.streak.toString(), style: const TextStyle(fontWeight: FontWeight.w900)),
+                    const Icon(
+                      Icons.local_fire_department_rounded,
+                      size: 17,
+                      color: AppColors.coral,
+                    ),
                     const SizedBox(width: 4),
-                    const Text('racha', style: TextStyle(fontSize: 11, color: AppColors.muted)),
+                    Text(
+                      stats.streak.toString(),
+                      style: const TextStyle(
+                        color: AppColors.navy,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
           const SizedBox(height: 22),
-          Text(
-            'Un paso a la vez.',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w900,
-              letterSpacing: -.9,
-            ),
-          ),
-          const SizedBox(height: 6),
-          const Text(
-            'Aprende japonés con sesiones cortas y progresivas.',
-            style: TextStyle(color: AppColors.muted),
-          ),
-          const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.all(21),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [AppColors.navy, Color(0xFF343A59)],
-              ),
+              color: AppColors.navy,
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(.14),
-                  blurRadius: 28,
-                  offset: const Offset(0, 11),
+                  color: AppColors.navy.withOpacity(.18),
+                  blurRadius: 30,
+                  offset: const Offset(0, 12),
                 ),
               ],
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Row(
+                Positioned(
+                  right: -50,
+                  top: -65,
+                  child: Container(
+                    width: 175,
+                    height: 175,
+                    decoration: BoxDecoration(
+                      color: AppColors.violet.withOpacity(.14),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 30,
+                  bottom: -80,
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    decoration: BoxDecoration(
+                      color: AppColors.coral.withOpacity(.10),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(.10),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text(
-                        next.review ? 'RETO SEMANAL' : 'CONTINÚA AQUÍ',
-                        style: const TextStyle(
-                          color: AppColors.coral,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 1.1,
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: AppColors.coral.withOpacity(.14),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Text(
+                            next.review ? 'RETO SEMANAL' : 'SIGUIENTE',
+                            style: const TextStyle(
+                              color: AppColors.coral,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          'S' + next.week.toString() + ' · D' + next.day.toString(),
+                          style: const TextStyle(
+                            color: Color(0xFF969BB0),
+                            fontSize: 10,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                next.titleJa,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w900,
+                                  height: 1.2,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                next.titleEs,
+                                style: const TextStyle(
+                                  color: Color(0xFFB9BDCF),
+                                  fontSize: 13,
+                                  height: 1.4,
+                                ),
+                              ),
+                              const SizedBox(height: 11),
+                              Text(
+                                next.focus,
+                                style: const TextStyle(
+                                  color: AppColors.yellow,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        SizedBox(
+                          width: 70,
+                          height: 70,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              CircularProgressIndicator(
+                                value: progress.sessionProgress,
+                                strokeWidth: 7,
+                                color: AppColors.coral,
+                                backgroundColor: Colors.white.withOpacity(.1),
+                              ),
+                              Text(
+                                percent.toString() + '%',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: AppColors.coral,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: onStart,
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        label: Text(
+                          next.review
+                              ? 'COMENZAR RETO'
+                              : 'COMENZAR SESIÓN',
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    Text(
-                      'S' + next.week.toString() + ' · D' + next.day.toString(),
-                      style: const TextStyle(color: Color(0xFFB9BDCF), fontWeight: FontWeight.w800),
-                    ),
                   ],
-                ),
-                const SizedBox(height: 18),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            next.titleJa,
-                            style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900, height: 1.15),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            next.titleEs,
-                            style: const TextStyle(color: Color(0xFFB9BDCF), height: 1.35),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            next.focus,
-                            style: const TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w900),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: 68,
-                      height: 68,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CircularProgressIndicator(
-                            value: progress.sessionProgress,
-                            strokeWidth: 7,
-                            color: AppColors.primary,
-                            backgroundColor: Colors.white.withOpacity(.55),
-                          ),
-                          Text(
-                            (progress.sessionProgress * 100).round().toString() + '%',
-                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 19),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.icon(
-                    onPressed: onStart,
-                    icon: const Icon(Icons.play_arrow_rounded),
-                    label: Text(next.review ? 'COMENZAR RETO' : 'CONTINUAR'),
-                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(child: _Metric(icon: Icons.bolt_rounded, value: s.xp.toString(), label: 'XP')),
-              const SizedBox(width: 8),
-              Expanded(child: _Metric(icon: Icons.check_circle_rounded, value: s.correct.toString(), label: 'Buenas')),
-              const SizedBox(width: 8),
-              Expanded(child: _Metric(icon: Icons.percent_rounded, value: s.accuracy.round().toString() + '%', label: 'Precisión')),
-            ],
-          ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 15),
           Row(
             children: [
               Expanded(
-                child: Text(
-                  'Tu recorrido',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+                child: _QuickMetric(
+                  icon: Icons.bolt_rounded,
+                  value: stats.xp.toString(),
+                  label: 'XP',
+                  color: AppColors.violet,
                 ),
               ),
-              Text(
-                (progress.sessionProgress * 100).round().toString() + '%',
-                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w900),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _QuickMetric(
+                  icon: Icons.check_circle_rounded,
+                  value: stats.correct.toString(),
+                  label: 'Buenas',
+                  color: AppColors.green,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _QuickMetric(
+                  icon: Icons.track_changes_rounded,
+                  value: stats.accuracy.round().toString() + '%',
+                  label: 'Precisión',
+                  color: AppColors.mint,
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 11),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 17, 16, 8),
-              child: Column(
-                children: [
-                  for (var w = 1; w <= 6; w++)
-                    _HomeWeekRow(week: w, progress: progress),
-                ],
+          const SizedBox(height: 26),
+          Row(
+            children: [
+              const Expanded(
+                child: Text(
+                  'Tu camino',
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
+              Text(
+                percent.toString() + '% completado',
+                style: const TextStyle(
+                  color: AppColors.violet,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 18, 16, 8),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(25),
+              border: Border.all(color: AppColors.border),
+            ),
+            child: Column(
+              children: [
+                for (var week = 1; week <= 6; week++)
+                  _HomeWeekRow(
+                    week: week,
+                    progress: progress,
+                  ),
+              ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 17),
           Container(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.primaryDeep,
-              borderRadius: BorderRadius.circular(25),
+              color: AppColors.yellowSoft,
+              borderRadius: BorderRadius.circular(22),
             ),
             child: Row(
               children: [
-                const Icon(Icons.auto_awesome_rounded, color: Colors.white, size: 28),
-                const SizedBox(width: 13),
+                Container(
+                  width: 39,
+                  height: 39,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(.7),
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: const Icon(
+                    Icons.auto_awesome_rounded,
+                    color: AppColors.navy,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    s.corrected > 0
-                        ? 'Has recuperado ' + s.corrected.toString() + ' errores. Sigue así.'
-                        : 'Cada error queda registrado para que puedas recuperarlo.',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, height: 1.35),
+                    stats.corrected > 0
+                        ? 'Has recuperado ' + stats.corrected.toString() + ' errores. Sigue construyendo memoria.'
+                        : 'Los errores quedan registrados para que puedas recuperarlos más adelante.',
+                    style: const TextStyle(
+                      color: AppColors.navy,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      height: 1.4,
+                    ),
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuickMetric extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+  final Color color;
+
+  const _QuickMetric({
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 13),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(19),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, size: 17, color: color),
+          const SizedBox(height: 5),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.muted,
+              fontSize: 9,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
