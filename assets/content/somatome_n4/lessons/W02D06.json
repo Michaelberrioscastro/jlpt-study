@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W02D06",
+    "week": 2,
+    "day": 6,
+    "type": "grammar",
+    "pages": [44, 45],
+    "title_ja": "もっと勉強したほうがいいですよ。",
+    "title_es": "Deberías estudiar más.",
+    "focus": "たほうがいい · ないほうがいい · 命令形 · 禁止形 · 〜なさい · と言う／と言われる",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las expresiones presentadas en las páginas 44–45. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {"id":"s1","type":"teach","label":"APRENDE","title":"Consejo: たほうがいい／ないほうがいい","body":"Vたほうがいい se usa para recomendar una acción. Vないほうがいい recomienda no hacerla.","pattern":"Vたほうがいい · Vないほうがいい","example_ja":"わからないところは先生に聞いたほうがいいですよ。","example_es":"Deberías preguntarle al profesor lo que no entiendes.","tip":"Es un consejo, no necesariamente una obligación."},
+    {"id":"s2","type":"choice","title":"Dar una recomendación","question":"¿Cuál significa 'No deberías ir a un lugar tan peligroso'?","options":["そんな危ないところに行ったほうがいいです。","そんな危ないところに行かないほうがいいです。","そんな危ないところに行かなければなりません。","そんな危ないところに行ってはいけません。"],"answer":1,"explanation":"行かないほうがいい expresa una recomendación de no ir."},
+    {"id":"s3","type":"teach","label":"CLAVE","title":"Imperativo y prohibición","body":"La forma imperativa da una orden fuerte. La forma prohibitiva añade な al verbo en forma diccionario, como しゃべるな. El libro señala que estas formas tienen un sentido fuerte y aparecen también en señales y situaciones específicas.","pattern":"Imperativo · Vる + な","example_ja":"がんばれ！／スピードを出すな！","example_es":"¡Esfuérzate! / ¡No excedas la velocidad!","tip":"No uses estas formas como si fueran consejos neutros: el registro es fuerte."},
+    {"id":"s4","type":"choice","title":"Reconocer una prohibición","question":"¿Cuál es una prohibición fuerte?","options":["静かにしなさい。","スピードを出すな。","早く帰ったほうがいい。","早く帰らなくてもいい。"],"answer":1,"explanation":"Vるな es la forma prohibitiva fuerte."},
+    {"id":"s5","type":"teach","label":"PRACTICA","title":"〜なさい","body":"Vなさい se utiliza para dar una orden o instrucción, especialmente de un adulto a un niño o de un profesor a un estudiante. Es menos brusco que el imperativo directo, pero sigue siendo una instrucción.","pattern":"Vなさい","example_ja":"早く起きなさい。","example_es":"Levántate pronto.","tip":"El contexto y la relación entre las personas son importantes para el registro."},
+    {"id":"s6","type":"choice","title":"Orden o consejo","question":"Un padre le dice a su hijo: '¡Cállate y estate tranquilo!'. ¿Qué forma corresponde al patrón del libro?","options":["静かにしなさい。","静かにしたほうがいいです。","静かにしなくてもいいです。","静かにするようになりました。"],"answer":0,"explanation":"しなさい se usa para dar una instrucción directa en contextos como adulto→niño."},
+    {"id":"s7","type":"choice","title":"Transmitir una orden","question":"¿Cuál significa 'Me dijeron que no hablara'?","options":["しゃべらないほうがいいと言いました。","しゃべるなと言われました。","しゃべってみると言われました。","しゃべるようになりました。"],"answer":1,"explanation":"La forma prohibitiva puede aparecer dentro de と言われる al transmitir una orden o indicación."}
+  ],
+  "reflection":{"title":"Mini misión","prompt_es":"Escribe un consejo con たほうがいい y otro con ないほうがいい. Luego crea una orden con 〜なさい.","reward":20}
+}
