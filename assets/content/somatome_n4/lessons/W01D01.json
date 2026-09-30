@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "session": {
     "id": "W01D01",
     "week": 1,
@@ -11,110 +11,74 @@
     ],
     "title_ja": "一日に二回、歯をみがきます。",
     "title_es": "Me cepillo los dientes dos veces al día.",
-    "focus": "Frecuencia/ratio y ほど",
+    "focus": "Frecuencia · ずつ · ほど",
     "source": "日本語総まとめ N4 文法・読解・聴解",
-    "content_note": "Lección estructurada a partir de las páginas 18–19 del libro proporcionado. Las actividades de práctica son formulaciones originales y no reproducen íntegramente los ejercicios del libro."
+    "content_note": "Contenido de la sesión basado en las páginas 18–19. Las actividades interactivas adicionales son originales y sirven como apoyo didáctico."
   },
-  "sections": [
+  "steps": [
     {
-      "id": "frequency",
-      "title": "Frecuencia y cantidad",
-      "items": [
-        {
-          "pattern": "N に + cantidad/frecuencia",
-          "meaning_es": "Indica cuántas veces ocurre una acción dentro de un período.",
-          "example_ja": "一日に二回、歯をみがきます。",
-          "example_es": "Me cepillo los dientes dos veces al día.",
-          "note_es": "El libro usa 一日に + número + 回 para expresar frecuencia."
-        },
-        {
-          "pattern": "N ずつ",
-          "meaning_es": "Indica distribución en cantidades iguales: «cada uno / de uno en uno / una cantidad a la vez», según el contexto.",
-          "example_ja": "この本を毎日二ページずつ読みます。",
-          "example_es": "Leo dos páginas de este libro cada día.",
-          "note_es": "La idea central es una distribución regular de la cantidad."
-        }
-      ]
+      "id": "s1",
+      "type": "teach",
+      "title": "Primero: la frecuencia",
+      "body": "Para decir cuántas veces haces algo dentro de un período, el libro presenta la estructura N に + número + 回.",
+      "pattern": "一日に + número + 回",
+      "example_ja": "一日に二回、歯をみがきます。",
+      "example_es": "Me cepillo los dientes dos veces al día.",
+      "tip": "回 cuenta las veces que ocurre una acción."
     },
     {
-      "id": "hodoh",
-      "title": "ほど",
-      "items": [
-        {
-          "pattern": "N は N ほど + forma negativa",
-          "meaning_es": "Compara dos elementos y expresa que el primero no alcanza el grado del segundo: «no tanto como…».",
-          "example_ja": "今週は先週ほど忙しくありません。",
-          "example_es": "Esta semana no estoy tan ocupado como la semana pasada.",
-          "note_es": "En el patrón comparativo presentado, ほど aparece con una forma negativa."
-        }
-      ]
-    },
-    {
-      "id": "other_particles",
-      "title": "Otras expresiones de las páginas",
-      "items": [
-        {
-          "pattern": "N で",
-          "meaning_es": "En la lección aparece para indicar el lugar/contexto en que ocurre una acción.",
-          "example_ja": "日本のトヨタにつとめています。",
-          "example_es": "Trabajo en Toyota, en Japón.",
-          "note_es": "Las páginas presentan varias partículas en ejemplos funcionales."
-        },
-        {
-          "pattern": "N から",
-          "meaning_es": "Indica un punto de inicio, como un momento o lugar de partida.",
-          "example_ja": "3時からワインを作ります。",
-          "example_es": "Hacemos vino desde las tres.",
-          "note_es": "Aquí marca el punto de inicio."
-        },
-        {
-          "pattern": "N に",
-          "meaning_es": "Además de otros usos, aparece en expresiones de frecuencia como 一日に三回.",
-          "example_ja": "一日に三回、この薬を飲んでください。",
-          "example_es": "Toma este medicamento tres veces al día.",
-          "note_es": "Aquí に marca el período dentro del cual se cuenta la frecuencia."
-        },
-        {
-          "pattern": "N も",
-          "meaning_es": "Expresa «también» y puede aportar énfasis según la oración.",
-          "example_ja": "私はひらがなも書けません。",
-          "example_es": "Ni siquiera puedo escribir hiragana.",
-          "note_es": "El libro muestra este uso junto con una forma negativa."
-        }
-      ]
-    }
-  ],
-  "practice": [
-    {
-      "id": "p1",
+      "id": "s2",
       "type": "choice",
-      "prompt_es": "Completa: 一日に三___、この薬を飲んでください。",
+      "title": "Tu turno",
+      "question": "¿Cómo dices «tomo este medicamento tres veces al día»?",
       "options": [
-        "回",
-        "枚",
-        "人",
-        "本"
+        "一日に三回、この薬を飲みます。",
+        "一日を三回、この薬を飲みます。",
+        "一日から三回、この薬を飲みます。",
+        "一日に三枚、この薬を飲みます。"
       ],
       "answer": 0,
-      "explanation_es": "回 se usa para contar la frecuencia de una acción."
+      "explanation": "一日に三回 expresa tres veces dentro de un día."
     },
     {
-      "id": "p2",
+      "id": "s3",
+      "type": "teach",
+      "title": "Ahora: ずつ",
+      "body": "ずつ expresa una distribución regular de una cantidad. En español puede equivaler a «cada uno», «de uno en uno» o «una cantidad a la vez», según el contexto.",
+      "pattern": "cantidad + ずつ",
+      "example_ja": "毎日二ページずつ読みます。",
+      "example_es": "Leo dos páginas cada día.",
+      "tip": "Piensa en una cantidad que se reparte de forma regular."
+    },
+    {
+      "id": "s4",
       "type": "choice",
-      "prompt_es": "Elige la expresión que significa «dos páginas cada día».",
+      "title": "¿Cuál encaja?",
+      "question": "Quieres decir: «Estudio cinco palabras nuevas cada día».",
       "options": [
-        "毎日二ページずつ",
-        "毎日二ページほど",
-        "毎日二ページも",
-        "毎日二ページから"
+        "毎日、新しい言葉を五つずつ勉強します。",
+        "毎日、新しい言葉を五回勉強します。",
+        "毎日、新しい言葉を五つほど勉強しません。",
+        "毎日、新しい言葉を五つから勉強します。"
       ],
       "answer": 0,
-      "explanation_es": "ずつ expresa la distribución regular de una cantidad."
+      "explanation": "五つずつ expresa una cantidad distribuida: cinco palabras cada día."
     },
     {
-      "id": "p3",
+      "id": "s5",
+      "type": "teach",
+      "title": "Por último: ほど",
+      "body": "En la comparación que presenta la lección, ほど aparece con una forma negativa para expresar que algo no alcanza el mismo grado que otra cosa.",
+      "pattern": "N は N ほど + negativo",
+      "example_ja": "今週は先週ほど忙しくありません。",
+      "example_es": "Esta semana no estoy tan ocupado como la semana pasada.",
+      "tip": "ほど〜ない = «no tanto como…» en este patrón."
+    },
+    {
+      "id": "s6",
       "type": "choice",
-      "prompt_es": "Completa: 先週は今週___忙しくありませんでした。",
+      "title": "Comprueba la comparación",
+      "question": "Completa: 今日は昨日___暑くありません。",
       "options": [
         "ほど",
         "ずつ",
@@ -122,44 +86,26 @@
         "も"
       ],
       "answer": 0,
-      "explanation_es": "La comparación con ほど en este patrón se construye con una forma negativa."
+      "explanation": "Con la comparación negativa, ほど marca el grado que no se alcanza."
     },
     {
-      "id": "p4",
-      "type": "choice",
-      "prompt_es": "¿Cuál expresa «tres veces al día»?",
+      "id": "s7",
+      "type": "mixed",
+      "title": "Reto final",
+      "question": "¿Qué opción expresa «Leo dos páginas cada día y no estoy tan ocupado como ayer»?",
       "options": [
-        "一日に三回",
-        "一日で三回",
-        "一日から三回",
-        "一日も三回"
+        "毎日二ページずつ読みます。今日は昨日ほど忙しくありません。",
+        "毎日二ページ回読みます。今日は昨日ずつ忙しくありません。",
+        "毎日二ページから読みます。今日は昨日も忙しくありません。",
+        "毎日二ページほど読みます。今日は昨日から忙しくありません。"
       ],
       "answer": 0,
-      "explanation_es": "一日に三回 indica la frecuencia dentro de un día."
-    },
-    {
-      "id": "p5",
-      "type": "choice",
-      "prompt_es": "¿Qué partícula aparece en la estructura de frecuencia 一日に三回?",
-      "options": [
-        "に",
-        "から",
-        "で",
-        "も"
-      ],
-      "answer": 0,
-      "explanation_es": "に marca el período en el que se cuenta la frecuencia."
+      "explanation": "La primera parte usa ずつ para distribución y la segunda usa ほど con negativo para comparación."
     }
   ],
   "reflection": {
-    "prompt_es": "Escribe 3 oraciones propias usando: (1) 一日に〜回, (2) 〜ずつ, (3) 〜ほど〜ない."
-  },
-  "source_reference": {
-    "pages": [
-      18,
-      19
-    ],
-    "page_18": "Explicación de partículas y expresiones de frecuencia/cantidad, incluyendo 一日に〜回, ずつ y ほど.",
-    "page_19": "Práctica de selección y aplicación de las estructuras de la lección."
+    "title": "Mini misión",
+    "prompt_es": "Escribe 3 frases propias: una con 一日に〜回, otra con 〜ずつ y otra con 〜ほど〜ない.",
+    "reward": 20
   }
 }
