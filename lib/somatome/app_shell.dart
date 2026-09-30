@@ -786,7 +786,153 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 12),
               if (wide)
                 Row(
-                class BookDashboardPage extends StatelessWidget {
+              if (wide)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _bookCard(books[2])),
+                    const Expanded(child: SizedBox()),
+                  ],
+                )
+              else
+                _bookCard(books[2]),
+              const SizedBox(height: 28),
+
+                    Expanded(child: _bookCard(books[2])),
+                    const Expanded(child: SizedBox()),
+                  ],
+                )
+              else
+                _bookCard(books[2]),
+              const SizedBox(height: 28),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Libro seleccionado',
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    selected.level,
+                    style: const TextStyle(
+                      color: AppColors.muted,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 13),
+              Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            selected.title,
+                            style: const TextStyle(
+                              color: AppColors.ink,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            selected.description,
+                            style: const TextStyle(
+                              color: AppColors.muted,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              height: 1.35,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      '${percent}%',
+                      style: const TextStyle(
+                        color: AppColors.violet,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 28),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Mis metas',
+                      style: TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    'PROGRESO',
+                    style: TextStyle(
+                      color: AppColors.muted,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 13),
+              if (wide)
+                Row(
+                  children: [
+                    Expanded(child: _goalCard('Estudiar hoy', selectedSnapshot.answers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet)),
+                    const SizedBox(width: 10),
+                    Expanded(child: _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
+                    const SizedBox(width: 10),
+                    Expanded(child: _goalCard('Precisión', '${selectedSnapshot.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint)),
+                    const SizedBox(width: 10),
+                    Expanded(child: _goalCard('Ganar XP', '${selectedSnapshot.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow)),
+                  ],
+                )
+              else
+                Column(
+                  children: [
+                    _goalCard('Estudiar hoy', selectedSnapshot.answers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet),
+                    const SizedBox(height: 9),
+                    _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral),
+                    const SizedBox(height: 9),
+                    _goalCard('Precisión', '${selectedSnapshot.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint),
+                    const SizedBox(height: 9),
+                    _goalCard('Ganar XP', '${selectedSnapshot.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow),
+                  ],
+                ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class BookDashboardPage extends StatelessWidget {
   final ProgressService progress;
 
   const BookDashboardPage({super.key, required this.progress});
@@ -1170,141 +1316,7 @@ class _BookSessionCard extends StatelessWidget {
   }
 }
 
-  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(child: _bookCard(books[2])),
-                    const Expanded(child: SizedBox()),
-                  ],
-                )
-              else
-                _bookCard(books[2]),
-              const SizedBox(height: 28),
-              Row(
-                children: [
-                  const Expanded(
-                    child: Text(
-                      'Libro seleccionado',
-                      style: TextStyle(
-                        color: AppColors.ink,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    selected.level,
-                    style: const TextStyle(
-                      color: AppColors.muted,
-                      fontSize: 9,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 13),
-              Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(22),
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            selected.title,
-                            style: const TextStyle(
-                              color: AppColors.ink,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            selected.description,
-                            style: const TextStyle(
-                              color: AppColors.muted,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                              height: 1.35,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Text(
-                      '${percent}%',
-                      style: const TextStyle(
-                        color: AppColors.violet,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 28),
-              Row(
-                children: [
-                  const Expanded(
-                    child: Text(
-                      'Mis metas',
-                      style: TextStyle(
-                        color: AppColors.ink,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    'PROGRESO',
-                    style: TextStyle(
-                      color: AppColors.muted,
-                      fontSize: 9,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 13),
-              if (wide)
-                Row(
-                  children: [
-                    Expanded(child: _goalCard('Estudiar hoy', selectedSnapshot.answers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet)),
-                    const SizedBox(width: 10),
-                    Expanded(child: _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
-                    const SizedBox(width: 10),
-                    Expanded(child: _goalCard('Precisión', '${selectedSnapshot.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint)),
-                    const SizedBox(width: 10),
-                    Expanded(child: _goalCard('Ganar XP', '${selectedSnapshot.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow)),
-                  ],
-                )
-              else
-                Column(
-                  children: [
-                    _goalCard('Estudiar hoy', selectedSnapshot.answers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet),
-                    const SizedBox(height: 9),
-                    _goalCard('Mantener la racha', '${stats.streak}/7 días', Icons.local_fire_department_rounded, AppColors.coral),
-                    const SizedBox(height: 9),
-                    _goalCard('Precisión', '${selectedSnapshot.accuracy.round()}%', Icons.gps_fixed_rounded, AppColors.mint),
-                    const SizedBox(height: 9),
-                    _goalCard('Ganar XP', '${selectedSnapshot.xp}/100 XP', Icons.bolt_rounded, AppColors.yellow),
-                  ],
-                ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
+
 
 class _StreakBadge extends StatelessWidget {
   final int streak;
