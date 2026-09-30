@@ -2,17 +2,38 @@ export '../somatome/lesson_catalog.dart';
 
 import '../somatome/lesson_catalog.dart';
 import '../n3/n3_catalog.dart';
+import '../shinkanzen_n4/shinkanzen_n4_catalog.dart';
+import 'book_catalog.dart';
 
 abstract final class StudyCatalog {
   static String activeLevel = 'N4';
+  static String activeBookId = BookCatalog.somatomeN4.id;
 
-  static List<SessionInfo> get sessions =>
-      activeLevel == 'N3' ? N3Catalog.sessions : LessonCatalog.sessions;
+  static StudyBook get activeBook => BookCatalog.forId(activeBookId);
+
+  static List<SessionInfo> get sessions {
+    switch (activeBookId) {
+      case 'shinkanzen_n4_dokkai':
+        return ShinKanzenN4ReadingCatalog.sessions;
+      case 'shinkanzen_n3_grammar':
+        return N3Catalog.sessions;
+      case 'somatome_n4':
+      default:
+        return LessonCatalog.sessions;
+    }
+  }
 
   static int get totalSessions => sessions.length;
 
-  static LessonPacket buildPacket(SessionInfo session) =>
-      activeLevel == 'N3'
-          ? N3Catalog.buildPacket(session)
-          : LessonCatalog.buildPacket(session);
+  static LessonPacket buildPacket(SessionInfo session) {
+    switch (activeBookId) {
+      case 'shinkanzen_n4_dokkai':
+        return ShinKanzenN4ReadingCatalog.buildPacket(session);
+      case 'shinkanzen_n3_grammar':
+        return N3Catalog.buildPacket(session);
+      case 'somatome_n4':
+      default:
+        return LessonCatalog.buildPacket(session);
+    }
+  }
 }
