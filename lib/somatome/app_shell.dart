@@ -786,8 +786,6 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 12),
               if (wide)
                 Row(
-              if (wide)
-                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(child: _bookCard(books[2])),
