@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Michaelberrioscastro/jlpt-study/content-schema-v2",
+  "title": "JLPT Study Content Schema v2",
+  "type": "object",
+  "required": ["schema_version", "session", "steps"],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "session": {
+      "type": "object",
+      "required": ["id", "week", "day", "type", "pages", "title_ja", "title_es", "focus", "source"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "week": { "type": "integer", "minimum": 1 },
+        "day": { "type": "integer", "minimum": 1 },
+        "type": {
+          "type": "string",
+          "enum": ["grammar", "reading", "listening", "consolidation", "sentence", "text", "review", "mock"]
+        },
+        "pages": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "integer", "minimum": 1 }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "title_ja": { "type": "string" },
+        "title_es": { "type": "string" },
+        "focus": { "type": "string" },
+        "source": { "type": "string" },
+        "content_note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["id", "type", "label", "title", "body", "pattern", "example_ja", "example_es", "tip"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "const": "teach" },
+              "label": { "type": "string" },
+              "title": { "type": "string" },
+              "body": { "type": "string" },
+              "pattern": { "type": "string" },
+              "example_ja": { "type": "string" },
+              "example_es": { "type": "string" },
+              "tip": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["id", "type", "title", "question", "options", "answer", "explanation"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "enum": ["choice", "mixed"] },
+              "title": { "type": "string" },
+              "question": { "type": "string" },
+              "options": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+              "answer": { "type": "integer", "minimum": 0 },
+              "explanation": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "reflection": {
+      "type": "object",
+      "required": ["title", "prompt_es", "reward"],
+      "properties": {
+        "title": { "type": "string" },
+        "prompt_es": { "type": "string" },
+        "reward": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
