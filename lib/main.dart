@@ -4,7 +4,7 @@ import 'somatome/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const JLPTN4StudyApp());
+  runApp(const JLPTStudyApp());
 }
 
 class JLPTN4StudyApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class JLPTN4StudyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'JLPT N4 Study',
+      title: 'JLPT Study',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: const AppShell(),
