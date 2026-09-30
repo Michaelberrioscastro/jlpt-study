@@ -555,7 +555,7 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: LinearProgressIndicator(
                       minHeight: 8,
-                      value: snapshot.progress.clamp(0, 1),
+                      value: snapshot.progress.clamp(0.0, 1.0).toDouble(),
                       backgroundColor: active ? Colors.white.withOpacity(.12) : AppColors.background,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         active ? AppColors.coral : AppColors.violet,
@@ -730,7 +730,7 @@ class HomePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             child: LinearProgressIndicator(
                               minHeight: 9,
-                              value: progress.sessionProgress.clamp(0, 1),
+                              value: progress.sessionProgress.clamp(0.0, 1.0).toDouble(),
                               backgroundColor: Colors.white.withOpacity(.10),
                               valueColor: const AlwaysStoppedAnimation<Color>(AppColors.coral),
                             ),
