@@ -42,7 +42,7 @@ The learner can no longer infer the answer from a fixed position.
 
 ## Pedagogical basis
 
-The expansion follows the idea that JLPT preparation should combine language knowledge with the ability to use that knowledge in reading/listening tasks. The official JLPT guide describes N4 as requiring basic Japanese comprehension and N3 as understanding everyday Japanese to a certain degree.
+The expansion follows the idea that JLPT preparation should combine language knowledge with the ability to use that knowledge in reading tasks. The official JLPT guide describes N4 as requiring basic Japanese comprehension and N3 as understanding everyday Japanese to a certain degree.
 
 The 3A Network description of 新完全マスター 文法 N3 emphasizes learning grammar through both meaning/function and form, contrasting easily confused expressions, and practicing grammar in sentence/text contexts. The expansion follows that same principle without copying the book.
 

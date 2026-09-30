@@ -3,10 +3,10 @@
   "course": {
     "id": "somatome_n4",
     "title_ja": "日本語総まとめ N4 文法・読解・聴解",
-    "title_es": "Somatome N4 — Gramática, Reading y Listening",
+    "title_es": "Somatome N4 — Gramática y Reading",
     "level": "N4",
-    "weeks": 6,
-    "sessions": 42
+    "weeks": 5,
+    "sessions": 35
   },
   "sessions": [
     {
@@ -493,104 +493,6 @@
       "pages": [
         94,
         95
-      ],
-      "title_ja": "まとめ問題",
-      "focus": "Review",
-      "is_review": true,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D01",
-      "week": 6,
-      "day": 1,
-      "type": "listening",
-      "pages": [
-        98,
-        99
-      ],
-      "title_ja": "準備をしましょう①",
-      "focus": "準備①",
-      "is_review": false,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D02",
-      "week": 6,
-      "day": 2,
-      "type": "listening",
-      "pages": [
-        100,
-        101
-      ],
-      "title_ja": "準備をしましょう②",
-      "focus": "準備②",
-      "is_review": false,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D03",
-      "week": 6,
-      "day": 3,
-      "type": "listening",
-      "pages": [
-        102,
-        103
-      ],
-      "title_ja": "どれですか — 課題理解 —",
-      "focus": "どれですか",
-      "is_review": false,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D04",
-      "week": 6,
-      "day": 4,
-      "type": "listening",
-      "pages": [
-        104,
-        105
-      ],
-      "title_ja": "どうしてですか — ポイント理解 —",
-      "focus": "どうしてですか",
-      "is_review": false,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D05",
-      "week": 6,
-      "day": 5,
-      "type": "listening",
-      "pages": [
-        106,
-        107
-      ],
-      "title_ja": "何と言いますか — 発話表現 —",
-      "focus": "何と言いますか",
-      "is_review": false,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D06",
-      "week": 6,
-      "day": 6,
-      "type": "listening",
-      "pages": [
-        108,
-        109
-      ],
-      "title_ja": "どんな返事をしますか — 即時応答 —",
-      "focus": "どんな返事をしますか",
-      "is_review": false,
-      "content_status": "metadata_confirmed; full content extraction pending validation"
-    },
-    {
-      "id": "W06D07",
-      "week": 6,
-      "day": 7,
-      "type": "listening",
-      "pages": [
-        110,
-        111
       ],
       "title_ja": "まとめ問題",
       "focus": "Review",

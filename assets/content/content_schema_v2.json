@@ -15,7 +15,7 @@
         "day": { "type": "integer", "minimum": 1 },
         "type": {
           "type": "string",
-          "enum": ["grammar", "reading", "listening", "consolidation", "sentence", "text", "review", "mock"]
+          "enum": ["grammar", "reading", "consolidation", "sentence", "text", "review", "mock"]
         },
         "pages": {
           "type": "array",

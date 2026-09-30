@@ -7,6 +7,7 @@ import '../study/book_catalog.dart';
 import 'progress_service.dart';
 import '../study/expanded_content.dart';
 import '../study/learning_engine.dart';
+import 'sensei_chat_page.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -65,6 +66,20 @@ class _AppShellState extends State<AppShell> {
     if (mounted) setState(() {});
   }
 
+  String _currentSenseiContext() {
+    switch (tab) {
+      case 1:
+        return 'El usuario esta en Camino. La proxima sesion es ${progress.nextUnlockedSession().titleEs}, con foco ${progress.nextUnlockedSession().focus}.';
+      case 2:
+        return 'El usuario esta en Repaso. Tiene ${progress.stats.openMistakes} errores pendientes y esta revisando sus puntos debiles.';
+      case 3:
+        return 'El usuario esta en Progreso. Lleva ${progress.completedCount} sesiones completadas, ${progress.stats.xp} XP y una precision del ${progress.stats.accuracy.round()}%.';
+      default:
+        final session = progress.nextUnlockedSession();
+        return 'El usuario esta en Hoy. Su siguiente sesion es Dia ${session.day}: ${session.titleEs}. Foco: ${session.focus}.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
     animation: progress,
@@ -72,23 +87,35 @@ class _AppShellState extends State<AppShell> {
       final content = IndexedStack(
         index: tab,
         children: [
-          HomePage(
+          StudioHomePage(
             progress: progress,
             onStart: () => openSession(progress.nextUnlockedSession()),
-            onBookSelected: selectBook,
             onOpenBook: openBook,
+            onOpenMenu: () => setState(() => drawerOpen = true),
           ),
           CoursePage(progress: progress, onOpen: openSession),
           ReviewPage(progress: progress, onOpen: openSession),
           ProgressPage(progress: progress),
         ],
       );
+      final loadedContent = progress.isLoaded
+          ? content
+          : const Center(child: Text('Cargando...'));
 
       return Scaffold(
         backgroundColor: AppColors.background,
         body: Stack(
           children: [
-            Positioned.fill(child: _SakuraBackdrop(child: content)),
+            Positioned.fill(child: _SakuraBackdrop(child: loadedContent)),
+            if (!drawerOpen)
+              Positioned(
+                right: 20,
+                bottom: 24,
+                child: _SenseiBubble(
+                  level: progress.studyLevel,
+                  contextDescription: _currentSenseiContext(),
+                ),
+              ),
             AnimatedOpacity(
               duration: const Duration(milliseconds: 220),
               opacity: drawerOpen ? .56 : 0,
@@ -110,6 +137,8 @@ class _AppShellState extends State<AppShell> {
                 selected: tab,
                 level: progress.studyLevel,
                 book: progress.book,
+                progress: progress,
+                onClose: closeDrawer,
                 onTabChanged: (v) {
                   setState(() {
                     tab = v;
@@ -120,16 +149,6 @@ class _AppShellState extends State<AppShell> {
                 onBookChanged: (v) {
                   selectBook(v);
                 },
-              ),
-            ),
-            Positioned(
-              left: drawerOpen ? 300 : 16,
-              top: 18,
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 220),
-                child: drawerOpen
-                    ? _MenuCloseButton(onTap: closeDrawer)
-                    : _MenuOpenButton(onTap: () => setState(() => drawerOpen = true)),
               ),
             ),
           ],
@@ -144,36 +163,73 @@ class _MenuOpenButton extends StatelessWidget {
   const _MenuOpenButton({required this.onTap});
 
   @override
-  Widget build(BuildContext context) => Material(
-    color: AppColors.surface,
-    borderRadius: BorderRadius.circular(16),
-    child: InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: const SizedBox(
-        width: 48,
-        height: 48,
-        child: Icon(Icons.menu_rounded, color: AppColors.ink, size: 22),
+  Widget build(BuildContext context) => Tooltip(
+    message: 'Abrir camino',
+    child: Material(
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      child: InkWell(
+        onTap: onTap,
+        customBorder: const CircleBorder(),
+        child: Ink(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.surface.withOpacity(.92),
+            border: Border.all(color: AppColors.violet.withOpacity(.35)),
+            boxShadow: [BoxShadow(color: AppColors.violet.withOpacity(.18), blurRadius: 18, offset: const Offset(0, 7))],
+          ),
+          child: const Icon(Icons.menu_rounded, color: AppColors.ink, size: 22),
+        ),
       ),
     ),
   );
 }
 
-class _MenuCloseButton extends StatelessWidget {
-  final VoidCallback onTap;
-  const _MenuCloseButton({required this.onTap});
+class _SenseiBubble extends StatelessWidget {
+  final String level;
+  final String contextDescription;
+
+  const _SenseiBubble({required this.level, this.contextDescription = ''});
 
   @override
-  Widget build(BuildContext context) => Material(
-    color: AppColors.surface,
-    borderRadius: BorderRadius.circular(16),
-    child: InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: const SizedBox(
-        width: 48,
-        height: 48,
-        child: Icon(Icons.close_rounded, color: AppColors.ink, size: 22),
+  Widget build(BuildContext context) => Tooltip(
+    message: 'Preguntar al Sensei',
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (_) => SenseiChatSheet(
+            level: level,
+            contextDescription: contextDescription,
+          ),
+        ),
+        borderRadius: BorderRadius.circular(24),
+        child: Ink(
+          width: 58,
+          height: 58,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [AppColors.coral, AppColors.violet],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(21),
+            border: Border.all(color: Colors.white.withOpacity(.35)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.coral.withOpacity(.30),
+                blurRadius: 22,
+                offset: const Offset(0, 9),
+              ),
+            ],
+          ),
+          child: const Center(child: SenseiCatMark(size: 31)),
+        ),
       ),
     ),
   );
@@ -189,39 +245,35 @@ class _SakuraBackdrop extends StatelessWidget {
       Positioned.fill(child: child),
       const Positioned.fill(
         child: IgnorePointer(
-          child: CustomPaint(painter: _SakuraPainter()),
+          child: CustomPaint(painter: _SakuraAtmospherePainter()),
         ),
       ),
     ],
   );
 }
 
-class _SakuraPainter extends CustomPainter {
-  const _SakuraPainter();
+class _SakuraAtmospherePainter extends CustomPainter {
+  const _SakuraAtmospherePainter();
 
   @override
   void paint(Canvas canvas, Size size) {
-    final petal = Paint()..color = AppColors.sakura.withOpacity(.18);
-    final center = Paint()..color = AppColors.sakura.withOpacity(.26);
-    final points = <Offset>[
-      Offset(size.width * .84, size.height * .12),
-      Offset(size.width * .93, size.height * .34),
-      Offset(size.width * .11, size.height * .82),
-      Offset(size.width * .78, size.height * .76),
-      Offset(size.width * .25, size.height * .18),
-      Offset(size.width * .54, size.height * .52),
+    final glow = Paint()
+      ..color = AppColors.sakura.withOpacity(.08)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 28);
+    final bubble = Paint()
+      ..color = AppColors.sakura.withOpacity(.12)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    final bubbles = <({Offset center, double radius})>[
+      (center: Offset(size.width * .92, size.height * .16), radius: 92),
+      (center: Offset(size.width * .08, size.height * .72), radius: 68),
+      (center: Offset(size.width * .72, size.height * .86), radius: 52),
     ];
 
-    for (final p in points) {
-      for (var i = 0; i < 5; i++) {
-        final a = i * 1.2566;
-        canvas.save();
-        canvas.translate(p.dx, p.dy);
-        canvas.rotate(a);
-        canvas.drawOval(const Rect.fromLTWH(-3, -13, 6, 15), petal);
-        canvas.restore();
-      }
-      canvas.drawCircle(p, 3, center);
+    for (final item in bubbles) {
+      canvas.drawCircle(item.center, item.radius, glow);
+      canvas.drawCircle(item.center, item.radius, bubble);
+      canvas.drawArc(Rect.fromCircle(center: item.center, radius: item.radius - 8), -.7, 1.4, false, bubble);
     }
   }
 
@@ -233,6 +285,8 @@ class _SideMenu extends StatelessWidget {
   final int selected;
   final String level;
   final StudyBook book;
+  final ProgressService progress;
+  final VoidCallback onClose;
   final ValueChanged<int> onTabChanged;
   final ValueChanged<String> onLevelChanged;
   final ValueChanged<String> onBookChanged;
@@ -241,6 +295,8 @@ class _SideMenu extends StatelessWidget {
     required this.selected,
     required this.level,
     required this.book,
+    required this.progress,
+    required this.onClose,
     required this.onTabChanged,
     required this.onLevelChanged,
     required this.onBookChanged,
@@ -260,26 +316,28 @@ class _SideMenu extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: AppColors.violet,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Center(
-                      child: Text('JLPT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 11)),
-                    ),
-                  ),
+                  const _SidebarMark(),
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('JLPT Study', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+                        Text('Kana / Path', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
                         SizedBox(height: 2),
-                        Text('Tu espacio de estudio', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 11, color: AppColors.muted, fontWeight: FontWeight.w700)),
+                        Text('JLPT · Tu viaje hacia el japones', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 11, color: AppColors.muted, fontWeight: FontWeight.w700)),
                       ],
+                    ),
+                  ),
+                  Tooltip(
+                    message: 'Cerrar camino',
+                    child: IconButton(
+                      onPressed: onClose,
+                      icon: const Icon(Icons.close_rounded),
+                      style: IconButton.styleFrom(
+                        foregroundColor: AppColors.ink,
+                        backgroundColor: AppColors.surface2,
+                        shape: const CircleBorder(),
+                      ),
                     ),
                   ),
                 ],
@@ -289,7 +347,7 @@ class _SideMenu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                       const SizedBox(height: 10),
-                      const Text('NIVEL', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
+                      const Text('TU CAMINO', style: TextStyle(fontSize: 10, color: AppColors.muted, fontWeight: FontWeight.w900, letterSpacing: 1.8)),
                       const SizedBox(height: 8),
                       _LevelSwitcher(level: level, onChanged: onLevelChanged),
                       const SizedBox(height: 16),
@@ -299,30 +357,12 @@ class _SideMenu extends StatelessWidget {
                       const SizedBox(height: 22),
                       const Divider(color: AppColors.border),
                       const SizedBox(height: 12),
-                      _SideNavItem(index: 0, selected: selected == 0, icon: Icons.home_rounded, label: 'Inicio', onTap: onTabChanged),
-                      _SideNavItem(index: 1, selected: selected == 1, icon: Icons.route_rounded, label: 'Curso', onTap: onTabChanged),
-                      _SideNavItem(index: 2, selected: selected == 2, icon: Icons.refresh_rounded, label: 'Repaso', onTap: onTabChanged),
-                      _SideNavItem(index: 3, selected: selected == 3, icon: Icons.insights_rounded, label: 'Progreso', onTap: onTabChanged),
-                      const SizedBox(height: 18),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [AppColors.navy, AppColors.navySoft], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        child: Row(
-                          children: [
-                            const Text('🌸', style: TextStyle(fontSize: 24)),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                '${book.shortTitle}\n${book.subtitle}',
-                                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800, height: 1.35),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      _SideNavItem(index: 0, selected: selected == 0, icon: Icons.sunny_snowing, label: 'Hoy', description: 'Resumen de hoy', onTap: onTabChanged),
+                      _SideNavItem(index: 1, selected: selected == 1, icon: Icons.route_rounded, label: 'Camino', description: 'Dia actual disponible', onTap: onTabChanged),
+                      _SideNavItem(index: 2, selected: selected == 2, icon: Icons.replay_rounded, label: 'Repaso', description: 'Errores pendientes', onTap: onTabChanged),
+                      _SideNavItem(index: 3, selected: selected == 3, icon: Icons.auto_graph_rounded, label: 'Progreso', description: 'Actividad reciente', onTap: onTabChanged),
+                      const SizedBox(height: 16),
+                      _SidebarProgressModule(progress: progress, book: book),
                 ],
               ),
             ],
@@ -333,11 +373,57 @@ class _SideMenu extends StatelessWidget {
   );
 }
 
+class _SidebarMark extends StatelessWidget {
+  const _SidebarMark();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: 50,
+    height: 50,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      gradient: const LinearGradient(
+        colors: [AppColors.coral, AppColors.violet],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: AppColors.coral.withOpacity(.24),
+          blurRadius: 18,
+          offset: const Offset(0, 7),
+        ),
+      ],
+    ),
+    child: Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          width: 38,
+          height: 38,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white.withOpacity(.45), width: 1),
+          ),
+        ),
+        const Text(
+          '学',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 21,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 class _SideNavItem extends StatelessWidget {
   final int index;
   final bool selected;
   final IconData icon;
-  final String label;
+  final String label, description;
   final ValueChanged<int> onTap;
 
   const _SideNavItem({
@@ -345,6 +431,7 @@ class _SideNavItem extends StatelessWidget {
     required this.selected,
     required this.icon,
     required this.label,
+    required this.description,
     required this.onTap,
   });
 
@@ -363,15 +450,31 @@ class _SideNavItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 21, color: selected ? AppColors.violet : AppColors.muted),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 240),
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: selected ? AppColors.violet : AppColors.surface2,
+                boxShadow: selected
+                    ? [BoxShadow(color: AppColors.violet.withOpacity(.28), blurRadius: 15)]
+                    : null,
+              ),
+              child: Icon(icon, size: 18, color: selected ? Colors.white : AppColors.muted),
+            ),
             const SizedBox(width: 12),
-            Text(
-              label,
-              style: TextStyle(
-                color: selected ? AppColors.ink : AppColors.muted,
-                fontWeight: selected ? FontWeight.w900 : FontWeight.w700,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: TextStyle(color: selected ? AppColors.ink : AppColors.muted, fontWeight: selected ? FontWeight.w900 : FontWeight.w700)),
+                  const SizedBox(height: 2),
+                  Text(description, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: selected ? AppColors.muted : AppColors.muted.withOpacity(.72), fontSize: 9, fontWeight: FontWeight.w600)),
+                ],
               ),
             ),
+            AnimatedSwitcher(duration: const Duration(milliseconds: 220), child: selected ? const Icon(Icons.arrow_forward_ios_rounded, key: ValueKey('active'), size: 12, color: AppColors.violet) : const SizedBox(key: ValueKey('idle'), width: 12)),
           ],
         ),
       ),
@@ -385,50 +488,95 @@ class _LevelSwitcher extends StatelessWidget {
   const _LevelSwitcher({required this.level, required this.onChanged});
 
   @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(4),
-    decoration: BoxDecoration(
-      color: AppColors.background,
-      borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: AppColors.border),
-    ),
-    child: Row(
-      children: [
-        Expanded(child: _LevelChoice(label: 'N4', selected: level == 'N4', onTap: () => onChanged('N4'))),
-        Expanded(child: _LevelChoice(label: 'N3', selected: level == 'N3', onTap: () => onChanged('N3'))),
-      ],
-    ),
+  Widget build(BuildContext context) => Row(
+    children: [
+      Expanded(child: _LevelProgressChoice(level: 'N4', selected: level == 'N4', snapshot: ProgressService.instance.progressForBook(BookCatalog.defaultForLevel('N4')), onTap: () => onChanged('N4'))),
+      const SizedBox(width: 8),
+      Expanded(child: _LevelProgressChoice(level: 'N3', selected: level == 'N3', snapshot: ProgressService.instance.progressForBook(BookCatalog.defaultForLevel('N3')), onTap: () => onChanged('N3'))),
+    ],
   );
 }
 
-class _LevelChoice extends StatelessWidget {
-  final String label;
+class _LevelProgressChoice extends StatelessWidget {
   final bool selected;
+  final LevelProgressSnapshot snapshot;
   final VoidCallback onTap;
-  const _LevelChoice({required this.label, required this.selected, required this.onTap});
+  const _LevelProgressChoice({required this.level, required this.selected, required this.snapshot, required this.onTap});
+  final String level;
 
   @override
   Widget build(BuildContext context) => InkWell(
     onTap: selected ? null : onTap,
-    borderRadius: BorderRadius.circular(12),
+    borderRadius: BorderRadius.circular(17),
     child: AnimatedContainer(
-      duration: const Duration(milliseconds: 220),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      duration: const Duration(milliseconds: 240),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       decoration: BoxDecoration(
-        color: selected ? AppColors.violet : Colors.transparent,
-        borderRadius: BorderRadius.circular(12),
+        color: selected ? AppColors.violetSoft : AppColors.background,
+        borderRadius: BorderRadius.circular(17),
+        border: Border.all(color: selected ? AppColors.violet.withOpacity(.55) : AppColors.border),
       ),
-      child: Text(
-        label,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: selected ? Colors.white : AppColors.muted,
-          fontWeight: FontWeight.w900,
-          fontSize: 12,
-        ),
-      ),
+      child: Column(children: [
+        SizedBox(width: 38, height: 38, child: Stack(alignment: Alignment.center, children: [CircularProgressIndicator(value: snapshot.progress.clamp(0.0, 1.0).toDouble(), strokeWidth: 3, backgroundColor: AppColors.border, valueColor: AlwaysStoppedAnimation<Color>(selected ? AppColors.violet : AppColors.muted)), Text(level, style: TextStyle(color: selected ? AppColors.ink : AppColors.muted, fontSize: 11, fontWeight: FontWeight.w900))])),
+        const SizedBox(height: 6),
+        Text('${(snapshot.progress * 100).round()}%', style: TextStyle(color: selected ? AppColors.ink : AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900)),
+      ]),
     ),
   );
+}
+
+class _SidebarProgressModule extends StatelessWidget {
+  final ProgressService progress;
+  final StudyBook book;
+
+  const _SidebarProgressModule({required this.progress, required this.book});
+
+  @override
+  Widget build(BuildContext context) {
+    final snapshot = progress.progressForBook(book);
+    final achievement = progress.completedCount == 0
+        ? 'Primer paso'
+        : 'Día ${progress.completedCount} conquistado';
+
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.navySoft, AppColors.surface2],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: AppColors.violet.withOpacity(.26)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.violet.withOpacity(.10),
+            blurRadius: 22,
+            offset: const Offset(0, 9),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(children: [
+            const Icon(Icons.auto_graph_rounded, color: AppColors.yellow, size: 18),
+            const SizedBox(width: 7),
+            const Expanded(child: Text('TU IMPULSO', style: TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.4))),
+            Text('${(snapshot.progress * 100).round()}%', style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900)),
+          ]),
+          const SizedBox(height: 10),
+          ClipRRect(borderRadius: BorderRadius.circular(8), child: LinearProgressIndicator(value: snapshot.progress.clamp(0.0, 1.0).toDouble(), minHeight: 6, backgroundColor: Colors.white12, valueColor: const AlwaysStoppedAnimation<Color>(AppColors.yellow))),
+          const SizedBox(height: 12),
+          Text(book.shortTitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900)),
+          const SizedBox(height: 7),
+          Row(children: [const Icon(Icons.local_fire_department_rounded, color: AppColors.coral, size: 15), const SizedBox(width: 4), Text('${progress.stats.streak} dias', style: const TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w800)), const SizedBox(width: 10), const Icon(Icons.bolt_rounded, color: AppColors.yellow, size: 15), const SizedBox(width: 4), Text('${progress.stats.xp} XP', style: const TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w800))]),
+          const SizedBox(height: 10),
+          Row(children: [const Icon(Icons.emoji_events_rounded, color: AppColors.yellow, size: 15), const SizedBox(width: 5), Expanded(child: Text(achievement, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w800)))]),
+        ],
+      ),
+    );
+  }
 }
 
 class _BookSwitcher extends StatelessWidget {
@@ -672,6 +820,353 @@ void onStartSmart(BuildContext context, SessionInfo session) {
       ),
     ),
   );
+}
+
+class StudioHomePage extends StatelessWidget {
+  final ProgressService progress;
+  final VoidCallback onStart;
+  final VoidCallback onOpenMenu;
+  final ValueChanged<String> onOpenBook;
+
+  const StudioHomePage({
+    super.key,
+    required this.progress,
+    required this.onStart,
+    required this.onOpenMenu,
+    required this.onOpenBook,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final stats = progress.stats;
+    final next = progress.nextUnlockedSession();
+    final currentWeek = next.week;
+    final sessions = StudyCatalog.sessions
+      .where((session) => session.week == currentWeek)
+      .toList();
+
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final wide = constraints.maxWidth >= 900;
+          final horizontal = wide ? 42.0 : 20.0;
+
+          return ListView(
+            padding: EdgeInsets.fromLTRB(horizontal, 28, horizontal, 44),
+            children: [
+              _StudioHeader(
+                progress: progress,
+                stats: stats,
+                onOpenMenu: onOpenMenu,
+              ),
+              const SizedBox(height: 22),
+              _TodayHero(
+                progress: progress,
+                session: next,
+                onStart: onStart,
+              ),
+              const SizedBox(height: 28),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Expanded(
+                    child: _SectionHeading(
+                      eyebrow: 'TU RUTA',
+                      title: 'Sigue el hilo',
+                      subtitle: 'Pequeños pasos. Un gran salto al N3.',
+                    ),
+                  ),
+                  Text(
+                    '${progress.completedCount}/${StudyCatalog.totalSessions}',
+                    style: const TextStyle(
+                      color: AppColors.muted,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+              _LearningPath(
+                week: currentWeek,
+                sessions: sessions,
+                progress: progress,
+                onOpen: (session) => onStartSession(context, session, progress),
+              ),
+              const SizedBox(height: 28),
+              const _SectionHeading(
+                eyebrow: 'DESPUES DE ESTUDIAR',
+                title: 'Desafios opcionales',
+                subtitle: 'Pequenos retos para profundizar y coleccionar dominio.',
+              ),
+              const SizedBox(height: 14),
+              if (wide)
+                Row(
+                  children: [
+                    Expanded(child: _MissionCard(icon: Icons.translate_rounded, color: AppColors.violet, title: 'Dominio Kanji', detail: 'Escribe 10 kanjis correctamente', reward: '+40 XP')),
+                    SizedBox(width: 10),
+                    Expanded(child: _MissionCard(icon: Icons.auto_awesome_rounded, color: AppColors.coral, title: 'Desafio rapido', detail: 'Completa una actividad extra', reward: '+25 XP')),
+                    SizedBox(width: 10),
+                    Expanded(child: _MissionCard(icon: Icons.local_fire_department_rounded, color: AppColors.yellow, title: 'Protege tu racha', detail: 'Estudia durante 5 minutos', reward: 'Cofre')),
+                  ],
+                )
+              else
+                Column(
+                  children: [
+                    _MissionCard(icon: Icons.translate_rounded, color: AppColors.violet, title: 'Dominio Kanji', detail: 'Escribe 10 kanjis correctamente', reward: '+40 XP'),
+                    SizedBox(height: 10),
+                    _MissionCard(icon: Icons.auto_awesome_rounded, color: AppColors.coral, title: 'Desafio rapido', detail: 'Completa una actividad extra', reward: '+25 XP'),
+                    SizedBox(height: 10),
+                    _MissionCard(icon: Icons.local_fire_department_rounded, color: AppColors.yellow, title: 'Protege tu racha', detail: 'Estudia durante 5 minutos', reward: 'Cofre'),
+                  ],
+                ),
+              const SizedBox(height: 28),
+              _ProgressPulse(progress: progress),
+              const SizedBox(height: 14),
+              _CollectionStrip(progress: progress),
+              const SizedBox(height: 14),
+              _WeeklyMomentum(progress: progress),
+              const SizedBox(height: 14),
+              OutlinedButton.icon(
+                onPressed: () => onOpenBook(progress.book.id),
+                icon: const Icon(Icons.auto_stories_rounded, size: 18),
+                label: Text('Explorar ${progress.book.shortTitle}'),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+void onStartSession(BuildContext context, SessionInfo session, ProgressService progress) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => LessonFlowPage(session: session, progress: progress),
+    ),
+  );
+}
+
+class _StudioHeader extends StatelessWidget {
+  final ProgressService progress;
+  final StudyStats stats;
+  final VoidCallback onOpenMenu;
+
+  const _StudioHeader({required this.progress, required this.stats, required this.onOpenMenu});
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      _MenuOpenButton(onTap: onOpenMenu),
+      const SizedBox(width: 12),
+      Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [AppColors.coral, AppColors.sakura]),
+          borderRadius: BorderRadius.circular(17),
+          boxShadow: [BoxShadow(color: AppColors.coral.withOpacity(.28), blurRadius: 18, offset: const Offset(0, 7))],
+        ),
+        child: const Center(child: Text('あ', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900))),
+      ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('BUENOS DÍAS, ESTUDIANTE', style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.35)),
+            const SizedBox(height: 4),
+            Text(progress.book.shortTitle, style: const TextStyle(color: AppColors.ink, fontSize: 19, fontWeight: FontWeight.w900)),
+          ],
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(color: AppColors.coralSoft, borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.coral.withOpacity(.24))),
+        child: Row(children: [const Icon(Icons.local_fire_department_rounded, color: AppColors.coral, size: 18), const SizedBox(width: 5), Text('${stats.streak}', style: const TextStyle(color: AppColors.ink, fontWeight: FontWeight.w900))]),
+      ),
+    ],
+  );
+}
+
+class _TodayHero extends StatelessWidget {
+  final ProgressService progress;
+  final SessionInfo session;
+  final VoidCallback onStart;
+
+  const _TodayHero({required this.progress, required this.session, required this.onStart});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(22),
+    decoration: BoxDecoration(
+      gradient: const LinearGradient(colors: [AppColors.violet, Color(0xFF5142A7), AppColors.navySoft], begin: Alignment.topLeft, end: Alignment.bottomRight),
+      borderRadius: BorderRadius.circular(28),
+      border: Border.all(color: Colors.white.withOpacity(.12)),
+      boxShadow: [BoxShadow(color: AppColors.violet.withOpacity(.22), blurRadius: 30, offset: const Offset(0, 14))],
+    ),
+    child: Stack(
+      children: [
+        Positioned(right: -28, top: -35, child: Container(width: 150, height: 150, decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(.07)))),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [const Icon(Icons.wb_sunny_rounded, color: AppColors.yellow, size: 18), const SizedBox(width: 7), const Text('TU PRÓXIMO PASO', style: TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)), const Spacer(), Text('NIVEL ${progress.studyLevel}', style: const TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w900))]),
+            const SizedBox(height: 18),
+            Text('Día ${session.day}', style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w900, height: 1.05)),
+            const SizedBox(height: 6),
+            Text(session.focus, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900)),
+            const SizedBox(height: 4),
+            Text(session.titleEs, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w700, height: 1.35)),
+            const SizedBox(height: 18),
+            Row(children: [Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(8), child: LinearProgressIndicator(value: progress.sessionProgress.clamp(0.0, 1.0).toDouble(), minHeight: 7, backgroundColor: Colors.white24, valueColor: const AlwaysStoppedAnimation<Color>(AppColors.yellow)))), const SizedBox(width: 10), Text('${(progress.sessionProgress * 100).round()}%', style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900))]),
+            const SizedBox(height: 18),
+            Row(children: [const Icon(Icons.schedule_rounded, color: Colors.white70, size: 16), const SizedBox(width: 5), Text('${session.durationMinutes} min', style: const TextStyle(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w800)), const SizedBox(width: 14), const Icon(Icons.bolt_rounded, color: AppColors.yellow, size: 17), const SizedBox(width: 4), Text('+${session.xpReward} XP', style: const TextStyle(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w800))]),
+            const SizedBox(height: 14),
+            FilledButton.icon(onPressed: onStart, icon: const Icon(Icons.play_arrow_rounded, size: 19), label: Text('Comenzar Día ${session.day}'), style: FilledButton.styleFrom(backgroundColor: Colors.white, foregroundColor: AppColors.violet, padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 13), minimumSize: Size.zero)),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+class _SectionHeading extends StatelessWidget {
+  final String eyebrow, title, subtitle;
+  const _SectionHeading({required this.eyebrow, required this.title, required this.subtitle});
+  @override
+  Widget build(BuildContext context) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(eyebrow, style: const TextStyle(color: AppColors.coral, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.6)), const SizedBox(height: 5), Text(title, style: const TextStyle(color: AppColors.ink, fontSize: 22, fontWeight: FontWeight.w900)), const SizedBox(height: 3), Text(subtitle, style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700))]);
+}
+
+class _LearningPath extends StatelessWidget {
+  final int week;
+  final List<SessionInfo> sessions;
+  final ProgressService progress;
+  final ValueChanged<SessionInfo> onOpen;
+  const _LearningPath({required this.week, required this.sessions, required this.progress, required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.fromLTRB(17, 18, 17, 9),
+    decoration: BoxDecoration(color: AppColors.surface.withOpacity(.82), borderRadius: BorderRadius.circular(25), border: Border.all(color: AppColors.border)),
+    child: Column(
+      children: [
+        Row(children: [
+          _RegionBadge(week: week),
+          const SizedBox(width: 11),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('SEMANA $week', style: const TextStyle(color: AppColors.coral, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)), const SizedBox(height: 3), Text(_weekTitle(week), style: const TextStyle(color: AppColors.ink, fontSize: 15, fontWeight: FontWeight.w900))])),
+          const Icon(Icons.explore_rounded, color: AppColors.muted, size: 19),
+        ]),
+        const SizedBox(height: 13),
+        for (var i = 0; i < sessions.length; i++) _PathStep(session: sessions[i], progress: progress, isLast: i == sessions.length - 1, onOpen: onOpen),
+        _RegionFinish(week: week, complete: sessions.isNotEmpty && sessions.every((session) => progress.isCompleted(session.id))),
+      ],
+    ),
+  );
+}
+
+String _weekTitle(int week) => switch (week) {
+  1 => 'Primeras estructuras',
+  2 => 'Hablar con precision',
+  3 => 'Construir confianza',
+  4 => 'Leer entre lineas',
+  5 => 'Mirar mas lejos',
+  _ => 'Consolidar el viaje',
+};
+
+class _RegionBadge extends StatelessWidget {
+  final int week;
+  const _RegionBadge({required this.week});
+  @override
+  Widget build(BuildContext context) => Container(width: 48, height: 48, decoration: BoxDecoration(shape: BoxShape.circle, gradient: const LinearGradient(colors: [AppColors.coral, AppColors.violet], begin: Alignment.topLeft, end: Alignment.bottomRight), boxShadow: [BoxShadow(color: AppColors.violet.withOpacity(.22), blurRadius: 14)]), child: Center(child: Text('$week', style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w900))));
+}
+
+class _RegionFinish extends StatelessWidget {
+  final int week;
+  final bool complete;
+  const _RegionFinish({required this.week, required this.complete});
+  @override
+  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.only(top: 7, left: 42), child: Row(children: [Icon(complete ? Icons.emoji_events_rounded : Icons.flag_rounded, color: complete ? AppColors.yellow : AppColors.border, size: 19), const SizedBox(width: 10), Text(complete ? 'Semana $week conquistada' : 'Cierre de la semana', style: TextStyle(color: complete ? AppColors.yellow : AppColors.muted, fontSize: 10, fontWeight: FontWeight.w900))]));
+}
+
+class _PathStep extends StatelessWidget {
+  final SessionInfo session;
+  final ProgressService progress;
+  final bool isLast;
+  final ValueChanged<SessionInfo> onOpen;
+  const _PathStep({required this.session, required this.progress, required this.isLast, required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) {
+    final done = progress.isCompleted(session.id);
+    final unlocked = progress.isUnlocked(session.id);
+    final accent = done ? AppColors.mint : unlocked ? AppColors.violet : AppColors.border;
+    return InkWell(
+      onTap: unlocked ? () => onOpen(session) : null,
+      borderRadius: BorderRadius.circular(17),
+      child: SizedBox(
+        height: 69,
+        child: Row(children: [
+          SizedBox(width: 42, child: Stack(alignment: Alignment.center, children: [if (!isLast) Positioned(top: 38, bottom: 0, child: Container(width: 2, color: AppColors.border)), Container(width: 34, height: 34, decoration: BoxDecoration(shape: BoxShape.circle, color: done ? AppColors.mint : unlocked ? AppColors.violetSoft : AppColors.surface2, border: Border.all(color: accent.withOpacity(.7))), child: Icon(done ? Icons.check_rounded : unlocked ? Icons.play_arrow_rounded : Icons.lock_rounded, size: 16, color: done || unlocked ? Colors.white : AppColors.muted))])),
+          const SizedBox(width: 11),
+          Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [Text('DÍA ${session.day} · ${session.focus}', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: unlocked ? AppColors.ink : AppColors.muted, fontSize: 11, fontWeight: FontWeight.w900)), const SizedBox(height: 3), Text(session.titleEs, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w600))])),
+          Icon(done ? Icons.verified_rounded : unlocked ? Icons.arrow_forward_rounded : Icons.lock_outline_rounded, color: accent, size: 18),
+        ]),
+      ),
+    );
+  }
+}
+
+class _MissionCard extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String title, detail, reward;
+  const _MissionCard({required this.icon, required this.color, required this.title, required this.detail, required this.reward});
+  @override
+  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(15), decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(21), border: Border.all(color: AppColors.border)), child: Row(children: [Container(width: 38, height: 38, decoration: BoxDecoration(color: color.withOpacity(.14), borderRadius: BorderRadius.circular(13)), child: Icon(icon, color: color, size: 19)), const SizedBox(width: 11), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.ink, fontSize: 11, fontWeight: FontWeight.w900)), const SizedBox(height: 4), Text(detail, style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700))])), Text(reward, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w900))]));
+}
+
+class _CollectionStrip extends StatelessWidget {
+  final ProgressService progress;
+  const _CollectionStrip({required this.progress});
+  @override
+  Widget build(BuildContext context) {
+    final snapshot = progress.learningSnapshot;
+    return Container(padding: const EdgeInsets.all(17), decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(24), border: Border.all(color: AppColors.border)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [const Text('COLECCION DESCUBIERTA', style: TextStyle(color: AppColors.mint, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)), const SizedBox(height: 5), const Text('Construye tu japonés pieza a pieza', style: TextStyle(color: AppColors.ink, fontSize: 15, fontWeight: FontWeight.w900)), const SizedBox(height: 14), Row(children: [_CollectionStat(icon: Icons.translate_rounded, value: snapshot.trackedConcepts.toString(), label: 'conceptos'), const SizedBox(width: 8), _CollectionStat(icon: Icons.auto_awesome_rounded, value: progress.completedCount.toString(), label: 'sesiones'), const SizedBox(width: 8), _CollectionStat(icon: Icons.menu_book_rounded, value: '${(progress.sessionProgress * 100).round()}%', label: 'libro')]) ]));
+  }
+}
+
+class _CollectionStat extends StatelessWidget {
+  final IconData icon;
+  final String value, label;
+  const _CollectionStat({required this.icon, required this.value, required this.label});
+  @override
+  Widget build(BuildContext context) => Expanded(child: Column(children: [Icon(icon, color: AppColors.mint, size: 18), const SizedBox(height: 4), Text(value, style: const TextStyle(color: AppColors.ink, fontSize: 15, fontWeight: FontWeight.w900)), Text(label, style: const TextStyle(color: AppColors.muted, fontSize: 8, fontWeight: FontWeight.w800))]));
+}
+
+class _WeeklyMomentum extends StatelessWidget {
+  final ProgressService progress;
+  const _WeeklyMomentum({required this.progress});
+  @override
+  Widget build(BuildContext context) => Row(children: [Expanded(child: _MomentumItem(icon: Icons.local_fire_department_rounded, color: AppColors.coral, value: '${progress.stats.streak}', label: 'dias de racha')), const SizedBox(width: 9), Expanded(child: _MomentumItem(icon: Icons.bolt_rounded, color: AppColors.yellow, value: '${progress.stats.xp}', label: 'XP acumulados')), const SizedBox(width: 9), Expanded(child: _MomentumItem(icon: Icons.percent_rounded, color: AppColors.violet, value: '${progress.stats.accuracy.round()}%', label: 'precision'))]);
+}
+
+class _MomentumItem extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String value, label;
+  const _MomentumItem({required this.icon, required this.color, required this.value, required this.label});
+  @override
+  Widget build(BuildContext context) => Container(padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 6), decoration: BoxDecoration(color: AppColors.surface2.withOpacity(.8), borderRadius: BorderRadius.circular(18), border: Border.all(color: AppColors.border)), child: Column(children: [Icon(icon, color: color, size: 18), const SizedBox(height: 4), Text(value, style: const TextStyle(color: AppColors.ink, fontSize: 15, fontWeight: FontWeight.w900)), Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: AppColors.muted, fontSize: 8, fontWeight: FontWeight.w800))]));
+}
+
+class _ProgressPulse extends StatelessWidget {
+  final ProgressService progress;
+  const _ProgressPulse({required this.progress});
+  @override
+  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(18), decoration: BoxDecoration(color: AppColors.surface2, borderRadius: BorderRadius.circular(24), border: Border.all(color: AppColors.border)), child: Row(children: [Container(width: 46, height: 46, decoration: BoxDecoration(color: AppColors.yellowSoft, borderRadius: BorderRadius.circular(15)), child: const Icon(Icons.bolt_rounded, color: AppColors.yellow)), const SizedBox(width: 12), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [const Text('IMPULSO DE HOY', style: TextStyle(color: AppColors.yellow, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.4)), const SizedBox(height: 5), Text('${progress.stats.xp} XP acumulados · nivel ${progress.stats.level}', style: const TextStyle(color: AppColors.ink, fontSize: 12, fontWeight: FontWeight.w800))])), const Icon(Icons.chevron_right_rounded, color: AppColors.muted)]));
 }
 
 class HomePage extends StatelessWidget {
@@ -1320,22 +1815,20 @@ class BookDashboardPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    for (var i = 0; i < sessions.length; i++)
-                      _BookSessionCard(
-                        session: sessions[i],
-                        progress: progress,
-                        accent: accent,
-                        index: i,
-                        onOpen: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => LessonFlowPage(
-                              session: sessions[i],
-                              progress: progress,
-                            ),
+                    _BookPath(
+                      sessions: sessions,
+                      progress: progress,
+                      accent: accent,
+                      onOpen: (session) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => LessonFlowPage(
+                            session: session,
+                            progress: progress,
                           ),
                         ),
                       ),
+                    ),
                   ],
                 );
               },
@@ -1390,6 +1883,185 @@ class _DashboardStatCard extends StatelessWidget {
       ],
     ),
   );
+}
+
+class _BookPath extends StatelessWidget {
+  final List<SessionInfo> sessions;
+  final ProgressService progress;
+  final Color accent;
+  final ValueChanged<SessionInfo> onOpen;
+
+  const _BookPath({
+    required this.sessions,
+    required this.progress,
+    required this.accent,
+    required this.onOpen,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final weeks = sessions.map((session) => session.week).toSet().toList()..sort();
+
+    return Column(
+      children: [
+        for (var weekIndex = 0; weekIndex < weeks.length; weekIndex++)
+          _BookPathWeek(
+            week: weeks[weekIndex],
+            sessions: sessions.where((session) => session.week == weeks[weekIndex]).toList(),
+            progress: progress,
+            accent: accent,
+            onOpen: onOpen,
+            isLast: weekIndex == weeks.length - 1,
+          ),
+      ],
+    );
+  }
+}
+
+class _BookPathWeek extends StatelessWidget {
+  final int week;
+  final List<SessionInfo> sessions;
+  final ProgressService progress;
+  final Color accent;
+  final ValueChanged<SessionInfo> onOpen;
+  final bool isLast;
+
+  const _BookPathWeek({
+    required this.week,
+    required this.sessions,
+    required this.progress,
+    required this.accent,
+    required this.onOpen,
+    required this.isLast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final completed = sessions.where((session) => progress.isCompleted(session.id)).length;
+    final weekUnlocked = sessions.any((session) => progress.isUnlocked(session.id));
+
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: weekUnlocked ? accent.withOpacity(.16) : AppColors.surface2,
+                border: Border.all(color: weekUnlocked ? accent.withOpacity(.55) : AppColors.border, width: 1.5),
+              ),
+              child: Center(child: Text('$week', style: TextStyle(color: weekUnlocked ? accent : AppColors.muted, fontSize: 15, fontWeight: FontWeight.w900))),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('SEMANA $week', style: TextStyle(color: weekUnlocked ? accent : AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+                  const SizedBox(height: 3),
+                  Text('${completed}/${sessions.length} sesiones desbloqueadas', style: const TextStyle(color: AppColors.ink, fontSize: 12, fontWeight: FontWeight.w900)),
+                ],
+              ),
+            ),
+            Icon(weekUnlocked ? Icons.explore_rounded : Icons.lock_outline_rounded, color: weekUnlocked ? accent : AppColors.muted, size: 19),
+          ],
+        ),
+        const SizedBox(height: 10),
+        for (var index = 0; index < sessions.length; index++)
+          _BookPathNode(
+            session: sessions[index],
+            progress: progress,
+            accent: accent,
+            onOpen: onOpen,
+            isLast: index == sessions.length - 1,
+          ),
+        if (!isLast)
+          Padding(
+            padding: const EdgeInsets.only(left: 22, top: 1, bottom: 16),
+            child: Align(alignment: Alignment.centerLeft, child: Container(width: 2, height: 18, color: AppColors.border)),
+          ),
+      ],
+    );
+  }
+}
+
+class _BookPathNode extends StatelessWidget {
+  final SessionInfo session;
+  final ProgressService progress;
+  final Color accent;
+  final ValueChanged<SessionInfo> onOpen;
+  final bool isLast;
+
+  const _BookPathNode({
+    required this.session,
+    required this.progress,
+    required this.accent,
+    required this.onOpen,
+    required this.isLast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final completed = progress.isCompleted(session.id);
+    final unlocked = progress.isUnlocked(session.id);
+    final locked = !completed && !unlocked;
+    final nodeColor = completed ? AppColors.mint : unlocked ? accent : AppColors.border;
+
+    return InkWell(
+      onTap: unlocked ? () => onOpen(session) : null,
+      borderRadius: BorderRadius.circular(18),
+      child: SizedBox(
+        height: 76,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 46,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (!isLast) Positioned(top: 39, bottom: 0, child: Container(width: 2, color: nodeColor.withOpacity(.32))),
+                  Container(
+                    width: unlocked || completed ? 36 : 32,
+                    height: unlocked || completed ? 36 : 32,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: completed ? AppColors.mint : unlocked ? accent.withOpacity(.18) : AppColors.surface2,
+                      border: Border.all(color: nodeColor.withOpacity(.75), width: 1.5),
+                      boxShadow: unlocked ? [BoxShadow(color: accent.withOpacity(.22), blurRadius: 14)] : null,
+                    ),
+                    child: Icon(
+                      completed ? Icons.check_rounded : session.review ? Icons.star_rounded : unlocked ? Icons.play_arrow_rounded : Icons.lock_rounded,
+                      color: completed || unlocked ? (completed ? Colors.white : accent) : AppColors.muted,
+                      size: 17,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                padding: const EdgeInsets.fromLTRB(14, 10, 12, 10),
+                decoration: BoxDecoration(
+                  color: completed ? AppColors.mintSoft.withOpacity(.30) : unlocked ? accent.withOpacity(.10) : AppColors.surface2.withOpacity(.48),
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: completed ? AppColors.mint.withOpacity(.28) : unlocked ? accent.withOpacity(.28) : AppColors.border.withOpacity(.55)),
+                ),
+                child: Row(children: [
+                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [Text(session.review ? 'REPASO · Día ${session.day}' : 'Día ${session.day}', style: TextStyle(color: locked ? AppColors.muted : AppColors.ink, fontSize: 12, fontWeight: FontWeight.w900)), const SizedBox(height: 3), Text(session.titleEs, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: locked ? AppColors.muted.withOpacity(.75) : AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700))])),
+                  Icon(completed ? Icons.verified_rounded : unlocked ? Icons.arrow_forward_rounded : Icons.lock_outline_rounded, color: completed ? AppColors.mint : unlocked ? accent : AppColors.muted, size: 17),
+                ]),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _BookSessionCard extends StatelessWidget {
@@ -1832,7 +2504,12 @@ class _WeekCard extends StatelessWidget {
     final done = sessions.where((s) => progress.isCompleted(s.id)).length;
     final unlocked = sessions.any((s) => progress.isUnlocked(s.id));
 
-    final type = StudyCatalog.activeBookId == 'shinkanzen_n4_dokkai'
+    final category = BookCatalog.forId(StudyCatalog.activeBookId).category;
+    final type = category == 'kanji'
+      ? 'Kanji'
+      : category == 'vocabulary'
+        ? 'Vocabulario'
+        : StudyCatalog.activeBookId == 'shinkanzen_n4_dokkai'
         ? (week == 1
             ? 'Lectura estratégica'
             : week == 2
@@ -1840,7 +2517,7 @@ class _WeekCard extends StatelessWidget {
                 : week == 3
                     ? 'Práctica intensiva'
                     : 'Simulacro')
-        : progress.studyLevel == 'N3'
+            : progress.studyLevel == 'N3'
             ? (week <= 2
                 ? 'Gramática'
                 : week <= 4
@@ -1854,7 +2531,7 @@ class _WeekCard extends StatelessWidget {
                 ? 'Gramática'
                 : week == 5
                     ? 'Reading'
-                    : 'Listening');
+                    : 'Reading');
 
     final progressValue = sessions.isEmpty ? 0.0 : done / sessions.length;
 
@@ -2204,6 +2881,8 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
   LessonPacket? packet;
   int step=0,correct=0,wrong=0;
   int? selected; bool checked=false;
+  String writingAnswer = '';
+  bool writingChecked = false;
   DateTime questionStartedAt = DateTime.now();
 
   @override void initState(){super.initState();future=_load();}
@@ -2232,8 +2911,22 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
       bookId: StudyCatalog.activeBookId,
     );
     packet = ExpandedContentService.randomize(packet!);
+    packet = _addWritingStep(packet!, widget.session);
 
     return packet!;
+  }
+
+  LessonPacket _addWritingStep(LessonPacket source, SessionInfo session) {
+    return LessonPacket(source.session, [
+      ...source.steps,
+      WriteStep(
+        id: '${session.id}-write',
+        title: 'Escritura activa',
+        prompt: session.titleEs,
+        answer: session.titleJa,
+        hint: session.focus,
+      ),
+    ]);
   }
 
   Future<void> answer(int value,QuestionStep q) async {
@@ -2253,13 +2946,50 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
     setState((){});
   }
 
+  Future<void> submitWriting(WriteStep writeStep) async {
+    if (writingChecked) return;
+    final expected = _normalizeJapanese(writeStep.answer);
+    final actual = _normalizeJapanese(writingAnswer);
+    final ok = actual == expected && actual.isNotEmpty;
+    setState(() => writingChecked = true);
+    if (ok) {
+      correct++;
+    } else {
+      wrong++;
+    }
+    await widget.progress.recordAnswer(
+      sessionId: widget.session.id,
+      questionId: writeStep.id,
+      prompt: writeStep.prompt,
+      correct: ok,
+      conceptIds: LearningEngine.conceptsForFocus(widget.session.focus),
+      responseMs: DateTime.now().difference(questionStartedAt).inMilliseconds,
+    );
+    if (mounted) setState(() {});
+  }
+
+  String _normalizeJapanese(String value) => value
+      .trim()
+      .replaceAll(RegExp(r'[。、！？!?\s]+'), '');
+
   Future<void> next() async {
-    if(step<packet!.steps.length-1){setState(() { step++; selected=null; checked=false; questionStartedAt=DateTime.now(); });return;}
+    if(step<packet!.steps.length-1){setState(() { step++; selected=null; checked=false; writingAnswer=''; writingChecked=false; questionStartedAt=DateTime.now(); });return;}
     final total=correct+wrong;
     final passed=total>0 && correct/total>=.80;
     if(passed) await widget.progress.completeSession(widget.session.id,correct,wrong);
     if(!mounted)return;
-    showDialog(context:context,barrierDismissible:false,builder:(_)=>_ResultDialog(passed:passed,correct:correct,wrong:wrong,onClose:(){Navigator.pop(context);if(passed){Navigator.pop(context);}else{setState((){step=0;correct=0;wrong=0;selected=null;checked=false;questionStartedAt=DateTime.now();});}}));
+    showDialog(context:context,barrierDismissible:false,builder:(_)=>_ResultDialog(passed:passed,correct:correct,wrong:wrong,onClose:(){Navigator.pop(context);if(passed){Navigator.pop(context);}else{setState((){step=0;correct=0;wrong=0;selected=null;checked=false;writingAnswer='';writingChecked=false;questionStartedAt=DateTime.now();});}}));
+  }
+
+  String _lessonSenseiContext(LessonStep item) {
+    if (item is TeachStep) {
+      return 'Leccion Dia ${widget.session.day}. Tema: ${item.title}. Patron: ${item.pattern}. Ejemplo visible: ${item.exampleJa} — ${item.exampleEs}.';
+    }
+    if (item is WriteStep) {
+      return 'Ejercicio de escritura del Dia ${widget.session.day}. El usuario debe expresar en japones esta idea: ${item.prompt}. Pista visible: ${item.hint}.';
+    }
+    final question = item as QuestionStep;
+    return 'Pregunta actual del Dia ${widget.session.day}: ${question.title}. Enunciado visible: ${question.question}.';
   }
 
   @override Widget build(BuildContext context)=>FutureBuilder<LessonPacket>(future:future,builder:(_,snap){
@@ -2267,6 +2997,10 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
     final item=packet!.steps[step];
     return Scaffold(
       appBar:AppBar(title:Text('Día '+widget.session.day.toString()),actions:[Padding(padding:const EdgeInsets.only(right:16),child:Text('+'+widget.progress.stats.xp.toString()+' XP'))]),
+      floatingActionButton: _SenseiBubble(
+        level: widget.progress.studyLevel,
+        contextDescription: _lessonSenseiContext(item),
+      ),
       body:Column(children:[
         Padding(
           padding:const EdgeInsets.symmetric(horizontal:18,vertical:8),
@@ -2276,7 +3010,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
             Text((step+1).toString()+'/'+packet!.steps.length.toString(),style:const TextStyle(fontSize:11,fontWeight:FontWeight.w900,color:AppColors.muted)),
           ]),
         ),
-        Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(() { step++; questionStartedAt=DateTime.now(); })):_QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
+        Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(() { step++; questionStartedAt=DateTime.now(); })) : item is WriteStep ? _WritingCard(key:ValueKey(step),step:item,value:writingAnswer,checked:writingChecked,onChanged:(value)=>setState(() => writingAnswer=value),onSubmit:()=>submitWriting(item),onNext:next) : _QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
       ]),
     );
   });
@@ -2304,6 +3038,81 @@ class _TeachCard extends StatelessWidget {
     const SizedBox(height:14),Card(child:Padding(padding:const EdgeInsets.all(15),child:Row(crossAxisAlignment:CrossAxisAlignment.start,children:[const Icon(Icons.lightbulb_rounded,color:AppColors.primary),const SizedBox(width:10),Expanded(child:Text(step.tip))]))),
     const SizedBox(height:24),SizedBox(width:double.infinity,child:FilledButton.icon(onPressed:onNext,icon:const Icon(Icons.arrow_forward_rounded),label:const Text('CONTINUAR'))),
   ]);
+}
+
+class _WritingCard extends StatelessWidget {
+  final WriteStep step;
+  final String value;
+  final bool checked;
+  final ValueChanged<String> onChanged;
+  final VoidCallback onSubmit;
+  final VoidCallback onNext;
+
+  const _WritingCard({
+    super.key,
+    required this.step,
+    required this.value,
+    required this.checked,
+    required this.onChanged,
+    required this.onSubmit,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final correct = checked && value.trim().replaceAll(RegExp(r'[。、！？!?\s]+'), '') == step.answer.trim().replaceAll(RegExp(r'[。、！？!?\s]+'), '');
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(22, 26, 22, 30),
+      children: [
+        const _Label(text: 'ESCRITURA ACTIVA'),
+        const SizedBox(height: 12),
+        Text(
+          step.title,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+        ),
+        const SizedBox(height: 18),
+        const Text('Escribe esta idea en japones:', style: TextStyle(color: AppColors.muted, fontSize: 11, fontWeight: FontWeight.w800)),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: AppColors.surface2,
+            borderRadius: BorderRadius.circular(22),
+            border: Border.all(color: AppColors.violet.withOpacity(.24)),
+          ),
+          child: Text(step.prompt, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, height: 1.3)),
+        ),
+        const SizedBox(height: 10),
+        Text('Pista: ${step.hint}', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700)),
+        const SizedBox(height: 18),
+        TextField(
+          enabled: !checked,
+          autofocus: true,
+          onChanged: onChanged,
+          textInputAction: TextInputAction.done,
+          decoration: InputDecoration(
+            hintText: 'Escribe aqui en japones',
+            prefixIcon: const Icon(Icons.edit_rounded),
+            suffixIcon: checked ? Icon(correct ? Icons.check_circle_rounded : Icons.info_outline_rounded, color: correct ? AppColors.mint : AppColors.coral) : null,
+          ),
+        ),
+        if (checked) ...[
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(color: correct ? AppColors.mintSoft : AppColors.roseSoft, borderRadius: BorderRadius.circular(18)),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Icon(correct ? Icons.check_circle_rounded : Icons.auto_awesome_rounded, color: correct ? AppColors.mint : AppColors.coral), const SizedBox(width: 10), Expanded(child: Text(correct ? 'Perfecto. La frase coincide.' : 'La respuesta esperada era: ${step.answer}', style: const TextStyle(fontWeight: FontWeight.w800)))]),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(width: double.infinity, child: FilledButton.icon(onPressed: onNext, icon: const Icon(Icons.arrow_forward_rounded), label: const Text('CONTINUAR'))),
+        ] else ...[
+          const SizedBox(height: 18),
+          SizedBox(width: double.infinity, child: FilledButton.icon(onPressed: value.trim().isEmpty ? null : onSubmit, icon: const Icon(Icons.check_rounded), label: const Text('COMPROBAR'))),
+        ],
+      ],
+    );
+  }
 }
 
 class _QuestionCard extends StatelessWidget {

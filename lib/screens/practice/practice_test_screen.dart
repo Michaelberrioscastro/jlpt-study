@@ -43,8 +43,6 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
         return '文';
       case 'reading':
         return '読';
-      case 'listening':
-        return '聴';
       case 'vocabulary':
       default:
         return '語';
@@ -485,8 +483,6 @@ class _PracticeTestScreenState extends State<PracticeTestScreen> {
         return 'Grammar';
       case 'reading':
         return 'Reading';
-      case 'listening':
-        return 'Listening';
       case 'vocabulary':
       default:
         return 'Vocabulary';

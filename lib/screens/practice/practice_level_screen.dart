@@ -212,13 +212,6 @@ class _PracticeLevelScreenState extends State<PracticeLevelScreen> {
                 enabled: _hasPracticeContent,
                 onTap: _hasPracticeContent ? _openReading : null,
               ),
-              const SizedBox(height: 11),
-              const _SectionCard(
-                icon: Icons.headphones_rounded,
-                title: 'Listening',
-                japanese: '聴解',
-                subtitle: 'Coming soon',
-              ),
               const SizedBox(height: 22),
               _MockExamCard(level: _level),
             ],

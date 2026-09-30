@@ -6,18 +6,17 @@ Last audited in this iteration: 2026-09-30
 
 The unified N4 curriculum contains 42 sessions.
 
-All 42 sessions now have dedicated Schema v2 lesson assets:
+All 35 sessions now have dedicated Schema v2 lesson assets:
 
 - W01D01–W01D07 — pp. 18–31
 - W02D01–W02D07 — pp. 34–47
 - W03D01–W03D07 — pp. 50–63
 - W04D01–W04D07 — pp. 66–79
 - W05D01–W05D07 — pp. 82–95
-- W06D01–W06D07 — pp. 98–111
 
 The assets are source-structured and preserve the audited session/page mapping. Interactive questions are original app exercises rather than literal transcriptions of the book.
 
-Important limitation: dedicated JSON coverage is complete, but not every source exercise/answer has been transcribed into the app. The N4 reading/listening assets currently focus on the skill and session structure rather than reproducing every book item.
+Important limitation: dedicated JSON coverage is complete, but not every source exercise/answer has been transcribed into the app. The N4 reading assets currently focus on the skill and session structure rather than reproducing every book item.
 
 ## N3
 

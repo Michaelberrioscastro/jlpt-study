@@ -30,7 +30,7 @@ Optional:
 | id | string | yes | Globally unique lesson ID inside the app |
 | week | integer | yes | N4 week or N3 internal block |
 | day | integer | yes | Position inside the block |
-| type | string | yes | grammar, reading, listening, consolidation, sentence, text, review, mock |
+| type | string | yes | grammar, reading, consolidation, sentence, text, review, mock |
 | pages | integer[2] | yes | Source page range |
 | title_ja | string | yes | Japanese lesson title |
 | title_es | string | yes | Spanish display title |
@@ -107,7 +107,7 @@ Optional:
 4. Do not invent source exercises when the source has not been audited.
 5. A curriculum catalog can describe the structure of a book without pretending that its exact exercises have already been digitized.
 6. N3 is a grammar course in this app. Its structure must preserve the book's distinction between 文の文法1, 文の文法2, and 文章の文法, plus review/mock sections.
-7. N4 retains its existing Somatome organization: grammar, reading, and listening.
+7. N4 retains its existing Somatome organization: grammar and reading.
 
 ## ID rules
 

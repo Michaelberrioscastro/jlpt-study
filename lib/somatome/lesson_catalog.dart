@@ -3,7 +3,8 @@ class SessionInfo {
   final int week, day;
   final List<int> pages;
   final bool review;
-  const SessionInfo({required this.id, required this.week, required this.day, required this.type, required this.titleJa, required this.titleEs, required this.focus, required this.pages, required this.review});
+  final int durationMinutes, xpReward;
+  const SessionInfo({required this.id, required this.week, required this.day, required this.type, required this.titleJa, required this.titleEs, required this.focus, required this.pages, required this.review, this.durationMinutes = 12, this.xpReward = 75});
 }
 
 abstract final class LessonCatalog {
@@ -43,13 +44,6 @@ abstract final class LessonCatalog {
     SessionInfo(id:"W05D05",week:5,day:5,type:"reading",titleJa:"長めの文章を読みましょう②",titleEs:"Leamos un texto más largo ②.",focus:"文章②",pages:[90,91],review:false),
     SessionInfo(id:"W05D06",week:5,day:6,type:"reading",titleJa:"広告やお知らせを読みましょう",titleEs:"Leamos anuncios y avisos.",focus:"広告・お知らせ",pages:[92,93],review:false),
     SessionInfo(id:"W05D07",week:5,day:7,type:"reading",titleJa:"まとめ問題",titleEs:"Problemas de repaso de reading.",focus:"Review",pages:[94,95],review:true),
-    SessionInfo(id:"W06D01",week:6,day:1,type:"listening",titleJa:"準備をしましょう①",titleEs:"Preparémonos ①.",focus:"準備①",pages:[98,99],review:false),
-    SessionInfo(id:"W06D02",week:6,day:2,type:"listening",titleJa:"準備をしましょう②",titleEs:"Preparémonos ②.",focus:"準備②",pages:[100,101],review:false),
-    SessionInfo(id:"W06D03",week:6,day:3,type:"listening",titleJa:"どれですか — 課題理解 —",titleEs:"¿Cuál es? — comprensión de la tarea —",focus:"どれですか",pages:[102,103],review:false),
-    SessionInfo(id:"W06D04",week:6,day:4,type:"listening",titleJa:"どうしてですか — ポイント理解 —",titleEs:"¿Por qué? — comprensión de puntos clave —",focus:"どうしてですか",pages:[104,105],review:false),
-    SessionInfo(id:"W06D05",week:6,day:5,type:"listening",titleJa:"何と言いますか — 発話表現 —",titleEs:"¿Qué dices? — expresiones al hablar —",focus:"何と言いますか",pages:[106,107],review:false),
-    SessionInfo(id:"W06D06",week:6,day:6,type:"listening",titleJa:"どんな返事をしますか — 即時応答 —",titleEs:"¿Qué respuesta das? — respuesta inmediata —",focus:"どんな返事をしますか",pages:[108,109],review:false),
-    SessionInfo(id:"W06D07",week:6,day:7,type:"listening",titleJa:"まとめ問題",titleEs:"Problemas de repaso de listening.",focus:"Review",pages:[110,111],review:true),
   ];
 
   static LessonPacket buildPacket(SessionInfo s) {
@@ -85,6 +79,10 @@ class QuestionStep extends LessonStep {
   final List<String> options;
   final int answer;
   const QuestionStep({required this.id,required this.title,required this.question,required this.options,required this.answer,required this.explanation});
+}
+class WriteStep extends LessonStep {
+  final String id, title, prompt, answer, hint;
+  const WriteStep({required this.id, required this.title, required this.prompt, required this.answer, required this.hint});
 }
 class LessonPacket {
   final SessionInfo session;

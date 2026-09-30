@@ -54,6 +54,8 @@ class ProgressService extends ChangeNotifier {
   String _level = 'N4';
   String _bookId = BookCatalog.somatomeN4.id;
 
+  bool get isLoaded => _loaded;
+
   String get studyLevel => _level;
   String get bookId => _bookId;
   StudyBook get book => BookCatalog.forId(_bookId);
@@ -103,11 +105,7 @@ class ProgressService extends ChangeNotifier {
                 : null) ??
         0;
 
-    final total = book.id == BookCatalog.somatomeN4.id
-        ? 42
-        : book.id == BookCatalog.shinKanzenN4Reading.id
-            ? 21
-            : 50;
+    final total = book.sessionCount;
 
     return LevelProgressSnapshot(
       book: book,

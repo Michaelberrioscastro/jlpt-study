@@ -5,6 +5,9 @@ class StudyBook {
   final String shortTitle;
   final String subtitle;
   final String description;
+  final String category;
+  final String? parentBookId;
+  final int sessionCount;
 
   const StudyBook({
     required this.id,
@@ -13,6 +16,9 @@ class StudyBook {
     required this.shortTitle,
     required this.subtitle,
     required this.description,
+    this.category = 'course',
+    this.parentBookId,
+    this.sessionCount = 42,
   });
 }
 
@@ -22,8 +28,8 @@ abstract final class BookCatalog {
     level: 'N4',
     title: '日本語総まとめ N4',
     shortTitle: '総まとめ N4',
-    subtitle: 'Gramática · Reading · Listening',
-    description: 'Curso N4 organizado en seis semanas.',
+    subtitle: 'Gramática · Reading',
+    description: 'Curso N4 organizado en cinco semanas.',
   );
 
   static const shinKanzenN4Reading = StudyBook(
@@ -44,10 +50,88 @@ abstract final class BookCatalog {
     description: 'Curso de gramática N3 organizado por bloques.',
   );
 
+  static const somatomeN4Kanji = StudyBook(
+    id: 'somatome_n4_kanji',
+    level: 'N4',
+    title: '日本語総まとめ N4 · 漢字',
+    shortTitle: 'Kanji N4',
+    subtitle: 'Kanji esencial',
+    description: 'Curso complementario de kanji para 日本語総まとめ N4.',
+    category: 'kanji',
+    parentBookId: 'somatome_n4',
+    sessionCount: 12,
+  );
+
+  static const somatomeN4Vocabulary = StudyBook(
+    id: 'somatome_n4_vocabulary',
+    level: 'N4',
+    title: '日本語総まとめ N4 · 語彙',
+    shortTitle: 'Vocabulario N4',
+    subtitle: 'Vocabulario esencial',
+    description: 'Curso complementario de vocabulario para 日本語総まとめ N4.',
+    category: 'vocabulary',
+    parentBookId: 'somatome_n4',
+    sessionCount: 12,
+  );
+
+  static const shinKanzenN4Kanji = StudyBook(
+    id: 'shinkanzen_n4_kanji',
+    level: 'N4',
+    title: '新完全マスター N4 · 漢字',
+    shortTitle: 'Kanji N4',
+    subtitle: 'Kanji para lectura',
+    description: 'Curso complementario de kanji para 新完全マスター 読解 N4.',
+    category: 'kanji',
+    parentBookId: 'shinkanzen_n4_dokkai',
+    sessionCount: 12,
+  );
+
+  static const shinKanzenN4Vocabulary = StudyBook(
+    id: 'shinkanzen_n4_vocabulary',
+    level: 'N4',
+    title: '新完全マスター N4 · 語彙',
+    shortTitle: 'Vocabulario N4',
+    subtitle: 'Vocabulario para lectura',
+    description: 'Curso complementario de vocabulario para 新完全マスター 読解 N4.',
+    category: 'vocabulary',
+    parentBookId: 'shinkanzen_n4_dokkai',
+    sessionCount: 12,
+  );
+
+  static const shinKanzenN3Kanji = StudyBook(
+    id: 'shinkanzen_n3_kanji',
+    level: 'N3',
+    title: '新完全マスター N3 · 漢字',
+    shortTitle: 'Kanji N3',
+    subtitle: 'Kanji de consolidación',
+    description: 'Curso complementario de kanji para 新完全マスター 文法 N3.',
+    category: 'kanji',
+    parentBookId: 'shinkanzen_n3_grammar',
+    sessionCount: 12,
+  );
+
+  static const shinKanzenN3Vocabulary = StudyBook(
+    id: 'shinkanzen_n3_vocabulary',
+    level: 'N3',
+    title: '新完全マスター N3 · 語彙',
+    shortTitle: 'Vocabulario N3',
+    subtitle: 'Vocabulario de consolidación',
+    description: 'Curso complementario de vocabulario para 新完全マスター 文法 N3.',
+    category: 'vocabulary',
+    parentBookId: 'shinkanzen_n3_grammar',
+    sessionCount: 12,
+  );
+
   static const books = <StudyBook>[
     somatomeN4,
     shinKanzenN4Reading,
     shinKanzenN3Grammar,
+    somatomeN4Kanji,
+    somatomeN4Vocabulary,
+    shinKanzenN4Kanji,
+    shinKanzenN4Vocabulary,
+    shinKanzenN3Kanji,
+    shinKanzenN3Vocabulary,
   ];
 
   static List<StudyBook> forLevel(String level) =>
