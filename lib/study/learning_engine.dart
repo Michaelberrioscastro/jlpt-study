@@ -372,7 +372,6 @@ class LearningEngine {
     final scored = <MapEntry<SessionInfo, double>>[];
 
     for (final session in sessions) {
-      if (completedIds.contains(session.id)) continue;
       final focus = normalizeConcept(session.focus);
       var score = 0.0;
 
