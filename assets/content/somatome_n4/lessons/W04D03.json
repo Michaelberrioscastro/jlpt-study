@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W04D03",
+    "week": 4,
+    "day": 3,
+    "type": "grammar",
+    "pages": [
+      70,
+      71
+    ],
+    "title_ja": "この本は使いやすいです。",
+    "title_es": "Este libro es fácil de usar.",
+    "focus": "すぎる / やすい / にくい / 始める / 終わる / 続ける",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las páginas 70–71. Las preguntas son ejercicios originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "この本は使いやすいです。",
+      "body": "Esta sesión trabaja los puntos indicados en las páginas 70–71.",
+      "pattern": "すぎる / やすい / にくい / 始める / 終わる / 続ける",
+      "example_ja": "この本は使いやすいです。",
+      "example_es": "Este libro es fácil de usar.",
+      "tip": "Usa el contexto para distinguir formas parecidas."
+    },
+    {
+      "id": "W04D03-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "すぎる / やすい / にくい / 始める / 終わる / 続ける",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco es すぎる / やすい / にくい / 始める / 終わる / 続ける."
+    },
+    {
+      "id": "W04D03-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
