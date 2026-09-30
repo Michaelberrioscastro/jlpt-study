@@ -459,35 +459,34 @@ class HomePage extends StatelessWidget {
     required this.onLevelSelected,
   });
 
-  Widget _levelCard(
-    BuildContext context,
-    LevelProgressSnapshot snapshot,
-    String level,
-  ) {
+  Widget _bookCard(LevelProgressSnapshot snapshot, String level) {
     final active = progress.studyLevel == level;
     final percent = (snapshot.progress * 100).round();
 
     return InkWell(
       onTap: () => onLevelSelected(level),
-      borderRadius: BorderRadius.circular(28),
+      borderRadius: BorderRadius.circular(25),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 220),
-        padding: const EdgeInsets.all(22),
+        duration: const Duration(milliseconds: 240),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: active
-                ? [AppColors.navySoft, AppColors.navy]
-                : [AppColors.surface, AppColors.surface2],
+                ? [AppColors.navySoft, AppColors.surface]
+                : [AppColors.surface2, AppColors.surface],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(28),
-          border: Border.all(color: active ? AppColors.violet.withOpacity(.55) : AppColors.border),
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(
+            color: active ? AppColors.violet.withOpacity(.62) : AppColors.border,
+            width: active ? 1.3 : 1,
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(.12),
-              blurRadius: 24,
-              offset: const Offset(0, 12),
+              color: Colors.black.withOpacity(.18),
+              blurRadius: 25,
+              offset: const Offset(0, 13),
             ),
           ],
         ),
@@ -497,94 +496,105 @@ class HomePage extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 52,
-                  height: 52,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
-                    color: active ? AppColors.violet : AppColors.violetSoft,
-                    borderRadius: BorderRadius.circular(17),
+                    gradient: LinearGradient(
+                      colors: level == 'N4'
+                          ? [AppColors.violet, const Color(0xFF6D5BE8)]
+                          : [AppColors.coral, const Color(0xFFB94F78)],
+                    ),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
-                    child: Text(
-                      level,
-                      style: TextStyle(
-                        color: active ? Colors.white : AppColors.ink,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                if (active)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.mint.withOpacity(.15),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: const Text(
-                      'ACTIVO',
-                      style: TextStyle(color: AppColors.mint, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1),
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 18),
-            Text(
-              'JLPT ${level}',
-              style: TextStyle(
-                color: active ? Colors.white : AppColors.ink,
-                fontSize: 22,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              '${snapshot.book.shortTitle}',
-              style: TextStyle(
-                color: active ? Colors.white70 : AppColors.muted,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 18),
-            Row(
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: LinearProgressIndicator(
-                      minHeight: 8,
-                      value: snapshot.progress.clamp(0.0, 1.0).toDouble(),
-                      backgroundColor: active ? Colors.white.withOpacity(.12) : AppColors.background,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        active ? AppColors.coral : AppColors.violet,
-                      ),
-                    ),
+                    child: Text(level, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 14)),
                   ),
                 ),
                 const SizedBox(width: 12),
-                Text(
-                  '${percent}%',
-                  style: TextStyle(
-                    color: active ? Colors.white : AppColors.ink,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w900,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('JLPT \${level}@@', style: const TextStyle(color: AppColors.ink, fontSize: 18, fontWeight: FontWeight.w900)),
+                      const SizedBox(height: 3),
+                      Text(
+                        snapshot.book.shortTitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: active ? AppColors.violet : AppColors.border, width: 4),
+                  ),
+                  child: Center(
+                    child: Text('\${percent}@@%', style: const TextStyle(color: AppColors.ink, fontSize: 11, fontWeight: FontWeight.w900)),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 12),
-            Text(
-              '${snapshot.completed}/${snapshot.total} sesiones · ${snapshot.xp} XP',
-              style: TextStyle(
-                color: active ? Colors.white60 : AppColors.muted,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
+            const SizedBox(height: 18),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                minHeight: 7,
+                value: snapshot.progress.clamp(0.0, 1.0).toDouble(),
+                backgroundColor: AppColors.border,
+                valueColor: AlwaysStoppedAnimation<Color>(level == 'N4' ? AppColors.violet : AppColors.coral),
               ),
+            ),
+            const SizedBox(height: 13),
+            Row(
+              children: [
+                const Icon(Icons.check_circle_rounded, color: AppColors.mint, size: 15),
+                const SizedBox(width: 6),
+                Text('\${snapshot.completed}@@/\${snapshot.total}@@ sesiones', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
+                const Spacer(),
+                const Icon(Icons.bolt_rounded, color: AppColors.yellow, size: 16),
+                const SizedBox(width: 4),
+                Text('\${snapshot.xp}@@ XP', style: const TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w800)),
+              ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _goalCard(String title, String value, IconData icon, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(17),
+      decoration: BoxDecoration(
+        color: AppColors.surface2.withOpacity(.88),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(color: color.withOpacity(.13), borderRadius: BorderRadius.circular(13)),
+            child: Icon(icon, color: color, size: 19),
+          ),
+          const SizedBox(width: 11),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w800)),
+                const SizedBox(height: 4),
+                Text(value, style: const TextStyle(color: AppColors.ink, fontSize: 13, fontWeight: FontWeight.w900)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -593,242 +603,337 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final n4 = progress.progressForBook(progress.selectedBookForLevel('N4'));
     final n3 = progress.progressForBook(progress.selectedBookForLevel('N3'));
-    final active = progress.stats;
+    final stats = progress.stats;
     final percent = (progress.sessionProgress * 100).round();
 
     return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(42, 34, 42, 50),
-        children: [
-          const SizedBox(height: 6),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final wide = constraints.maxWidth >= 980;
+          final compact = constraints.maxWidth < 650;
+
+          return ListView(
+            padding: EdgeInsets.fromLTRB(compact ? 20 : 42, compact ? 20 : 28, compact ? 20 : 42, 50),
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'JLPT STUDY',
-                      style: TextStyle(
-                        color: AppColors.coral,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 3,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Tu japonés,\nun paso a la vez.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 38,
-                        height: 1.02,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -1.5,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Elige un nivel y continúa exactamente donde lo dejaste.',
-                      style: TextStyle(
-                        color: AppColors.muted,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                constraints: const BoxConstraints(minHeight: 270),
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: AppColors.border),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF17213C), Color(0xFF0C1326)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(34),
+                  border: Border.all(color: AppColors.violet.withOpacity(.34)),
+                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(.28), blurRadius: 38, offset: const Offset(0, 18))],
                 ),
-                child: Row(
-                  children: [
-                    const Text('🌸', style: TextStyle(fontSize: 20)),
-                    const SizedBox(width: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('${active.streak}', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
-                        const Text('días de racha', style: TextStyle(fontSize: 9, color: AppColors.muted, fontWeight: FontWeight.w700)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 28),
-          Container(
-            padding: const EdgeInsets.all(28),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [AppColors.navySoft, AppColors.navy],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(34),
-              border: Border.all(color: AppColors.violet.withOpacity(.35)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(.24),
-                  blurRadius: 36,
-                  offset: const Offset(0, 18),
-                ),
-              ],
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  right: -45,
-                  top: -70,
-                  child: Container(
-                    width: 230,
-                    height: 230,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.violet.withOpacity(.12), width: 45),
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(34),
+                  child: Stack(
+                    children: [
+                      const Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _HomeScenePainter()))),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(compact ? 24 : 34, 28, compact ? 24 : 34, 25),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('JLPT STUDY', style: TextStyle(color: AppColors.coral, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 3)),
+                                  const SizedBox(height: 14),
+                                  Text('Tu japonés,', style: TextStyle(color: Colors.white, fontFamily: 'Georgia', fontSize: compact ? 34 : 45, height: .95, fontWeight: FontWeight.w700)),
+                                  Text('un paso a la vez.', style: TextStyle(color: AppColors.violet, fontFamily: 'Georgia', fontSize: compact ? 34 : 45, height: 1.0, fontWeight: FontWeight.w700)),
+                                  const SizedBox(height: 11),
+                                  const Text('Pequeños hábitos, grandes logros.', style: TextStyle(color: AppColors.muted, fontSize: 12, fontWeight: FontWeight.w700)),
+                                  const SizedBox(height: 18),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(.055),
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white.withOpacity(.08)),
+                                    ),
+                                    child: const Text('「継続は力なり。」  La constancia da resultados.', style: TextStyle(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w700)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (wide) const Expanded(flex: 5, child: SizedBox(height: 235)),
+                          ],
+                        ),
+                      ),
+                      Positioned(right: 18, top: 15, child: _StreakBadge(streak: stats.streak)),
+                    ],
                   ),
                 ),
-                Column(
+              ),
+              const SizedBox(height: 20),
+              if (wide)
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'CONTINÚA CON ${progress.studyLevel}',
-                      style: const TextStyle(
-                        color: AppColors.coral,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1.8,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      '${progress.book.shortTitle}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      '${progress.book.subtitle}',
-                      style: const TextStyle(color: Colors.white60, fontSize: 12, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: LinearProgressIndicator(
-                              minHeight: 9,
-                              value: progress.sessionProgress.clamp(0.0, 1.0).toDouble(),
-                              backgroundColor: Colors.white.withOpacity(.10),
-                              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.coral),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          '${percent}%',
-                          style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w900),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 18),
-                    SizedBox(
-                      width: 210,
-                      child: FilledButton.icon(
-                        onPressed: onStart,
-                        icon: const Icon(Icons.play_arrow_rounded),
-                        label: const Text('CONTINUAR'),
-                        style: FilledButton.styleFrom(
-                          backgroundColor: AppColors.coral,
-                          foregroundColor: Colors.white,
-                        ),
-                      ),
-                    ),
+                    Expanded(flex: 7, child: _ContinueCard(progress: progress, percent: percent, onStart: onStart)),
+                    const SizedBox(width: 16),
+                    const Expanded(flex: 4, child: _NextSessionCard()),
+                  ],
+                )
+              else
+                _ContinueCard(progress: progress, percent: percent, onStart: onStart),
+              const SizedBox(height: 30),
+              Row(
+                children: [
+                  const Expanded(child: Text('Tus niveles', style: TextStyle(color: AppColors.ink, fontSize: 24, fontWeight: FontWeight.w900))),
+                  const Text('ELIGE PARA ESTUDIAR', style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.4)),
+                ],
+              ),
+              const SizedBox(height: 13),
+              if (wide)
+                Row(children: [
+                  Expanded(child: _bookCard(n4, 'N4')),
+                  const SizedBox(width: 14),
+                  Expanded(child: _bookCard(n3, 'N3')),
+                ])
+              else
+                Column(children: [
+                  _bookCard(n4, 'N4'),
+                  const SizedBox(height: 12),
+                  _bookCard(n3, 'N3'),
+                ]),
+              const SizedBox(height: 28),
+              Row(
+                children: [
+                  const Expanded(child: Text('Mis metas', style: TextStyle(color: AppColors.ink, fontSize: 21, fontWeight: FontWeight.w900))),
+                  const Text('PROGRESO', style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+                ],
+              ),
+              const SizedBox(height: 13),
+              if (wide)
+                Row(children: [
+                  Expanded(child: _goalCard('Estudiar hoy', stats.totalAnswers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet)),
+                  const SizedBox(width: 10),
+                  Expanded(child: _goalCard('Mantener la racha', '\${stats.streak}@@/7 días', Icons.local_fire_department_rounded, AppColors.coral)),
+                  const SizedBox(width: 10),
+                  Expanded(child: _goalCard('Precisión', '\${stats.accuracy.round()}@@%', Icons.gps_fixed_rounded, AppColors.mint)),
+                  const SizedBox(width: 10),
+                  Expanded(child: _goalCard('Ganar XP', '\${stats.xp}@@/100 XP', Icons.bolt_rounded, AppColors.yellow)),
+                ])
+              else
+                Column(children: [
+                  _goalCard('Estudiar hoy', stats.totalAnswers > 0 ? '✓ sesión' : '0/1 sesión', Icons.menu_book_rounded, AppColors.violet),
+                  const SizedBox(height: 9),
+                  _goalCard('Mantener la racha', '\${stats.streak}@@/7 días', Icons.local_fire_department_rounded, AppColors.coral),
+                  const SizedBox(height: 9),
+                  _goalCard('Precisión', '\${stats.accuracy.round()}@@%', Icons.gps_fixed_rounded, AppColors.mint),
+                  const SizedBox(height: 9),
+                  _goalCard('Ganar XP', '\${stats.xp}@@/100 XP', Icons.bolt_rounded, AppColors.yellow),
+                ]),
+              const SizedBox(height: 26),
+              Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(22), border: Border.all(color: AppColors.border)),
+                child: const Row(
+                  children: [
+                    Text('🌸', style: TextStyle(fontSize: 25)),
+                    SizedBox(width: 12),
+                    Expanded(child: Text('Tu progreso se guarda por nivel y por libro. Cambia de ruta cuando quieras sin perder lo que ya has estudiado.', style: TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700, height: 1.4))),
                   ],
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 34),
-          const Row(
-            children: [
-              Expanded(
-                child: Text(
-                  'Tus niveles',
-                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900),
-                ),
-              ),
-              Text(
-                'ELIGE PARA ESTUDIAR',
-                style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5),
               ),
             ],
-          ),
-          const SizedBox(height: 14),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final wide = constraints.maxWidth > 720;
-              final cards = [
-                _levelCard(context, n4, 'N4'),
-                _levelCard(context, n3, 'N3'),
-              ];
-              return wide
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(child: cards[0]),
-                        const SizedBox(width: 16),
-                        Expanded(child: cards[1]),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        cards[0],
-                        const SizedBox(height: 14),
-                        cards[1],
-                      ],
-                    );
-            },
-          ),
-          const SizedBox(height: 28),
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.border),
-            ),
-            child: const Row(
-              children: [
-                Text('🌸', style: TextStyle(fontSize: 27)),
-                SizedBox(width: 13),
-                Expanded(
-                  child: Text(
-                    'Abre el menú lateral para cambiar de libro, revisar tus errores o consultar tu progreso detallado.',
-                    style: TextStyle(color: AppColors.muted, fontSize: 11, fontWeight: FontWeight.w700, height: 1.4),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
 }
 
+class _StreakBadge extends StatelessWidget {
+  final int streak;
+  const _StreakBadge({required this.streak});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+    decoration: BoxDecoration(color: AppColors.surface.withOpacity(.82), borderRadius: BorderRadius.circular(18), border: Border.all(color: AppColors.border)),
+    child: Row(children: [
+      const Text('🔥', style: TextStyle(fontSize: 18)),
+      const SizedBox(width: 8),
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('$streak', style: const TextStyle(color: AppColors.ink, fontSize: 16, fontWeight: FontWeight.w900)),
+        const Text('días de racha', style: TextStyle(color: AppColors.muted, fontSize: 8, fontWeight: FontWeight.w700)),
+      ]),
+    ]),
+  );
+}
+
+class _ContinueCard extends StatelessWidget {
+  final ProgressService progress;
+  final int percent;
+  final VoidCallback onStart;
+
+  const _ContinueCard({required this.progress, required this.percent, required this.onStart});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(22),
+    decoration: BoxDecoration(
+      gradient: const LinearGradient(colors: [AppColors.surface2, AppColors.surface], begin: Alignment.topLeft, end: Alignment.bottomRight),
+      borderRadius: BorderRadius.circular(25),
+      border: Border.all(color: AppColors.violet.withOpacity(.34)),
+    ),
+    child: Row(
+      children: [
+        Container(
+          width: 55,
+          height: 55,
+          decoration: BoxDecoration(gradient: const LinearGradient(colors: [AppColors.violet, Color(0xFF6655D8)]), borderRadius: BorderRadius.circular(17)),
+          child: Center(child: Text(progress.studyLevel, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 15))),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('CONTINÚA ESTUDIANDO', style: TextStyle(color: AppColors.violet, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+              const SizedBox(height: 5),
+              Text(progress.book.shortTitle, style: const TextStyle(color: AppColors.ink, fontSize: 19, fontWeight: FontWeight.w900)),
+              const SizedBox(height: 3),
+              Text(progress.book.subtitle, style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700)),
+              const SizedBox(height: 12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  minHeight: 7,
+                  value: progress.sessionProgress.clamp(0.0, 1.0).toDouble(),
+                  backgroundColor: AppColors.border,
+                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.coral),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text('\${progress.completedCount}@@/\${StudyCatalog.totalSessions}@@ sesiones · \${percent}@@%', style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700)),
+            ],
+          ),
+        ),
+        const SizedBox(width: 16),
+        FilledButton.icon(
+          onPressed: onStart,
+          icon: const Icon(Icons.play_arrow_rounded, size: 19),
+          label: const Text('Continuar'),
+          style: FilledButton.styleFrom(backgroundColor: AppColors.coral, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 15), minimumSize: Size.zero),
+        ),
+      ],
+    ),
+  );
+}
+
+class _NextSessionCard extends StatelessWidget {
+  const _NextSessionCard();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(22),
+    decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(25), border: Border.all(color: AppColors.border)),
+    child: const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('PRÓXIMA SESIÓN', style: TextStyle(color: AppColors.coral, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.5)),
+        SizedBox(height: 11),
+        Text('Tu siguiente lección', style: TextStyle(color: AppColors.ink, fontSize: 17, fontWeight: FontWeight.w900)),
+        SizedBox(height: 7),
+        Text('Continúa tu ruta desde donde la dejaste.', style: TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700, height: 1.35)),
+        SizedBox(height: 18),
+        Row(children: [
+          Icon(Icons.auto_awesome_rounded, color: AppColors.violet, size: 18),
+          SizedBox(width: 7),
+          Text('Lista para empezar', style: TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w800)),
+        ]),
+      ],
+    ),
+  );
+}
+
+class _HomeScenePainter extends CustomPainter {
+  const _HomeScenePainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final moon = Paint()..color = const Color(0xFFFFDCCF).withOpacity(.72);
+    final glow = Paint()..color = const Color(0xFFF09BB6).withOpacity(.07);
+    final hill = Paint()..color = const Color(0xFF111B33);
+    final temple = Paint()..color = const Color(0xFF202A49);
+    final sakura = Paint()..color = AppColors.sakura.withOpacity(.45);
+    final torii = Paint()..color = AppColors.violet.withOpacity(.35)..strokeWidth = 5..style = PaintingStyle.stroke;
+
+    final moonCenter = Offset(size.width * .80, size.height * .27);
+    canvas.drawCircle(moonCenter, 36, moon);
+    canvas.drawCircle(moonCenter, 75, glow);
+    canvas.drawOval(Rect.fromCenter(center: Offset(size.width * .72, size.height * .88), width: size.width * .72, height: size.height * .48), hill);
+
+    final roof = Path()
+      ..moveTo(size.width * .73, size.height * .58)
+      ..lineTo(size.width * .83, size.height * .45)
+      ..lineTo(size.width * .93, size.height * .58)
+      ..close();
+    canvas.drawPath(roof, temple);
+    canvas.drawRect(Rect.fromLTWH(size.width * .77, size.height * .57, size.width * .12, size.height * .22), temple);
+
+    canvas.drawLine(Offset(size.width * .62, size.height * .69), Offset(size.width * .91, size.height * .69), torii);
+    canvas.drawLine(Offset(size.width * .64, size.height * .76), Offset(size.width * .89, size.height * .76), torii);
+    canvas.drawLine(Offset(size.width * .67, size.height * .68), Offset(size.width * .67, size.height * .90), torii);
+    canvas.drawLine(Offset(size.width * .87, size.height * .68), Offset(size.width * .87, size.height * .90), torii);
+
+    final petals = <Offset>[
+      Offset(size.width * .60, size.height * .22),
+      Offset(size.width * .70, size.height * .15),
+      Offset(size.width * .88, size.height * .16),
+      Offset(size.width * .92, size.height * .34),
+      Offset(size.width * .53, size.height * .40),
+      Offset(size.width * .79, size.height * .50),
+      Offset(size.width * .64, size.height * .55),
+    ];
+    for (final p in petals) {
+      canvas.save();
+      canvas.translate(p.dx, p.dy);
+      canvas.rotate(-.35);
+      for (var i = 0; i < 5; i++) {
+        canvas.save();
+        canvas.rotate(i * 1.2566);
+        canvas.drawOval(const Rect.fromLTWH(-2.5, -10, 5, 12), sakura);
+        canvas.restore();
+      }
+      canvas.restore();
+    }
+
+    final catBody = Paint()..color = const Color(0xFFF7EDE8);
+    final ear1 = Path()
+      ..moveTo(size.width * .57, size.height * .61)
+      ..lineTo(size.width * .60, size.height * .49)
+      ..lineTo(size.width * .65, size.height * .60)
+      ..close();
+    final ear2 = Path()
+      ..moveTo(size.width * .66, size.height * .60)
+      ..lineTo(size.width * .71, size.height * .49)
+      ..lineTo(size.width * .74, size.height * .62)
+      ..close();
+    canvas.drawPath(ear1, catBody);
+    canvas.drawPath(ear2, catBody);
+    canvas.drawOval(Rect.fromCenter(center: Offset(size.width * .65, size.height * .68), width: 105, height: 92), catBody);
+
+    final scarf = Paint()..color = AppColors.coral;
+    canvas.drawOval(Rect.fromCenter(center: Offset(size.width * .65, size.height * .75), width: 105, height: 20), scarf);
+
+    final eye = Paint()..color = const Color(0xFF1D2030);
+    canvas.drawCircle(Offset(size.width * .62, size.height * .67), 3, eye);
+    canvas.drawCircle(Offset(size.width * .68, size.height * .67), 3, eye);
+    canvas.drawCircle(Offset(size.width * .65, size.height * .70), 2.5, scarf);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
 class CoursePage extends StatelessWidget {
   final ProgressService progress; final void Function(SessionInfo) onOpen;
   const CoursePage({super.key,required this.progress,required this.onOpen});
