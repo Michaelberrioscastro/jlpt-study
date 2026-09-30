@@ -1,0 +1,168 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "SKN4MOCK01",
+    "week": 4,
+    "day": 1,
+    "type": "mock",
+    "pages": [
+      96,
+      103
+    ],
+    "title_ja": "模擬試験",
+    "title_es": "Simulacro de lectura N4",
+    "focus": "Simular el formato de lectura del JLPT N4 y gestionar el tiempo",
+    "source": "新完全マスター 読解 N4",
+    "content_note": "Mapa curricular basado en las páginas indicadas del libro. Las actividades interactivas de esta app son originales y no constituyen una transcripción de los ejercicios publicados."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "SIMULACRO",
+      "title": "模擬試験",
+      "body": "Simulacro de lectura N4.\n\nLa sección del libro sigue el formato del examen y propone resolver las tareas contando el tiempo. Esta actividad de la app conserva ese objetivo, pero utiliza práctica original.",
+      "pattern": "Tiempo · comprensión · búsqueda de información",
+      "example_ja": "新完全マスター 読解 N4 · pp. 96–103",
+      "example_es": "Distribuye tu tiempo entre textos cortos, texto medio y búsqueda de información.",
+      "tip": "Si una pregunta se atasca, marca mentalmente la información que necesitas y continúa."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto corto 1",
+      "question": "¿Qué estrategia ayuda más cuando una pregunta se refiere a un texto corto?",
+      "options": [
+        "Localizar la información que responde directamente",
+        "Traducir todo antes de mirar la pregunta",
+        "Elegir por una palabra aislada",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Primero identifica qué pide la pregunta y luego localiza la información pertinente."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto corto 2",
+      "question": "¿Qué estrategia ayuda más cuando una pregunta se refiere a un texto corto?",
+      "options": [
+        "Localizar la información que responde directamente",
+        "Traducir todo antes de mirar la pregunta",
+        "Elegir por una palabra aislada",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Primero identifica qué pide la pregunta y luego localiza la información pertinente."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto corto 3",
+      "question": "¿Qué estrategia ayuda más cuando una pregunta se refiere a un texto corto?",
+      "options": [
+        "Localizar la información que responde directamente",
+        "Traducir todo antes de mirar la pregunta",
+        "Elegir por una palabra aislada",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Primero identifica qué pide la pregunta y luego localiza la información pertinente."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto corto 4",
+      "question": "¿Qué estrategia ayuda más cuando una pregunta se refiere a un texto corto?",
+      "options": [
+        "Localizar la información que responde directamente",
+        "Traducir todo antes de mirar la pregunta",
+        "Elegir por una palabra aislada",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "Primero identifica qué pide la pregunta y luego localiza la información pertinente."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto medio 1",
+      "question": "En un texto de longitud media, ¿qué conviene relacionar con la pregunta 1?",
+      "options": [
+        "La pregunta con la parte pertinente del texto",
+        "Solo la primera oración",
+        "Solo las palabras conocidas",
+        "La opinión personal del lector"
+      ],
+      "answer": 0,
+      "explanation": "Las respuestas deben apoyarse en la relación entre la pregunta y la información del texto."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto medio 2",
+      "question": "En un texto de longitud media, ¿qué conviene relacionar con la pregunta 2?",
+      "options": [
+        "La pregunta con la parte pertinente del texto",
+        "Solo la primera oración",
+        "Solo las palabras conocidas",
+        "La opinión personal del lector"
+      ],
+      "answer": 0,
+      "explanation": "Las respuestas deben apoyarse en la relación entre la pregunta y la información del texto."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto medio 3",
+      "question": "En un texto de longitud media, ¿qué conviene relacionar con la pregunta 3?",
+      "options": [
+        "La pregunta con la parte pertinente del texto",
+        "Solo la primera oración",
+        "Solo las palabras conocidas",
+        "La opinión personal del lector"
+      ],
+      "answer": 0,
+      "explanation": "Las respuestas deben apoyarse en la relación entre la pregunta y la información del texto."
+    },
+    {
+      "type": "choice",
+      "title": "Comprensión de texto medio 4",
+      "question": "En un texto de longitud media, ¿qué conviene relacionar con la pregunta 4?",
+      "options": [
+        "La pregunta con la parte pertinente del texto",
+        "Solo la primera oración",
+        "Solo las palabras conocidas",
+        "La opinión personal del lector"
+      ],
+      "answer": 0,
+      "explanation": "Las respuestas deben apoyarse en la relación entre la pregunta y la información del texto."
+    },
+    {
+      "type": "choice",
+      "title": "Búsqueda de información 1",
+      "question": "Si necesitas encontrar un dato concreto en una guía o aviso, ¿qué haces primero?",
+      "options": [
+        "Identificar el dato que buscas y localizarlo",
+        "Leer todas las líneas con el mismo detalle",
+        "Traducir el texto completo",
+        "Ignorar títulos y etiquetas"
+      ],
+      "answer": 0,
+      "explanation": "La búsqueda de información exige una lectura selectiva orientada a un dato concreto."
+    },
+    {
+      "type": "choice",
+      "title": "Búsqueda de información 2",
+      "question": "Si necesitas encontrar un dato concreto en una guía o aviso, ¿qué haces primero?",
+      "options": [
+        "Identificar el dato que buscas y localizarlo",
+        "Leer todas las líneas con el mismo detalle",
+        "Traducir el texto completo",
+        "Ignorar títulos y etiquetas"
+      ],
+      "answer": 0,
+      "explanation": "La búsqueda de información exige una lectura selectiva orientada a un dato concreto."
+    }
+  ],
+  "reflection": {
+    "prompt": "¿Cómo distribuirás tu tiempo en el próximo simulacro?",
+    "options": [
+      "Reservar tiempo para cada tipo de tarea",
+      "Gastar todo el tiempo en el primer texto",
+      "No mirar el reloj"
+    ]
+  }
+}
