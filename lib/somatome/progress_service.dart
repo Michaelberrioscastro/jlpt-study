@@ -68,10 +68,38 @@ class ProgressService extends ChangeNotifier {
   LevelProgressSnapshot progressForBook(StudyBook book) {
     final p = _prefs;
     final prefix = book.level + '_' + book.id;
-    final completed = p?.getStringList('completed_sessions_' + prefix)?.length ?? 0;
-    final answers = p?.getInt('total_answers_' + prefix) ?? 0;
-    final correct = p?.getInt('correct_' + prefix) ?? 0;
-    final xp = p?.getInt('xp_' + prefix) ?? 0;
+    final legacySomatome = book.id == BookCatalog.somatomeN4.id;
+    final legacyN3 = book.id == BookCatalog.shinKanzenN3Grammar.id;
+
+    final completed = (p?.getStringList('completed_sessions_' + prefix) ??
+            (legacySomatome
+                ? p?.getStringList('completed_sessions')
+                : legacyN3
+                    ? p?.getStringList('completed_sessions_N3')
+                    : null) ??
+            const <String>[])
+        .length;
+    final answers = p?.getInt('total_answers_' + prefix) ??
+        (legacySomatome
+            ? p?.getInt('total_answers')
+            : legacyN3
+                ? p?.getInt('total_answers_N3')
+                : null) ??
+        0;
+    final correct = p?.getInt('correct_' + prefix) ??
+        (legacySomatome
+            ? p?.getInt('correct')
+            : legacyN3
+                ? p?.getInt('correct_N3')
+                : null) ??
+        0;
+    final xp = p?.getInt('xp_' + prefix) ??
+        (legacySomatome
+            ? p?.getInt('xp')
+            : legacyN3
+                ? p?.getInt('xp_N3')
+                : null) ??
+        0;
 
     final total = book.id == BookCatalog.somatomeN4.id
         ? 42
