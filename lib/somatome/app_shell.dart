@@ -616,7 +616,7 @@ class HomePage extends StatelessWidget {
           return ListView(
             padding: EdgeInsets.fromLTRB(
               compact ? 20 : 42,
-              compact ? 22 : 32,
+              78,
               compact ? 20 : 42,
               50,
             ),
@@ -885,87 +885,493 @@ class _HomeScenePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 class CoursePage extends StatelessWidget {
-  final ProgressService progress; final void Function(SessionInfo) onOpen;
-  const CoursePage({super.key,required this.progress,required this.onOpen});
-  @override Widget build(BuildContext context)=>SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,18,20,30),children:[
-    Text('Curso',style:Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight:FontWeight.w900)),
-    const SizedBox(height:5),const Text('Cada sesión se desbloquea al superar la anterior con 80% o más.'),
-    const SizedBox(height:18),
-    _CourseSummary(progress:progress),
-    const SizedBox(height:18),
-    for(var w=1;w<=StudyCatalog.totalBlocks;w++) _WeekCard(week:w,progress:progress,onOpen:onOpen),
-  ]));
+  final ProgressService progress;
+  final void Function(SessionInfo) onOpen;
+
+  const CoursePage({
+    super.key,
+    required this.progress,
+    required this.onOpen,
+  });
+
+  @override
+  Widget build(BuildContext context) => SafeArea(
+    child: ListView(
+      padding: const EdgeInsets.fromLTRB(20, 78, 20, 30),
+      children: [
+        Text(
+          'Curso',
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(fontWeight: FontWeight.w900),
+        ),
+        const SizedBox(height: 5),
+        const Text(
+          'Cada sesión se desbloquea al superar la anterior con 80% o más.',
+        ),
+        const SizedBox(height: 18),
+        _CourseSummary(progress: progress),
+        const SizedBox(height: 22),
+        for (var w = 1; w <= StudyCatalog.totalBlocks; w++)
+          _WeekCard(
+            week: w,
+            progress: progress,
+            onOpen: onOpen,
+            isLastWeek: w == StudyCatalog.totalBlocks,
+          ),
+      ],
+    ),
+  );
 }
 
 class _CourseSummary extends StatelessWidget {
-  final ProgressService progress; const _CourseSummary({required this.progress});
-  @override Widget build(BuildContext context)=>Card(child:Padding(padding:const EdgeInsets.all(17),child:Row(children:[
-    SizedBox(width:72,height:72,child:Stack(alignment:Alignment.center,children:[CircularProgressIndicator(value:progress.sessionProgress,strokeWidth:8),Text((progress.sessionProgress*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900))])),
-    const SizedBox(width:15),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(progress.completedCount.toString()+' / '+StudyCatalog.totalSessions.toString()+' sesiones',style:const TextStyle(fontSize:19,fontWeight:FontWeight.w900)),const SizedBox(height:3),Text('Nivel '+progress.stats.level.toString()+' · '+progress.stats.xp.toString()+' XP',style:const TextStyle(color:AppColors.muted))])),
-  ])));
+  final ProgressService progress;
+
+  const _CourseSummary({required this.progress});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.all(18),
+    decoration: BoxDecoration(
+      gradient: const LinearGradient(
+        colors: [AppColors.surface2, AppColors.surface],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      borderRadius: BorderRadius.circular(24),
+      border: Border.all(color: AppColors.border),
+    ),
+    child: Row(
+      children: [
+        SizedBox(
+          width: 72,
+          height: 72,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              CircularProgressIndicator(
+                value: progress.sessionProgress,
+                strokeWidth: 8,
+                backgroundColor: AppColors.border,
+                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.violet),
+              ),
+              Text(
+                '${(progress.sessionProgress * 100).round()}%',
+                style: const TextStyle(fontWeight: FontWeight.w900),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 15),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${progress.completedCount} / ${StudyCatalog.totalSessions} sesiones',
+                style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                'Nivel ${progress.stats.level} · ${progress.stats.xp} XP',
+                style: const TextStyle(color: AppColors.muted),
+              ),
+              const SizedBox(height: 9),
+              Text(
+                'Tu ruta de aprendizaje',
+                style: TextStyle(
+                  color: AppColors.violet.withOpacity(.9),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 class _WeekCard extends StatelessWidget {
-  final int week; final ProgressService progress; final void Function(SessionInfo) onOpen;
-  const _WeekCard({required this.week,required this.progress,required this.onOpen});
-  @override Widget build(BuildContext context){
-    final sessions=StudyCatalog.sessions.where((s)=>s.week==week).toList();
-    final done=sessions.where((s)=>progress.isCompleted(s.id)).length;
-    final unlocked=sessions.any((s)=>progress.isUnlocked(s.id));
+  final int week;
+  final ProgressService progress;
+  final void Function(SessionInfo) onOpen;
+  final bool isLastWeek;
+
+  const _WeekCard({
+    required this.week,
+    required this.progress,
+    required this.onOpen,
+    required this.isLastWeek,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final sessions = StudyCatalog.sessions
+        .where((s) => s.week == week)
+        .toList();
+    final done = sessions.where((s) => progress.isCompleted(s.id)).length;
+    final unlocked = sessions.any((s) => progress.isUnlocked(s.id));
+
     final type = StudyCatalog.activeBookId == 'shinkanzen_n4_dokkai'
-        ? (week == 1 ? 'Lectura estratégica' : week == 2 ? 'Tipos de preguntas' : week == 3 ? 'Práctica intensiva' : 'Simulacro')
+        ? (week == 1
+            ? 'Lectura estratégica'
+            : week == 2
+                ? 'Tipos de preguntas'
+                : week == 3
+                    ? 'Práctica intensiva'
+                    : 'Simulacro')
         : progress.studyLevel == 'N3'
-            ? (week<=2?'Gramática':week<=4?'Consolidación':week==5?'Construcción':week<=7?'Gramática textual':'Repaso y simulacros')
-            : (week<=4?'Gramática':week==5?'Reading':'Listening');
-    return Card(margin:const EdgeInsets.only(bottom:12),child:Padding(padding:const EdgeInsets.all(15),child:Column(children:[
-      Row(children:[
-        CircleAvatar(backgroundColor:unlocked?AppColors.primarySoft:AppColors.surface2,child:Text(week.toString(),style:TextStyle(fontWeight:FontWeight.w900,color:unlocked?AppColors.primary:AppColors.muted))),
-        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text((StudyCatalog.blockLabel + ' ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
-        Text((done/sessions.length*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900)),
-      ]),
-      const SizedBox(height:10),ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/sessions.length,minHeight:7)),
-      const SizedBox(height:8),
-      for(final s in sessions) _SessionTile(session:s,progress:progress,onOpen:onOpen),
-    ])));
+            ? (week <= 2
+                ? 'Gramática'
+                : week <= 4
+                    ? 'Consolidación'
+                    : week == 5
+                        ? 'Construcción'
+                        : week <= 7
+                            ? 'Gramática textual'
+                            : 'Repaso y simulacros')
+            : (week <= 4
+                ? 'Gramática'
+                : week == 5
+                    ? 'Reading'
+                    : 'Listening');
+
+    final progressValue = sessions.isEmpty ? 0.0 : done / sessions.length;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 12),
+      decoration: BoxDecoration(
+        color: AppColors.surface.withOpacity(.94),
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: unlocked
+              ? AppColors.violet.withOpacity(.20)
+              : AppColors.border,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.07),
+            blurRadius: 24,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              _WeekBadge(
+                week: week,
+                unlocked: unlocked,
+                completed: sessions.isNotEmpty && done == sessions.length,
+              ),
+              const SizedBox(width: 13),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${StudyCatalog.blockLabel} ${week}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      '${type}  ·  ${done}/${sessions.length}',
+                      style: const TextStyle(
+                        color: AppColors.muted,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '${(progressValue * 100).round()}%',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  color: unlocked ? AppColors.violet : AppColors.muted,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 13),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: LinearProgressIndicator(
+              value: progressValue,
+              minHeight: 6,
+              backgroundColor: AppColors.border,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                done == sessions.length && sessions.isNotEmpty
+                    ? AppColors.mint
+                    : AppColors.violet,
+              ),
+            ),
+          ),
+          const SizedBox(height: 11),
+          Column(
+            children: [
+              for (var i = 0; i < sessions.length; i++)
+                _SessionTile(
+                  session: sessions[i],
+                  progress: progress,
+                  onOpen: onOpen,
+                  isFirst: i == 0,
+                  isLast: i == sessions.length - 1,
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WeekBadge extends StatelessWidget {
+  final int week;
+  final bool unlocked;
+  final bool completed;
+
+  const _WeekBadge({
+    required this.week,
+    required this.unlocked,
+    required this.completed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = completed
+        ? AppColors.mint
+        : unlocked
+            ? AppColors.violet
+            : AppColors.border;
+
+    return Container(
+      width: 46,
+      height: 46,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: unlocked ? color.withOpacity(.13) : AppColors.surface2,
+        border: Border.all(
+          color: color.withOpacity(unlocked ? .55 : .9),
+          width: 1.5,
+        ),
+      ),
+      child: Center(
+        child: completed
+            ? const Icon(Icons.check_rounded, color: AppColors.mint, size: 21)
+            : Text(
+                '${week}',
+                style: TextStyle(
+                  color: unlocked ? color : AppColors.muted,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 14,
+                ),
+              ),
+      ),
+    );
   }
 }
 
 class _SessionTile extends StatelessWidget {
-  final SessionInfo session; final ProgressService progress; final void Function(SessionInfo) onOpen;
-  const _SessionTile({required this.session,required this.progress,required this.onOpen});
-  @override Widget build(BuildContext context){
-    final done=progress.isCompleted(session.id), unlocked=progress.isUnlocked(session.id);
+  final SessionInfo session;
+  final ProgressService progress;
+  final void Function(SessionInfo) onOpen;
+  final bool isFirst;
+  final bool isLast;
+
+  const _SessionTile({
+    required this.session,
+    required this.progress,
+    required this.onOpen,
+    required this.isFirst,
+    required this.isLast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final done = progress.isCompleted(session.id);
+    final unlocked = progress.isUnlocked(session.id);
+    final locked = !done && !unlocked;
+
+    final nodeColor = done
+        ? AppColors.mint
+        : unlocked
+            ? AppColors.violet
+            : AppColors.border;
+
+    final titleColor = locked ? AppColors.muted : AppColors.ink;
+
     return InkWell(
-      onTap:unlocked?()=>onOpen(session):null,
-      borderRadius:BorderRadius.circular(18),
-      child:AnimatedContainer(
-        duration:const Duration(milliseconds:220),
-        margin:const EdgeInsets.only(bottom:6),
-        padding:const EdgeInsets.symmetric(horizontal:10,vertical:9),
-        decoration:BoxDecoration(
-          color:done?AppColors.mintSoft.withOpacity(.45):unlocked?AppColors.primarySoft.withOpacity(.45):Colors.transparent,
-          borderRadius:BorderRadius.circular(18),
-          border:Border.all(color:done?AppColors.mint.withOpacity(.18):unlocked?AppColors.violet.withOpacity(.16):Colors.transparent),
-        ),
-        child:Row(children:[
-          Container(
-            width:36,height:36,
-            decoration:BoxDecoration(
-              shape:BoxShape.circle,
-              gradient:done?const LinearGradient(colors:[AppColors.mint,AppColors.green]):unlocked?const LinearGradient(colors:[AppColors.violet,AppColors.navySoft]):null,
-              color:!done&&!unlocked?const Color(0xFFEDEAE7):null,
+      onTap: unlocked ? () => onOpen(session) : null,
+      borderRadius: BorderRadius.circular(22),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 220),
+        constraints: const BoxConstraints(minHeight: 72),
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              width: 50,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (!isFirst)
+                    Positioned(
+                      top: 0,
+                      bottom: 36,
+                      child: Container(
+                        width: 2,
+                        decoration: BoxDecoration(
+                          color: locked
+                              ? AppColors.border.withOpacity(.65)
+                              : nodeColor.withOpacity(.30),
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ),
+                  if (!isLast)
+                    Positioned(
+                      top: 36,
+                      bottom: 0,
+                      child: Container(
+                        width: 2,
+                        decoration: BoxDecoration(
+                          color: locked
+                              ? AppColors.border.withOpacity(.65)
+                              : nodeColor.withOpacity(.30),
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 220),
+                    width: unlocked ? 42 : 38,
+                    height: unlocked ? 42 : 38,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: done
+                          ? AppColors.mint
+                          : unlocked
+                              ? AppColors.violet
+                              : AppColors.surface2,
+                      border: Border.all(
+                        color: nodeColor.withOpacity(locked ? .9 : .35),
+                        width: locked ? 1.5 : 1,
+                      ),
+                      boxShadow: unlocked
+                          ? [
+                              BoxShadow(
+                                color: AppColors.violet.withOpacity(.20),
+                                blurRadius: 15,
+                                spreadRadius: 2,
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Icon(
+                      done
+                          ? Icons.check_rounded
+                          : unlocked
+                              ? Icons.play_arrow_rounded
+                              : Icons.lock_rounded,
+                      size: unlocked ? 19 : 16,
+                      color: done || unlocked
+                          ? Colors.white
+                          : AppColors.muted,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            child:Icon(done?Icons.check_rounded:unlocked?Icons.play_arrow_rounded:Icons.lock_rounded,size:17,color:done||unlocked?Colors.white:AppColors.muted),
-          ),
-          const SizedBox(width:11),
-          Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-            Text('Día '+session.day.toString()+' · '+session.titleJa,maxLines:1,overflow:TextOverflow.ellipsis,style:const TextStyle(fontWeight:FontWeight.w800,fontSize:13)),
-            const SizedBox(height:3),
-            Text(session.focus,maxLines:1,overflow:TextOverflow.ellipsis,style:const TextStyle(color:AppColors.muted,fontSize:10)),
-          ])),
-          if(done) const Icon(Icons.verified_rounded,color:AppColors.green,size:20)
-          else if(unlocked) const Icon(Icons.arrow_forward_ios_rounded,color:AppColors.violet,size:14),
-        ]),
+            const SizedBox(width: 8),
+            Expanded(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                margin: const EdgeInsets.only(bottom: 4),
+                padding: const EdgeInsets.fromLTRB(13, 11, 12, 11),
+                decoration: BoxDecoration(
+                  color: done
+                      ? AppColors.mintSoft.withOpacity(.42)
+                      : unlocked
+                          ? AppColors.violetSoft.withOpacity(.44)
+                          : AppColors.surface2.withOpacity(.42),
+                  borderRadius: BorderRadius.circular(19),
+                  border: Border.all(
+                    color: done
+                        ? AppColors.mint.withOpacity(.20)
+                        : unlocked
+                            ? AppColors.violet.withOpacity(.18)
+                            : AppColors.border.withOpacity(.42),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Día ${session.day} · ${session.titleJa}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: titleColor,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 13,
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            session.focus,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: locked
+                                  ? AppColors.muted.withOpacity(.72)
+                                  : AppColors.muted,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    if (done)
+                      const Icon(
+                        Icons.verified_rounded,
+                        color: AppColors.green,
+                        size: 19,
+                      )
+                    else if (unlocked)
+                      const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: AppColors.violet,
+                        size: 18,
+                      )
+                    else
+                      Icon(
+                        Icons.lock_outline_rounded,
+                        color: AppColors.muted.withOpacity(.55),
+                        size: 17,
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1225,7 +1631,7 @@ class _ResultDialog extends StatelessWidget {
 class ReviewPage extends StatelessWidget {
   final ProgressService progress; final void Function(SessionInfo) onOpen;
   const ReviewPage({super.key,required this.progress,required this.onOpen});
-  @override Widget build(BuildContext context){final s=progress.stats;return SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,18,20,30),children:[
+  @override Widget build(BuildContext context){final s=progress.stats;return SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,78,20,30),children:[
     Text('Repaso inteligente',style:Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:5),const Text('Convierte tus errores en puntos fuertes.'),const SizedBox(height:18),
     Card(color:AppColors.primarySoft,child:Padding(padding:const EdgeInsets.all(19),child:Row(children:[const Icon(Icons.auto_awesome_rounded,size:34,color:AppColors.primary),const SizedBox(width:13),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(s.openMistakes.toString()+' errores pendientes',style:const TextStyle(fontSize:19,fontWeight:FontWeight.w900)),Text(s.corrected.toString()+' errores ya corregidos',style:const TextStyle(color:AppColors.muted))]))] ))),
     const SizedBox(height:14),_StatsRow(stats:s),const SizedBox(height:18),
@@ -1238,7 +1644,7 @@ class ReviewPage extends StatelessWidget {
 
 class ProgressPage extends StatelessWidget {
   final ProgressService progress; const ProgressPage({super.key,required this.progress});
-  @override Widget build(BuildContext context){final s=progress.stats;return SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,18,20,30),children:[
+  @override Widget build(BuildContext context){final s=progress.stats;return SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,78,20,30),children:[
     Text('Tu progreso',style:Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:5),const Text('Buenas, malas y lo que ya lograste corregir.'),const SizedBox(height:18),
     Card(child:Padding(padding:const EdgeInsets.all(20),child:Row(children:[SizedBox(width:82,height:82,child:Stack(alignment:Alignment.center,children:[CircularProgressIndicator(value:progress.sessionProgress,strokeWidth:9),Text((progress.sessionProgress*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900))])),const SizedBox(width:17),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(progress.completedCount.toString()+' / '+StudyCatalog.totalSessions.toString()+' sesiones',style:const TextStyle(fontSize:20,fontWeight:FontWeight.w900)),Text('Nivel '+s.level.toString()+' · '+s.xp.toString()+' XP',style:const TextStyle(color:AppColors.muted))]))]))),
     const SizedBox(height:14),_StatsRow(stats:s),const SizedBox(height:22),
