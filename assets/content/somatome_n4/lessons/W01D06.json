@@ -1,0 +1,111 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W01D06",
+    "week": 1,
+    "day": 6,
+    "type": "grammar",
+    "pages": [28, 29],
+    "title_ja": "雪を見たことがありません。",
+    "title_es": "Nunca he visto nieve.",
+    "focus": "たことがある · ことがある · ことにする · ことになる · する／なる",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las funciones gramaticales presentadas en las páginas 28–29. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "たことがある: experiencia",
+      "body": "La forma Vたことがある se usa para hablar de una experiencia que ocurrió alguna vez en el pasado. La forma negativa permite decir que nunca se ha tenido esa experiencia.",
+      "pattern": "Vたことがある／Vたことがない",
+      "example_ja": "私はアフリカに行ったことがあります。",
+      "example_es": "He estado en África.",
+      "tip": "Aquí no estás describiendo una acción puntual de ahora: estás indicando si una experiencia forma parte o no de tu experiencia pasada."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "Experiencia pasada",
+      "question": "¿Cuál significa 'Nunca he visto ese musical'?",
+      "options": [
+        "そのミュージカルを一度も見たことがありません。",
+        "そのミュージカルを一度も見ていませんでした。",
+        "そのミュージカルを一度も見ることにします。",
+        "そのミュージカルを一度も見ながらいません。"
+      ],
+      "answer": 0,
+      "explanation": "一度も + Vたことがありません expresa que nunca se ha tenido esa experiencia."
+    },
+    {
+      "id": "s3",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "ことがある: algo ocurre a veces",
+      "body": "La misma construcción puede expresar que una situación ocurre ocasionalmente cuando se combina con una forma verbal no pasada. El significado depende de la forma verbal y del contexto.",
+      "pattern": "Vることがある",
+      "example_ja": "昼ご飯を食べないことがあります。",
+      "example_es": "A veces no almuerzo.",
+      "tip": "Compara Vたことがある (experiencia) con Vることがある (ocasionalmente ocurre)."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Distingue los significados",
+      "question": "¿Cuál expresa una acción que ocurre ocasionalmente?",
+      "options": [
+        "昼ご飯を食べないことがあります。",
+        "昼ご飯を食べたことがあります。",
+        "昼ご飯を食べることにしました。",
+        "昼ご飯を食べることになりました。"
+      ],
+      "answer": 0,
+      "explanation": "Vることがある puede expresar que algo sucede de vez en cuando."
+    },
+    {
+      "id": "s5",
+      "type": "teach",
+      "label": "PRACTICA",
+      "title": "ことにする y ことになる",
+      "body": "ことにする presenta una decisión tomada por la propia persona. ことになる presenta una decisión o resultado que queda determinado, sin centrar la expresión en la voluntad individual.",
+      "pattern": "Vる／Vない + ことにする · Vる／Vない + ことになる",
+      "example_ja": "これから、ダイエットすることにします。",
+      "example_es": "A partir de ahora, decido hacer dieta.",
+      "tip": "Pregunta: ¿estoy decidiendo algo yo mismo, o estoy describiendo algo que ha quedado decidido?"
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Decisión o resultado",
+      "question": "Quieres decir 'Decidí no volver a casa este año'.",
+      "options": [
+        "今年は国に帰らないことにしました。",
+        "今年は国に帰らないことになりました。",
+        "今年は国に帰ったことがあります。",
+        "今年は国に帰らないことがあります。"
+      ],
+      "answer": 0,
+      "explanation": "ことにする presenta la decisión del hablante como una elección propia."
+    },
+    {
+      "id": "s7",
+      "type": "choice",
+      "title": "Reto final: する y なる",
+      "question": "¿Qué opción expresa un cambio de estado realizado deliberadamente?",
+      "options": [
+        "テレビの音を小さくします。",
+        "テレビの音が小さくなります。",
+        "テレビの音を小さくことがあります。",
+        "テレビの音が小さくしたことがあります。"
+      ],
+      "answer": 0,
+      "explanation": "する presenta el cambio de estado como algo que una persona realiza deliberadamente; なる presenta el cambio como algo que llega a producirse."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Escribe una frase sobre una experiencia que hayas tenido usando Vたことがある y otra sobre una decisión propia usando ことにする.",
+    "reward": 20
+  }
+}
