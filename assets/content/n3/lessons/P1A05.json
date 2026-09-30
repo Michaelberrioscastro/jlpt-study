@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1A05",
+    "week": 3,
+    "day": 5,
+    "type": "consolidation",
+    "pages": [
+      74,
+      78
+    ],
+    "title_ja": "E · 「わけ」のいろいろな使い方",
+    "title_es": "Usos de わけ",
+    "focus": "～わけだ・～というわけだ・～わけにはいかない・～ないわけにはいかない",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 74–78. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "CONSOLIDA",
+      "title": "E · 「わけ」のいろいろな使い方",
+      "body": "Consolida el foco indicado en las páginas 74–78.",
+      "pattern": "～わけだ・～というわけだ・～わけにはいかない・～ないわけにはいかない",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera función, contexto y matiz.",
+      "tip": "Compara usos cercanos y observa las restricciones."
+    },
+    {
+      "id": "P1A05-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "～わけだ・～というわけだ・～わけにはいかない・～ないわけにはいかない",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es ～わけだ・～というわけだ・～わけにはいかない・～ないわけにはいかない."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal y crea una oración propia.",
+    "reward": 25
+  }
+}
