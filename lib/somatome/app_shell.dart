@@ -368,7 +368,7 @@ class HomePage extends StatelessWidget {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFFE6DFF8), Color(0xFFF8E8EB)],
+                colors: [AppColors.navy, Color(0xFF343A59)],
               ),
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
@@ -387,13 +387,13 @@ class HomePage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(.75),
+                        color: Colors.white.withOpacity(.10),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Text(
                         next.review ? 'RETO SEMANAL' : 'CONTINÚA AQUÍ',
                         style: const TextStyle(
-                          color: AppColors.primary,
+                          color: AppColors.coral,
                           fontSize: 10,
                           fontWeight: FontWeight.w900,
                           letterSpacing: 1.1,
@@ -403,7 +403,7 @@ class HomePage extends StatelessWidget {
                     const Spacer(),
                     Text(
                       'S' + next.week.toString() + ' · D' + next.day.toString(),
-                      style: const TextStyle(color: AppColors.muted, fontWeight: FontWeight.w800),
+                      style: const TextStyle(color: Color(0xFFB9BDCF), fontWeight: FontWeight.w800),
                     ),
                   ],
                 ),
@@ -417,12 +417,12 @@ class HomePage extends StatelessWidget {
                         children: [
                           Text(
                             next.titleJa,
-                            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, height: 1.15),
+                            style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900, height: 1.15),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             next.titleEs,
-                            style: const TextStyle(color: AppColors.muted, height: 1.35),
+                            style: const TextStyle(color: Color(0xFFB9BDCF), height: 1.35),
                           ),
                           const SizedBox(height: 10),
                           Text(
