@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W01D05",
+    "week": 1,
+    "day": 5,
+    "type": "grammar",
+    "pages": [26, 27],
+    "title_ja": "音楽を聞きながら勉強しています。",
+    "title_es": "Estudio mientras escucho música.",
+    "focus": "で · まま · ながら · ないで",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las funciones gramaticales presentadas en las páginas 26–27. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "で: causa, estado y medio",
+      "body": "En esta sesión, で aparece entre otros usos para expresar causa o razón, y también para indicar un medio o procedimiento. El contexto decide la interpretación.",
+      "pattern": "Nで",
+      "example_ja": "かぜで学校を休みました。",
+      "example_es": "Falté a la escuela por un resfriado.",
+      "tip": "No confundas automáticamente で con una sola traducción: identifica qué relación expresa con el verbo."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "Reconoce la causa",
+      "question": "¿Cuál significa 'No pude comprarlo porque no tenía dinero'?",
+      "options": [
+        "お金がなくて、買えませんでした。",
+        "お金がないまま、買えませんでした。",
+        "お金をしながら、買えませんでした。",
+        "お金をで、買えませんでした。"
+      ],
+      "answer": 0,
+      "explanation": "なくて puede conectar una situación o causa con el resultado de la oración."
+    },
+    {
+      "id": "s3",
+      "type": "teach",
+      "label": "CLAVE",
+      "title": "まま: mantener un estado",
+      "body": "まま expresa que una acción ocurre mientras un estado previo permanece sin cambiar.",
+      "pattern": "Vたまま · Nのまま",
+      "example_ja": "窓を開けたまま寝ました。",
+      "example_es": "Me dormí dejando la ventana abierta.",
+      "tip": "Piensa: 'el estado quedó así y luego ocurrió otra acción'."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Estado sin cambiar",
+      "question": "Quieres decir 'Salió de casa todavía con el pijama puesto'.",
+      "options": [
+        "パジャマのまま出かけました。",
+        "パジャマながら出かけました。",
+        "パジャマでないで出かけました。",
+        "パジャマしか出かけました。"
+      ],
+      "answer": 0,
+      "explanation": "Nのまま expresa que el estado de llevar el pijama se mantiene al realizar la segunda acción."
+    },
+    {
+      "id": "s5",
+      "type": "teach",
+      "label": "PRACTICA",
+      "title": "ながら y ないで",
+      "body": "ながら conecta dos acciones simultáneas realizadas por el mismo sujeto. ないで indica que una acción se realiza sin hacer otra.",
+      "pattern": "Vます + ながら · Vないで",
+      "example_ja": "音楽を聞きながら勉強します。",
+      "example_es": "Estudio mientras escucho música.",
+      "tip": "Con ながら, las dos acciones se solapan. Con ないで, la segunda acción ocurre sin realizar la primera."
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Reto final",
+      "question": "¿Cuál expresa 'Estudio mientras escucho música'?",
+      "options": [
+        "音楽を聞きながら勉強します。",
+        "音楽を聞かないで勉強します。",
+        "音楽を聞いたまま勉強します。",
+        "音楽を聞いてからでないと勉強します。"
+      ],
+      "answer": 0,
+      "explanation": "聞きながら une dos acciones simultáneas realizadas por el mismo sujeto."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Escribe una frase con ～ながら y otra con ～ないで. Después crea una tercera usando ～まま.",
+    "reward": 20
+  }
+}
