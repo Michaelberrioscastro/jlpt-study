@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W04D05",
+    "week": 4,
+    "day": 5,
+    "type": "grammar",
+    "pages": [
+      74,
+      75
+    ],
+    "title_ja": "かぎがかかっています。",
+    "title_es": "La puerta está cerrada con llave.",
+    "focus": "自動詞 / 他動詞 / ている / てある / てくる / ていく",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 74–75. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "かぎがかかっています。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 74–75 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "自動詞 / 他動詞 / ている / てある / てくる / ていく",
+      "example_ja": "窓が閉まっています。",
+      "example_es": "La puerta está cerrada con llave.",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W04D05-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "自動詞 / 他動詞 / ている / てある / てくる / ていく",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es 自動詞 / 他動詞 / ている / てある / てくる / ていく."
+    },
+    {
+      "id": "W04D05-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
