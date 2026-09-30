@@ -2465,7 +2465,9 @@ class ProgressPage extends StatelessWidget {
   @override Widget build(BuildContext context){final s=progress.stats;return SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(20,78,20,30),children:[
     Text('Tu progreso',style:Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:5),const Text('Buenas, malas y lo que ya lograste corregir.'),const SizedBox(height:18),
     Card(child:Padding(padding:const EdgeInsets.all(20),child:Row(children:[SizedBox(width:82,height:82,child:Stack(alignment:Alignment.center,children:[CircularProgressIndicator(value:progress.sessionProgress,strokeWidth:9),Text((progress.sessionProgress*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900))])),const SizedBox(width:17),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(progress.completedCount.toString()+' / '+StudyCatalog.totalSessions.toString()+' sesiones',style:const TextStyle(fontSize:20,fontWeight:FontWeight.w900)),Text('Nivel '+s.level.toString()+' · '+s.xp.toString()+' XP',style:const TextStyle(color:AppColors.muted))]))]))),
-    const SizedBox(height:14),_StatsRow(stats:s),const SizedBox(height:22),
+    const SizedBox(height:14),_StatsRow(stats:s),const SizedBox(height:18),
+    _LearningOverviewCard(progress: progress),
+    const SizedBox(height:22),
     Text('Recuperación',style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:8),
     Card(child:Padding(padding:const EdgeInsets.all(18),child:Column(children:[
       _Bar(label:'Buenas respuestas',value:s.correct,max:s.totalAnswers==0?1:s.totalAnswers),_Bar(label:'Malas respuestas',value:s.wrong,max:s.totalAnswers==0?1:s.totalAnswers),_Bar(label:'Errores corregidos',value:s.corrected,max:s.wrong==0?1:s.wrong),
@@ -2473,6 +2475,189 @@ class ProgressPage extends StatelessWidget {
     const SizedBox(height:22),Text('Por semana',style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:8),
     for(var w=1;w<=StudyCatalog.totalBlocks;w++) _WeekRow(week:w,progress:progress),
   ]));}
+}
+
+class _LearningOverviewCard extends StatelessWidget {
+  final ProgressService progress;
+
+  const _LearningOverviewCard({required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    final snapshot = progress.learningSnapshot;
+    final mastery = snapshot.mastery.round();
+
+    return Container(
+      padding: const EdgeInsets.all(19),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.surface2, AppColors.surface],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.violet.withOpacity(.22)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.psychology_alt_rounded,
+                color: AppColors.violet,
+                size: 22,
+              ),
+              const SizedBox(width: 9),
+              const Expanded(
+                child: Text(
+                  'Lo que la app ha aprendido de ti',
+                  style: TextStyle(
+                    color: AppColors.ink,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              Text(
+                snapshot.hasIntelligenceData ? '$mastery%' : '—',
+                style: const TextStyle(
+                  color: AppColors.violet,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            snapshot.hasIntelligenceData
+                ? 'Dominio estimado a partir de tus respuestas, rachas y repasos.'
+                : 'Todavía no hay suficiente historial. Tus respuestas irán creando tu perfil.',
+            style: const TextStyle(
+              color: AppColors.muted,
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              height: 1.35,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              _LearningStat(
+                icon: Icons.hub_rounded,
+                value: snapshot.trackedConcepts.toString(),
+                label: 'conceptos',
+              ),
+              const SizedBox(width: 8),
+              _LearningStat(
+                icon: Icons.schedule_rounded,
+                value: snapshot.dueConcepts.toString(),
+                label: 'para repasar',
+              ),
+              const SizedBox(width: 8),
+              _LearningStat(
+                icon: Icons.warning_amber_rounded,
+                value: snapshot.weakConcepts.toString(),
+                label: 'débiles',
+              ),
+              const SizedBox(width: 8),
+              _LearningStat(
+                icon: Icons.shield_moon_rounded,
+                value: snapshot.atRiskConcepts.toString(),
+                label: 'en riesgo',
+              ),
+            ],
+          ),
+          if (snapshot.weakest.isNotEmpty) ...[
+            const SizedBox(height: 15),
+            const Text(
+              'PRIORIDADES',
+              style: TextStyle(
+                color: AppColors.muted,
+                fontSize: 8,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.5,
+              ),
+            ),
+            const SizedBox(height: 7),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                for (final concept in snapshot.weakest.take(3))
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.roseSoft.withOpacity(.5),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      concept.id,
+                      style: const TextStyle(
+                        color: AppColors.ink,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _LearningStat extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+
+  const _LearningStat({
+    required this.icon,
+    required this.value,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) => Expanded(
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 9),
+      decoration: BoxDecoration(
+        color: AppColors.background.withOpacity(.58),
+        borderRadius: BorderRadius.circular(13),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: AppColors.violet, size: 16),
+          const SizedBox(height: 3),
+          Text(
+            value,
+            style: const TextStyle(
+              color: AppColors.ink,
+              fontSize: 14,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: AppColors.muted,
+              fontSize: 7,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 class _StatsRow extends StatelessWidget {
