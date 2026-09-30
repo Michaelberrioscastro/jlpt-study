@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P2L01",
+    "week": 5,
+    "day": 1,
+    "type": "sentence",
+    "pages": [
+      104,
+      105
+    ],
+    "title_ja": "第2部・課1 · 文の組み立て－1「引用」",
+    "title_es": "Construcción de oraciones con citas",
+    "focus": "引用 / cita",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 104–105. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "文の組み立て－1「引用」",
+      "body": "Trabaja la construcción de oraciones con citas.",
+      "pattern": "引用 / cita",
+      "example_ja": "先生は明日来ると言いました。",
+      "example_es": "El profesor dijo que vendrá mañana.",
+      "tip": "Observa qué parte introduce la información citada."
+    },
+    {
+      "id": "P2L01-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "Construcción con citas",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "Esta sesión trabaja la cita dentro de la oración."
+    }
+  ]
+}
