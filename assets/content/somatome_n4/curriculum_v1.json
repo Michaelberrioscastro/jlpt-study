@@ -8,5 +8,617 @@
     "weeks": 6,
     "sessions": 42
   },
-  "sessions": []
+  "sessions": [
+    {
+      "id": "W01D01",
+      "week": 1,
+      "day": 1,
+      "type": "grammar",
+      "pages": [
+        18,
+        19
+      ],
+      "title_ja": "一日に二回、歯をみがきます。",
+      "focus": "Frecuencia/ratio y ほど",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W01D02",
+      "week": 1,
+      "day": 2,
+      "type": "grammar",
+      "pages": [
+        20,
+        21
+      ],
+      "title_ja": "漢字は少ししか書けません。",
+      "focus": "しか～ない / でも / で",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W01D03",
+      "week": 1,
+      "day": 3,
+      "type": "grammar",
+      "pages": [
+        22,
+        23
+      ],
+      "title_ja": "9時までに来てください。",
+      "focus": "まで / までに / たり～たり / し",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W01D04",
+      "week": 1,
+      "day": 4,
+      "type": "grammar",
+      "pages": [
+        24,
+        25
+      ],
+      "title_ja": "今、勉強しているところです。",
+      "focus": "ところ / 間に / とき / 前に / 後で",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W01D05",
+      "week": 1,
+      "day": 5,
+      "type": "grammar",
+      "pages": [
+        26,
+        27
+      ],
+      "title_ja": "音楽を聞きながら勉強しています。",
+      "focus": "て / なくて / ないで / ても",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W01D06",
+      "week": 1,
+      "day": 6,
+      "type": "grammar",
+      "pages": [
+        28,
+        29
+      ],
+      "title_ja": "雪を見たことがありません。",
+      "focus": "たことがある / ことにする / ことになる",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W01D07",
+      "week": 1,
+      "day": 7,
+      "type": "grammar",
+      "pages": [
+        30,
+        31
+      ],
+      "title_ja": "まとめ問題",
+      "focus": "Review",
+      "is_review": true,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D01",
+      "week": 2,
+      "day": 1,
+      "type": "grammar",
+      "pages": [
+        34,
+        35
+      ],
+      "title_ja": "宿題をしなければいけません。",
+      "focus": "なければならない / なくてもいい",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D02",
+      "week": 2,
+      "day": 2,
+      "type": "grammar",
+      "pages": [
+        36,
+        37
+      ],
+      "title_ja": "習ったことを忘れてしまいました。",
+      "focus": "ておく / てしまう",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D03",
+      "week": 2,
+      "day": 3,
+      "type": "grammar",
+      "pages": [
+        38,
+        39
+      ],
+      "title_ja": "教えてくれてありがとう。",
+      "focus": "てくれる / てもらう / てあげる",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D04",
+      "week": 2,
+      "day": 4,
+      "type": "grammar",
+      "pages": [
+        40,
+        41
+      ],
+      "title_ja": "日記を書くようにしましょう。",
+      "focus": "ようにする / ようになる",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D05",
+      "week": 2,
+      "day": 5,
+      "type": "grammar",
+      "pages": [
+        42,
+        43
+      ],
+      "title_ja": "日本語でどう言いますか。",
+      "focus": "という / そうだ / らしい",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D06",
+      "week": 2,
+      "day": 6,
+      "type": "grammar",
+      "pages": [
+        44,
+        45
+      ],
+      "title_ja": "もっと勉強したほうがいいですよ。",
+      "focus": "ほうがいい / たらいい / なら",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W02D07",
+      "week": 2,
+      "day": 7,
+      "type": "grammar",
+      "pages": [
+        46,
+        47
+      ],
+      "title_ja": "まとめ問題",
+      "focus": "Review",
+      "is_review": true,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D01",
+      "week": 3,
+      "day": 1,
+      "type": "grammar",
+      "pages": [
+        50,
+        51
+      ],
+      "title_ja": "漢字を書くのは大変です。",
+      "focus": "のは / のが / のを",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D02",
+      "week": 3,
+      "day": 2,
+      "type": "grammar",
+      "pages": [
+        52,
+        53
+      ],
+      "title_ja": "このまどから富士山が見えます。",
+      "focus": "見える / 聞こえる / できる / 可能",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D03",
+      "week": 3,
+      "day": 3,
+      "type": "grammar",
+      "pages": [
+        54,
+        55
+      ],
+      "title_ja": "雨でも行きましょう。",
+      "focus": "でも / ても / しかたがない",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D04",
+      "week": 3,
+      "day": 4,
+      "type": "grammar",
+      "pages": [
+        56,
+        57
+      ],
+      "title_ja": "この漢字の読み方はむずかしいです。",
+      "focus": "読み方 / patrones relacionados",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D05",
+      "week": 3,
+      "day": 5,
+      "type": "grammar",
+      "pages": [
+        58,
+        59
+      ],
+      "title_ja": "手伝ってくださいませんか。",
+      "focus": "てくださいませんか / てもらいたい / てほしい",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D06",
+      "week": 3,
+      "day": 6,
+      "type": "grammar",
+      "pages": [
+        60,
+        61
+      ],
+      "title_ja": "今日はお酒を飲まないつもりです。",
+      "focus": "って / と思う / ようと思う",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W03D07",
+      "week": 3,
+      "day": 7,
+      "type": "grammar",
+      "pages": [
+        62,
+        63
+      ],
+      "title_ja": "まとめ問題",
+      "focus": "Review",
+      "is_review": true,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D01",
+      "week": 4,
+      "day": 1,
+      "type": "grammar",
+      "pages": [
+        66,
+        67
+      ],
+      "title_ja": "夏休みになったら、国に帰ります。",
+      "focus": "たら / ば / なら",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D02",
+      "week": 4,
+      "day": 2,
+      "type": "grammar",
+      "pages": [
+        68,
+        69
+      ],
+      "title_ja": "明日は天気がよさそうです。",
+      "focus": "ようだ / みたいだ / そうだ / でしょう",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D03",
+      "week": 4,
+      "day": 3,
+      "type": "grammar",
+      "pages": [
+        70,
+        71
+      ],
+      "title_ja": "この本は使いやすいです。",
+      "focus": "すぎる / やすい / にくい",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D04",
+      "week": 4,
+      "day": 4,
+      "type": "grammar",
+      "pages": [
+        72,
+        73
+      ],
+      "title_ja": "会社をやめさせられました。",
+      "focus": "受身 / 使役 / 使役受身",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D05",
+      "week": 4,
+      "day": 5,
+      "type": "grammar",
+      "pages": [
+        74,
+        75
+      ],
+      "title_ja": "かぎがかかっています。",
+      "focus": "自動詞 / 他動詞 / ている / てある",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D06",
+      "week": 4,
+      "day": 6,
+      "type": "grammar",
+      "pages": [
+        76,
+        77
+      ],
+      "title_ja": "試験に受からないかなあ。",
+      "focus": "んです / なあ / かなあ",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W04D07",
+      "week": 4,
+      "day": 7,
+      "type": "grammar",
+      "pages": [
+        78,
+        79
+      ],
+      "title_ja": "まとめ問題",
+      "focus": "Review",
+      "is_review": true,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D01",
+      "week": 5,
+      "day": 1,
+      "type": "reading",
+      "pages": [
+        82,
+        83
+      ],
+      "title_ja": "メールやメモを読みましょう",
+      "focus": "メール・メモ",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D02",
+      "week": 5,
+      "day": 2,
+      "type": "reading",
+      "pages": [
+        84,
+        85
+      ],
+      "title_ja": "説明を読みましょう",
+      "focus": "説明",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D03",
+      "week": 5,
+      "day": 3,
+      "type": "reading",
+      "pages": [
+        86,
+        87
+      ],
+      "title_ja": "案内や注意書きを読みましょう",
+      "focus": "案内・注意書き",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D04",
+      "week": 5,
+      "day": 4,
+      "type": "reading",
+      "pages": [
+        88,
+        89
+      ],
+      "title_ja": "長めの文章を読みましょう①",
+      "focus": "文章①",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D05",
+      "week": 5,
+      "day": 5,
+      "type": "reading",
+      "pages": [
+        90,
+        91
+      ],
+      "title_ja": "長めの文章を読みましょう②",
+      "focus": "文章②",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D06",
+      "week": 5,
+      "day": 6,
+      "type": "reading",
+      "pages": [
+        92,
+        93
+      ],
+      "title_ja": "広告やお知らせを読みましょう",
+      "focus": "広告・お知らせ",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W05D07",
+      "week": 5,
+      "day": 7,
+      "type": "reading",
+      "pages": [
+        94,
+        95
+      ],
+      "title_ja": "まとめ問題",
+      "focus": "Review",
+      "is_review": true,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D01",
+      "week": 6,
+      "day": 1,
+      "type": "listening",
+      "pages": [
+        98,
+        99
+      ],
+      "title_ja": "準備をしましょう①",
+      "focus": "準備①",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D02",
+      "week": 6,
+      "day": 2,
+      "type": "listening",
+      "pages": [
+        100,
+        101
+      ],
+      "title_ja": "準備をしましょう②",
+      "focus": "準備②",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D03",
+      "week": 6,
+      "day": 3,
+      "type": "listening",
+      "pages": [
+        102,
+        103
+      ],
+      "title_ja": "どれですか — 課題理解 —",
+      "focus": "どれですか",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D04",
+      "week": 6,
+      "day": 4,
+      "type": "listening",
+      "pages": [
+        104,
+        105
+      ],
+      "title_ja": "どうしてですか — ポイント理解 —",
+      "focus": "どうしてですか",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D05",
+      "week": 6,
+      "day": 5,
+      "type": "listening",
+      "pages": [
+        106,
+        107
+      ],
+      "title_ja": "何と言いますか — 発話表現 —",
+      "focus": "何と言いますか",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D06",
+      "week": 6,
+      "day": 6,
+      "type": "listening",
+      "pages": [
+        108,
+        109
+      ],
+      "title_ja": "どんな返事をしますか — 即時応答 —",
+      "focus": "どんな返事をしますか",
+      "is_review": false,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    },
+    {
+      "id": "W06D07",
+      "week": 6,
+      "day": 7,
+      "type": "listening",
+      "pages": [
+        110,
+        111
+      ],
+      "title_ja": "まとめ問題",
+      "focus": "Review",
+      "is_review": true,
+      "content_status": "metadata_confirmed; full content extraction pending validation"
+    }
+  ],
+  "references": [
+    {
+      "id": "conjugations",
+      "pages": [
+        113,
+        117
+      ]
+    },
+    {
+      "id": "index",
+      "pages": [
+        118,
+        119
+      ]
+    },
+    {
+      "id": "answers_explanations_scripts",
+      "pages": [
+        121,
+        132
+      ]
+    }
+  ]
 }
