@@ -197,14 +197,14 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
   Future<void> answer(int value,QuestionStep q) async {
     if(checked)return;
     final ok=value==q.answer;
-    setState(()=>{selected=value,checked=true});
+    setState(() { selected=value; checked=true; });
     if(ok) correct++; else wrong++;
     await widget.progress.recordAnswer(sessionId:widget.session.id,questionId:q.id,prompt:q.question,correct:ok);
     setState((){});
   }
 
   Future<void> next() async {
-    if(step<packet!.steps.length-1){setState(()=>{step++,selected=null,checked=false});return;}
+    if(step<packet!.steps.length-1){setState(() { step++; selected=null; checked=false; });return;}
     final total=correct+wrong;
     final passed=total>0 && correct/total>=.80;
     if(passed) await widget.progress.completeSession(widget.session.id,correct,wrong);
@@ -219,7 +219,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
       appBar:AppBar(title:Text('Día '+widget.session.day.toString()),actions:[Padding(padding:const EdgeInsets.only(right:16),child:Text('+'+widget.progress.stats.xp.toString()+' XP'))]),
       body:Column(children:[
         LinearProgressIndicator(value:(step+1)/packet!.steps.length,minHeight:6),
-        Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(()=>step++)):_QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
+        Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(() { step++; })):_QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
       ]),
     );
   });
