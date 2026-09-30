@@ -19,6 +19,15 @@ abstract final class AppColors {
   static const yellowSoft = Color(0xFFFFF1CC);
   static const redSoft = Color(0xFFFFE1E0);
   static const green = Color(0xFF35A27D);
+
+  // Compatibility aliases for the current app shell.
+  static const primary = violet;
+  static const primaryDeep = navy;
+  static const primarySoft = violetSoft;
+  static const roseSoft = coralSoft;
+  static const sageSoft = mintSoft;
+  static const text = ink;
+  static const mutedText = muted;
 }
 
 abstract final class AppTheme {
