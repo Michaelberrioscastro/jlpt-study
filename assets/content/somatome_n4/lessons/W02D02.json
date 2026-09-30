@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W02D02",
+    "week": 2,
+    "day": 2,
+    "type": "grammar",
+    "pages": [36, 37],
+    "title_ja": "習ったことを忘れてしまいました。",
+    "title_es": "He olvidado lo que aprendí.",
+    "focus": "ておく · てしまう · てみる",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las expresiones presentadas en las páginas 36–37. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {"id":"s1","type":"teach","label":"APRENDE","title":"Preparación: ておく","body":"Vておく expresa que una acción se realiza por adelantado como preparación. También puede expresar que una condición se mantiene tal como está.","pattern":"Vておく","example_ja":"お客さんが来る前に、そうじしておきます。","example_es":"Limpiaré antes de que lleguen los invitados.","tip":"En conversación, ておく puede aparecer como とく: 読んどく／しとく."},
+    {"id":"s2","type":"choice","title":"Prepararse con anticipación","question":"¿Cuál completa mejor: パーティーのためにビールを買って（　）ください。","options":["おいて","しまって","みて","いって"],"answer":0,"explanation":"買っておいてください significa comprarlo de antemano como preparación."},
+    {"id":"s3","type":"teach","label":"CLAVE","title":"Resultado o arrepentimiento: てしまう","body":"Vてしまう puede enfatizar que una acción quedó completamente realizada o expresar pesar por haber llegado a una situación no deseada.","pattern":"Vてしまう","example_ja":"残っていたワインを飲んでしまいました。","example_es":"Me bebí todo el vino que quedaba.","tip":"En conversación puede reducirse a ちゃう／じゃう."},
+    {"id":"s4","type":"choice","title":"Acción completada","question":"¿Cuál expresa que alguien se terminó todo el vino que quedaba?","options":["残っていたワインを飲んでおきました。","残っていたワインを飲んでみました。","残っていたワインを飲んでしまいました。","残っていたワインを飲まなくてもいいです。"],"answer":2,"explanation":"飲んでしまいました enfatiza que la acción quedó completamente realizada."},
+    {"id":"s5","type":"teach","label":"PRACTICA","title":"Probar a hacer algo: てみる","body":"Vてみる expresa que se intenta o se prueba hacer algo para comprobar qué sucede o cómo resulta.","pattern":"Vてみる","example_ja":"これ、おいしいですよ。食べてみてください。","example_es":"Esto está rico. Pruébalo.","tip":"No significa simplemente 'hacer': añade la idea de probar o intentar."},
+    {"id":"s6","type":"choice","title":"Intentar una experiencia","question":"¿Cuál significa 'Quiero probar alojarme en un ryokan japonés'?","options":["日本の旅館に泊まっておきたいです。","日本の旅館に泊まってみたいです。","日本の旅館に泊まってしまいたいです。","日本の旅館に泊まらないでください。"],"answer":1,"explanation":"泊まってみたい expresa el deseo de probar esa experiencia."}
+  ],
+  "reflection":{"title":"Mini misión","prompt_es":"Escribe una frase con ておく y otra con てみる. Luego escribe una frase con てしまう que exprese arrepentimiento.","reward":20}
+}
