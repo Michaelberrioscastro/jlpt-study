@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W04D04",
+    "week": 4,
+    "day": 4,
+    "type": "grammar",
+    "pages": [
+      72,
+      73
+    ],
+    "title_ja": "会社をやめさせられました。",
+    "title_es": "Me obligaron a dejar la empresa.",
+    "focus": "受身 / 使役 / 使役受身 / させてください",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 72–73. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "会社をやめさせられました。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 72–73 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "受身 / 使役 / 使役受身 / させてください",
+      "example_ja": "会社をやめさせられました。",
+      "example_es": "Me obligaron a dejar la empresa.",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W04D04-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "受身 / 使役 / 使役受身 / させてください",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es 受身 / 使役 / 使役受身 / させてください."
+    },
+    {
+      "id": "W04D04-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
