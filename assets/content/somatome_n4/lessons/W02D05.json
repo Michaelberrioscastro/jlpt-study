@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W02D05",
+    "week": 2,
+    "day": 5,
+    "type": "grammar",
+    "pages": [42, 43],
+    "title_ja": "日本語でどう言いますか。",
+    "title_es": "¿Cómo se dice en japonés?",
+    "focus": "こんな／そんな／あんな／どんな · こう／そう／ああ／どう · という · っていう",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las expresiones presentadas en las páginas 42–43. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {"id":"s1","type":"teach","label":"APRENDE","title":"こんな・そんな・あんな・どんな","body":"Estas formas describen el tipo o la manera de algo. こんな se refiere a algo cercano al hablante, そんな a algo relacionado con el interlocutor y あんな a algo más distante o compartido como referencia.","pattern":"こんなN · そんなN · あんなN · どんなN","example_ja":"私もこんな家に住みたいです。","example_es":"Yo también quiero vivir en una casa así.","tip":"También existen こんなに／そんなに／あんなに／どんなに para modificar la intensidad o cantidad."},
+    {"id":"s2","type":"choice","title":"Elegir el demostrativo","question":"A: テスト、全然できませんでした。 B: （　）むずかしかったんですか。","options":["こんなに","そんなに","あんなに","どんなに"],"answer":1,"explanation":"そんなに retoma la situación que acaba de mencionar el interlocutor."},
+    {"id":"s3","type":"teach","label":"CLAVE","title":"こう・そう・ああ・どう","body":"Estas formas funcionan como expresiones adverbiales para indicar 'de esta manera', 'de esa manera', 'de aquella manera' y preguntar 'cómo'.","pattern":"こう／そう／ああ／どう","example_ja":"どう書きますか。こう書きます。","example_es":"¿Cómo se escribe? Se escribe así.","tip":"En conversación, la relación con el contexto determina si corresponde こう, そう o ああ."},
+    {"id":"s4","type":"choice","title":"Forma de hacer algo","question":"A: これ、どう書きますか。 B: （　）書きます。","options":["こう","そう","ああ","どんな"],"answer":0,"explanation":"こう書きます significa 'se escribe así', mostrando la manera de hacerlo."},
+    {"id":"s5","type":"teach","label":"PRACTICA","title":"Decir 'que...' con という","body":"NというN y expresiones como どういう意味ですか permiten nombrar, identificar o preguntar por el significado de algo. En conversación aparece también っていう.","pattern":"NというN · どういう · 〜っていう","example_ja":"それはどういう意味ですか。","example_es":"¿Qué significa eso?","tip":"っていう es una forma coloquial frecuente de という."},
+    {"id":"s6","type":"choice","title":"Identificar un nombre","question":"¿Cuál expresa '¿Cómo se llama el restaurante que se llama Irori?'","options":["「いろり」っていう居酒屋はどうですか。","「いろり」こういう居酒屋はどうですか。","「いろり」そんな居酒屋はどうですか。","「いろり」どういう居酒屋はどうですか。"],"answer":0,"explanation":"っていう puede introducir el nombre con el sentido de 'que se llama...' en lenguaje coloquial."}
+  ],
+  "reflection":{"title":"Mini misión","prompt_es":"Escribe una pregunta con どういう y una respuesta con こう. Después crea una frase con こんなN.","reward":20}
+}
