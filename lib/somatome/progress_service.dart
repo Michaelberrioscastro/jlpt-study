@@ -225,13 +225,12 @@ class ProgressService extends ChangeNotifier {
 
   Future<void> setBook(String value) async {
     final selected = BookCatalog.forId(value);
-    if (selected.level != _level) return;
-    if (value == _bookId && _loaded) return;
-
-    // Persist the requested book before reloading. load() restores the selected
-    // book from SharedPreferences, so saving first prevents it from snapping
-    // back to the previously selected N4 book.
     final p = _prefs ??= await SharedPreferences.getInstance();
+
+    if (selected.level != _level) {
+      _level = selected.level;
+    }
+
     await p.setString('selected_book_' + _level, value);
 
     _bookId = value;
