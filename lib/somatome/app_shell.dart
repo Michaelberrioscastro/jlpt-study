@@ -59,7 +59,7 @@ class _AppShellState extends State<AppShell> {
                       child: Center(
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 1180),
-                          child: content,
+                          child: _AmbientCanvas(child: content),
                         ),
                       ),
                     ),
@@ -111,6 +111,27 @@ class _AppShellState extends State<AppShell> {
   );
 }
 
+class _AmbientCanvas extends StatelessWidget {
+  final Widget child;
+  const _AmbientCanvas({required this.child});
+  @override
+  Widget build(BuildContext context) => Stack(children:[
+    Positioned(top:-120,right:-90,child:IgnorePointer(child:Container(
+      width:310,height:310,
+      decoration:BoxDecoration(shape:BoxShape.circle,gradient:RadialGradient(
+        colors:[AppColors.violet.withOpacity(.13),AppColors.violet.withOpacity(0)],
+      )),
+    ))),
+    Positioned(bottom:-150,left:-110,child:IgnorePointer(child:Container(
+      width:340,height:340,
+      decoration:BoxDecoration(shape:BoxShape.circle,gradient:RadialGradient(
+        colors:[AppColors.coral.withOpacity(.08),AppColors.coral.withOpacity(0)],
+      )),
+    ))),
+    child,
+  ]);
+}
+
 class _LevelSwitcher extends StatelessWidget {
   final String level;
   final ValueChanged<String> onChanged;
@@ -131,8 +152,15 @@ class _LevelChoice extends StatelessWidget {
   @override
   Widget build(BuildContext context)=>InkWell(
     onTap:selected?null:onTap,borderRadius:BorderRadius.circular(11),
-    child:AnimatedContainer(duration:const Duration(milliseconds:180),padding:const EdgeInsets.symmetric(vertical:9),
-      decoration:BoxDecoration(color:selected?AppColors.navy:Colors.transparent,borderRadius:BorderRadius.circular(11)),
+    child:AnimatedContainer(
+      duration:const Duration(milliseconds:260),
+      curve:Curves.easeOutCubic,
+      padding:const EdgeInsets.symmetric(vertical:9),
+      decoration:BoxDecoration(
+        gradient:selected?const LinearGradient(colors:[AppColors.navy,AppColors.navySoft],begin:Alignment.topLeft,end:Alignment.bottomRight):null,
+        borderRadius:BorderRadius.circular(13),
+        boxShadow:selected?[BoxShadow(color:AppColors.navy.withOpacity(.18),blurRadius:12,offset:const Offset(0,4))]:null,
+      ),
       child:Text(label,textAlign:TextAlign.center,style:TextStyle(color:selected?Colors.white:AppColors.muted,fontWeight:FontWeight.w900,fontSize:12))),
   );
 }
@@ -398,7 +426,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
+                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColors.coralSoft,
                   borderRadius: BorderRadius.circular(17),
@@ -712,12 +740,15 @@ class _QuickMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 13),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeOutCubic,
+      padding: const EdgeInsets.symmetric(vertical: 15),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(19),
+        color: AppColors.surface.withOpacity(.94),
+        borderRadius: BorderRadius.circular(22),
         border: Border.all(color: AppColors.border),
+        boxShadow: [BoxShadow(color:color.withOpacity(.08),blurRadius:20,offset:const Offset(0,8))],
       ),
       child: Column(
         children: [
@@ -891,13 +922,38 @@ class _SessionTile extends StatelessWidget {
   const _SessionTile({required this.session,required this.progress,required this.onOpen});
   @override Widget build(BuildContext context){
     final done=progress.isCompleted(session.id), unlocked=progress.isUnlocked(session.id);
-    return ListTile(
-      dense:true,contentPadding:const EdgeInsets.symmetric(horizontal:2),
-      leading:CircleAvatar(radius:16,backgroundColor:done?AppColors.sageSoft:unlocked?AppColors.primarySoft:const Color(0xFFEDEAE7),child:Icon(done?Icons.check_rounded:unlocked?Icons.play_arrow_rounded:Icons.lock_rounded,size:17,color:done?const Color(0xFF4B8A5A):unlocked?AppColors.primary:AppColors.muted)),
-      title:Text('Día '+session.day.toString()+' · '+session.titleJa,maxLines:1,overflow:TextOverflow.ellipsis,style:const TextStyle(fontWeight:FontWeight.w700)),
-      subtitle:Text(session.focus,maxLines:1,overflow:TextOverflow.ellipsis),
-      trailing:done?const Icon(Icons.verified_rounded,color:Color(0xFF4B8A5A)):unlocked?const Icon(Icons.chevron_right_rounded):null,
+    return InkWell(
       onTap:unlocked?()=>onOpen(session):null,
+      borderRadius:BorderRadius.circular(18),
+      child:AnimatedContainer(
+        duration:const Duration(milliseconds:220),
+        margin:const EdgeInsets.only(bottom:6),
+        padding:const EdgeInsets.symmetric(horizontal:10,vertical:9),
+        decoration:BoxDecoration(
+          color:done?AppColors.mintSoft.withOpacity(.45):unlocked?AppColors.primarySoft.withOpacity(.45):Colors.transparent,
+          borderRadius:BorderRadius.circular(18),
+          border:Border.all(color:done?AppColors.mint.withOpacity(.18):unlocked?AppColors.violet.withOpacity(.16):Colors.transparent),
+        ),
+        child:Row(children:[
+          Container(
+            width:36,height:36,
+            decoration:BoxDecoration(
+              shape:BoxShape.circle,
+              gradient:done?const LinearGradient(colors:[AppColors.mint,AppColors.green]):unlocked?const LinearGradient(colors:[AppColors.violet,AppColors.navySoft]):null,
+              color:!done&&!unlocked?const Color(0xFFEDEAE7):null,
+            ),
+            child:Icon(done?Icons.check_rounded:unlocked?Icons.play_arrow_rounded:Icons.lock_rounded,size:17,color:done||unlocked?Colors.white:AppColors.muted),
+          ),
+          const SizedBox(width:11),
+          Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+            Text('Día '+session.day.toString()+' · '+session.titleJa,maxLines:1,overflow:TextOverflow.ellipsis,style:const TextStyle(fontWeight:FontWeight.w800,fontSize:13)),
+            const SizedBox(height:3),
+            Text(session.focus,maxLines:1,overflow:TextOverflow.ellipsis,style:const TextStyle(color:AppColors.muted,fontSize:10)),
+          ])),
+          if(done) const Icon(Icons.verified_rounded,color:AppColors.green,size:20)
+          else if(unlocked) const Icon(Icons.arrow_forward_ios_rounded,color:AppColors.violet,size:14),
+        ]),
+      ),
     );
   }
 }
@@ -958,7 +1014,14 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
     return Scaffold(
       appBar:AppBar(title:Text('Día '+widget.session.day.toString()),actions:[Padding(padding:const EdgeInsets.only(right:16),child:Text('+'+widget.progress.stats.xp.toString()+' XP'))]),
       body:Column(children:[
-        LinearProgressIndicator(value:(step+1)/packet!.steps.length,minHeight:6),
+        Padding(
+          padding:const EdgeInsets.symmetric(horizontal:18,vertical:8),
+          child:Row(children:[
+            Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:(step+1)/packet!.steps.length,minHeight:8,backgroundColor:AppColors.border))),
+            const SizedBox(width:10),
+            Text((step+1).toString()+'/'+packet!.steps.length.toString(),style:const TextStyle(fontSize:11,fontWeight:FontWeight.w900,color:AppColors.muted)),
+          ]),
+        ),
         Expanded(child:AnimatedSwitcher(duration:const Duration(milliseconds:220),child:item is TeachStep?_TeachCard(key:ValueKey(step),step:item,onNext:()=>setState(() { step++; })):_QuestionCard(key:ValueKey(step),step:item as QuestionStep,selected:selected,checked:checked,onAnswer:answer,onNext:next))),
       ]),
     );
@@ -973,7 +1036,15 @@ class _TeachCard extends StatelessWidget {
     Text(step.title,style:Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight:FontWeight.w900)),
     const SizedBox(height:12),Text(step.body,style:const TextStyle(fontSize:17,height:1.45)),
     const SizedBox(height:18),
-    Container(padding:const EdgeInsets.all(20),decoration:BoxDecoration(color:AppColors.primarySoft,borderRadius:BorderRadius.circular(22)),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+    Container(
+      padding:const EdgeInsets.all(22),
+      decoration:BoxDecoration(
+        gradient:const LinearGradient(begin:Alignment.topLeft,end:Alignment.bottomRight,colors:[AppColors.violetSoft,Color(0xFFFFF7F1)]),
+        borderRadius:BorderRadius.circular(26),
+        border:Border.all(color:AppColors.violet.withOpacity(.10)),
+        boxShadow:[BoxShadow(color:AppColors.violet.withOpacity(.08),blurRadius:24,offset:const Offset(0,10))],
+      ),
+      child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       Text(step.pattern,style:const TextStyle(fontSize:20,fontWeight:FontWeight.w900)),const SizedBox(height:13),Text(step.exampleJa,style:const TextStyle(fontSize:21,fontWeight:FontWeight.w900)),const SizedBox(height:5),Text(step.exampleEs),
     ])),
     const SizedBox(height:14),Card(child:Padding(padding:const EdgeInsets.all(15),child:Row(crossAxisAlignment:CrossAxisAlignment.start,children:[const Icon(Icons.lightbulb_rounded,color:AppColors.primary),const SizedBox(width:10),Expanded(child:Text(step.tip))]))),
@@ -1093,13 +1164,39 @@ class _QuestionCard extends StatelessWidget {
 class _ResultDialog extends StatelessWidget {
   final bool passed; final int correct,wrong; final VoidCallback onClose;
   const _ResultDialog({required this.passed,required this.correct,required this.wrong,required this.onClose});
-  @override Widget build(BuildContext context)=>Dialog(child:Padding(padding:const EdgeInsets.all(24),child:Column(mainAxisSize:MainAxisSize.min,children:[
-    Icon(passed?Icons.emoji_events_rounded:Icons.refresh_rounded,size:64,color:AppColors.primary),const SizedBox(height:12),
-    Text(passed?'¡Nivel superado!':'Casi lo tienes',style:Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:7),
-    Text(correct.toString()+' buenas · '+wrong.toString()+' malas',style:const TextStyle(fontSize:18,fontWeight:FontWeight.w800)),const SizedBox(height:5),
-    Text(passed?'Siguiente sesión desbloqueada.':'Necesitas 80% para desbloquear la siguiente sesión.',textAlign:TextAlign.center),const SizedBox(height:20),
-    SizedBox(width:double.infinity,child:FilledButton(onPressed:onClose,child:Text(passed?'CONTINUAR':'REINTENTAR'))),
-  ])));
+  @override Widget build(BuildContext context)=>Dialog(
+    shape:RoundedRectangleBorder(borderRadius:BorderRadius.circular(32)),
+    child:Padding(
+      padding:const EdgeInsets.fromLTRB(26,30,26,24),
+      child:TweenAnimationBuilder<double>(
+        tween:Tween(begin:.88,end:1),
+        duration:const Duration(milliseconds:420),
+        curve:Curves.easeOutBack,
+        builder:(context,scale,child)=>Transform.scale(scale:scale,child:child),
+        child:Column(mainAxisSize:MainAxisSize.min,children:[
+          Container(
+            width:82,height:82,
+            decoration:BoxDecoration(
+              shape:BoxShape.circle,
+              gradient:LinearGradient(colors:passed?[AppColors.yellow,AppColors.coral]:[AppColors.violet,AppColors.navySoft]),
+              boxShadow:[BoxShadow(color:(passed?AppColors.coral:AppColors.violet).withOpacity(.25),blurRadius:25,offset:const Offset(0,8))],
+            ),
+            child:Icon(passed?Icons.emoji_events_rounded:Icons.refresh_rounded,size:42,color:Colors.white),
+          ),
+          const SizedBox(height:18),
+          Text(passed?'¡Sesión completada!':'Casi lo tienes',style:Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight:FontWeight.w900)),
+          const SizedBox(height:8),
+          if(passed) const Text('+ XP  ·  Racha en marcha',style:TextStyle(color:AppColors.coral,fontWeight:FontWeight.w900)),
+          const SizedBox(height:8),
+          Text(correct.toString()+' correctas  ·  '+wrong.toString()+' errores',style:const TextStyle(fontSize:17,fontWeight:FontWeight.w800)),
+          const SizedBox(height:8),
+          Text(passed?'Siguiente sesión desbloqueada.':'Necesitas 80% para desbloquear la siguiente sesión.',textAlign:TextAlign.center,style:const TextStyle(color:AppColors.muted)),
+          const SizedBox(height:22),
+          SizedBox(width:double.infinity,child:FilledButton(onPressed:onClose,child:Text(passed?'CONTINUAR':'REINTENTAR'))),
+        ]),
+      ),
+    ),
+  );
 }
 
 class ReviewPage extends StatelessWidget {
