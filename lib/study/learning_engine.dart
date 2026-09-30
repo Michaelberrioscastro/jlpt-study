@@ -271,7 +271,7 @@ class LearningEngine {
 
   static List<String> conceptsForFocus(String focus) {
     final parts = focus
-        .split(RegExp(r'\\s*[·/／,、]+\\s*'))
+        .split(RegExp(r'\s*[·/／,、]+\s*'))
         .map(normalizeConcept)
         .where((x) => x.isNotEmpty && x != 'Review')
         .toSet()
