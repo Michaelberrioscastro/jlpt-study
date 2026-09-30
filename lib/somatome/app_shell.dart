@@ -209,7 +209,7 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
     final passed=total>0 && correct/total>=.80;
     if(passed) await widget.progress.completeSession(widget.session.id,correct,wrong);
     if(!mounted)return;
-    showDialog(context:context,barrierDismissible:false,builder:(_)=>_ResultDialog(passed:passed,correct:correct,wrong:wrong,onClose:(){Navigator.pop(context);Navigator.pop(context);}));
+    showDialog(context:context,barrierDismissible:false,builder:(_)=>_ResultDialog(passed:passed,correct:correct,wrong:wrong,onClose:(){Navigator.pop(context);if(passed){Navigator.pop(context);}else{setState((){step=0;correct=0;wrong=0;selected=null;checked=false;});}}));
   }
 
   @override Widget build(BuildContext context)=>FutureBuilder<LessonPacket>(future:future,builder:(_,snap){
@@ -252,7 +252,7 @@ class _QuestionCard extends StatelessWidget {
       Text(step.question,style:const TextStyle(fontSize:18,fontWeight:FontWeight.w700,height:1.4)),const SizedBox(height:18),
       for(var i=0;i<step.options.length;i++) Padding(padding:const EdgeInsets.only(bottom:10),child:OutlinedButton(
         style:OutlinedButton.styleFrom(alignment:Alignment.centerLeft,padding:const EdgeInsets.symmetric(horizontal:16,vertical:16),side:BorderSide(color:checked&&i==step.answer?const Color(0xFF4B8A5A):checked&&i==selected?const Color(0xFFC85A5A):AppColors.border,width:checked&&(i==step.answer||i==selected)?2:1)),
-        onPressed:checked?null:()=>onAnswer(i,step),child:Text(step.options[i],style:const TextStyle(fontSize:16)))),
+        onPressed:checked?null:(){ onAnswer(i,step); },child:Text(step.options[i],style:const TextStyle(fontSize:16)))),
       if(checked)...[
         const SizedBox(height:4),Card(color:ok?AppColors.sageSoft:AppColors.roseSoft,child:Padding(padding:const EdgeInsets.all(15),child:Row(crossAxisAlignment:CrossAxisAlignment.start,children:[Icon(ok?Icons.check_circle_rounded:Icons.info_outline_rounded,color:ok?const Color(0xFF4B8A5A):const Color(0xFFC85A5A)),const SizedBox(width:10),Expanded(child:Text(step.explanation))]))),
         const SizedBox(height:15),SizedBox(width:double.infinity,child:FilledButton(onPressed:onNext,child:const Text('SIGUIENTE'))),
