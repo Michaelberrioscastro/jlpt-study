@@ -1,0 +1,131 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W01D07",
+    "week": 1,
+    "day": 7,
+    "type": "review",
+    "pages": [30, 31],
+    "title_ja": "まとめ問題",
+    "title_es": "Repaso de la semana 1",
+    "focus": "Repaso integrado de la gramática de la semana 1",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Sesión de repaso basada en los contenidos y formatos de práctica de las páginas 30–31. Las preguntas de la app son ejercicios originales y no transcripciones literales del libro."
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "type": "teach",
+      "label": "REPASA",
+      "title": "La semana 1 en una mirada",
+      "body": "Esta semana reúne expresiones para cantidad y límite, acciones simultáneas, estados y momentos, experiencias y decisiones. Antes de responder, identifica qué relación expresa la oración.",
+      "pattern": "しか〜ない · まで／までに · 〜ながら · 〜ところ · 〜たことがある · 〜ことにする／なる",
+      "example_ja": "日本にいるうちに、いろいろなところへ行きたいです。",
+      "example_es": "Mientras esté en Japón, quiero ir a distintos lugares.",
+      "tip": "No memorices solo la traducción: fíjate en la forma verbal que aparece antes de cada patrón."
+    },
+    {
+      "id": "s2",
+      "type": "choice",
+      "title": "Cantidad limitada",
+      "question": "¿Cuál completa mejor la frase: この店では水しか（　）。",
+      "options": [
+        "ありません",
+        "あります",
+        "ありましたか",
+        "あることにします"
+      ],
+      "answer": 0,
+      "explanation": "しか〜ない expresa una cantidad o conjunto limitado y normalmente se combina con una forma negativa."
+    },
+    {
+      "id": "s3",
+      "type": "choice",
+      "title": "Límite temporal",
+      "question": "¿Cuál significa 'Por favor, ven antes de las nueve'?",
+      "options": [
+        "9時まで来てください。",
+        "9時までに来てください。",
+        "9時のところに来てください。",
+        "9時ながら来てください。"
+      ],
+      "answer": 1,
+      "explanation": "までに indica el momento límite en que una acción debe quedar realizada."
+    },
+    {
+      "id": "s4",
+      "type": "choice",
+      "title": "Acciones simultáneas",
+      "question": "¿Cuál expresa 'Estudio mientras escucho música'?",
+      "options": [
+        "音楽を聞いてから勉強しています。",
+        "音楽を聞きながら勉強しています。",
+        "音楽を聞くことになって勉強しています。",
+        "音楽を聞いたことがあって勉強しています。"
+      ],
+      "answer": 1,
+      "explanation": "Vながら expresa que dos acciones se realizan simultáneamente, con la acción principal en la segunda parte."
+    },
+    {
+      "id": "s5",
+      "type": "choice",
+      "title": "Momento de una acción",
+      "question": "¿Cuál expresa que una acción está a punto de comenzar?",
+      "options": [
+        "これから出かけるところです。",
+        "これから出かけたことがあります。",
+        "これから出かけることになりました。",
+        "これから出かけないしかありません。"
+      ],
+      "answer": 0,
+      "explanation": "Vるところです presenta una acción que está a punto de comenzar."
+    },
+    {
+      "id": "s6",
+      "type": "choice",
+      "title": "Experiencia",
+      "question": "¿Cuál significa 'Nunca he estado en Canadá'?",
+      "options": [
+        "カナダに行くことがあります。",
+        "カナダに行ったことがありません。",
+        "カナダに行くことにしません。",
+        "カナダに行っているところではありません。"
+      ],
+      "answer": 1,
+      "explanation": "Vたことがない expresa que no se ha tenido esa experiencia."
+    },
+    {
+      "id": "s7",
+      "type": "choice",
+      "title": "Decisión propia",
+      "question": "Quieres decir 'Decidí estudiar japonés todos los días'.",
+      "options": [
+        "毎日日本語を勉強することにしました。",
+        "毎日日本語を勉強することになりました。",
+        "毎日日本語を勉強したことがあります。",
+        "毎日日本語を勉強するところでした。"
+      ],
+      "answer": 0,
+      "explanation": "ことにする presenta una decisión tomada por el propio hablante."
+    },
+    {
+      "id": "s8",
+      "type": "choice",
+      "title": "Repaso final",
+      "question": "¿Cuál frase es natural para decir 'A veces no desayuno'?",
+      "options": [
+        "朝ご飯を食べたことがあります。",
+        "朝ご飯を食べないことがあります。",
+        "朝ご飯を食べないことにします。",
+        "朝ご飯を食べないところです。"
+      ],
+      "answer": 1,
+      "explanation": "Vる／Vない + ことがある puede expresar que una situación ocurre ocasionalmente."
+    }
+  ],
+  "reflection": {
+    "title": "Cierre de la semana",
+    "prompt_es": "Escribe una frase con しか〜ない y otra con ことにする. Después explica en español qué diferencia de significado tienen.",
+    "reward": 20
+  }
+}
