@@ -153,9 +153,9 @@ class _DesktopRail extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'N4',
+                      level,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
@@ -165,7 +165,7 @@ class _DesktopRail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 11),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -704,7 +704,7 @@ class _HomeWeekRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sessions = LessonCatalog.sessions.where((s) => s.week == week).toList();
+    final sessions = StudyCatalog.sessions.where((s) => s.week == week).toList();
     final done = sessions.where((s) => progress.isCompleted(s.id)).length;
     final unlocked = progress.weekUnlocked(week);
     final complete = progress.weekCompleted(week);
@@ -761,7 +761,7 @@ class _HomeWeekRow extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            done.toString() + '/7',
+            done.toString() + '/' + sessions.length.toString(),
             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.muted),
           ),
         ],
@@ -789,7 +789,7 @@ class _Hero extends StatelessWidget {
       const SizedBox(height:4),
       Text(session.focus,style:const TextStyle(color:AppColors.muted)),
       const SizedBox(height:16),
-      Row(children:[Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:progress.sessionProgress,minHeight:8))),const SizedBox(width:10),Text(progress.completedCount.toString()+'/42',style:const TextStyle(fontWeight:FontWeight.w900))]),
+      Row(children:[Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:progress.sessionProgress,minHeight:8))),const SizedBox(width:10),Text(progress.completedCount.toString()+'/'+StudyCatalog.totalSessions.toString(),style:const TextStyle(fontWeight:FontWeight.w900))]),
       const SizedBox(height:16),
       SizedBox(width:double.infinity,child:FilledButton.icon(onPressed:onStart,icon:const Icon(Icons.play_arrow_rounded),label:const Text('CONTINUAR'))),
     ]),
@@ -805,7 +805,7 @@ class CoursePage extends StatelessWidget {
     const SizedBox(height:18),
     _CourseSummary(progress:progress),
     const SizedBox(height:18),
-    for(var w=1;w<=6;w++) _WeekCard(week:w,progress:progress,onOpen:onOpen),
+    for(var w=1;w<=(progress.studyLevel=='N3'?8:6);w++) _WeekCard(week:w,progress:progress,onOpen:onOpen),
   ]));
 }
 
@@ -813,7 +813,7 @@ class _CourseSummary extends StatelessWidget {
   final ProgressService progress; const _CourseSummary({required this.progress});
   @override Widget build(BuildContext context)=>Card(child:Padding(padding:const EdgeInsets.all(17),child:Row(children:[
     SizedBox(width:72,height:72,child:Stack(alignment:Alignment.center,children:[CircularProgressIndicator(value:progress.sessionProgress,strokeWidth:8),Text((progress.sessionProgress*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900))])),
-    const SizedBox(width:15),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(progress.completedCount.toString()+' / 42 sesiones',style:const TextStyle(fontSize:19,fontWeight:FontWeight.w900)),const SizedBox(height:3),Text('Nivel '+progress.stats.level.toString()+' · '+progress.stats.xp.toString()+' XP',style:const TextStyle(color:AppColors.muted))])),
+    const SizedBox(width:15),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(progress.completedCount.toString()+' / '+StudyCatalog.totalSessions.toString()+' sesiones',style:const TextStyle(fontSize:19,fontWeight:FontWeight.w900)),const SizedBox(height:3),Text('Nivel '+progress.stats.level.toString()+' · '+progress.stats.xp.toString()+' XP',style:const TextStyle(color:AppColors.muted))])),
   ])));
 }
 
@@ -821,17 +821,17 @@ class _WeekCard extends StatelessWidget {
   final int week; final ProgressService progress; final void Function(SessionInfo) onOpen;
   const _WeekCard({required this.week,required this.progress,required this.onOpen});
   @override Widget build(BuildContext context){
-    final sessions=LessonCatalog.sessions.where((s)=>s.week==week).toList();
+    final sessions=StudyCatalog.sessions.where((s)=>s.week==week).toList();
     final done=sessions.where((s)=>progress.isCompleted(s.id)).length;
     final unlocked=sessions.any((s)=>progress.isUnlocked(s.id));
-    final type=week<=4?'Gramática':week==5?'Reading':'Listening';
+    final type=progress.studyLevel=='N3' ? (week<=2?'Gramática':week<=4?'Consolidación':week==5?'Construcción':week<=7?'Gramática textual':'Repaso y simulacros') : (week<=4?'Gramática':week==5?'Reading':'Listening');
     return Card(margin:const EdgeInsets.only(bottom:12),child:Padding(padding:const EdgeInsets.all(15),child:Column(children:[
       Row(children:[
         CircleAvatar(backgroundColor:unlocked?AppColors.primarySoft:const Color(0xFFEDEAE7),child:Text(week.toString(),style:TextStyle(fontWeight:FontWeight.w900,color:unlocked?AppColors.primary:AppColors.muted))),
-        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Semana '+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/7',style:const TextStyle(color:AppColors.muted))])),
+        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Semana '+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
         Text((done/7*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900)),
       ]),
-      const SizedBox(height:10),ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/7,minHeight:7)),
+      const SizedBox(height:10),ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/sessions.length,minHeight:7)),
       const SizedBox(height:8),
       for(final s in sessions) _SessionTile(session:s,progress:progress,onOpen:onOpen),
     ])));
@@ -868,11 +868,11 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
 
   @override void initState(){super.initState();future=_load();}
   Future<LessonPacket> _load() async {
-    if(widget.session.id=='W01D01'){
-      final raw=await rootBundle.loadString('assets/content/somatome_n4/lessons/W01D01.json');
+    if(widget.session.id=='W01D01' || widget.session.id=='P1L01'){
+      final raw=await rootBundle.loadString(widget.session.id=='P1L01' ? 'assets/content/n3/lessons/P1L01.json' : 'assets/content/somatome_n4/lessons/W01D01.json');
       packet=LessonPacket.fromJson(jsonDecode(raw) as Map<String,dynamic>,widget.session);
     }else{
-      packet=LessonCatalog.buildPacket(widget.session);
+      packet=StudyCatalog.buildPacket(widget.session);
     }
     return packet!;
   }
@@ -1070,7 +1070,7 @@ class ProgressPage extends StatelessWidget {
       _Bar(label:'Buenas respuestas',value:s.correct,max:s.totalAnswers==0?1:s.totalAnswers),_Bar(label:'Malas respuestas',value:s.wrong,max:s.totalAnswers==0?1:s.totalAnswers),_Bar(label:'Errores corregidos',value:s.corrected,max:s.wrong==0?1:s.wrong),
     ]))),
     const SizedBox(height:22),Text('Por semana',style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:8),
-    for(var w=1;w<=6;w++) _WeekRow(week:w,progress:progress),
+    for(var w=1;w<=(progress.studyLevel=='N3'?8:6);w++) _WeekRow(week:w,progress:progress),
   ]));}
 }
 
@@ -1113,7 +1113,7 @@ class _Bar extends StatelessWidget {
 
 class _WeekRow extends StatelessWidget {
   final int week; final ProgressService progress; const _WeekRow({required this.week,required this.progress});
-  @override Widget build(BuildContext context){final done=LessonCatalog.sessions.where((s)=>s.week==week&&progress.isCompleted(s.id)).length;return Padding(padding:const EdgeInsets.only(bottom:10),child:Row(children:[SizedBox(width:82,child:Text('Semana '+week.toString(),style:const TextStyle(fontWeight:FontWeight.w800))),Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/7,minHeight:8))),const SizedBox(width:10),Text(done.toString()+'/7',style:const TextStyle(fontWeight:FontWeight.w900))]));}
+  @override Widget build(BuildContext context){final sessions=StudyCatalog.sessions.where((s)=>s.week==week).toList();final done=sessions.where((s)=>progress.isCompleted(s.id)).length;return Padding(padding:const EdgeInsets.only(bottom:10),child:Row(children:[SizedBox(width:82,child:Text('Semana '+week.toString(),style:const TextStyle(fontWeight:FontWeight.w800))),Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/7,minHeight:8))),const SizedBox(width:10),Text(done.toString()+'/7',style:const TextStyle(fontWeight:FontWeight.w900))]));}
 }
 
 class _Path extends StatelessWidget {
@@ -1162,7 +1162,7 @@ class _Path extends StatelessWidget {
         ),
       );
 
-      if (i < 6) {
+      if (i < (progress.studyLevel == 'N3' ? 8 : 6)) {
         children.add(const Expanded(child: Divider()));
       }
     }
