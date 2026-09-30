@@ -7,8 +7,8 @@ void main() {
   runApp(const JLPTStudyApp());
 }
 
-class JLPTN4StudyApp extends StatelessWidget {
-  const JLPTN4StudyApp({super.key});
+class JLPTStudyApp extends StatelessWidget {
+  const JLPTStudyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
