@@ -111,7 +111,6 @@ abstract final class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surface,
         indicatorColor: AppColors.violetSoft,
-        labelTextStyle: const WidgetStatePropertyAll(TextStyle(color: AppColors.ink, fontWeight: FontWeight.w800)),
         elevation: 0,
         labelTextStyle: const WidgetStatePropertyAll(
           TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: AppColors.ink),
@@ -129,7 +128,6 @@ abstract final class AppTheme {
         side: const BorderSide(color: AppColors.border),
         labelStyle: const TextStyle(color: AppColors.ink, fontWeight: FontWeight.w800),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        labelStyle: const TextStyle(fontWeight: FontWeight.w800),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
