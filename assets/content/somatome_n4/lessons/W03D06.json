@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W03D06",
+    "week": 3,
+    "day": 6,
+    "type": "grammar",
+    "pages": [
+      60,
+      61
+    ],
+    "title_ja": "今日はお酒を飲まないつもりです。",
+    "title_es": "Hoy no pienso beber alcohol.",
+    "focus": "って / と思う / ようと思う / つもり",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de la organización y puntos de las páginas 60–61. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "APRENDE",
+      "title": "今日はお酒を飲まないつもりです。",
+      "body": "Esta sesión sigue los puntos gramaticales indicados en las páginas 60–61 del libro. Reconoce primero la función y después selecciona la forma adecuada.",
+      "pattern": "って / と思う / ようと思う / つもり",
+      "example_ja": "お酒を飲まないつもりです。",
+      "example_es": "Hoy no pienso beber alcohol.",
+      "tip": "Las preguntas de esta app son ejercicios originales; no son una transcripción literal del libro."
+    },
+    {
+      "id": "W03D06-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal de esta sesión?",
+      "options": [
+        "って / と思う / ようと思う / つもり",
+        "Contenido de otra semana",
+        "Pronunciación aislada"
+      ],
+      "answer": 0,
+      "explanation": "El foco de esta sesión es って / と思う / ようと思う / つもり."
+    },
+    {
+      "id": "W03D06-q2",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene comprobar antes de elegir una forma?",
+      "options": [
+        "La función y el contexto",
+        "Solo la traducción literal",
+        "Solo la longitud de la palabra"
+      ],
+      "answer": 0,
+      "explanation": "La función y el contexto permiten distinguir formas cercanas."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica con tus palabras el punto principal y crea un ejemplo propio.",
+    "reward": 20
+  }
+}
