@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_theme.dart';
 import '../study/study_catalog.dart';
+import '../study/book_catalog.dart';
 import 'progress_service.dart';
 
 class AppShell extends StatefulWidget {
@@ -52,6 +53,8 @@ class _AppShellState extends State<AppShell> {
                     onChanged: (v) => setState(() => tab = v),
                     level: progress.studyLevel,
                     onLevelChanged: (v) => progress.setLevel(v),
+                    book: progress.book,
+                    onBookChanged: (v) => progress.setBook(v),
                   ),
                   Expanded(
                     child: Container(
@@ -73,7 +76,7 @@ class _AppShellState extends State<AppShell> {
             backgroundColor: AppColors.background,
             body: Column(
               children: [
-                _MobileLevelBar(level: progress.studyLevel, onChanged: (v) => progress.setLevel(v)),
+                _MobileLevelBar(level: progress.studyLevel, onChanged: (v) => progress.setLevel(v), book: progress.book, onBookChanged: (v) => progress.setBook(v)),
                 Expanded(child: content),
               ],
             ),
@@ -166,23 +169,87 @@ class _LevelChoice extends StatelessWidget {
 }
 class _MobileLevelBar extends StatelessWidget {
   final String level; final ValueChanged<String> onChanged;
-  const _MobileLevelBar({required this.level,required this.onChanged});
+  final StudyBook book; final ValueChanged<String> onBookChanged;
+  const _MobileLevelBar({required this.level,required this.onChanged,required this.book,required this.onBookChanged});
   @override
   Widget build(BuildContext context)=>SafeArea(bottom:false,child:Padding(
     padding:const EdgeInsets.fromLTRB(16,10,16,6),
-    child:Row(children:[
-      Expanded(child:Text(level=='N4'?'Somatome N4':'Shin Kanzen Master N3',style:const TextStyle(fontWeight:FontWeight.w900,fontSize:15))),
-      SizedBox(width:142,child:_LevelSwitcher(level:level,onChanged:onChanged)),
+    child:Column(children:[
+      Row(children:[
+        Expanded(child:Text('JLPT '+level,style:const TextStyle(fontWeight:FontWeight.w900,fontSize:15))),
+        SizedBox(width:142,child:_LevelSwitcher(level:level,onChanged:onChanged)),
+      ]),
+      const SizedBox(height:7),
+      _BookSwitcher(book:book,onChanged:onBookChanged),
     ]),
   ));
 }
+class _BookSwitcher extends StatelessWidget {
+  final StudyBook book;
+  final ValueChanged<String> onChanged;
+
+  const _BookSwitcher({required this.book, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final books = BookCatalog.forLevel(book.level);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(12, 9, 8, 9),
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: book.id,
+          isExpanded: true,
+          isDense: true,
+          icon: const Icon(Icons.expand_more_rounded, size: 18, color: AppColors.muted),
+          borderRadius: BorderRadius.circular(16),
+          items: [
+            for (final item in books)
+              DropdownMenuItem<String>(
+                value: item.id,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.shortTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      item.subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 8, color: AppColors.muted, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+          onChanged: (value) {
+            if (value != null) onChanged(value);
+          },
+        ),
+      ),
+    );
+  }
+}
+
 class _DesktopRail extends StatelessWidget {
   final int selected;
   final ValueChanged<int> onChanged;
   final String level;
   final ValueChanged<String> onLevelChanged;
+  final StudyBook book;
+  final ValueChanged<String> onBookChanged;
 
-  const _DesktopRail({required this.selected, required this.onChanged, required this.level, required this.onLevelChanged});
+  const _DesktopRail({required this.selected, required this.onChanged, required this.level, required this.onLevelChanged, required this.book, required this.onBookChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +315,7 @@ class _DesktopRail extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      level == 'N3' ? 'Shin Kanzen Master' : 'Somatome',
+                      book.shortTitle,
                       style: TextStyle(color: AppColors.muted, fontSize: 11),
                     ),
                   ],
@@ -257,6 +324,8 @@ class _DesktopRail extends StatelessWidget {
             ),
           ),
           _LevelSwitcher(level: level, onChanged: onLevelChanged),
+          const SizedBox(height: 8),
+          _BookSwitcher(book: book, onChanged: onBookChanged),
           const SizedBox(height: 18),
           for (var i = 0; i < items.length; i++)
             Padding(
@@ -379,7 +448,7 @@ class HomePage extends StatelessWidget {
     final stats = progress.stats;
     final next = progress.nextUnlockedSession();
     final percent = (progress.sessionProgress * 100).round();
-    final blocks = progress.studyLevel == 'N3' ? 8 : 6;
+    final blocks = StudyCatalog.totalBlocks;
 
     return SafeArea(
       child: ListView(
@@ -398,9 +467,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, letterSpacing: -1.5)),
                     const SizedBox(height: 5),
                     Text(
-                      progress.studyLevel == 'N3'
-                          ? 'Tu camino hacia el N3 continúa.'
-                          : 'Tu camino hacia el N4 continúa.',
+                      progress.book.subtitle,
                       style: const TextStyle(color: AppColors.muted, fontSize: 13, fontWeight: FontWeight.w600),
                     ),
                   ],
@@ -686,7 +753,7 @@ class _Hero extends StatelessWidget {
     child: Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       Row(children:[Expanded(child:Text('SIGUIENTE SESIÓN',style:Theme.of(context).textTheme.labelMedium?.copyWith(color:AppColors.primary,fontWeight:FontWeight.w900,letterSpacing:1.2))),_Pill(icon:Icons.lock_open_rounded,text:'Desbloqueada')]),
       const SizedBox(height:12),
-      Text((progress.studyLevel=='N3'?'Bloque ':'Semana ')+session.week.toString()+' · Día '+session.day.toString(),style:const TextStyle(fontWeight:FontWeight.w900)),
+      Text((StudyCatalog.blockLabel + ' ')+session.week.toString()+' · Día '+session.day.toString(),style:const TextStyle(fontWeight:FontWeight.w900)),
       const SizedBox(height:5),
       Text(session.titleJa,style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),
       const SizedBox(height:4),
@@ -708,7 +775,7 @@ class CoursePage extends StatelessWidget {
     const SizedBox(height:18),
     _CourseSummary(progress:progress),
     const SizedBox(height:18),
-    for(var w=1;w<=(progress.studyLevel=='N3'?8:6);w++) _WeekCard(week:w,progress:progress,onOpen:onOpen),
+    for(var w=1;w<=StudyCatalog.totalBlocks;w++) _WeekCard(week:w,progress:progress,onOpen:onOpen),
   ]));
 }
 
@@ -727,11 +794,15 @@ class _WeekCard extends StatelessWidget {
     final sessions=StudyCatalog.sessions.where((s)=>s.week==week).toList();
     final done=sessions.where((s)=>progress.isCompleted(s.id)).length;
     final unlocked=sessions.any((s)=>progress.isUnlocked(s.id));
-    final type=progress.studyLevel=='N3' ? (week<=2?'Gramática':week<=4?'Consolidación':week==5?'Construcción':week<=7?'Gramática textual':'Repaso y simulacros') : (week<=4?'Gramática':week==5?'Reading':'Listening');
+    final type = StudyCatalog.activeBookId == 'shinkanzen_n4_dokkai'
+        ? (week == 1 ? 'Lectura estratégica' : week == 2 ? 'Tipos de preguntas' : week == 3 ? 'Práctica intensiva' : 'Simulacro')
+        : progress.studyLevel == 'N3'
+            ? (week<=2?'Gramática':week<=4?'Consolidación':week==5?'Construcción':week<=7?'Gramática textual':'Repaso y simulacros')
+            : (week<=4?'Gramática':week==5?'Reading':'Listening');
     return Card(margin:const EdgeInsets.only(bottom:12),child:Padding(padding:const EdgeInsets.all(15),child:Column(children:[
       Row(children:[
         CircleAvatar(backgroundColor:unlocked?AppColors.primarySoft:const Color(0xFFEDEAE7),child:Text(week.toString(),style:TextStyle(fontWeight:FontWeight.w900,color:unlocked?AppColors.primary:AppColors.muted))),
-        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text((progress.studyLevel=='N3'?'Bloque ':'Semana ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
+        const SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text((StudyCatalog.blockLabel + ' ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w900,fontSize:17)),Text(type+' · '+done.toString()+'/'+sessions.length.toString(),style:const TextStyle(color:AppColors.muted))])),
         Text((done/sessions.length*100).round().toString()+'%',style:const TextStyle(fontWeight:FontWeight.w900)),
       ]),
       const SizedBox(height:10),ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/sessions.length,minHeight:7)),
@@ -796,10 +867,13 @@ class _LessonFlowPageState extends State<LessonFlowPage> {
 
   @override void initState(){super.initState();future=_load();}
   Future<LessonPacket> _load() async {
-    final isN3 = widget.session.id.startsWith('P') || widget.session.id.startsWith('R');
-    final asset = isN3
-        ? 'assets/content/n3/lessons/' + widget.session.id + '.json'
-        : 'assets/content/somatome_n4/lessons/' + widget.session.id + '.json';
+    final asset = switch (StudyCatalog.activeBookId) {
+      'shinkanzen_n4_dokkai' =>
+        'assets/content/shinkanzen_n4_dokkai/lessons/' + widget.session.id + '.json',
+      'shinkanzen_n3_grammar' =>
+        'assets/content/n3/lessons/' + widget.session.id + '.json',
+      _ => 'assets/content/somatome_n4/lessons/' + widget.session.id + '.json',
+    };
 
     try {
       final raw = await rootBundle.loadString(asset);
@@ -1048,7 +1122,7 @@ class ProgressPage extends StatelessWidget {
       _Bar(label:'Buenas respuestas',value:s.correct,max:s.totalAnswers==0?1:s.totalAnswers),_Bar(label:'Malas respuestas',value:s.wrong,max:s.totalAnswers==0?1:s.totalAnswers),_Bar(label:'Errores corregidos',value:s.corrected,max:s.wrong==0?1:s.wrong),
     ]))),
     const SizedBox(height:22),Text('Por semana',style:Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight:FontWeight.w900)),const SizedBox(height:8),
-    for(var w=1;w<=(progress.studyLevel=='N3'?8:6);w++) _WeekRow(week:w,progress:progress),
+    for(var w=1;w<=StudyCatalog.totalBlocks;w++) _WeekRow(week:w,progress:progress),
   ]));}
 }
 
@@ -1091,7 +1165,7 @@ class _Bar extends StatelessWidget {
 
 class _WeekRow extends StatelessWidget {
   final int week; final ProgressService progress; const _WeekRow({required this.week,required this.progress});
-  @override Widget build(BuildContext context){final sessions=StudyCatalog.sessions.where((s)=>s.week==week).toList();final done=sessions.where((s)=>progress.isCompleted(s.id)).length;return Padding(padding:const EdgeInsets.only(bottom:10),child:Row(children:[SizedBox(width:82,child:Text((progress.studyLevel=='N3'?'Bloque ':'Semana ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w800))),Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/sessions.length,minHeight:8))),const SizedBox(width:10),Text(done.toString()+'/'+sessions.length.toString(),style:const TextStyle(fontWeight:FontWeight.w900))]));}
+  @override Widget build(BuildContext context){final sessions=StudyCatalog.sessions.where((s)=>s.week==week).toList();final done=sessions.where((s)=>progress.isCompleted(s.id)).length;return Padding(padding:const EdgeInsets.only(bottom:10),child:Row(children:[SizedBox(width:82,child:Text((StudyCatalog.blockLabel + ' ')+week.toString(),style:const TextStyle(fontWeight:FontWeight.w800))),Expanded(child:ClipRRect(borderRadius:BorderRadius.circular(8),child:LinearProgressIndicator(value:done/sessions.length,minHeight:8))),const SizedBox(width:10),Text(done.toString()+'/'+sessions.length.toString(),style:const TextStyle(fontWeight:FontWeight.w900))]));}
 }
 
 class _Path extends StatelessWidget {
@@ -1103,7 +1177,7 @@ class _Path extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = <Widget>[];
 
-    for (var i = 1; i <= (progress.studyLevel == 'N3' ? 8 : 6); i++) {
+    for (var i = 1; i <= StudyCatalog.totalBlocks; i++) {
       children.add(
         Column(
           children: [
@@ -1140,7 +1214,7 @@ class _Path extends StatelessWidget {
         ),
       );
 
-      if (i < (progress.studyLevel == 'N3' ? 8 : 6)) {
+      if (i < StudyCatalog.totalBlocks) {
         children.add(const Expanded(child: Divider()));
       }
     }
