@@ -744,7 +744,7 @@ class _HomeWeekRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Semana ' + week.toString(),
+                  'Bloque ' + week.toString(),
                   style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
                 ),
                 const SizedBox(height: 4),
@@ -761,7 +761,7 @@ class _HomeWeekRow extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            done.toString() + '/7',
+            done.toString() + '/' + sessions.length.toString(),
             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.muted),
           ),
         ],
@@ -1162,7 +1162,7 @@ class _Path extends StatelessWidget {
         ),
       );
 
-      if (i < 6) {
+      if (i < 8) {
         children.add(const Expanded(child: Divider()));
       }
     }
