@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "W02D03",
+    "week": 2,
+    "day": 3,
+    "type": "grammar",
+    "pages": [38, 39],
+    "title_ja": "教えてくれてありがとう。",
+    "title_es": "Gracias por enseñarme.",
+    "focus": "あげる · くれる · もらう · 〜てあげる · 〜てくれる · 〜てもらう · さしあげる · くださる · いただく",
+    "source": "日本語総まとめ N4 文法・読解・聴解",
+    "content_note": "Contenido didáctico estructurado a partir de las expresiones presentadas en las páginas 38–39. Las preguntas de la app son ejercicios originales."
+  },
+  "steps": [
+    {"id":"s1","type":"teach","label":"APRENDE","title":"Dar y recibir: あげる・くれる・もらう","body":"あげる describe que alguien da algo a otra persona. くれる se usa cuando otra persona da algo al hablante o a su familia. もらう expresa recibir algo.","pattern":"AはBにNをあげる · Aは私にNをくれる · 私はAにNをもらう","example_ja":"田中さんが私にセーターをくれました。","example_es":"Tanaka me regaló un suéter.","tip":"Con くれる, la persona que recibe es el hablante o alguien de su grupo."},
+    {"id":"s2","type":"choice","title":"¿Quién recibe?","question":"¿Cuál expresa que Tanaka le dio un suéter al hablante?","options":["私は田中さんにセーターをあげました。","田中さんが私にセーターをくれました。","私は田中さんにセーターをもらいました。","田中さんは私にセーターをあげました。"],"answer":1,"explanation":"くれる presenta a la otra persona dando algo al hablante."},
+    {"id":"s3","type":"teach","label":"CLAVE","title":"Hacer algo por otra persona","body":"Vてあげる expresa que el hablante hace algo para beneficio de otra persona. Vてくれる expresa que otra persona hace algo para el hablante. Vてもらう expresa que el hablante recibe el favor de que otra persona haga algo.","pattern":"Vてあげる · Vてくれる · Vてもらう","example_ja":"田中さんは私に地図を書いてくれました。","example_es":"Tanaka me hizo un mapa.","tip":"El punto de vista cambia: identifica quién realiza la acción y para beneficio de quién."},
+    {"id":"s4","type":"choice","title":"Recibir un favor","question":"¿Cuál significa 'Tanaka me llevó hasta la estación'?","options":["田中さんを駅まで連れて行ってあげました。","田中さんが駅まで連れて行ってくれました。","田中さんに駅まで連れて行ってあげました。","田中さんが駅まで連れて行ってもらいました。"],"answer":1,"explanation":"連れて行ってくれました indica que Tanaka realizó la acción para beneficio del hablante."},
+    {"id":"s5","type":"teach","label":"PRACTICA","title":"Formas honoríficas","body":"Con personas superiores o en situaciones respetuosas aparecen さしあげる, くださる y いただく como formas honoríficas relacionadas con あげる, くれる y もらう.","pattern":"さしあげる · くださる · いただく","example_ja":"先生が本をくださいました。","example_es":"El profesor me dio un libro.","tip":"También aparece Vていただく para expresar que alguien hizo algo por el hablante en un registro respetuoso."},
+    {"id":"s6","type":"choice","title":"Registro respetuoso","question":"¿Cuál es una forma respetuosa de decir que un profesor le hizo un mapa al hablante?","options":["先生に地図を書いてあげました。","先生が地図を書いてくださいました。","先生が地図を書いてもらいました。","先生に地図を書いてさしあげました。"],"answer":1,"explanation":"書いてくださいました presenta respetuosamente el favor realizado por el profesor."}
+  ],
+  "reflection":{"title":"Mini misión","prompt_es":"Escribe una frase con てくれる y otra con てもらう sobre un favor que alguien haya hecho por ti.","reward":20}
+}
