@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "P1A10",
+    "week": 4,
+    "day": 5,
+    "type": "consolidation",
+    "pages": [
+      96,
+      100
+    ],
+    "title_ja": "J · 動詞や名詞の意味を広げる文法形式",
+    "title_es": "Extensión de significado",
+    "focus": "Formas que amplían el significado de verbos y sustantivos; ～らしい vs ～ようだ／～みたいだ",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión estructurada según las páginas 96–100. Las actividades son originales de la app."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "CONSOLIDA",
+      "title": "J · 動詞や名詞の意味を広げる文法形式",
+      "body": "Consolida el foco indicado en las páginas 96–100.",
+      "pattern": "Formas que amplían el significado de verbos y sustantivos; ～らしい vs ～ようだ／～みたいだ",
+      "example_ja": "文脈を考えて、適切な表現を選びましょう。",
+      "example_es": "Considera función, contexto y matiz.",
+      "tip": "Compara usos cercanos y observa las restricciones."
+    },
+    {
+      "id": "P1A10-q1",
+      "type": "choice",
+      "title": "Reconoce el foco",
+      "question": "¿Cuál es el contenido principal?",
+      "options": [
+        "Formas que amplían el significado de verbos y sustantivos; ～らしい vs ～ようだ／～みたいだ",
+        "Contenido de otro nivel",
+        "Solo pronunciación"
+      ],
+      "answer": 0,
+      "explanation": "El foco es Formas que amplían el significado de verbos y sustantivos; ～らしい vs ～ようだ／～みたいだ."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Explica la diferencia principal y crea una oración propia.",
+    "reward": 25
+  }
+}
