@@ -918,7 +918,6 @@ class CoursePage extends StatelessWidget {
             week: w,
             progress: progress,
             onOpen: onOpen,
-            isLastWeek: w == StudyCatalog.totalBlocks,
           ),
       ],
     ),
@@ -999,13 +998,11 @@ class _WeekCard extends StatelessWidget {
   final int week;
   final ProgressService progress;
   final void Function(SessionInfo) onOpen;
-  final bool isLastWeek;
 
   const _WeekCard({
     required this.week,
     required this.progress,
     required this.onOpen,
-    required this.isLastWeek,
   });
 
   @override
