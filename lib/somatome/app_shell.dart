@@ -372,352 +372,216 @@ class HomePage extends StatelessWidget {
   final ProgressService progress;
   final VoidCallback onStart;
 
-  const HomePage({
-    super.key,
-    required this.progress,
-    required this.onStart,
-  });
+  const HomePage({super.key, required this.progress, required this.onStart});
 
   @override
   Widget build(BuildContext context) {
     final stats = progress.stats;
     final next = progress.nextUnlockedSession();
     final percent = (progress.sessionProgress * 100).round();
+    final blocks = progress.studyLevel == 'N3' ? 8 : 6;
 
     return SafeArea(
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(26, 18, 26, 34),
+        padding: const EdgeInsets.fromLTRB(32, 28, 32, 40),
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text('JLPT ${progress.studyLevel}', style: const TextStyle(
+                      color: AppColors.violet, fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 2.2)),
+                    const SizedBox(height: 8),
+                    const Text('おかえりなさい。',
+                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, letterSpacing: -1.5)),
+                    const SizedBox(height: 5),
                     Text(
-                      'JLPT '+progress.studyLevel,
-                      style: TextStyle(
-                        color: AppColors.violet,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    SizedBox(height: 7),
-                    Text(
-                      'おかえりなさい',
-                      style: TextStyle(
-                        color: AppColors.ink,
-                        fontSize: 27,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -1,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      '¿Listo para tu siguiente paso?',
-                      style: TextStyle(
-                        color: AppColors.muted,
-                        fontSize: 12,
-                      ),
+                      progress.studyLevel == 'N3'
+                          ? 'Tu camino hacia el N3 continúa.'
+                          : 'Tu camino hacia el N4 continúa.',
+                      style: const TextStyle(color: AppColors.muted, fontSize: 13, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
                 decoration: BoxDecoration(
-                  color: AppColors.coralSoft,
-                  borderRadius: BorderRadius.circular(17),
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: AppColors.border),
                 ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.local_fire_department_rounded,
-                      size: 17,
-                      color: AppColors.coral,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      stats.streak.toString(),
-                      style: const TextStyle(
-                        color: AppColors.navy,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ],
-                ),
+                child: Row(children: [
+                  Container(
+                    width: 31, height: 31,
+                    decoration: const BoxDecoration(color: AppColors.coralSoft, shape: BoxShape.circle),
+                    child: const Icon(Icons.local_fire_department_rounded, size: 17, color: AppColors.coral),
+                  ),
+                  const SizedBox(width: 8),
+                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text('${stats.streak}', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
+                    const Text('días de racha', style: TextStyle(fontSize: 9, color: AppColors.muted, fontWeight: FontWeight.w700)),
+                  ]),
+                ]),
               ),
             ],
           ),
-          const SizedBox(height: 22),
+          const SizedBox(height: 28),
           Container(
-            padding: const EdgeInsets.all(21),
+            padding: const EdgeInsets.all(28),
             decoration: BoxDecoration(
-              color: AppColors.navy,
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.navy.withOpacity(.18),
-                  blurRadius: 30,
-                  offset: const Offset(0, 12),
-                ),
-              ],
+              gradient: const LinearGradient(
+                colors: [AppColors.navy, Color(0xFF303650)],
+                begin: Alignment.topLeft, end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(34),
+              boxShadow: [BoxShadow(color: AppColors.navy.withOpacity(.20), blurRadius: 35, offset: const Offset(0, 18))],
             ),
-            child: Stack(
-              children: [
-                Positioned(
-                  right: -50,
-                  top: -65,
-                  child: Container(
-                    width: 175,
-                    height: 175,
-                    decoration: BoxDecoration(
-                      color: AppColors.violet.withOpacity(.14),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
+            child: Stack(children: [
+              Positioned(right: -65, top: -75, child: Container(
+                width: 240, height: 240,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.violet.withOpacity(.18), width: 42),
                 ),
-                Positioned(
-                  right: 30,
-                  bottom: -80,
-                  child: Container(
-                    width: 140,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      color: AppColors.coral.withOpacity(.10),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: AppColors.coral.withOpacity(.14),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Text(
-                            next.review ? 'RETO SEMANAL' : 'SIGUIENTE',
-                            style: const TextStyle(
-                              color: AppColors.coral,
-                              fontSize: 9,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          'S' + next.week.toString() + ' · D' + next.day.toString(),
-                          style: const TextStyle(
-                            color: Color(0xFF969BB0),
-                            fontSize: 10,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                next.titleJa,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w900,
-                                  height: 1.2,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                next.titleEs,
-                                style: const TextStyle(
-                                  color: Color(0xFFB9BDCF),
-                                  fontSize: 13,
-                                  height: 1.4,
-                                ),
-                              ),
-                              const SizedBox(height: 11),
-                              Text(
-                                next.focus,
-                                style: const TextStyle(
-                                  color: AppColors.yellow,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        SizedBox(
-                          width: 70,
-                          height: 70,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              CircularProgressIndicator(
-                                value: progress.sessionProgress,
-                                strokeWidth: 7,
-                                color: AppColors.coral,
-                                backgroundColor: Colors.white.withOpacity(.1),
-                              ),
-                              Text(
-                                percent.toString() + '%',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
+              )),
+              Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                Expanded(
+                  flex: 7,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Row(children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(color: AppColors.coral.withOpacity(.15), borderRadius: BorderRadius.circular(20)),
+                        child: Text(next.review ? 'RETO' : 'SIGUIENTE PASO',
+                          style: const TextStyle(color: AppColors.coral, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 1.1)),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        progress.studyLevel == 'N3'
+                            ? 'B${next.week} · D${next.day}'
+                            : 'S${next.week} · D${next.day}',
+                        style: const TextStyle(color: Color(0xFF969BB0), fontSize: 10, fontWeight: FontWeight.w800),
+                      ),
+                    ]),
+                    const SizedBox(height: 22),
+                    Text(next.titleJa, style: const TextStyle(color: Colors.white, fontSize: 29, fontWeight: FontWeight.w900, height: 1.15)),
+                    const SizedBox(height: 8),
+                    Text(next.titleEs, style: const TextStyle(color: Color(0xFFC1C5D4), fontSize: 13, height: 1.45)),
+                    const SizedBox(height: 10),
+                    Text(next.focus, style: const TextStyle(color: AppColors.yellow, fontSize: 10, fontWeight: FontWeight.w900)),
+                    const SizedBox(height: 24),
                     SizedBox(
-                      width: double.infinity,
+                      width: 250,
                       child: FilledButton.icon(
+                        onPressed: onStart,
                         style: FilledButton.styleFrom(
                           backgroundColor: AppColors.coral,
                           foregroundColor: Colors.white,
+                          minimumSize: const Size.fromHeight(51),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                         ),
-                        onPressed: onStart,
                         icon: const Icon(Icons.play_arrow_rounded),
-                        label: Text(
-                          next.review
-                              ? 'COMENZAR RETO'
-                              : 'COMENZAR SESIÓN',
-                        ),
+                        label: Text(next.review ? 'COMENZAR RETO' : 'COMENZAR SESIÓN'),
                       ),
                     ),
-                  ],
+                  ]),
                 ),
-              ],
+                const SizedBox(width: 28),
+                Expanded(
+                  flex: 3,
+                  child: Column(children: [
+                    SizedBox(
+                      width: 142, height: 142,
+                      child: Stack(alignment: Alignment.center, children: [
+                        SizedBox(
+                          width: 142, height: 142,
+                          child: CircularProgressIndicator(
+                            value: progress.sessionProgress, strokeWidth: 10,
+                            color: AppColors.coral, backgroundColor: Colors.white.withOpacity(.10),
+                          ),
+                        ),
+                        Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Text('${percent}%', style: const TextStyle(color: Colors.white, fontSize: 27, fontWeight: FontWeight.w900)),
+                          const Text('sesión', style: TextStyle(color: Color(0xFF9CA1B4), fontSize: 10, fontWeight: FontWeight.w700)),
+                        ]),
+                      ]),
+                    ),
+                    const SizedBox(height: 14),
+                    Text('${progress.completedCount}/${StudyCatalog.totalSessions} sesiones',
+                      style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800)),
+                    const SizedBox(height: 3),
+                    const Text('progreso del curso', style: TextStyle(color: Color(0xFF8F94AA), fontSize: 9, fontWeight: FontWeight.w700)),
+                  ]),
+                ),
+              ]),
+            ]),
+          ),
+          const SizedBox(height: 18),
+          Row(children: [
+            Expanded(child: _QuickMetric(icon: Icons.bolt_rounded, value: '${stats.xp}', label: 'XP acumulado', color: AppColors.violet)),
+            const SizedBox(width: 10),
+            Expanded(child: _QuickMetric(icon: Icons.check_circle_rounded, value: '${stats.correct}', label: 'buenas', color: AppColors.green)),
+            const SizedBox(width: 10),
+            Expanded(child: _QuickMetric(icon: Icons.track_changes_rounded, value: '${stats.accuracy.round()}%', label: 'precisión', color: AppColors.mint)),
+            const SizedBox(width: 10),
+            Expanded(child: _QuickMetric(icon: Icons.workspace_premium_rounded, value: 'N${stats.level}', label: 'nivel', color: AppColors.yellow)),
+          ]),
+          const SizedBox(height: 32),
+          Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text('Tu recorrido', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, letterSpacing: -.5)),
+              SizedBox(height: 4),
+              Text('Avanza paso a paso hasta completar el libro.',
+                style: TextStyle(color: AppColors.muted, fontSize: 11, fontWeight: FontWeight.w600)),
+            ])),
+            Text('${percent}%', style: const TextStyle(color: AppColors.violet, fontSize: 22, fontWeight: FontWeight.w900)),
+            const SizedBox(width: 5),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 3),
+              child: Text('completado', style: TextStyle(color: AppColors.muted, fontSize: 10, fontWeight: FontWeight.w700)),
             ),
-          ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              Expanded(
-                child: _QuickMetric(
-                  icon: Icons.bolt_rounded,
-                  value: stats.xp.toString(),
-                  label: 'XP',
-                  color: AppColors.violet,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _QuickMetric(
-                  icon: Icons.check_circle_rounded,
-                  value: stats.correct.toString(),
-                  label: 'Buenas',
-                  color: AppColors.green,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _QuickMetric(
-                  icon: Icons.track_changes_rounded,
-                  value: stats.accuracy.round().toString() + '%',
-                  label: 'Precisión',
-                  color: AppColors.mint,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 26),
-          Row(
-            children: [
-              const Expanded(
-                child: Text(
-                  'Tu camino',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Text(
-                percent.toString() + '% completado',
-                style: const TextStyle(
-                  color: AppColors.violet,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
+          ]),
+          const SizedBox(height: 13),
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 18, 16, 8),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 7),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(28),
               border: Border.all(color: AppColors.border),
+              boxShadow: [BoxShadow(color: AppColors.navy.withOpacity(.045), blurRadius: 24, offset: const Offset(0, 9))],
             ),
-            child: Column(
-              children: [
-                for (var week = 1; week <= (progress.studyLevel == 'N3' ? 8 : 6); week++)
-                  _HomeWeekRow(
-                    week: week,
-                    progress: progress,
-                  ),
-              ],
-            ),
+            child: Column(children: [
+              for (var week = 1; week <= blocks; week++)
+                _HomeWeekRow(week: week, progress: progress),
+            ]),
           ),
-          const SizedBox(height: 17),
+          const SizedBox(height: 18),
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: AppColors.yellowSoft,
-              borderRadius: BorderRadius.circular(22),
+              gradient: const LinearGradient(
+                colors: [AppColors.yellowSoft, AppColors.coralSoft],
+                begin: Alignment.topLeft, end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(24),
             ),
-            child: Row(
-              children: [
-                Container(
-                  width: 39,
-                  height: 39,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(.7),
-                    borderRadius: BorderRadius.circular(13),
-                  ),
-                  child: const Icon(
-                    Icons.auto_awesome_rounded,
-                    color: AppColors.navy,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    stats.corrected > 0
-                        ? 'Has recuperado ' + stats.corrected.toString() + ' errores. Sigue construyendo memoria.'
-                        : 'Los errores quedan registrados para que puedas recuperarlos más adelante.',
-                    style: const TextStyle(
-                      color: AppColors.navy,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
-                      height: 1.4,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: Row(children: [
+              Container(
+                width: 46, height: 46,
+                decoration: BoxDecoration(color: Colors.white.withOpacity(.72), borderRadius: BorderRadius.circular(15)),
+                child: const Icon(Icons.auto_awesome_rounded, color: AppColors.navy, size: 23),
+              ),
+              const SizedBox(width: 13),
+              Expanded(child: Text(
+                stats.corrected > 0
+                    ? 'Has recuperado ${stats.corrected} errores. Cada corrección fortalece tu memoria.'
+                    : 'Tus errores quedan registrados para que puedas reforzar lo que todavía cuesta.',
+                style: const TextStyle(color: AppColors.navy, fontSize: 11, fontWeight: FontWeight.w800, height: 1.45),
+              )),
+            ]),
           ),
         ],
       ),
@@ -731,48 +595,30 @@ class _QuickMetric extends StatelessWidget {
   final String label;
   final Color color;
 
-  const _QuickMetric({
-    required this.icon,
-    required this.value,
-    required this.label,
-    required this.color,
-  });
+  const _QuickMetric({required this.icon, required this.value, required this.label, required this.color});
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 260),
-      curve: Curves.easeOutCubic,
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      decoration: BoxDecoration(
-        color: AppColors.surface.withOpacity(.94),
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: AppColors.border),
-        boxShadow: [BoxShadow(color:color.withOpacity(.08),blurRadius:20,offset:const Offset(0,8))],
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.fromLTRB(15, 14, 15, 15),
+    decoration: BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: AppColors.border),
+    ),
+    child: Row(children: [
+      Container(
+        width: 35, height: 35,
+        decoration: BoxDecoration(color: color.withOpacity(.11), borderRadius: BorderRadius.circular(11)),
+        child: Icon(icon, size: 18, color: color),
       ),
-      child: Column(
-        children: [
-          Icon(icon, size: 17, color: color),
-          const SizedBox(height: 5),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          Text(
-            label,
-            style: const TextStyle(
-              color: AppColors.muted,
-              fontSize: 9,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+      const SizedBox(width: 10),
+      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
+        Text(label, maxLines: 2, overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: AppColors.muted, fontSize: 9, fontWeight: FontWeight.w700, height: 1.15)),
+      ])),
+    ]),
+  );
 }
 
 class _HomeWeekRow extends StatelessWidget {
@@ -787,64 +633,42 @@ class _HomeWeekRow extends StatelessWidget {
     final done = sessions.where((s) => progress.isCompleted(s.id)).length;
     final unlocked = progress.weekUnlocked(week);
     final complete = progress.weekCompleted(week);
+    final value = sessions.isEmpty ? 0.0 : done / sessions.length;
+    final label = progress.studyLevel == 'N3' ? 'Bloque $week' : 'Semana $week';
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 11),
-      child: Row(
-        children: [
-          Container(
-            width: 35,
-            height: 35,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: complete
-                  ? AppColors.sageSoft
-                  : unlocked
-                      ? AppColors.primarySoft
-                      : const Color(0xFFEDEAE7),
-            ),
-            child: Icon(
-              complete
-                  ? Icons.check_rounded
-                  : unlocked
-                      ? Icons.play_arrow_rounded
-                      : Icons.lock_rounded,
-              size: 17,
-              color: complete
-                  ? const Color(0xFF4B8A5A)
-                  : unlocked
-                      ? AppColors.primary
-                      : AppColors.muted,
-            ),
+      padding: const EdgeInsets.only(bottom: 13),
+      child: Row(children: [
+        Container(
+          width: 38, height: 38,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: complete
+                ? const LinearGradient(colors: [AppColors.mint, AppColors.green])
+                : unlocked
+                    ? const LinearGradient(colors: [AppColors.violet, AppColors.primaryDeep])
+                    : null,
+            color: complete || unlocked ? null : const Color(0xFFEDEAE7),
           ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Semana ' + week.toString(),
-                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
-                ),
-                const SizedBox(height: 4),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: LinearProgressIndicator(
-                    value: sessions.isEmpty ? 0 : done / sessions.length,
-                    minHeight: 6,
-                    backgroundColor: const Color(0xFFECE7E2),
-                  ),
-                ),
-              ],
-            ),
+          child: Icon(
+            complete ? Icons.check_rounded : unlocked ? Icons.play_arrow_rounded : Icons.lock_rounded,
+            size: 17,
+            color: complete || unlocked ? Colors.white : AppColors.muted,
           ),
-          const SizedBox(width: 10),
-          Text(
-            done.toString() + '/' + sessions.length.toString(),
-            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: AppColors.muted),
+        ),
+        const SizedBox(width: 13),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12))),
+            Text('${done}/${sessions.length}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.muted)),
+          ]),
+          const SizedBox(height: 7),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: LinearProgressIndicator(value: value, minHeight: 7, backgroundColor: const Color(0xFFECE7E2)),
           ),
-        ],
-      ),
+        ])),
+      ]),
     );
   }
 }
