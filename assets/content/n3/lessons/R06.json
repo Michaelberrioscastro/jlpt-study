@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "session": {
+    "id": "R06",
+    "week": 8,
+    "day": 6,
+    "type": "review",
+    "pages": [
+      112,
+      113
+    ],
+    "title_ja": "まとめ問題（第2部 1課～4課）",
+    "title_es": "Repaso de la Parte 2",
+    "focus": "Repaso acumulativo",
+    "source": "新完全マスター文法 N3",
+    "content_note": "Sesión de repaso organizada según las páginas 112–113. Las actividades de la app son originales; no se transcriben literalmente los ejercicios ni el simulacro del libro."
+  },
+  "steps": [
+    {
+      "type": "teach",
+      "label": "REPASA",
+      "title": "まとめ問題（第2部 1課～4課）",
+      "body": "Repaso acumulativo de los contenidos indicados.",
+      "pattern": "Repaso acumulativo",
+      "example_ja": "文脈を考えて、最も適切なものを選びましょう。",
+      "example_es": "Considera el contexto y elige la opción más adecuada.",
+      "tip": "Registra los errores por tipo para volver a estudiarlos."
+    },
+    {
+      "id": "R06-q1",
+      "type": "choice",
+      "title": "Estrategia",
+      "question": "¿Qué conviene hacer al revisar un error?",
+      "options": [
+        "Explicar por qué la respuesta correcta encaja",
+        "Memorizar solo la letra de la respuesta",
+        "Ignorar el contexto"
+      ],
+      "answer": 0,
+      "explanation": "La revisión debe recuperar la razón lingüística de la respuesta."
+    }
+  ],
+  "reflection": {
+    "title": "Mini misión",
+    "prompt_es": "Anota un error que hayas cometido y explica qué regla o relación textual lo resuelve.",
+    "reward": 30
+  }
+}
