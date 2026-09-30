@@ -116,6 +116,7 @@ class ProgressService extends ChangeNotifier {
       xp: xp,
       answers: answers,
       correct: correct,
+      responseMs: responseMs,
     );
   }
 
@@ -315,6 +316,7 @@ class ProgressService extends ChangeNotifier {
     required String prompt,
     required bool correct,
     List<String> conceptIds = const <String>[],
+    int responseMs = 0,
   }) async {
     _total++;
     final existing = _mistakes[questionId];
