@@ -62,9 +62,9 @@ class ProgressService extends ChangeNotifier {
 
   StudyBook selectedBookForLevel(String level) {
     final saved = _prefs?.getString('selected_book_' + level);
-    if (saved != null) {
-      final candidate = BookCatalog.forId(saved);
-      if (candidate.level == level) return candidate;
+    if (saved != null &&
+        BookCatalog.books.any((book) => book.id == saved && book.level == level)) {
+      return BookCatalog.forId(saved);
     }
     return BookCatalog.defaultForLevel(level);
   }
@@ -128,7 +128,9 @@ class ProgressService extends ChangeNotifier {
         _prefs!.getString('selected_book_' + _level) ??
         BookCatalog.defaultForLevel(_level).id;
 
-    if (BookCatalog.forId(selectedBook).level == _level) {
+    if (BookCatalog.books.any(
+      (book) => book.id == selectedBook && book.level == _level,
+    )) {
       _bookId = selectedBook;
     } else {
       _bookId = BookCatalog.defaultForLevel(_level).id;
