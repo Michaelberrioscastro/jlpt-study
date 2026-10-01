@@ -322,7 +322,7 @@ class _SideMenu extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Kana / Path', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+                        Text('Cursos', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
                         SizedBox(height: 2),
                         Text('JLPT · Tu viaje hacia el japones', maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 11, color: AppColors.muted, fontWeight: FontWeight.w700)),
                       ],
