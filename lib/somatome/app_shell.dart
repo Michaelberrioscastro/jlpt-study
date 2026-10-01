@@ -1815,16 +1815,22 @@ class BookDashboardPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    _BookPath(
-                      sessions: sessions,
-                      progress: progress,
-                      accent: accent,
-                      onOpen: (session) => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => LessonFlowPage(
-                            session: session,
-                            progress: progress,
+                    Align(
+                      alignment: Alignment.center,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 760),
+                        child: _BookPath(
+                          sessions: sessions,
+                          progress: progress,
+                          accent: accent,
+                          onOpen: (session) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => LessonFlowPage(
+                                session: session,
+                                progress: progress,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -1970,14 +1976,21 @@ class _BookPathWeek extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        for (var index = 0; index < sessions.length; index++)
-          _BookPathNode(
-            session: sessions[index],
-            progress: progress,
-            accent: accent,
-            onOpen: onOpen,
-            isLast: index == sessions.length - 1,
+        Padding(
+          padding: const EdgeInsets.only(left: 18),
+          child: Column(
+            children: [
+              for (var index = 0; index < sessions.length; index++)
+                _BookPathNode(
+                  session: sessions[index],
+                  progress: progress,
+                  accent: accent,
+                  onOpen: onOpen,
+                  isLast: index == sessions.length - 1,
+                ),
+            ],
           ),
+        ),
         if (!isLast)
           Padding(
             padding: const EdgeInsets.only(left: 22, top: 1, bottom: 16),
@@ -2404,12 +2417,18 @@ class CoursePage extends StatelessWidget {
         const SizedBox(height: 18),
         _CourseSummary(progress: progress),
         const SizedBox(height: 22),
-        for (var w = 1; w <= StudyCatalog.totalBlocks; w++)
-          _WeekCard(
-            week: w,
-            progress: progress,
-            onOpen: onOpen,
+        Align(
+          alignment: Alignment.center,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 760),
+            child: _BookPath(
+              sessions: StudyCatalog.sessions,
+              progress: progress,
+              accent: AppColors.violet,
+              onOpen: onOpen,
+            ),
           ),
+        ),
       ],
     ),
   );

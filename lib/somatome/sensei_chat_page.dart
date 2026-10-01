@@ -177,6 +177,10 @@ class SenseiCatPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final fill = Paint()..color = Colors.white;
+    final darkFur = Paint()..color = const Color(0xFF24202A);
+    final earPink = Paint()..color = AppColors.coral;
+    final scarf = Paint()..color = const Color(0xFFB9364A)..strokeWidth = size.width * .13..style = PaintingStyle.stroke..strokeCap = StrokeCap.round;
+    final bell = Paint()..color = AppColors.yellow;
     final ink = Paint()..color = AppColors.violet..strokeWidth = 1.5..style = PaintingStyle.stroke;
     final center = Offset(size.width / 2, size.height / 2 + 2);
     final head = Rect.fromCenter(center: center, width: size.width * .68, height: size.height * .56);
@@ -189,6 +193,27 @@ class SenseiCatPainter extends CustomPainter {
       ..lineTo(size.width * .81, size.height * .40);
     canvas.drawPath(ears, fill);
     canvas.drawOval(head, fill);
+    final leftInnerEar = Path()
+      ..moveTo(size.width * .25, size.height * .30)
+      ..lineTo(size.width * .28, size.height * .17)
+      ..lineTo(size.width * .37, size.height * .30)
+      ..close();
+    final rightInnerEar = Path()
+      ..moveTo(size.width * .63, size.height * .30)
+      ..lineTo(size.width * .72, size.height * .17)
+      ..lineTo(size.width * .75, size.height * .30)
+      ..close();
+    canvas.drawPath(leftInnerEar, earPink);
+    canvas.drawPath(rightInnerEar, earPink);
+    final furPatch = Path()
+      ..moveTo(size.width * .47, size.height * .23)
+      ..quadraticBezierTo(size.width * .60, size.height * .10, size.width * .78, size.height * .28)
+      ..quadraticBezierTo(size.width * .70, size.height * .38, size.width * .55, size.height * .39)
+      ..close();
+    canvas.drawPath(furPatch, darkFur);
+    canvas.drawArc(Rect.fromCenter(center: Offset(size.width * .50, size.height * .70), width: size.width * .68, height: size.height * .30), .1, 3.0, false, scarf);
+    canvas.drawCircle(Offset(size.width * .50, size.height * .79), size.width * .075, bell);
+    canvas.drawCircle(Offset(size.width * .50, size.height * .79), size.width * .025, ink);
     canvas.drawCircle(Offset(size.width * .39, size.height * .49), 1.2, ink);
     canvas.drawCircle(Offset(size.width * .61, size.height * .49), 1.2, ink);
     canvas.drawCircle(Offset(size.width * .50, size.height * .60), 1.1, ink);

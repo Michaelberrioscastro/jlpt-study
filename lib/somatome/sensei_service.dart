@@ -30,6 +30,7 @@ class SenseiService {
         history.last['content'] ?? '',
         level: level,
         contextDescription: contextDescription,
+        history: history,
       );
     }
 
@@ -89,7 +90,7 @@ $sessions''';
         suggestions: const ['Que significa ほど?', 'Explicame ている', 'Busca vocabulario'],
       );
 
-  static SenseiReply answer(String raw, {required String level, String contextDescription = ''}) {
+  static SenseiReply answer(String raw, {required String level, String contextDescription = '', List<Map<String, String>> history = const <Map<String, String>>[]}) {
     final input = raw.trim();
     final query = _normalize(input);
 
@@ -107,7 +108,8 @@ $sessions''';
       );
     }
 
-    if (_matches(query, ['esto', 'esta frase', 'este ejercicio', 'pista', 'ayuda con esto', 'this'])) {
+    if (_matches(query, ['esto', 'esta frase', 'este ejercicio', 'pista', 'ayuda con esto', 'this']) &&
+      !_matches(query, ['explica', 'explicame', 'no entiendo', 'paso a paso', 'por que', 'por qué'])) {
       if (contextDescription.isNotEmpty) {
         return SenseiReply(
           'Pista sobre lo que tienes delante:\n\n$contextDescription\n\nFijate primero en la estructura y en la relacion entre la frase japonesa y su significado. No mires la respuesta completa todavia: intenta identificar que parte expresa la idea principal.',
@@ -117,6 +119,20 @@ $sessions''';
       return const SenseiReply(
         'Puedo darte una pista, pero necesito que estes dentro de una leccion o que pegues aqui la frase que quieres revisar.',
         suggestions: ['Que significa ほど?', 'Dame un ejemplo', 'Busca vocabulario'],
+      );
+    }
+
+    if (_matches(query, ['si', 'sí', 'entiendo', 'vale', 'por que', 'por qué', 'entonces', 'otra vez']) && history.length > 1) {
+      return SenseiReply(
+        'Sí, seguimos desde la duda anterior. La idea clave es esta: ${_conversationAnchor(history)}\n\nPiensa en qué función cumple la estructura dentro de la frase, no solo en su traducción literal. Si me escribes tu propia oración, te la corrijo paso a paso.',
+        suggestions: const ['Corrige mi frase', 'Dame otro ejemplo', 'Explícalo más simple'],
+      );
+    }
+
+    if (_matches(query, ['explica esto', 'explicame esto', 'no entiendo', 'paso a paso', 'por que es', 'por qué es']) && contextDescription.isNotEmpty) {
+      return SenseiReply(
+        'Vamos paso a paso:\n\n1. Identifica la idea que quieres expresar.\n2. Localiza el patrón o palabra clave del contexto.\n3. Observa qué parte de la frase cambia el significado.\n4. Prueba a reformularla con tus propias palabras.\n\nEn esta pantalla: $contextDescription',
+        suggestions: const ['Dame un ejemplo parecido', 'Corrige mi frase', 'Compáralo con otro patrón'],
       );
     }
 
@@ -225,6 +241,16 @@ $sessions''';
   static bool _matches(String query, List<String> terms) => terms.any(query.contains);
 
   static bool _containsAny(String query, List<String> terms) => terms.any(query.contains);
+
+  static String _conversationAnchor(List<Map<String, String>> history) {
+    for (var index = history.length - 1; index >= 0; index--) {
+      if (history[index]['role'] == 'assistant') {
+        final text = history[index]['content'] ?? '';
+        return text.length > 180 ? '${text.substring(0, 180)}...' : text;
+      }
+    }
+    return 'la explicación anterior';
+  }
 
   static String _normalize(String value) => value
       .toLowerCase()
