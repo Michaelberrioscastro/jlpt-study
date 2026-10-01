@@ -4,7 +4,6 @@ import '../somatome/lesson_catalog.dart';
 import '../n3/n3_catalog.dart';
 import '../shinkanzen_n4/shinkanzen_n4_catalog.dart';
 import 'book_catalog.dart';
-import 'supplement_catalog.dart';
 
 abstract final class StudyCatalog {
   static String activeLevel = 'N4';
@@ -18,13 +17,6 @@ abstract final class StudyCatalog {
         return ShinKanzenN4ReadingCatalog.sessions;
       case 'shinkanzen_n3_grammar':
         return N3Catalog.sessions;
-      case 'somatome_n4_kanji':
-      case 'somatome_n4_vocabulary':
-      case 'shinkanzen_n4_kanji':
-      case 'shinkanzen_n4_vocabulary':
-      case 'shinkanzen_n3_kanji':
-      case 'shinkanzen_n3_vocabulary':
-        return SupplementCatalog.sessionsFor(activeBookId);
       case 'somatome_n4':
       default:
         return LessonCatalog.sessions;
@@ -34,7 +26,6 @@ abstract final class StudyCatalog {
   static int get totalSessions => sessions.length;
 
   static int get totalBlocks {
-    if (BookCatalog.forId(activeBookId).category != 'course') return 4;
     switch (activeBookId) {
       case 'shinkanzen_n4_dokkai':
         return 4;
@@ -47,18 +38,13 @@ abstract final class StudyCatalog {
   }
 
   static String get blockLabel =>
-      BookCatalog.forId(activeBookId).category != 'course'
-          ? 'Semana'
-          : activeBookId == 'shinkanzen_n4_dokkai'
-              ? 'Parte'
-              : activeBookId == 'shinkanzen_n3_grammar'
-                  ? 'Bloque'
-                  : 'Semana';
+      activeBookId == 'shinkanzen_n4_dokkai'
+          ? 'Parte'
+          : activeBookId == 'shinkanzen_n3_grammar'
+              ? 'Bloque'
+              : 'Semana';
 
   static LessonPacket buildPacket(SessionInfo session) {
-    if (BookCatalog.forId(activeBookId).category != 'course') {
-      return SupplementCatalog.buildPacket(session, activeBookId);
-    }
     switch (activeBookId) {
       case 'shinkanzen_n4_dokkai':
         return ShinKanzenN4ReadingCatalog.buildPacket(session);
