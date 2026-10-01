@@ -176,23 +176,80 @@ class SenseiCatMark extends StatelessWidget {
 class SenseiCatPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final fill = Paint()..color = Colors.white;
-    final ink = Paint()..color = const Color(0xFF171522)..strokeWidth = 1.5..style = PaintingStyle.stroke;
-    final center = Offset(size.width / 2, size.height / 2 + 2);
-    final head = Rect.fromCenter(center: center, width: size.width * .68, height: size.height * .56);
-    final ears = Path()
-      ..moveTo(size.width * .19, size.height * .40)
-      ..lineTo(size.width * .25, size.height * .10)
-      ..lineTo(size.width * .43, size.height * .30)
-      ..moveTo(size.width * .57, size.height * .30)
-      ..lineTo(size.width * .75, size.height * .10)
-      ..lineTo(size.width * .81, size.height * .40);
-    canvas.drawPath(ears, fill);
-    canvas.drawOval(head, fill);
-    canvas.drawCircle(Offset(size.width * .39, size.height * .49), 1.2, ink);
-    canvas.drawCircle(Offset(size.width * .61, size.height * .49), 1.2, ink);
-    canvas.drawCircle(Offset(size.width * .50, size.height * .60), 1.1, ink);
-    canvas.drawArc(Rect.fromCenter(center: Offset(size.width * .50, size.height * .63), width: size.width * .17, height: size.height * .12), 0, 3.14, false, ink);
+    final scale = size.shortestSide / 40;
+    canvas.save();
+    canvas.scale(scale);
+    const fur = Color(0xFFFFF9F0);
+    const ink = Color(0xFF242233);
+    const accent = Color(0xFFFFD166);
+    final fill = Paint()..color = fur;
+    final detail = Paint()
+      ..color = ink
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.8
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+
+    // Distinct upright ears and a smooth silhouette keep Sensei recognizable.
+    final silhouette = Path()
+      ..moveTo(7, 17)
+      ..lineTo(5.8, 5.2)
+      ..quadraticBezierTo(5.7, 3.8, 7.1, 4.8)
+      ..lineTo(14.3, 10.7)
+      ..quadraticBezierTo(20, 8.7, 25.7, 10.7)
+      ..lineTo(32.9, 4.8)
+      ..quadraticBezierTo(34.3, 3.8, 34.2, 5.2)
+      ..lineTo(33, 17)
+      ..cubicTo(35.3, 20, 36, 22.6, 35.2, 26)
+      ..cubicTo(33.7, 32, 27.8, 35.5, 20, 35.5)
+      ..cubicTo(12.2, 35.5, 6.3, 32, 4.8, 26)
+      ..cubicTo(4, 22.6, 4.7, 20, 7, 17)
+      ..close();
+    canvas.drawShadow(silhouette, const Color(0x550F1020), 2.2, false);
+    canvas.drawPath(silhouette, fill);
+
+    final leftEar = Path()
+      ..moveTo(8, 8)
+      ..lineTo(8.8, 15.1)
+      ..lineTo(14.1, 11.8)
+      ..close();
+    final rightEar = Path()
+      ..moveTo(32, 8)
+      ..lineTo(31.2, 15.1)
+      ..lineTo(25.9, 11.8)
+      ..close();
+    canvas.drawPath(leftEar, Paint()..color = accent);
+    canvas.drawPath(rightEar, Paint()..color = accent);
+
+    final leftEye = Path()
+      ..moveTo(12.4, 21)
+      ..quadraticBezierTo(15, 23.2, 17.6, 21);
+    final rightEye = Path()
+      ..moveTo(22.4, 21)
+      ..quadraticBezierTo(25, 23.2, 27.6, 21);
+    canvas.drawPath(leftEye, detail);
+    canvas.drawPath(rightEye, detail);
+    canvas.drawCircle(const Offset(20, 24.2), 1.15, Paint()..color = accent);
+
+    final smile = Path()
+      ..moveTo(20, 25.3)
+      ..lineTo(20, 26.5)
+      ..quadraticBezierTo(20, 27.8, 18.2, 28);
+    canvas.drawPath(smile, detail);
+    final smileRight = Path()
+      ..moveTo(20, 26.5)
+      ..quadraticBezierTo(21.8, 27.8, 21.8, 28);
+    canvas.drawPath(smileRight, detail);
+
+    final whiskers = Paint()
+      ..color = ink.withOpacity(.55)
+      ..strokeWidth = 1.1
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(const Offset(3.5, 24), const Offset(10, 24.8), whiskers);
+    canvas.drawLine(const Offset(4.5, 28), const Offset(10.5, 27.2), whiskers);
+    canvas.drawLine(const Offset(30, 24.8), const Offset(36.5, 24), whiskers);
+    canvas.drawLine(const Offset(29.5, 27.2), const Offset(35.5, 28), whiskers);
+    canvas.restore();
   }
 
   @override
