@@ -34,6 +34,9 @@ class KnowledgeService {
       mastery: {
         for (final dimension in KnowledgeDimension.values) dimension: 0.0,
       },
+      exposure: {
+        for (final dimension in KnowledgeDimension.values) dimension: 0,
+      },
       attempts: 0,
       correct: 0,
       lapses: 0,
@@ -53,7 +56,11 @@ class KnowledgeService {
     required String itemType,
     required int itemId,
     required bool correct,
-    Iterable<KnowledgeDimension> dimensions = KnowledgeDimension.values,
+    Iterable<KnowledgeDimension> dimensions = const [
+      KnowledgeDimension.recognition,
+      KnowledgeDimension.meaning,
+      KnowledgeDimension.reading,
+    ],
     double difficulty = 0.5,
     int responseMs = 0,
   }) async {
@@ -61,15 +68,18 @@ class KnowledgeService {
     final current = await getOrCreate(itemType: itemType, itemId: itemId);
     final now = DateTime.now();
 
+    final measured = dimensions.toSet();
     final normalizedDifficulty = difficulty.clamp(0.0, 1.0).toDouble();
     final step = correct
         ? 0.08 + normalizedDifficulty * 0.07
         : 0.14 + normalizedDifficulty * 0.08;
 
     final mastery = <KnowledgeDimension, double>{...current.mastery};
+    final exposure = <KnowledgeDimension, int>{...current.exposure};
 
-    for (final dimension in dimensions) {
+    for (final dimension in measured) {
       final old = mastery[dimension] ?? 0;
+      exposure[dimension] = (exposure[dimension] ?? 0) + 1;
       mastery[dimension] = correct
           ? (old + step * (1 - old)).clamp(0.0, 1.0).toDouble()
           : (old - step * (0.35 + old * 0.65)).clamp(0.0, 1.0).toDouble();
@@ -85,8 +95,14 @@ class KnowledgeService {
         .clamp(0.0, 1.0)
         .toDouble();
 
-    final masteryAfter =
-        mastery.values.reduce((a, b) => a + b) / mastery.length;
+    final observedDimensions =
+        measured.where((d) => (exposure[d] ?? 0) > 0).toList();
+    final masteryAfter = observedDimensions.isEmpty
+        ? current.overallMastery
+        : observedDimensions
+                .map((d) => mastery[d] ?? 0)
+                .reduce((a, b) => a + b) /
+            observedDimensions.length;
 
     await db.update(
       'knowledge_state',
@@ -97,6 +113,12 @@ class KnowledgeService {
         'listening': mastery[KnowledgeDimension.listening],
         'production': mastery[KnowledgeDimension.production],
         'context': mastery[KnowledgeDimension.context],
+        'recognition_attempts': exposure[KnowledgeDimension.recognition] ?? 0,
+        'meaning_attempts': exposure[KnowledgeDimension.meaning] ?? 0,
+        'reading_attempts': exposure[KnowledgeDimension.reading] ?? 0,
+        'listening_attempts': exposure[KnowledgeDimension.listening] ?? 0,
+        'production_attempts': exposure[KnowledgeDimension.production] ?? 0,
+        'context_attempts': exposure[KnowledgeDimension.context] ?? 0,
         'attempts': attempts,
         'correct': correctCount,
         'lapses': lapses,
@@ -114,7 +136,7 @@ class KnowledgeService {
       'item_id': itemId,
       'occurred_at': now.toIso8601String(),
       'event_type': correct ? 'correct' : 'incorrect',
-      'dimensions_json': dimensions.map((e) => e.name).join(','),
+      'dimensions_json': measured.map((e) => e.name).join(','),
       'difficulty': normalizedDifficulty,
       'response_ms': responseMs,
       'mastery_before': current.overallMastery,
@@ -125,6 +147,7 @@ class KnowledgeService {
       itemType: itemType,
       itemId: itemId,
       mastery: mastery,
+      exposure: exposure,
       attempts: attempts,
       correct: correctCount,
       lapses: lapses,
@@ -162,8 +185,23 @@ class KnowledgeService {
         li.front,
         li.reading,
         li.meaning,
-        ((ks.recognition + ks.meaning + ks.reading +
-          ks.listening + ks.production + ks.context) / 6.0) AS mastery
+        (
+          (CASE WHEN ks.recognition_attempts > 0 THEN ks.recognition ELSE 0 END) +
+          (CASE WHEN ks.meaning_attempts > 0 THEN ks.meaning ELSE 0 END) +
+          (CASE WHEN ks.reading_attempts > 0 THEN ks.reading ELSE 0 END) +
+          (CASE WHEN ks.listening_attempts > 0 THEN ks.listening ELSE 0 END) +
+          (CASE WHEN ks.production_attempts > 0 THEN ks.production ELSE 0 END) +
+          (CASE WHEN ks.context_attempts > 0 THEN ks.context ELSE 0 END)
+        ) /
+        NULLIF(
+          (CASE WHEN ks.recognition_attempts > 0 THEN 1 ELSE 0 END) +
+          (CASE WHEN ks.meaning_attempts > 0 THEN 1 ELSE 0 END) +
+          (CASE WHEN ks.reading_attempts > 0 THEN 1 ELSE 0 END) +
+          (CASE WHEN ks.listening_attempts > 0 THEN 1 ELSE 0 END) +
+          (CASE WHEN ks.production_attempts > 0 THEN 1 ELSE 0 END) +
+          (CASE WHEN ks.context_attempts > 0 THEN 1 ELSE 0 END),
+          0
+        ) AS mastery
       FROM knowledge_state ks
       LEFT JOIN learning_items li
         ON li.item_type = ks.item_type
