@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/study_item.dart';
 import 'database_service.dart';
+import 'knowledge_service.dart';
 
 enum ReviewRating { again, hard, good, easy }
 
@@ -137,6 +138,18 @@ class SrsService {
         'previous_interval': oldInterval,
         'new_interval': interval,
       });
+
+      await KnowledgeService.recordPerformance(
+        itemType: item.type,
+        itemId: item.id,
+        correct: rating != ReviewRating.again,
+        difficulty: switch (rating) {
+          ReviewRating.again => 0.9,
+          ReviewRating.hard => 0.7,
+          ReviewRating.good => 0.45,
+          ReviewRating.easy => 0.2,
+        },
+      );
     });
   }
 }
