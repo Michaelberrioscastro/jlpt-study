@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/study_item.dart';
+import 'knowledge_migration_service.dart';
 
 class DatabaseService {
   DatabaseService._();
@@ -59,6 +60,7 @@ class DatabaseService {
       // Several tabs can request the database during the first app launch.
       await _ensureLearnedColumn(db);
       await _migrateKana(db);
+      await KnowledgeMigrationService.migrate(db);
 
       _database = db;
       return db;
