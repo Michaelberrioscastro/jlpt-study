@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
 import '../models/study_item.dart';
+import '../models/knowledge_state.dart';
 import 'database_service.dart';
 import 'knowledge_service.dart';
 
@@ -141,10 +142,17 @@ class SrsService {
     });
 
     // Update the knowledge model after the SRS transaction has committed.
+    final dimensions = item.type == 'kana'
+        ? const [KnowledgeDimension.recognition, KnowledgeDimension.reading]
+        : item.type == 'grammar'
+            ? const [KnowledgeDimension.meaning, KnowledgeDimension.reading, KnowledgeDimension.context]
+            : const [KnowledgeDimension.recognition, KnowledgeDimension.meaning, KnowledgeDimension.reading];
+
     await KnowledgeService.recordPerformance(
       itemType: item.type,
       itemId: item.id,
       correct: rating != ReviewRating.again,
+      dimensions: dimensions,
       difficulty: switch (rating) {
         ReviewRating.again => 0.9,
         ReviewRating.hard => 0.7,
