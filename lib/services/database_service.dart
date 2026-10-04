@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/study_item.dart';
+import 'content_migration_service.dart';
 import 'knowledge_migration_service.dart';
 
 class DatabaseService {
@@ -61,6 +62,7 @@ class DatabaseService {
       await _ensureLearnedColumn(db);
       await _migrateKana(db);
       await KnowledgeMigrationService.migrate(db);
+      await ContentMigrationService.migrate(db);
 
       _database = db;
       return db;
