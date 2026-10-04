@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 class KnowledgeMigrationService {
   KnowledgeMigrationService._();
 
-  static const migrationKey = 'adaptive_learning_core_v1';
+  static const migrationKey = 'adaptive_learning_core_v2';
 
   static Future<void> migrate(Database db) async {
     await db.execute('''
@@ -16,6 +16,12 @@ class KnowledgeMigrationService {
         listening REAL NOT NULL DEFAULT 0,
         production REAL NOT NULL DEFAULT 0,
         context REAL NOT NULL DEFAULT 0,
+        recognition_attempts INTEGER NOT NULL DEFAULT 0,
+        meaning_attempts INTEGER NOT NULL DEFAULT 0,
+        reading_attempts INTEGER NOT NULL DEFAULT 0,
+        listening_attempts INTEGER NOT NULL DEFAULT 0,
+        production_attempts INTEGER NOT NULL DEFAULT 0,
+        context_attempts INTEGER NOT NULL DEFAULT 0,
         attempts INTEGER NOT NULL DEFAULT 0,
         correct INTEGER NOT NULL DEFAULT 0,
         lapses INTEGER NOT NULL DEFAULT 0,
@@ -25,6 +31,23 @@ class KnowledgeMigrationService {
         PRIMARY KEY(item_type, item_id)
       )
     ''');
+
+    for (final column in const [
+      'recognition_attempts',
+      'meaning_attempts',
+      'reading_attempts',
+      'listening_attempts',
+      'production_attempts',
+      'context_attempts',
+    ]) {
+      try {
+        await db.execute(
+          'ALTER TABLE knowledge_state ADD COLUMN $column INTEGER NOT NULL DEFAULT 0',
+        );
+      } catch (_) {
+        // Column already exists.
+      }
+    }
 
     await db.execute('''
       CREATE TABLE IF NOT EXISTS knowledge_events (
@@ -50,10 +73,13 @@ class KnowledgeMigrationService {
       'ON knowledge_state(meaning, reading, recognition)',
     );
 
+    // Existing SRS history gives us evidence for recognition/meaning/reading.
+    // Do not invent evidence for listening, production or context.
     await db.execute('''
       INSERT OR IGNORE INTO knowledge_state (
         item_type, item_id,
         recognition, meaning, reading,
+        recognition_attempts, meaning_attempts, reading_attempts,
         listening, production, context,
         attempts, correct, lapses, confidence,
         last_seen, last_correct
@@ -82,6 +108,9 @@ class KnowledgeMigrationService {
           WHEN repetitions >= 1 THEN 0.25
           ELSE 0.0
         END,
+        CASE WHEN repetitions + lapses > 0 THEN repetitions + lapses ELSE 0 END,
+        CASE WHEN repetitions + lapses > 0 THEN repetitions + lapses ELSE 0 END,
+        CASE WHEN repetitions + lapses > 0 THEN repetitions + lapses ELSE 0 END,
         0.0, 0.0, 0.0,
         repetitions + lapses,
         repetitions,
