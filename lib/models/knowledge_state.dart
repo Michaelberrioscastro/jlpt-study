@@ -11,6 +11,7 @@ class KnowledgeState {
   final String itemType;
   final int itemId;
   final Map<KnowledgeDimension, double> mastery;
+  final Map<KnowledgeDimension, int> exposure;
   final int attempts;
   final int correct;
   final int lapses;
@@ -22,6 +23,7 @@ class KnowledgeState {
     required this.itemType,
     required this.itemId,
     required this.mastery,
+    required this.exposure,
     required this.attempts,
     required this.correct,
     required this.lapses,
@@ -31,8 +33,14 @@ class KnowledgeState {
   });
 
   double get overallMastery {
-    if (mastery.isEmpty) return 0;
-    return mastery.values.reduce((a, b) => a + b) / mastery.length;
+    final observed = KnowledgeDimension.values
+        .where((d) => (exposure[d] ?? 0) > 0)
+        .toList();
+    if (observed.isEmpty) return 0;
+    return observed
+            .map((d) => mastery[d] ?? 0)
+            .reduce((a, b) => a + b) /
+        observed.length;
   }
 
   double get accuracy => attempts == 0 ? 0 : correct / attempts;
@@ -48,6 +56,12 @@ class KnowledgeState {
         'listening': dimension(KnowledgeDimension.listening),
         'production': dimension(KnowledgeDimension.production),
         'context': dimension(KnowledgeDimension.context),
+        'recognition_attempts': exposure[KnowledgeDimension.recognition] ?? 0,
+        'meaning_attempts': exposure[KnowledgeDimension.meaning] ?? 0,
+        'reading_attempts': exposure[KnowledgeDimension.reading] ?? 0,
+        'listening_attempts': exposure[KnowledgeDimension.listening] ?? 0,
+        'production_attempts': exposure[KnowledgeDimension.production] ?? 0,
+        'context_attempts': exposure[KnowledgeDimension.context] ?? 0,
         'attempts': attempts,
         'correct': correct,
         'lapses': lapses,
@@ -58,6 +72,7 @@ class KnowledgeState {
 
   factory KnowledgeState.fromMap(Map<String, dynamic> map) {
     double n(String key) => (map[key] as num?)?.toDouble() ?? 0;
+    int i(String key) => (map[key] as num?)?.toInt() ?? 0;
     DateTime? date(String key) {
       final value = map[key]?.toString();
       return value == null || value.isEmpty ? null : DateTime.tryParse(value);
@@ -74,9 +89,17 @@ class KnowledgeState {
         KnowledgeDimension.production: n('production'),
         KnowledgeDimension.context: n('context'),
       },
-      attempts: (map['attempts'] as num?)?.toInt() ?? 0,
-      correct: (map['correct'] as num?)?.toInt() ?? 0,
-      lapses: (map['lapses'] as num?)?.toInt() ?? 0,
+      exposure: {
+        KnowledgeDimension.recognition: i('recognition_attempts'),
+        KnowledgeDimension.meaning: i('meaning_attempts'),
+        KnowledgeDimension.reading: i('reading_attempts'),
+        KnowledgeDimension.listening: i('listening_attempts'),
+        KnowledgeDimension.production: i('production_attempts'),
+        KnowledgeDimension.context: i('context_attempts'),
+      },
+      attempts: i('attempts'),
+      correct: i('correct'),
+      lapses: i('lapses'),
       confidence: n('confidence'),
       lastSeen: date('last_seen'),
       lastCorrect: date('last_correct'),
