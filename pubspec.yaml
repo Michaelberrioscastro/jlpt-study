@@ -30,6 +30,8 @@ flutter:
   assets:
     - assets/database/jlpt_study_master.sqlite
     - assets/data/kana_seed.json
+    - assets/data/jlpt_vocab.csv
+    - assets/data/anchorI_kanji.json
     - assets/data/practice/
     - assets/audio/kana/
     - assets/branding/
