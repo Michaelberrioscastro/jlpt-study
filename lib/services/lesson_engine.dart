@@ -243,6 +243,21 @@ class LessonEngine {
         .toList();
   }
 
+  static Future<KnowledgeState> submitAnswer({
+    required LessonExercise exercise,
+    required bool correct,
+    int responseMs = 0,
+  }) {
+    return KnowledgeService.recordPerformance(
+      itemType: exercise.itemType,
+      itemId: exercise.itemId,
+      correct: correct,
+      dimensions: [exercise.dimension],
+      difficulty: exercise.difficulty / 4.0,
+      responseMs: responseMs,
+    );
+  }
+
   static String _id(String type, int id, ExerciseType exerciseType) =>
       '$type:$id:${exerciseType.name}';
 }
