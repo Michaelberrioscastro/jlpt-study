@@ -138,18 +138,19 @@ class SrsService {
         'previous_interval': oldInterval,
         'new_interval': interval,
       });
-
-      await KnowledgeService.recordPerformance(
-        itemType: item.type,
-        itemId: item.id,
-        correct: rating != ReviewRating.again,
-        difficulty: switch (rating) {
-          ReviewRating.again => 0.9,
-          ReviewRating.hard => 0.7,
-          ReviewRating.good => 0.45,
-          ReviewRating.easy => 0.2,
-        },
-      );
     });
+
+    // Update the knowledge model after the SRS transaction has committed.
+    await KnowledgeService.recordPerformance(
+      itemType: item.type,
+      itemId: item.id,
+      correct: rating != ReviewRating.again,
+      difficulty: switch (rating) {
+        ReviewRating.again => 0.9,
+        ReviewRating.hard => 0.7,
+        ReviewRating.good => 0.45,
+        ReviewRating.easy => 0.2,
+      },
+    );
   }
 }
