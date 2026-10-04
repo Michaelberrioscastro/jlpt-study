@@ -32,6 +32,12 @@ class AdaptiveEngine {
         COALESCE(ks.listening, 0) AS listening,
         COALESCE(ks.production, 0) AS production,
         COALESCE(ks.context, 0) AS context,
+        COALESCE(ks.recognition_attempts, 0) AS recognition_attempts,
+        COALESCE(ks.meaning_attempts, 0) AS meaning_attempts,
+        COALESCE(ks.reading_attempts, 0) AS reading_attempts,
+        COALESCE(ks.listening_attempts, 0) AS listening_attempts,
+        COALESCE(ks.production_attempts, 0) AS production_attempts,
+        COALESCE(ks.context_attempts, 0) AS context_attempts,
         COALESCE(rs.state, 'new') AS srs_state,
         rs.next_review
       FROM learning_items li
@@ -48,14 +54,26 @@ class AdaptiveEngine {
     );
 
     double score(Map<String, dynamic> row) {
-      final mastery = [
-        row['recognition'],
-        row['meaning'],
-        row['reading'],
-        row['listening'],
-        row['production'],
-        row['context'],
-      ].map((v) => (v as num).toDouble()).reduce((a, b) => a + b) / 6;
+      final dimensions = [
+        ('recognition', 'recognition_attempts'),
+        ('meaning', 'meaning_attempts'),
+        ('reading', 'reading_attempts'),
+        ('listening', 'listening_attempts'),
+        ('production', 'production_attempts'),
+        ('context', 'context_attempts'),
+      ];
+      var masteryTotal = 0.0;
+      var measuredDimensions = 0;
+
+      for (final dimension in dimensions) {
+        final attempts = (row[dimension.$2] as num?)?.toInt() ?? 0;
+        if (attempts <= 0) continue;
+        masteryTotal += (row[dimension.$1] as num?)?.toDouble() ?? 0.0;
+        measuredDimensions++;
+      }
+
+      final mastery =
+          measuredDimensions == 0 ? 0.0 : masteryTotal / measuredDimensions;
 
       final nextReview = row['next_review'] == null
           ? null
