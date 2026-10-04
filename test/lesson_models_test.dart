@@ -28,7 +28,7 @@ void main() {
       level: 'N5',
       phase: LessonPhase.newContent,
       exercises: [],
-      createdAt: null,
+      createdAt: DateTime.utc(2026, 1, 1),
     );
 
     expect(session.total, 0);
