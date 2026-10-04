@@ -6,6 +6,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/study_item.dart';
+import 'content_migration_service.dart';
+import 'knowledge_migration_service.dart';
 
 class DatabaseService {
   DatabaseService._();
@@ -59,6 +61,8 @@ class DatabaseService {
       // Several tabs can request the database during the first app launch.
       await _ensureLearnedColumn(db);
       await _migrateKana(db);
+      await KnowledgeMigrationService.migrate(db);
+      await ContentMigrationService.migrate(db);
 
       _database = db;
       return db;
@@ -1131,9 +1135,29 @@ class DatabaseService {
         limit: 3,
       );
 
+      final linkedKanji = await db.rawQuery(
+        '''
+        SELECT
+          k.id,
+          k.kanji,
+          k.level,
+          k.reading,
+          k.meaning,
+          vk.position
+        FROM vocabulary_kanji vk
+        JOIN kanji k ON k.id = vk.kanji_id
+        WHERE vk.vocabulary_id = ?
+        ORDER BY vk.position ASC
+        ''',
+        [item.id],
+      );
+
       return {
         ...Map<String, dynamic>.from(rows.first),
         'examples': examples
+            .map((row) => Map<String, dynamic>.from(row))
+            .toList(),
+        'kanji': linkedKanji
             .map((row) => Map<String, dynamic>.from(row))
             .toList(),
       };
@@ -1158,9 +1182,40 @@ class DatabaseService {
         limit: 6,
       );
 
+      final metadataRows = await db.query(
+        'kanji_metadata',
+        where: 'kanji_id = ?',
+        whereArgs: [item.id],
+        limit: 1,
+      );
+
+      final linkedVocabulary = await db.rawQuery(
+        '''
+        SELECT
+          v.id,
+          v.expression,
+          v.reading,
+          v.meaning,
+          v.level,
+          vk.position
+        FROM vocabulary_kanji vk
+        JOIN vocabulary v ON v.id = vk.vocabulary_id
+        WHERE vk.kanji_id = ?
+        ORDER BY vk.position ASC, v.id ASC
+        LIMIT 20
+        ''',
+        [item.id],
+      );
+
       return {
         ...Map<String, dynamic>.from(rows.first),
+        'metadata': metadataRows.isEmpty
+            ? null
+            : Map<String, dynamic>.from(metadataRows.first),
         'examples': examples
+            .map((row) => Map<String, dynamic>.from(row))
+            .toList(),
+        'vocabulary': linkedVocabulary
             .map((row) => Map<String, dynamic>.from(row))
             .toList(),
       };
